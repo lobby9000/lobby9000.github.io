@@ -136,15 +136,17 @@ def badge(p: dict) -> str:
 
 
 def gallery_title(title: str, limit: int = 30) -> str:
-    """Window title in the style of the site: words joined by underscores, cut at a word."""
-    words = re.sub(r"[^A-Za-z0-9]+", " ", title).split()
-    out = ""
+    """Window title in the style of the site: the part before any colon, words joined
+    by underscores, cut at a word and never ending on a small word like "and"."""
+    words = re.sub(r"[^A-Za-z0-9]+", " ", title.split(":")[0]).split()
+    kept: list[str] = []
     for w in words:
-        candidate = f"{out}_{w}" if out else w
-        if len(candidate) > limit:
+        if len("_".join(kept + [w])) > limit:
             break
-        out = candidate
-    return out or "Gallery"
+        kept.append(w)
+    while kept and kept[-1].lower() in {"a", "an", "and", "the", "of", "with", "for", "in", "on", "to"}:
+        kept.pop()
+    return "_".join(kept) or "Gallery"
 
 
 def card(p: dict, pad: str) -> str:
