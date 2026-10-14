@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV · Luis Ángel Quiroz López</title>
+  <meta name="description" content="Luis Ángel Quiroz López: physicist and MSc candidate in astrophysics (UNAM) building data and AI solutions in Python and SQL. CV, selected projects and contact.">
+  <link rel="canonical" href="https://lobby9000.github.io/cv.html">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Luis Ángel Quiroz López · Data Science, Data Engineering and AI">
+  <meta property="og:description" content="CV, selected projects with their repositories, and contact details.">
+  <meta property="og:url" content="https://lobby9000.github.io/cv.html">
+  <meta property="og:image" content="https://lobby9000.github.io/assets/ui/social-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.png">
+
+  <style>
+    /* =====================================================
+       VISTA PARA RECLUTADORES
+       Lo mismo que el Professional Log en una sola pagina,
+       sin animaciones ni sonido, y lista para imprimir.
+       Los proyectos entre los marcadores GENERATED salen de
+       projects.json (python3 tools/build_site.py).
+       ===================================================== */
+    :root {
+      --desk: #004E98;
+      --paper: #FFFFFF;
+      --ink: #1F2328;
+      --muted: #59636E;
+      --rule: #D8DEE4;
+      --xp-blue: #003399;
+      --link: #0B57D0;
+      --chip: #ECE9D8;
+      --chip-border: #ACA899;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--desk);
+      color: var(--ink);
+      font-family: Tahoma, Verdana, "Segoe UI", system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.55;
+      padding: 24px 16px 40px;
+    }
+
+    a { color: var(--link); }
+    a:hover { color: var(--xp-blue); }
+
+    .window {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #ECE9D8;
+      border: 3px solid #0054E3;
+      border-radius: 8px 8px 0 0;
+      box-shadow: 5px 5px 25px rgba(0,0,0,0.45);
+    }
+
+    .title-bar {
+      background: linear-gradient(to right, #0058EE 0%, #3593FF 8%, #288EFF 40%, #127DFF 88%, #036CD5 100%);
+      color: #fff;
+      font-weight: bold;
+      font-size: 13px;
+      padding: 5px 10px;
+      border-radius: 5px 5px 0 0;
+      text-shadow: 1px 1px #0F1089;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .title-bar a { color: #fff; font-weight: normal; text-decoration: none; font-size: 12px; white-space: nowrap; }
+    .title-bar a:hover { text-decoration: underline; color: #fff; }
+
+    .paper {
+      background: var(--paper);
+      margin: 8px;
+      border: 2px inset #E0E0E0;
+      padding: 32px 40px 28px;
+    }
+
+    header h1 { font-size: 28px; line-height: 1.2; margin: 0 0 4px; color: var(--ink); }
+    .headline { font-size: 17px; color: var(--xp-blue); margin: 0 0 12px; font-weight: bold; }
+    .contact { list-style: none; padding: 0; margin: 0 0 16px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 2px 20px; }
+    .contact li { white-space: nowrap; }
+
+    .downloads { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 6px; }
+    .xp-button {
+      display: inline-block;
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 6px 14px;
+      background: linear-gradient(to bottom, #FFFFFF, #ECE9D8);
+      border: 1px solid #7A7A6D;
+      border-radius: 3px;
+    }
+    .xp-button:hover, .xp-button:focus-visible { border-color: #F0A030; box-shadow: 0 0 4px rgba(240,160,48,0.7); color: var(--ink); }
+
+    h2 {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--xp-blue);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 4px;
+      margin: 28px 0 12px;
+    }
+
+    .cv-project { margin: 0 0 18px; }
+    .cv-project h3 { font-size: 16px; margin: 0; }
+    .cv-project h3 a { color: var(--ink); text-decoration-color: var(--rule); }
+    .cv-project h3 a:hover { color: var(--xp-blue); }
+    .cv-stack { margin: 1px 0 4px; font-size: 13px; color: var(--muted); }
+    .cv-project p { margin: 0 0 4px; }
+    .cv-project ul { margin: 4px 0; padding-left: 20px; }
+    .cv-links { font-size: 13px; }
+
+    dl.skills { display: grid; grid-template-columns: 190px 1fr; gap: 6px 16px; margin: 0; }
+    dl.skills dt { font-weight: bold; }
+    dl.skills dd { margin: 0; }
+
+    .role { margin: 0 0 14px; }
+    .role-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .role-head strong { font-size: 15px; }
+    .role-meta { color: var(--muted); font-size: 13px; font-style: italic; }
+    .role p { margin: 2px 0 0; }
+
+    .lang-list { margin: 0; }
+
+    footer {
+      margin-top: 28px;
+      padding-top: 12px;
+      border-top: 1px solid var(--rule);
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 0 0 24px; }
+      .window { border-width: 0; border-radius: 0; }
+      .title-bar { border-radius: 0; }
+      .paper { margin: 0; border: 0; padding: 20px 16px; }
+      dl.skills { grid-template-columns: 1fr; gap: 0 0; }
+      dl.skills dd { margin-bottom: 8px; }
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; font-size: 11pt; }
+      .window { border: 0; box-shadow: none; max-width: none; }
+      .title-bar, .downloads, footer { display: none; }
+      .paper { margin: 0; border: 0; padding: 0; }
+      a { color: var(--ink); text-decoration: none; }
+      .cv-project, .role { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="window">
+    <div class="title-bar">
+      <span>C:\My Documents\CV.htm</span>
+      <a href="professional.html">Full Professional Log &#8599;</a>
+    </div>
+
+    <main class="paper">
+      <header>
+        <h1>Luis Ángel Quiroz López</h1>
+        <p class="headline">Data Science · Data Engineering · AI</p>
+        <ul class="contact">
+          <li>Mexico City</li>
+          <li><a href="mailto:quirozcat@gmail.com">quirozcat@gmail.com</a></li>
+          <li><a href="https://wa.me/525565393328">+52 55 6539 3328</a></li>
+          <li><a href="https://www.linkedin.com/in/llqq">linkedin.com/in/llqq</a></li>
+          <li><a href="https://github.com/lobby9000">github.com/lobby9000</a></li>
+          <li><a href="https://lobby9000.github.io">lobby9000.github.io</a></li>
+        </ul>
+        <div class="downloads">
+          <a class="xp-button" href="assets/cv/CV_Luis_Angel_Quiroz_Lopez_EN.pdf" download>Download CV (English, PDF)</a>
+          <a class="xp-button" href="assets/cv/CV_Luis_Angel_Quiroz_Lopez_ES.pdf" download lang="es">Descargar CV (español, PDF)</a>
+        </div>
+      </header>
+
+      <section aria-labelledby="summary">
+        <h2 id="summary">Summary</h2>
+        <p>Physicist and MSc candidate in astrophysics (UNAM) who builds data and AI solutions in Python and SQL, from data pipelines and dashboards to LLM applications with RAG. Freelance experience evaluating LLM outputs against quality rubrics for model training (RLHF). Experienced in presenting technical work to non-specialist audiences.</p>
+      </section>
+
+      <section aria-labelledby="projects">
+        <h2 id="projects">Selected projects</h2>
+      <!-- BEGIN GENERATED: featured -->
+      <article class="cv-project">
+        <h3><a href="https://github.com/lobby9000/class-notes-pipeline">Lecture notes pipeline with Claude</a></h3>
+        <p class="cv-stack">Python · faster-whisper · Claude Code · ffmpeg · systemd</p>
+        <p>Turns four-hour class recordings into structured Obsidian notes with no manual steps: local transcription on the CPU, notes written by Claude Code in headless mode, a page per new concept and a course index.</p>
+        <ul>
+          <li>Fits in 8 GB of RAM: silence-aligned ten-minute chunks cut peak audio memory from more than 6 GB to about 0.7 GB on a two-hour recording.</li>
+          <li>Whatever Claude adds stays visibly separate from what was said in class, and mistakes not corrected in class are flagged.</li>
+        </ul>
+        <p class="cv-links"><a href="https://github.com/lobby9000/class-notes-pipeline">Repository</a></p>
+      </article>
+      <article class="cv-project">
+        <h3><a href="https://github.com/lobby9000/Retail-Business-Data-Cases">Retail delivery diagnostics: an end-to-end case</a></h3>
+        <p class="cv-stack">Python · pandas · SQL · Star schema · Chart.js · Statistics</p>
+        <p>Diagnosis of a department-store delivery network, from 62,420 raw shipment records to an executive dashboard. The monthly report said 95.7% of deliveries were on time and in full, yet management felt deliveries were getting slower. The analysis shows where and why.</p>
+        <ul>
+          <li>Cleaning with lineage: 62,420 raw records reduced to 59,615 shipments, with every exclusion logged.</li>
+          <li>Stores compared with their own zone through Wilson intervals, so only 1 of 61 stores is flagged as significantly worse.</li>
+        </ul>
+        <p class="cv-links"><a href="https://github.com/lobby9000/Retail-Business-Data-Cases">Repository</a> · <a href="https://lobby9000.github.io/Retail-Business-Data-Cases/dashboard/">Open the live dashboard</a></p>
+      </article>
+      <article class="cv-project">
+        <h3><a href="https://github.com/lobby9000/macd-toolkit">EMA/MACD signal toolkit</a></h3>
+        <p class="cv-stack">Python · pandas · Excel · pytest · LibreOffice</p>
+        <p>Moving averages, MACD(12, 26, 9) and RSI implemented from first principles for a finance diploma, then extended into a batch run over 35 equities listed on the Mexican Stock Exchange.</p>
+        <ul>
+          <li>Cross-validated against a 3,815-formula Excel model to within 5 × 10⁻¹³, recalculated in CI on every push.</li>
+          <li>28 unit tests on properties derived by hand, such as MACD equal to 7 × slope on a linear trend.</li>
+        </ul>
+        <p class="cv-links"><a href="https://github.com/lobby9000/macd-toolkit">Repository</a></p>
+      </article>
+      <article class="cv-project">
+        <h3>Small language model from scratch</h3>
+        <p class="cv-stack">Python · PyTorch · NumPy</p>
+        <p>Every component of a small language model, implemented and then trained, for Carnegie Mellon University&#x27;s Introduction to Modern AI (online, January to April 2026).</p>
+        <ul>
+          <li>An autodiff engine, a BPE tokenizer and the Adam optimiser written from first principles.</li>
+          <li>A decoder-only transformer with masked multi-head attention, a KV cache, RMSNorm and a gated MLP, trained on TinyStories.</li>
+        </ul>
+        <p class="cv-links">The code stays private under the course&#x27;s academic integrity policy.</p>
+      </article>
+      <article class="cv-project">
+        <h3><a href="https://github.com/lobby9000/Milky-Way-Structure">Milky Way structure: Gaia DR3 × APOGEE-2 DR17</a></h3>
+        <p class="cv-stack">Python · pandas · astropy · scikit-learn · TOPCAT</p>
+        <p>Spatial and kinematic characterisation of the Milky Way&#x27;s stellar populations, built by cross-matching Gaia DR3 astrometry with APOGEE-2 DR17 spectroscopy.</p>
+        <ul>
+          <li>682,284 sources reduced to 281,612 stars through documented cuts on signal-to-noise, astrometric fit, radial-velocity scatter and parallax.</li>
+          <li>Velocity ellipsoid tilted by a vertex deviation of about −26.6°, consistent with asymmetric drift.</li>
+        </ul>
+        <p class="cv-links"><a href="https://github.com/lobby9000/Milky-Way-Structure">Repository</a> · <a href="https://github.com/lobby9000/Milky-Way-Structure/blob/main/report/milky-way-structure-report.pdf">Report (PDF)</a></p>
+      </article>
+      <article class="cv-project">
+        <h3><a href="https://github.com/lobby9000/Galaxy-Morphology-NNClassifier">Galaxy morphology with convolutional networks</a></h3>
+        <p class="cv-stack">Python · TensorFlow / Keras · scikit-learn · Transfer learning</p>
+        <p>Binary classification of 5,608 MaNGA galaxy images into early types and late types, from a baseline CNN to transfer learning, with the class imbalance handled explicitly.</p>
+        <ul>
+          <li>Baseline CNN: 81.0% test accuracy, held back by a recall of only 0.68 on late types.</li>
+          <li>A deeper CNN reached 86.3% test accuracy and raised late-type recall to 0.77.</li>
+        </ul>
+        <p class="cv-links"><a href="https://github.com/lobby9000/Galaxy-Morphology-NNClassifier">Repository</a></p>
+      </article>
+      <!-- END GENERATED: featured -->
+        <p class="cv-links">More projects, grouped by area, in the <a href="professional.html#projects">Professional Log</a>.</p>
+      </section>
+
+      <section aria-labelledby="skills">
+        <h2 id="skills">Core skills</h2>
+        <dl class="skills">
+          <dt>Programming</dt>
+          <dd>Python (pandas, NumPy), SQL, R, Bash, JavaScript, HTML/CSS</dd>
+          <dt>Data engineering &amp; cloud</dt>
+          <dd>PostgreSQL, data modelling (star schema), ETL, data validation, Spark, Snowflake, Azure ML, FastAPI, Flask, Git, GitHub Actions, Linux</dd>
+          <dt>Machine learning</dt>
+          <dd>scikit-learn, PyTorch, TensorFlow/Keras, statistical inference (maximum likelihood, model selection, hypothesis testing)</dd>
+          <dt>LLMs &amp; RAG</dt>
+          <dd>Anthropic API (streaming, tool use, token counting), Claude Code (headless mode, skills), prompt engineering, RAG with ChromaDB and hybrid retrieval, LLM evaluation (rubrics, red-teaming), RLHF, SFT and DPO</dd>
+          <dt>Quality assurance</dt>
+          <dd>Test design (boundary values, equivalence partitioning, negative testing), API testing with Postman and Newman, pytest, SQL data validation, regression testing in CI, Jira</dd>
+          <dt>BI &amp; productivity</dt>
+          <dd>Chart.js, Excel (pivot tables, data validation), Power BI and Looker Studio (basic), Google Workspace, Microsoft 365</dd>
+        </dl>
+      </section>
+
+      <section aria-labelledby="experience">
+        <h2 id="experience">Experience</h2>
+
+        <div class="role">
+          <div class="role-head"><strong>AI Trainer, Software Validation &amp; NLP</strong><span>2026</span></div>
+          <div class="role-meta">DataAnnotation · Remote</div>
+          <p>Tested unreleased LLMs across 10+ projects with adversarial prompts that exposed logic failures and policy violations, reporting each one in expected-versus-actual form. Designed the rubrics and metrics used to score model outputs, and provided RLHF feedback and NLP annotations for model evaluation and fine-tuning.</p>
+        </div>
+
+        <div class="role">
+          <div class="role-head"><strong>Language Specialist and Freelance AI Trainer</strong><span>2026</span></div>
+          <div class="role-meta">Meridial Marketplace · Remote</div>
+          <p>Reviewed and corrected LLM outputs in multilingual human-in-the-loop pipelines, giving structured feedback used to guide training.</p>
+        </div>
+
+        <div class="role">
+          <div class="role-head"><strong>Freelance Field Data Verification Specialist</strong><span>2026</span></div>
+          <div class="role-meta">Independent contract · Mexico City</div>
+          <p>Collected and verified data on commercial venues through site visits and digital documentation, keeping the dataset accurate and complete.</p>
+        </div>
+
+        <div class="role">
+          <div class="role-head"><strong>Freelance Web Developer</strong><span>2025</span></div>
+          <div class="role-meta">Ashland Chemical de México · Mexico City</div>
+          <p>Built an interactive product-presentation website for private-school outreach, from client requirements to a deployed interface.</p>
+        </div>
+
+        <div class="role">
+          <div class="role-head"><strong>Research Assistant (university social service)</strong><span>2024</span></div>
+          <div class="role-meta">UNAM, with Dr Gabriella Piccinelli Bocchi and Dr Ángel Sánchez Cecilio · Mexico City</div>
+          <p>Reviewed the cosmology literature, wrote a literature review on cosmological perturbations and presented the theory to the research group every week.</p>
+        </div>
+
+        <div class="role">
+          <div class="role-head"><strong>Science Communicator (volunteer)</strong></div>
+          <div class="role-meta">Institute of Physics, UNAM · Mexico City</div>
+          <p>Presented cosmology research to audiences ranging from children to researchers in other fields, and built a live-camera demo that simulates a gravitational wave passing through the viewer.</p>
+        </div>
+      </section>
+
+      <section aria-labelledby="education">
+        <h2 id="education">Education</h2>
+        <div class="role">
+          <div class="role-head"><strong>MSc in Field and Particle Astrophysics</strong><span>Aug 2024 to present</span></div>
+          <div class="role-meta">Institute of Astronomy &amp; Institute of Physics, UNAM · coursework completed, thesis in progress</div>
+          <p>Thesis: <em>Effective Equation of State and Gravitational Particle Production in Inflationary Models</em>, supervised by Dr Marcos A. García García.</p>
+        </div>
+        <div class="role">
+          <div class="role-head"><strong>BSc in Physics, graduated with honours</strong><span>Aug 2019 to Dec 2023</span></div>
+          <div class="role-meta">National Autonomous University of Mexico (UNAM)</div>
+        </div>
+      </section>
+
+      <section aria-labelledby="courses">
+        <h2 id="courses">Courses &amp; certifications</h2>
+        <ul>
+          <li><strong>Introduction to Modern AI</strong>, Carnegie Mellon University (online), January to April 2026</li>
+          <li><strong>Diploma in Finance</strong>, UNAM, March 2026 to present</li>
+          <li><strong>zero2hero</strong> (2026): Claude Essentials · Claude Architect · Project Management and AI Agents with Claude · Software Development with Python and AI (24 sessions) · FastAPI and SQLModel · Financial Algorithms with Python · Statistics, Time Series and Econometrics with R</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="languages">
+        <h2 id="languages">Languages</h2>
+        <p class="lang-list">Spanish (native) · English (C2) · Italian (B2) · German (B1) · Portuguese (B1)</p>
+      </section>
+
+      <footer>
+        <span>Prefer the full experience? <a href="professional.html">Professional Log</a> · <a href="index.html">Portal</a></span>
+        <span>Updated October 2026</span>
+      </footer>
+    </main>
+  </div>
+
+</body>
+</html>

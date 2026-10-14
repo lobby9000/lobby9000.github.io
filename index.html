@@ -3,7 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to My Universe</title>
+  <title>Welcome to My Universe · Luis Ángel Quiroz López</title>
+  <meta name="description" content="Personal site of Luis Ángel Quiroz López, physicist working in data science, data engineering, AI and QA. Projects, thesis, CV and a few cats.">
+  <link rel="canonical" href="https://lobby9000.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Luis Ángel Quiroz López · Data Science, Data Engineering and AI">
+  <meta property="og:description" content="Projects, thesis and CV, behind a CRT monitor from 1998.">
+  <meta property="og:url" content="https://lobby9000.github.io/">
+  <meta property="og:image" content="https://lobby9000.github.io/assets/ui/social-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="favicon.png">
 
@@ -22,15 +30,15 @@
       --ink: #000000;
     }
 
-    html { cursor: url('cursor-arrow.png') 0 0, default; }
+    html { cursor: url('assets/ui/cursors/cursor-arrow.png') 0 0, default; }
 
-    a, button { cursor: url('cursor-hand.png') 10 0, pointer; }
+    a, button { cursor: url('assets/ui/cursors/cursor-hand.png') 10 0, pointer; }
 
-    a:active, button:active { cursor: url('cursor-hand-click.png') 10 4, pointer; }
+    a:active, button:active { cursor: url('assets/ui/cursors/cursor-hand-click.png') 10 4, pointer; }
 
     /* Reloj de arena mientras sale de esta pagina */
     body.busy, body.busy * {
-      cursor: url('cursor-wait.png') 14 14, progress !important;
+      cursor: url('assets/ui/cursors/cursor-wait.png') 14 14, progress !important;
     }
 
     /* =====================================================
@@ -38,7 +46,7 @@
        ===================================================== */
     body {
       background-color: var(--ink);
-      background-image: url('hubble.jpg');
+      background-image: url('assets/ui/hubble.jpg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -228,6 +236,20 @@
     }
 
     /* =====================================================
+       ATAJO PARA RECLUTADORES
+       Discreto a proposito: el portal sigue siendo el portal.
+       ===================================================== */
+    .plain-link {
+      font-family: 'VT323', "Courier New", monospace;
+      font-size: 17px;
+      margin: 10px 0 0 0;
+      letter-spacing: 1px;
+    }
+
+    .plain-link a { color: var(--phosphor-dim); text-decoration: none; }
+    .plain-link a:hover, .plain-link a:focus-visible { color: var(--amber); text-shadow: 0 0 8px rgba(255,176,0,0.6); }
+
+    /* =====================================================
        BOTON DE SONIDO
        ===================================================== */
     .sound-toggle {
@@ -317,23 +339,25 @@
     <nav class="portal-container">
 
       <a href="fun.html" class="portal" data-status="loading personal_hub.exe">
-        <div class="frame"><img src="smiley.gif" alt="Smiley face"></div>
+        <div class="frame"><img src="assets/ui/smiley.gif" alt="Smiley face"></div>
         <span class="label">[ Personal Hub ]</span>
       </a>
 
       <a href="professional.html" class="portal" data-status="loading professional_log.exe">
-        <div class="frame"><img src="computer.gif" alt="Retro computer"></div>
+        <div class="frame"><img src="assets/ui/computer.gif" alt="Retro computer"></div>
         <span class="label">[ Professional Log ]</span>
       </a>
 
       <a href="https://github.com/lobby9000" class="portal" target="_blank" rel="noopener" data-status="connecting to github.com">
-        <div class="frame"><img src="cat.gif" alt="Pixel cat"></div>
+        <div class="frame"><img src="assets/ui/cat.gif" alt="Pixel cat"></div>
         <span class="label">[ Code Archive ]</span>
       </a>
 
     </nav>
 
     <p class="statusbar" id="status">&gt; awaiting input_</p>
+
+    <p class="plain-link"><a href="cv.html" data-status="opening cv.html (plain, no animations)">[ in a hurry? recruiter view ]</a></p>
 
   </main>
 
@@ -402,6 +426,13 @@
      3. BARRA DE ESTADO Y SONIDO AL PASAR EL MOUSE
      ===================================================== */
   var statusEl = document.getElementById('status');
+
+  var plain = document.querySelector('.plain-link a');
+  plain.addEventListener('mouseenter', function () {
+    statusEl.textContent = '> ' + plain.dataset.status + '_';
+    beep(1200, 18, 0.03);
+  });
+  plain.addEventListener('mouseleave', function () { statusEl.textContent = '> awaiting input_'; });
 
   document.querySelectorAll('.portal').forEach(function (portal) {
     portal.addEventListener('mouseenter', function () {

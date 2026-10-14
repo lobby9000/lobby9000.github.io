@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Professional Log - Luis.exe</title>
+  <title>Professional Log · Luis Ángel Quiroz López</title>
+  <meta name="description" content="Projects, thesis and CV of Luis Ángel Quiroz López, a physicist working in data science, data engineering, AI and QA.">
+  <link rel="canonical" href="https://lobby9000.github.io/professional.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Professional Log · Luis Ángel Quiroz López">
+  <meta property="og:description" content="Data science, data engineering, AI and QA projects, each with its repository and results.">
+  <meta property="og:url" content="https://lobby9000.github.io/professional.html">
+  <meta property="og:image" content="https://lobby9000.github.io/assets/ui/social-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
@@ -11,57 +20,57 @@
   <style>
     /* =====================================================
        CURSORES DE PIXEL ART
-       Los PNG van en la raiz de Neocities, junto al HTML.
+       Los PNG viven en assets/ui/cursors/.
        Los dos numeros despues del archivo son el hotspot:
        el pixel exacto que hace clic. Si el clic se siente
        corrido, ahi es donde se ajusta.
        El ultimo valor de cada linea (default, pointer, text)
        es el respaldo por si el PNG no carga.
        ===================================================== */
-    html { cursor: url('cursor-arrow.png') 0 0, default; }
+    html { cursor: url('assets/ui/cursors/cursor-arrow.png') 0 0, default; }
 
     /* Texto seleccionable. Va antes que los links para que un
        link dentro de un parrafo siga mostrando la mano. */
     .content-area p, .content-area li, .content-area h2,
     .content-area h3, .float-body p, .float-body h3 {
-      cursor: url('cursor-text.png') 12 16, text;
+      cursor: url('assets/ui/cursors/cursor-text.png') 12 16, text;
     }
 
     /* Todo lo clicable */
     a, button, .nav-btn, .tab-btn, .desk-icon,
     .content-area a, .float-body a {
-      cursor: url('cursor-hand.png') 10 0, pointer;
+      cursor: url('assets/ui/cursors/cursor-hand.png') 10 0, pointer;
     }
 
     /* Mientras se mantiene presionado */
     a:active, button:active, .nav-btn:active, .tab-btn:active, .desk-icon:active {
-      cursor: url('cursor-hand-click.png') 10 4, pointer;
+      cursor: url('assets/ui/cursors/cursor-hand-click.png') 10 4, pointer;
     }
 
     /* Barras de titulo: las ventanas se arrastran */
     .title-bar, .float-win .title-bar {
-      cursor: url('cursor-move.png') 14 14, move;
+      cursor: url('assets/ui/cursors/cursor-move.png') 14 14, move;
     }
 
     /* Capturas y tablero: se pueden abrir en grande */
     .shot, .shot-placeholder {
-      cursor: url('cursor-zoom-in.png') 12 8, zoom-in;
+      cursor: url('assets/ui/cursors/cursor-zoom-in.png') 12 8, zoom-in;
     }
 
     .viewer-image {
-      cursor: url('cursor-zoom-out.png') 12 8, zoom-out;
+      cursor: url('assets/ui/cursors/cursor-zoom-out.png') 12 8, zoom-out;
     }
 
     /* Lo que todavia no existe */
     .status.wip {
-      cursor: url('cursor-no.png') 12 12, not-allowed;
+      cursor: url('assets/ui/cursors/cursor-no.png') 12 12, not-allowed;
     }
 
     /* Reloj de arena mientras carga una seccion.
        El !important es a proposito: durante ese medio segundo
        gana sobre cualquier otro cursor de la pagina. */
     body.busy, body.busy * {
-      cursor: url('cursor-wait.png') 14 14, progress !important;
+      cursor: url('assets/ui/cursors/cursor-wait.png') 14 14, progress !important;
     }
 
     /* =====================================================
@@ -251,7 +260,7 @@
 
     /* =====================================================
        ICONOS DEL INDICE
-       Archivos de 16x16 en la raiz de Neocities:
+       Archivos de 16x16 en assets/ui/icons/:
        icon-folder, icon-user, icon-thesis, icon-code,
        icon-doc, icon-globe, icon-back.
        ===================================================== */
@@ -384,7 +393,7 @@
     .status.wip { background: #FFF4CE; border: 1px solid #D9A400; color: #7A5C00; }
     .status.live { background: #DFF6DD; border: 1px solid #4C9A4C; color: #1E5C1E; }
 
-    /* Screenshot slot: looks intentional even before you upload the image */
+    /* Screenshots: framed like an XP picture viewer */
     .shot {
       width: 100%;
       max-width: 420px;
@@ -669,7 +678,7 @@
 
     /* =====================================================
        ICONOS DEL ESCRITORIO
-       Archivos de 32x32 en la raiz de Neocities:
+       Archivos de 32x32 en assets/ui/icons/:
        icon-cv, icon-readme, icon-dashboard, icon-github,
        icon-music. Para cambiar alguno, basta con reemplazar
        el PNG conservando el nombre.
@@ -901,7 +910,7 @@
       display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-top: 10px;
     }
     .carrusel-mini img {
-      height: 120px; width: auto; border: 2px inset #E0E0E0; cursor: url('cursor-zoom-in.png') 12 8, zoom-in;
+      height: 120px; width: auto; border: 2px inset #E0E0E0; cursor: url('assets/ui/cursors/cursor-zoom-in.png') 12 8, zoom-in;
     }
     .mosaico-grid {
       display: grid;
@@ -910,7 +919,7 @@
     }
     .mosaico-grid figure { margin: 0; display: flex; flex-direction: column; }
     .mosaico-grid img {
-      width: 100%; height: auto; border: 2px inset #E0E0E0; cursor: url('cursor-zoom-in.png') 12 8, zoom-in;
+      width: 100%; height: auto; border: 2px inset #E0E0E0; cursor: url('assets/ui/cursors/cursor-zoom-in.png') 12 8, zoom-in;
     }
     .mosaico-grid figcaption { font-size: 11px; color: #555; margin-top: 4px; }
     .btn-galeria {
@@ -918,6 +927,43 @@
       border: 1px solid #7A7A6D; border-radius: 3px; padding: 4px 12px; cursor: pointer; margin-top: 5px;
     }
     .btn-galeria:hover { border-color: #F0A030; box-shadow: 0 0 4px rgba(240,160,48,0.7); }
+    /* =====================================================
+       TARJETAS GENERADAS DESDE projects.json
+       ===================================================== */
+    .project-card { scroll-margin-top: 10px; }
+    .project-card .tags { margin: 0 0 6px 0; }
+    .project-card ul.highlights { font-size: 13px; line-height: 1.5; margin: 6px 0 8px 0; padding-left: 20px; }
+    .project-card ul.highlights li { margin-bottom: 3px; }
+    .project-card pre.snippet {
+      font-family: 'VT323', "Courier New", monospace;
+      font-size: 15px;
+      background: #0B1B0B;
+      color: #6BFF6B;
+      border: 2px inset #000;
+      padding: 6px 8px;
+      white-space: pre-wrap;
+      margin: 8px 0;
+    }
+    .project-card p.note { font-size: 12px; color: #555; font-style: italic; }
+    .pending-note { font-size: 12px; color: #7A5C00; font-style: italic; }
+    .ci-link { margin-left: 12px; vertical-align: middle; }
+    .link-row a.ci-link + a, .link-row .ci-link { text-decoration: none; }
+    .ci-badge { height: 18px; vertical-align: middle; }
+    .tab-count {
+      display: inline-block;
+      min-width: 14px;
+      font-size: 10px;
+      background: #ECE9D8;
+      border: 1px solid #ACA899;
+      border-radius: 7px;
+      padding: 0 4px;
+      margin-left: 2px;
+      color: #4A4A3F;
+    }
+    .tab-btn.active .tab-count { background: #DCE6F7; border-color: #7BA2E7; color: #003399; }
+    .viewer-caption { margin-top: 12px; font-size: 13px; color: #333; line-height: 1.4; }
+    .content-area .doc-list li { margin-bottom: 6px; }
+    .cv-links-inline a + a { margin-left: 12px; }
   </style>
 </head>
 <body>
@@ -932,11 +978,12 @@
 
   <!-- ICONOS DEL ESCRITORIO (un clic selecciona, doble clic abre) -->
   <div class="desktop-icons">
-    <button class="desk-icon" data-open="cv"><img class="glyph" src="icon-cv.png" alt="CV"><span>CV_2026.pdf</span></button>
-    <button class="desk-icon" data-open="readme"><img class="glyph" src="icon-readme.png" alt="README"><span>README.txt</span></button>
-    <button class="desk-icon" data-open="dashboard"><img class="glyph" src="icon-dashboard.png" alt="Dashboard"><span>dashboard.exe</span></button>
-    <button class="desk-icon" data-open="github"><img class="glyph" src="icon-github.png" alt="GitHub"><span>github.url</span></button>
-    <button class="desk-icon" data-open="music"><img class="glyph" src="icon-music.png" alt="Player"><span>player.exe</span></button>
+    <button class="desk-icon" data-open="cv"><img class="glyph" src="assets/ui/icons/icon-cv.png" alt="CV"><span>CV_2026.pdf</span></button>
+    <button class="desk-icon" data-open="recruiter"><img class="glyph" src="assets/ui/icons/icon-briefcase-32.png" alt="Recruiter view"><span>recruiter.htm</span></button>
+    <button class="desk-icon" data-open="readme"><img class="glyph" src="assets/ui/icons/icon-readme.png" alt="README"><span>README.txt</span></button>
+    <button class="desk-icon" data-open="dashboard"><img class="glyph" src="assets/ui/icons/icon-dashboard.png" alt="Dashboard"><span>dashboard.exe</span></button>
+    <button class="desk-icon" data-open="github"><img class="glyph" src="assets/ui/icons/icon-github.png" alt="GitHub"><span>github.url</span></button>
+    <button class="desk-icon" data-open="music"><img class="glyph" src="assets/ui/icons/icon-music.png" alt="Player"><span>player.exe</span></button>
   </div>
 
   <div class="xp-window" id="xpWindow">
@@ -953,13 +1000,14 @@
     <div class="window-body">
       <!-- LEFT INDEX (SIDEBAR) -->
       <div class="sidebar">
-        <button class="nav-btn selected" data-status="about_the_log.txt" onclick="showSection('log', this)"><img class="ico" src="icon-folder.png" alt="Folder">About the Log</button>
-        <button class="nav-btn" data-status="about_me.txt" onclick="showSection('about', this)"><img class="ico" src="icon-user.png" alt="Profile">About Me</button>
-        <button class="nav-btn" data-status="thesis_project.tex" onclick="showSection('thesis', this)"><img class="ico" src="icon-thesis.png" alt="Thesis">Master's Thesis</button>
-        <button class="nav-btn" data-status="projects/" onclick="showSection('projects', this)"><img class="ico" src="icon-code.png" alt="Code">Programming Projects</button>
-        <button class="nav-btn" data-status="graduate_works/" onclick="showSection('graduate', this)"><img class="ico" src="icon-doc.png" alt="Documents">Graduate Works</button>
-        <button class="nav-btn" data-status="languages/" onclick="showSection('languages', this)"><img class="ico" src="icon-globe.png" alt="Languages">Languages Works</button>
-        <button class="nav-btn" data-status="returning to portal" onclick="leaveTo('index.html')"><img class="ico" src="icon-back.png" alt="Back">Back to Portal</button>
+        <button class="nav-btn selected" data-section="log" data-status="about_the_log.txt" onclick="showSection('log', this)"><img class="ico" src="assets/ui/icons/icon-folder.png" alt="">About the Log</button>
+        <button class="nav-btn" data-section="about" data-status="about_me.txt" onclick="showSection('about', this)"><img class="ico" src="assets/ui/icons/icon-user.png" alt="">About Me</button>
+        <button class="nav-btn" data-section="thesis" data-status="thesis_project.tex" onclick="showSection('thesis', this)"><img class="ico" src="assets/ui/icons/icon-thesis.png" alt="">Master's Thesis</button>
+        <button class="nav-btn" data-section="projects" data-status="projects/" onclick="showSection('projects', this)"><img class="ico" src="assets/ui/icons/icon-code.png" alt="">Projects</button>
+        <button class="nav-btn" data-section="writing" data-status="written_work/" onclick="showSection('writing', this)"><img class="ico" src="assets/ui/icons/icon-doc.png" alt="">Written Work</button>
+        <button class="nav-btn" data-section="languages" data-status="languages.txt" onclick="showSection('languages', this)"><img class="ico" src="assets/ui/icons/icon-globe.png" alt="">Languages</button>
+        <button class="nav-btn" data-status="opening recruiter view" onclick="leaveTo('cv.html')"><img class="ico" src="assets/ui/icons/icon-briefcase.png" alt="">Recruiter View</button>
+        <button class="nav-btn" data-status="returning to portal" onclick="leaveTo('index.html')"><img class="ico" src="assets/ui/icons/icon-back.png" alt="">Back to Portal</button>
       </div>
 
       <!-- CENTER/RIGHT CONTENT -->
@@ -969,33 +1017,35 @@
         <div id="log" class="content-section active">
           <h2>About the Professional Log</h2>
           <hr>
-          <p>Welcome to my Professional Log. This section of my website serves as a dedicated academic and technical portfolio. Here, you will find my curriculum vitae, details regarding my ongoing Master's Thesis Project, documentation of my Python programming projects, and a collection of written works.</p>
-          <p><strong>Note:</strong> This space is strictly reserved for my professional and academic endeavors. If you are looking for more personal or relaxed content—such as my weekly blog where I discuss recent scientific papers, technology news, and other topics not directly related to my thesis—please head back to the main portal and select the <strong>Personal Hub</strong>.</p>
+          <p>Welcome to my Professional Log, the academic and technical side of this site. Here you will find my CV, my master's thesis, the projects I have built and a collection of written work.</p>
+          <p>In a hurry? The <a href="cv.html">recruiter view</a> has the essentials on one plain page, with no animations and the CV in English and Spanish.</p>
+          <p><strong>Note:</strong> this space is reserved for my professional and academic work. If you are looking for something more personal or relaxed, such as the blog where I will write about recent scientific papers, technology and other topics outside my thesis, head back to the main portal and select the <strong>Personal Hub</strong>.</p>
         </div>
 
         <!-- SECTION 1: ABOUT ME -->
         <div id="about" class="content-section">
           <h2>About Me</h2>
           <hr>
-          <p>Hello, and welcome to my professional log. My name is Luis A. Quiroz, and I am a data science-driven physicist and current Master's student in Astrophysics at UNAM's Astronomy and Physics Institutes. I specialize in theoretical cosmology, numerical simulations, data visualization, and the application of computational methods to complex mathematical physics problems.</p>
+          <p>Hello, and welcome to my professional log. My name is Luis A. Quiroz, and I am a data-science-driven physicist and Master's student in Astrophysics at UNAM's Institutes of Astronomy and Physics. I specialise in theoretical cosmology, numerical simulation, data visualisation and the application of computational methods to complex problems in mathematical physics.</p>
 
-          <p>Currently, I am developing my Master’s Thesis Project (MTP), tentatively titled <em>Effective Equation of State and Gravitational Particle Production in Inflationary Models</em>, under the direction of Dr. Marcos A. García García. In this research, I write modular Python code to run numerical simulations that analyze the dynamics of inflaton and spectator fields during the reheating transition. For non-physics people, that means studying the early Universe energy fields that would become fundamental particles and could explain modern astrophysical questions like dark matter (DM) or the still-happening expansion of the space itself.</p>
+          <p>For my Master's Thesis Project I am working on <em>Effective Equation of State and Gravitational Particle Production in Inflationary Models</em>, under the supervision of Dr Marcos A. García García. I write modular Python code to simulate the dynamics of the inflaton and spectator fields during reheating. For non-physicists, that means studying the energy fields of the early Universe that would become fundamental particles, and which could explain modern puzzles such as dark matter (DM) or the ongoing expansion of space itself.</p>
 
-          <p>Beyond theoretical cosmology, my academic and professional trajectory heavily integrates data science (DS), machine learning (ML), and artificial intelligence (AI). My background includes specialized coursework in neural networks (NN) and AI modeling - I took Dr. Jose Antonio Vazquez Mata's course on NN as a bachelor at UNAM's Faculty of Science, I am currently revisiting Dr. Mehryar Mohri's course on Foundations of ML at New York University (NYU) and taking the Introduction to Modern AI lectures given by Dr. Zico Kolter at Carnegie Mellon University (CMU) - allowing me to apply advanced computational architectures to rigorous data sets.</p>
+          <p>Beyond theoretical cosmology, my academic and professional path draws heavily on data science (DS), machine learning (ML) and artificial intelligence (AI). I took Dr Jose Antonio Vazquez Mata's course on neural networks as an undergraduate at UNAM's Faculty of Science, I am revisiting Dr Mehryar Mohri's Foundations of Machine Learning course from New York University (NYU), and I completed Dr Zico Kolter's Introduction to Modern AI at Carnegie Mellon University (CMU), where I built a small language model from scratch.</p>
 
-          <p>I have actively applied these analytical and programming skills in industry environments. Recently, I have worked as an AI Trainer, contributing to human-in-the-loop learning pipelines and providing high-quality annotations for natural language processing (NLP) tasks. This includes direct experience with Reinforcement Learning Through Human Feedback (RLHF), refining large language model (LLM) behavior in real-time evaluations.</p>
+          <p>I apply these skills in industry too. As an AI trainer I contribute to human-in-the-loop pipelines, write high-quality annotations for natural language processing (NLP) tasks and evaluate large language model (LLM) outputs for reinforcement learning from human feedback (RLHF). I have also turned the same rigour into software quality assurance: test design, API testing and regression suites, which the QA &amp; engineering track documents.</p>
 
-          <p>Effective scientific communication and interdisciplinary research are also central to my methodology. Over the years, I have cultivated a strong foundation in academic and analytical writing, authoring award-winning essays (Concursos Interpreparatorianos 2017-2019) spanning both physics and the humanities, such as <em>Natural and Artificial Satellites</em> and <em>Why Study Philosophy Today?</em>. I love a good research project!</p>
+          <p>Clear scientific communication and interdisciplinary research are central to how I work. Over the years I have built a strong foundation in academic and analytical writing, with award-winning essays (Concursos Interpreparatorianos, 2017 to 2019) in both physics and the humanities, such as <em>Natural and Artificial Satellites</em> and <em>Why Study Philosophy Today?</em> I love a good research project!</p>
 
-          <p>Finally, as a polyglot with proficiency in English, German, Italian, and Portuguese, I am equipped to collaborate effectively across international and multidisciplinary teams. Whether I am modeling financial workflows, training language models, or simulating the early universe, my goal is always to leverage computational tools to extract meaningful insights from complex systems.</p>
+          <p>Finally, as a polyglot with English, German, Italian and Portuguese, I am used to collaborating across international and multidisciplinary teams. Whether I am modelling financial workflows, training language models or simulating the early Universe, my goal is always to use computational tools to extract meaningful insight from complex systems.</p>
 
-          <p>If for some reason you do not already have a copy of my Résumé (or CV) here you can find one.</p>
-
+          <p>If you do not already have a copy of my CV, here it is:</p>
           <ul>
-            <li><a href="CV_2026_lq.pdf" target="_blank">Click Here for CV! (PDF)</a></li>
+            <li><a href="assets/cv/CV_Luis_Angel_Quiroz_Lopez_EN.pdf" target="_blank" rel="noopener">CV in English (PDF)</a></li>
+            <li><a href="assets/cv/CV_Luis_Angel_Quiroz_Lopez_ES.pdf" target="_blank" rel="noopener">CV en español (PDF)</a></li>
+            <li><a href="cv.html">Recruiter view (one plain page)</a></li>
           </ul>
 
-          <p>Hope you have a wonderful <b>day/night/whatever</b>! And as John Lennon said at the end of The Beatles rooftop concert, <em> I hope we passed the audition!</em> </p>
+          <p>Hope you have a wonderful <b>day/night/whatever</b>! And as John Lennon said at the end of the Beatles' rooftop concert, <em>I hope we passed the audition!</em></p>
         </div>
 
         <!-- SECTION 2: MASTER'S THESIS PROJECT -->
@@ -1003,272 +1053,330 @@
           <h2>Master's Thesis Project</h2>
           <hr>
           <h3>Effective Equation of State and Gravitational Particle Production in Inflationary Models</h3>
-          <p><strong>Advisor:</strong> Dr. Marcos A. García García</p>
+          <p><strong>Supervisor:</strong> Dr Marcos A. García García</p>
           <p><strong>Institution:</strong> Institute of Physics, UNAM</p>
 
-          <p>The primary objective of the project is to rigorously characterise the relic abundance of a dark matter candidate produced exclusively through gravitational interaction during the transition between cosmic inflation and the inflationary reheating phase. In particular, we study the dynamical behaviour of a <em>spectator</em> scalar field decoupled from the inflaton sector, analysing how the coherent oscillations of the inflationary background modulate the spacetime metric and induce non-thermal particle production phenomena.</p>
+          <p>The primary objective of the project is to rigorously characterise the relic abundance of a dark matter candidate produced exclusively through gravitational interaction during the transition between cosmic inflation and reheating. In particular, we study the dynamical behaviour of a <em>spectator</em> scalar field decoupled from the inflaton sector, analysing how the coherent oscillations of the inflationary background modulate the spacetime metric and induce non-thermal particle production.</p>
 
           <h3>Work Completed and Achievements</h3>
           <p>During the previous semesters, the research plan has focused on:</p>
 
           <ol>
             <li>
-              <strong>Exploration of T-Model Type Potentials:</strong> In the first stage of the project, the inflation dynamics using <em>T-model</em> type potentials were evaluated in detail, employing recent literature in the sector as a formal reference framework (particularly the analytical formalism presented in <a href="https://arxiv.org/abs/2502.20471" target="_blank">arXiv:2502.20471</a>). The slow-roll conditions and the end of inflation were derived for these potentials. In terms of programming, the work focused on the dynamics of the inflationary field:
+              <strong>Exploration of T-model potentials:</strong> the first stage evaluated inflationary dynamics with <em>T-model</em> potentials in detail, taking recent literature as the formal reference framework (particularly the analytical formalism in <a href="https://arxiv.org/abs/2502.20471" target="_blank" rel="noopener">arXiv:2502.20471</a>). The slow-roll conditions and the end of inflation were derived for these potentials. The programming work focused on the dynamics of the inflaton:
               <ul>
-                <li>The evolution of the inflaton during inflation and its transition towards the oscillation phase (<em>reheating</em>) was studied for a <em>T-model</em> and various values of k, verifying that the densities obtained agreed with the theoretical forms (~ a<sup>-6k/(k+2)</sup>).</li>
-                <li>Work was carried out comparing the values obtained for the end of inflation (&phi;<sub>end</sub>) through direct numerical evolution against the analytical predictions of the <em>slow-roll</em> approximation.</li>
+                <li>The evolution of the inflaton during inflation and its transition to the oscillation phase (<em>reheating</em>) was studied for a <em>T-model</em> and several values of k, verifying that the resulting densities follow the theoretical scaling (~ a<sup>-6k/(k+2)</sup>).</li>
+                <li>The end of inflation (&phi;<sub>end</sub>) from direct numerical evolution was compared with the analytical predictions of the <em>slow-roll</em> approximation.</li>
               </ul>
-              <p>This is the Colab Notebook containing the results: <a href="https://colab.research.google.com/drive/1WU9EHqw5BTEdtey-hU27ECNP07T4Ge6S?usp=sharing" target="_blank">View on Google Colab</a>.</p>
+              <p>The Colab notebook with these results: <a href="https://colab.research.google.com/drive/1WU9EHqw5BTEdtey-hU27ECNP07T4Ge6S?usp=sharing" target="_blank" rel="noopener">view on Google Colab</a>.</p>
             </li>
 
             <li>
-              <strong>Transition to the Quartic Regime (n = 4):</strong> The current focus of the thesis has been reorientated, based on <a href="https://arxiv.org/abs/2206.08940" target="_blank">arXiv:2206.08940</a>, towards the analytical and numerical study of the pure quartic regime (n = 4) for inflaton oscillations. This regime is of particular interest because the average equation of state of the universe during the oscillation phase mimics a radiation fluid (&lang;w&rang; = 1/3), which fundamentally alters the Hubble expansion rate H(a) and, consequently, the instantaneous rates of gravitational particle production of the <em>spectator</em> field.
+              <strong>Transition to the quartic regime (n = 4):</strong> based on <a href="https://arxiv.org/abs/2206.08940" target="_blank" rel="noopener">arXiv:2206.08940</a>, the thesis has been reoriented towards the analytical and numerical study of the pure quartic regime (n = 4) for inflaton oscillations. This regime is of particular interest because the average equation of state during the oscillation phase mimics a radiation fluid (&lang;w&rang; = 1/3), which fundamentally changes the Hubble rate H(a) and, with it, the instantaneous rates of gravitational particle production of the <em>spectator</em> field.
             </li>
 
             <li>
-              <strong>Development and Injection of Precision Numerical Code:</strong> A modular computational environment was designed and implemented in Python, focused on the simultaneous resolution of the coupled set of Friedmann and Klein-Gordon differential equations. The code calculates the time evolution of the scale factor a(t), the inflaton field &phi;(t), and the energy density functions without relying on explicit couplings.
+              <strong>A precise, modular numerical code:</strong> a modular Python environment solves the coupled Friedmann and Klein-Gordon equations simultaneously. It computes the time evolution of the scale factor a(t), the inflaton field &phi;(t) and the energy densities without explicit couplings.
               <br><br>
-              In the following Colab Notebook, you can review the progress and the <em>work in progress</em> of the "Zero-Coupling" implementation (without initial couplings) as a base case, which, once the stability of the code is validated, will:
+              The notebook below shows the work in progress on the zero-coupling implementation, the base case. Once the stability of the code is validated, the next steps are to:
               <ul>
                 <li>Introduce the coupling terms.</li>
                 <li>Vary the effective mass parameters.</li>
                 <li>Generate the first occupation spectra.</li>
               </ul>
-              <p><a href="https://colab.research.google.com/drive/1WU9EHqw5BTEdtey-hU27ECNP07T4Ge6S?usp=sharing" target="_blank">View Zero-Coupling Colab Notebook</a></p>
+              <p><a href="https://colab.research.google.com/drive/1WU9EHqw5BTEdtey-hU27ECNP07T4Ge6S?usp=sharing" target="_blank" rel="noopener">View the zero-coupling notebook</a></p>
             </li>
 
             <li>
-              <strong>Debugging and Algorithmic Optimisation:</strong> Recently, critical computational challenges associated with the numerical stability of the code were resolved. Specifically, inconsistencies originating from the omission of positional arguments within the <em>slow-roll</em> integrand routines were corrected. Even so, the numerical integrator and the graphical results produced by the code continue to be refined.
+              <strong>Debugging and algorithmic optimisation:</strong> critical problems with the numerical stability of the code were recently resolved. In particular, inconsistencies caused by missing positional arguments in the <em>slow-roll</em> integrand routines were corrected. The numerical integrator and the figures it produces are still being refined.
             </li>
           </ol>
 
           <h3>Academic Meetings and Discussions</h3>
-          <p>Throughout this period, constant meetings have been held with Dr. Marcos Alejandro García García. Recent discussions have focused on the following critical points:</p>
+          <p>Throughout this period I have met regularly with Dr Marcos Alejandro García García. Recent discussions have focused on:</p>
           <ul>
-            <li><strong>Transition to the Coupled System:</strong> It was established that the next major objective is to integrate the background dynamics, which have already been modelled, with the second field (the <em>spectator</em> field) to evaluate the joint gravitational production.</li>
-            <li><strong>Identification of Computational Challenges:</strong> The numerical challenges that arise when attempting to couple both fields have been exhaustively discussed, identifying instabilities in the integration methods that require revision.</li>
-            <li><strong>Exploration of New Scenarios:</strong> The determination and feasibility of studying additional scalar fields to strengthen the phenomenological analysis of the thesis have been proposed.</li>
+            <li><strong>Moving to the coupled system:</strong> the next major objective is to combine the background dynamics, already modelled, with the second field (the <em>spectator</em>) to evaluate their joint gravitational production.</li>
+            <li><strong>Computational challenges:</strong> the numerical difficulties that appear when both fields are coupled have been discussed in depth, identifying instabilities in the integration methods that need revision.</li>
+            <li><strong>New scenarios:</strong> studying additional scalar fields has been proposed to strengthen the phenomenological analysis.</li>
           </ul>
         </div>
 
         <!-- ============================================================
-             SECTION 3: PROGRAMMING PROJECTS  (now with 3 sub-tabs)
+             SECTION 3: PROJECTS
+             The tabs and cards between the GENERATED markers come from
+             projects.json. Edit that file and run:
+                 python3 tools/build_site.py
              ============================================================ -->
         <div id="projects" class="content-section">
-          <h2>Programming Projects</h2>
+          <h2>Projects</h2>
           <hr>
 
-          <!-- TAB STRIP -->
-          <div class="tab-strip">
-            <button class="tab-btn active" onclick="showTab('tab-academic', this)">🎓 Academic</button>
-            <button class="tab-btn" onclick="showTab('tab-research', this)">🔭 Research</button>
-            <button class="tab-btn" onclick="showTab('tab-industry', this)">🛒 Retail &amp; Industry</button>
+          <!-- BEGIN GENERATED: projects -->
+          <div class="tab-strip" role="tablist" aria-label="Project tracks">
+            <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-data" data-tab="tab-data" title="Data &amp; analytics">📊 Data <span class="tab-count">4</span></button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-ai" data-tab="tab-ai" title="AI &amp; LLMs">🤖 AI &amp; LLMs <span class="tab-count">3</span></button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-qa" data-tab="tab-qa" title="QA &amp; engineering">🧪 QA <span class="tab-count">3</span></button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-physics" data-tab="tab-physics" title="Physics &amp; simulation">🔭 Physics <span class="tab-count">3</span></button>
           </div>
 
-          <!-- TAB A: ACADEMIC -->
-          <div id="tab-academic" class="tab-panel active">
-            <p class="panel-intro">Coursework and degree projects: numerical methods, statistics and machine learning built for a class, a lab or a final exam.</p>
-
-            <div class="project-card">
-              <h3>Hydrodynamic Astrophysical Jet Simulation <span class="status live">Live</span></h3>
-              <p>
-                <span class="tag">Python</span><span class="tag">NumPy</span><span class="tag">Euler2D</span><span class="tag">Numerical methods</span>
-              </p>
-              <p>Two-dimensional hydrodynamic simulation of an astrophysical jet on a 400 &times; 150 cell grid, solved with a MacCormack scheme under CFL time-step control. Adiabatic and radiative-cooling runs are compared from a single Python configuration file holding the parameters, initial conditions and boundary conditions.</p>
-              <div class="carrusel-mini">
-                 <img src="output_0052.png" alt="2D adiabatic simulation, t=52 yr" class="shot">
-                 <img src="output_0100.png" alt="2D radiative simulation, t=100 yr" class="shot">
-                 <img src="output_0052_2.png" alt="2D adiabatic simulation, t=52 yr" class="shot">
-                 <img src="output_0100_2.png" alt="2D radiative simulation, t=100yr" class="shot">              
-              </div>
-              <button class="btn-galeria" id="btnAbrirGaleriaFluidos">⊞ View Full Gallery</button>
+          <div id="tab-data" class="tab-panel active" role="tabpanel">
+            <p class="panel-intro"><strong>Data &amp; analytics.</strong> Pipelines, statistics and dashboards that turn raw records into a decision: cleaning with lineage, KPIs that survive scrutiny and inference with its assumptions stated.</p>
+            <article class="project-card" id="project-retail-delivery">
+              <h3>Retail delivery diagnostics: an end-to-end case <span class="status live">Live</span></h3>
+              <p class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">SQL</span><span class="tag">Star schema</span><span class="tag">Chart.js</span><span class="tag">Statistics</span></p>
+              <p>Diagnosis of a department-store delivery network, from 62,420 raw shipment records to an executive dashboard. The monthly report said 95.7% of deliveries were on time and in full, yet management felt deliveries were getting slower. The analysis shows where and why.</p>
+              <ul class="highlights">
+                <li>Cleaning with lineage: 62,420 raw records reduced to 59,615 shipments, with every exclusion logged.</li>
+                <li>Stores compared with their own zone through Wilson intervals, so only 1 of 61 stores is flagged as significantly worse.</li>
+                <li>The worst-stores ranking turned out to be a carrier effect, visible only after conditioning on zone.</li>
+              </ul>
+              <iframe class="dashboard-frame" src="https://lobby9000.github.io/Retail-Business-Data-Cases/dashboard/" title="Retail delivery dashboard" loading="lazy"></iframe>
               <div class="link-row">
-                <!-- Replace # with the repository URL once it is published -->
-                <a href="https://github.com/lobby9000/Astrophysical-Fluid-Simulations" target="_blank">View Repository on GitHub</a>
+                <a href="https://github.com/lobby9000/Retail-Business-Data-Cases" target="_blank" rel="noopener">Repository</a>
+                <a href="https://lobby9000.github.io/Retail-Business-Data-Cases/dashboard/" target="_blank" rel="noopener">Open the live dashboard</a>
               </div>
-            </div>
-
-            <div class="project-card">
-              <h3>Stellar Classification &amp; Astrostatistics <span class="status live">Live</span></h3>
-              <p>
-                <span class="tag">R</span><span class="tag">MLE</span><span class="tag">AIC</span><span class="tag">Hypothesis testing</span>
-              </p>
-              <p>Classification of stellar populations from temperature and spectral class over 240 observations. Maximum-likelihood fits comparing exponential and gamma models, AIC-based model selection, Box-Cox and Ordered Quantile normalisation, plus confidence intervals and hypothesis tests across 15 population pairs.</p>
-              
-              <!-- Carrusel de imágenes de Astroestadística -->
+            </article>
+            <article class="project-card" id="project-macd-toolkit">
+              <h3>EMA/MACD signal toolkit <span class="status live">Live</span></h3>
+              <p class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">Excel</span><span class="tag">pytest</span><span class="tag">LibreOffice</span></p>
+              <p>Moving averages, MACD(12, 26, 9) and RSI implemented from first principles for a finance diploma, then extended into a batch run over 35 equities listed on the Mexican Stock Exchange.</p>
+              <ul class="highlights">
+                <li>Cross-validated against a 3,815-formula Excel model to within 5 × 10⁻¹³, recalculated in CI on every push.</li>
+                <li>28 unit tests on properties derived by hand, such as MACD equal to 7 × slope on a linear trend.</li>
+                <li>Flags tickers whose data feed is missing recent sessions instead of mixing stale and current prices.</li>
+              </ul>
               <div class="carrusel-mini">
-                <img src="hist_comparacion.png" alt="Probabilistic vs theoretical gamma model" class="shot">
-                <img src="hist4.png" alt="Temperature distributions after Box-Cox transformation" class="shot">
-                <img src="hist5.png" alt="Data before and after the Ordered Quantile normalization" class="shot">
-                <img src="Pasted image.png" alt="92% Confidence Intervals" class="shot">
+                <img src="assets/projects/macd-toolkit/femsa-daily-2026-10-02.png" alt="Daily price, EMA 12 and EMA 26 for FEMSA with the MACD panel and a summary panel, 2 October 2026" class="shot" loading="lazy" data-caption="FEMSA, daily, 2 October 2026" data-description="Output of the batch run for FEMSA: closing price with EMA 12 and EMA 26, MACD with its signal line and histogram, and a summary panel with the latest values, RSI(14), the last crossover and a technical reading that counts three conditions.">
               </div>
-              <button class="btn-galeria" id="btnAbrirGaleriaAstro">⊞ View Full Gallery</button>
-
               <div class="link-row">
-                <a href="https://github.com/lobby9000/Astrostatistics" target="_blank">View Repository on GitHub</a>
+                <a href="https://github.com/lobby9000/macd-toolkit" target="_blank" rel="noopener">Repository</a>
+                <a class="ci-link" href="https://github.com/lobby9000/macd-toolkit/actions/workflows/tests.yml" target="_blank" rel="noopener"><img class="ci-badge" src="https://github.com/lobby9000/macd-toolkit/actions/workflows/tests.yml/badge.svg" alt="Test status of macd-toolkit" loading="lazy"></a>
               </div>
-            </div>
-
-            <div class="project-card">
-              <h3>Neural Network for Galaxy Morphological Classification <span class="status live">Live</span></h3>
-              <p>
-                <span class="tag">Python</span><span class="tag">TensorFlow / Keras</span><span class="tag">CNN</span><span class="tag">Imbalanced classes</span>
-              </p>
-              <p>Final project for a neural networks course: a convolutional classifier separating early-type from late-type galaxies over roughly 5,600 labelled images with a naturally imbalanced split (~3,530 late-type vs ~2,080 early-type), including the handling of that imbalance in training and evaluation.</p>
-              <!-- Carrusel deslizable en la tarjeta -->
+            </article>
+            <article class="project-card" id="project-milky-way">
+              <h3>Milky Way structure: Gaia DR3 × APOGEE-2 DR17 <span class="status live">Live</span></h3>
+              <p class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">astropy</span><span class="tag">scikit-learn</span><span class="tag">TOPCAT</span></p>
+              <p>Spatial and kinematic characterisation of the Milky Way&#x27;s stellar populations, built by cross-matching Gaia DR3 astrometry with APOGEE-2 DR17 spectroscopy.</p>
+              <ul class="highlights">
+                <li>682,284 sources reduced to 281,612 stars through documented cuts on signal-to-noise, astrometric fit, radial-velocity scatter and parallax.</li>
+                <li>Velocity ellipsoid tilted by a vertex deviation of about −26.6°, consistent with asymmetric drift.</li>
+                <li>DBSCAN partially recovers the Hercules moving group, and the rotation curve is flat beyond 8.5 kpc.</li>
+              </ul>
               <div class="carrusel-mini">
-                <img src="gal.png" alt="CNN classification analysis" class="shot">
-                <img src="confmax.png" alt="Confusion Matrix InceptionV3" class="shot">
-                <img src="acu.png" alt="Training and Validation metrics" class="shot">
+                <img src="assets/projects/milky-way/density-map.png" alt="Stellar density map on the Galactocentric XY plane" class="shot" loading="lazy" data-caption="Stellar density map (XY)" data-description="Two-dimensional stellar density map projected onto the Galactocentric XY plane. It shows a high-density region around the Sun and radial arms that trace APOGEE&#x27;s lines of sight.">
+                <img src="assets/projects/milky-way/velocity-field.png" alt="Vector field of mean radial and azimuthal velocities" class="shot" loading="lazy" data-caption="Velocity vector field" data-description="Mean radial and azimuthal velocities as a vector field. The pattern is globally rotational, with clear radial streaming where arrows point inwards or outwards.">
+                <img src="assets/projects/milky-way/dbscan-moving-groups.png" alt="Moving groups found by DBSCAN in the UV velocity plane" class="shot" loading="lazy" data-caption="DBSCAN kinematic clusters" data-description="Moving groups identified with DBSCAN (ε = 3.5 km/s, min_samples = 7) in the UV plane, compared with classical boundaries such as the Hercules moving group.">
+                <img src="assets/projects/milky-way/rotation-curve.png" alt="Galactic rotation curve between 6 and 12 kpc" class="shot" loading="lazy" data-caption="Galactic rotation curve" data-description="Median azimuthal velocity, corrected to the local standard of rest, between 6 and 12 kpc. The curve is flat beyond 8.5 kpc.">
               </div>
-              <button class="btn-galeria" id="btnAbrirGaleria">⊞ See details</button>
+              <button class="btn-galeria" data-gallery-title="Milky_Way_structure_Gaia_DR3_A">⊞ View full gallery</button>
               <div class="link-row">
-                <a href="https://github.com/lobby9000/Galaxy-Morphology-NNClassifier" target="_blank">View Repository on GitHub</a>
+                <a href="https://github.com/lobby9000/Milky-Way-Structure" target="_blank" rel="noopener">Repository</a>
+                <a href="https://github.com/lobby9000/Milky-Way-Structure/blob/main/report/milky-way-structure-report.pdf" target="_blank" rel="noopener">Report (PDF)</a>
               </div>
-            </div>
-
-            <!-- COPY THIS BLOCK TO ADD ANOTHER ACADEMIC PROJECT
-            <div class="project-card">
-              <h3>Project title <span class="status wip">Repo pending</span></h3>
-              <p><span class="tag">Stack</span></p>
-              <p>One paragraph: what the problem was, what you built, what the numbers were.</p>
-              <div class="shot-placeholder">[ Screenshot slot ]</div>
-              <div class="link-row"><a href="https://github.com/lobby9000/Retail-Business-Data-Cases" target="_blank">View Repository on GitHub</a></div>
-            </div>
-            -->
+            </article>
+            <article class="project-card" id="project-astrostatistics">
+              <h3>Stellar classification and astrostatistics <span class="status live">Live</span></h3>
+              <p class="tags"><span class="tag">R</span><span class="tag">Maximum likelihood</span><span class="tag">AIC</span><span class="tag">Hypothesis testing</span></p>
+              <p>Statistical characterisation of 240 stars from their temperature and spectral class: distribution fitting by maximum likelihood, model selection, normalisation and hypothesis tests across spectral classes.</p>
+              <ul class="highlights">
+                <li>A physically motivated Gamma model beats an Exponential fit by AIC (4,908.98 against 4,926.26).</li>
+                <li>Box-Cox failed to normalise the data and Ordered Quantile normalisation succeeded, which enabled inference.</li>
+                <li>92% confidence intervals and t and F tests across 15 pairs of spectral classes.</li>
+              </ul>
+              <div class="carrusel-mini">
+                <img src="assets/projects/astrostatistics/gamma-vs-exponential.png" alt="Exponential model against the theoretical Gamma model for stellar temperatures" class="shot" loading="lazy" data-caption="Probabilistic against theoretical model" data-description="The proposed Exponential model against a theoretical Gamma model based on Wien&#x27;s law for stellar temperatures. AIC favours the Gamma distribution (4,908.98).">
+                <img src="assets/projects/astrostatistics/box-cox.png" alt="Temperature distributions after a Box-Cox transformation" class="shot" loading="lazy" data-caption="Box-Cox attempts" data-description="Temperature distributions after the Box-Cox transformation. The data stayed right-skewed and failed the normality tests.">
+                <img src="assets/projects/astrostatistics/ordered-quantile.png" alt="Histograms before and after Ordered Quantile normalisation" class="shot" loading="lazy" data-caption="Ordered Quantile normalisation" data-description="Histograms before and after Ordered Quantile normalisation, which achieved normality and made valid confidence intervals possible.">
+                <img src="assets/projects/astrostatistics/confidence-intervals.png" alt="Table of 92% confidence intervals for differences in means between spectral classes" class="shot" loading="lazy" data-caption="Confidence intervals" data-description="92% confidence intervals for the difference in means between 15 pairs of spectral classes. Every interval contains zero, so the normalised means are statistically similar.">
+              </div>
+              <button class="btn-galeria" data-gallery-title="Stellar_classification_and_ast">⊞ View full gallery</button>
+              <div class="link-row">
+                <a href="https://github.com/lobby9000/Astrostatistics" target="_blank" rel="noopener">Repository</a>
+                <a href="https://github.com/lobby9000/Astrostatistics/blob/main/reports/final-project-report.pdf" target="_blank" rel="noopener">Final report (PDF, Spanish)</a>
+              </div>
+            </article>
           </div>
 
-          <!-- TAB B: RESEARCH -->
-          <div id="tab-research" class="tab-panel">
-            <p class="panel-intro">Research-grade work: code written to answer an open question, either inside my thesis or alongside it.</p>
-
-            <div class="project-card">
-              <h3>Cosmic Inflation &amp; Reheating Simulation <span class="status wip">In progress</span></h3>
-              <p>
-                <span class="tag">Python</span><span class="tag">SciPy</span><span class="tag">ODE integration</span><span class="tag">Cosmology</span>
-              </p>
-              <p>Modular solver for the coupled Friedmann and Klein-Gordon equations, tracking the scale factor a(t), the inflaton &phi;(t) and the energy densities through the transition from inflation to reheating. Includes T-model potentials, the pure quartic regime (n = 4) and validation of numerical results against slow-roll analytical predictions.</p>
-              <div class="shot-placeholder">[ Screenshot slot — energy density vs scale factor ]</div>
+          <div id="tab-ai" class="tab-panel" role="tabpanel">
+            <p class="panel-intro"><strong>AI &amp; LLMs.</strong> Machine learning and language models, from a transformer built from scratch to an LLM pipeline that runs unattended on a laptop.</p>
+            <article class="project-card" id="project-lecture-notes-pipeline">
+              <h3>Lecture notes pipeline with Claude <span class="status live">Live</span></h3>
+              <p class="tags"><span class="tag">Python</span><span class="tag">faster-whisper</span><span class="tag">Claude Code</span><span class="tag">ffmpeg</span><span class="tag">systemd</span></p>
+              <p>Turns four-hour class recordings into structured Obsidian notes with no manual steps: local transcription on the CPU, notes written by Claude Code in headless mode, a page per new concept and a course index.</p>
+              <ul class="highlights">
+                <li>Fits in 8 GB of RAM: silence-aligned ten-minute chunks cut peak audio memory from more than 6 GB to about 0.7 GB on a two-hour recording.</li>
+                <li>Whatever Claude adds stays visibly separate from what was said in class, and mistakes not corrected in class are flagged.</li>
+                <li>51 tests against a fake Whisper model and a fake claude executable, run in CI with ffmpeg.</li>
+              </ul>
+              <pre class="snippet">lecture.mp4 → Whisper (CPU, int8) → transcript [P2 00:12:30] → claude -p → note + concept pages + index</pre>
               <div class="link-row">
-                <a href="https://colab.research.google.com/drive/1WU9EHqw5BTEdtey-hU27ECNP07T4Ge6S?usp=sharing" target="_blank">View on Google Colab</a>
-                <a href="https://github.com/lobby9000/Retail-Business-Data-Cases" target="_blank">View Repository on GitHub</a>
+                <a href="https://github.com/lobby9000/class-notes-pipeline" target="_blank" rel="noopener">Repository</a>
+                <a class="ci-link" href="https://github.com/lobby9000/class-notes-pipeline/actions/workflows/tests.yml" target="_blank" rel="noopener"><img class="ci-badge" src="https://github.com/lobby9000/class-notes-pipeline/actions/workflows/tests.yml/badge.svg" alt="Test status of class-notes-pipeline" loading="lazy"></a>
               </div>
-            </div>
-            
-
-            <div class="project-card">
-              <h3>Milky Way Structure: Gaia DR3 &times; APOGEE-2 DR17 <span class="status live">Live</span></h3>
-              <p>
-                <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">TOPCAT</span><span class="tag">DBSCAN</span>
-              </p>
-              <p>Cross-match of Gaia DR3 with APOGEE-2 DR17, reducing 682,284 sources to 281,612 through documented quality thresholds (SNR, RUWE, VSCATTER, parallax error). The analysis covers galactic component classification, Toomre diagrams, velocity ellipsoids, DBSCAN clustering of moving groups, the rotation curve between 6 and 12 kpc, and Oort constant maps.</p>
-<!-- Carrusel de imágenes de la Vía Láctea -->
+            </article>
+            <article class="project-card" id="project-small-llm">
+              <h3>Small language model from scratch <span class="status live">Live</span></h3>
+              <p class="tags"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">NumPy</span></p>
+              <p>Every component of a small language model, implemented and then trained, for Carnegie Mellon University&#x27;s Introduction to Modern AI (online, January to April 2026).</p>
+              <ul class="highlights">
+                <li>An autodiff engine, a BPE tokenizer and the Adam optimiser written from first principles.</li>
+                <li>A decoder-only transformer with masked multi-head attention, a KV cache, RMSNorm and a gated MLP, trained on TinyStories.</li>
+                <li>Fine-tuned with supervised fine-tuning, DPO and reinforcement learning for reasoning on GSM8K.</li>
+              </ul>
+              <p class="note">The code stays private under the course&#x27;s academic integrity policy.</p>
+              <div class="link-row">
+              </div>
+            </article>
+            <article class="project-card" id="project-galaxy-cnn">
+              <h3>Galaxy morphology with convolutional networks <span class="status live">Live</span></h3>
+              <p class="tags"><span class="tag">Python</span><span class="tag">TensorFlow / Keras</span><span class="tag">scikit-learn</span><span class="tag">Transfer learning</span></p>
+              <p>Binary classification of 5,608 MaNGA galaxy images into early types and late types, from a baseline CNN to transfer learning, with the class imbalance handled explicitly.</p>
+              <ul class="highlights">
+                <li>Baseline CNN: 81.0% test accuracy, held back by a recall of only 0.68 on late types.</li>
+                <li>A deeper CNN reached 86.3% test accuracy and raised late-type recall to 0.77.</li>
+                <li>InceptionV3 transfer learning reached 85.9% with balanced recall of 0.86 on both classes.</li>
+              </ul>
               <div class="carrusel-mini">
-                <img src="mw-density.png" alt="Stellar density map" class="shot">
-                <img src="mw-vector.png" alt="Vector field" class="shot">
-                <img src="mw-dbscan.png" alt="Kinematic moving groups" class="shot">
-                <img src="mw-rotation.png" alt="Galactic rotation curve" class="shot">
+                <img src="assets/projects/galaxy-cnn/misclassified-sample.jpg" alt="Nine galaxy images the CNN misclassified, with true and predicted labels" class="shot" loading="lazy" data-caption="Error analysis" data-description="Nine random misclassifications by the convolutional network, comparing the true label (0 = early type, 1 = late type) with the prediction.">
+                <img src="assets/projects/galaxy-cnn/confusion-matrix-inceptionv3.png" alt="Confusion matrix of the InceptionV3 transfer-learning model" class="shot" loading="lazy" data-caption="Confusion matrix (InceptionV3)" data-description="Confusion matrix of the InceptionV3 transfer-learning model. Unlike the baseline CNN, it handles the class imbalance, with a recall of 0.86 on both early and late types.">
+                <img src="assets/projects/galaxy-cnn/training-curves.png" alt="Training and validation accuracy and loss across epochs" class="shot" loading="lazy" data-caption="Training against validation" data-description="Training and validation metrics across epochs for InceptionV3: stable convergence to about 86% accuracy with little overfitting.">
               </div>
-              <button class="btn-galeria" id="btnAbrirGaleriaMW">⊞ See details</button>
-
+              <button class="btn-galeria" data-gallery-title="Galaxy_morphology_with_convolu">⊞ View full gallery</button>
               <div class="link-row">
-                <a href="https://github.com/lobby9000/Milky-Way-Structure" target="_blank">View Repository on GitHub</a>
+                <a href="https://github.com/lobby9000/Galaxy-Morphology-NNClassifier" target="_blank" rel="noopener">Repository</a>
               </div>
-            </div>
-
-            <div class="project-card">
-              <h3>The Bar Strikes Back: Galactic Bar Dynamics <span class="status live">Live</span></h3>
-              <p>
-                <span class="tag">Python</span><span class="tag">RKN4 integrator</span><span class="tag">N-body (test particles)</span>
-              </p>
-              <p>Integration of 10<sup>4</sup> test particles in a time-dependent galactic bar potential using a fourth-order Runge-Kutta-Nyström scheme, with the time step chosen from the measured energy error. Six snapshots of the evolving distribution and a full energy-budget analysis document the reliability of the run.</p>
-<!-- Carrusel de imágenes de Dinámica Galáctica -->
-              <div class="carrusel-mini">
-                <img src="bar-snapshots.png" alt="Phase-space coordinates" class="shot">
-                <img src="bar-energy.png" alt="Final versus initial specific energies" class="shot">
-                <img src="bar-radial.png" alt="Energy gain" class="shot">
-              </div>
-              <button class="btn-galeria" id="btnAbrirGaleriaBar">⊞ See details</button>
-
-              <div class="link-row">
-                <a href="https://github.com/lobby9000/Galactic-Bar-Dynamics" target="_blank">View Repository on GitHub</a>
-              </div>
-            </div>
+            </article>
           </div>
 
-          <!-- TAB C: RETAIL AND INDUSTRY -->
-          <div id="tab-industry" class="tab-panel">
-            <p class="panel-intro">Business-facing analytics: operational KPIs, dashboards and financial models aimed at a decision rather than a paper.</p>
-
-            <div class="project-card">
-              <h3>Retail Logistics Diagnostics — End-to-End Case <span class="status live">Live</span></h3>
-              <p>
-                <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">SQL</span><span class="tag">Star schema</span><span class="tag">Dashboard</span>
-              </p>
-              <p>End-to-end diagnostic of a retail delivery network, from raw shipment data to an executive readout. The dataset covers six months of shipments across five distribution centres, 61 stores and several carriers and delivery channels, with realistic data-quality issues left in on purpose so the cleaning logic is part of the work.</p>
-              <p><strong>What the analysis does:</strong> defines and computes delivery compliance (OTIF) and cycle-time KPIs, decomposes lead time by stage, uses median and P90 instead of the mean for right-skewed delivery times, attaches Wilson confidence intervals to every proportion, separates structural deterioration from seasonal effects, and ranks bottlenecks by store and distribution centre.</p>
-              <p><strong>What ships with it:</strong> a documented notebook, a star-schema export ready for Power BI or Looker Studio (<code>fact_envios</code>, <code>dim_tienda</code>, <code>dim_calendario</code>), a data simulator to regenerate the dataset, and a static HTML dashboard.</p>
-
-              <iframe class="dashboard-frame"
-                      src="https://lobby9000.github.io/Retail-Business-Data-Cases/dashboard/"
-                      title="Retail logistics dashboard"
-                      loading="lazy"></iframe>
-
+          <div id="tab-qa" class="tab-panel" role="tabpanel">
+            <p class="panel-intro"><strong>QA &amp; engineering.</strong> Testing as the main deliverable: requirements reviewed for testability, risk-based test design, API and database testing, and regression suites that run on every push.</p>
+            <article class="project-card" id="project-incentive-comp-qa">
+              <h3>Incentive compensation API: a QA case study <span class="status wip">Repo pending</span></h3>
+              <p class="tags"><span class="tag">Postman</span><span class="tag">Newman</span><span class="tag">pytest</span><span class="tag">PostgreSQL</span><span class="tag">FastAPI</span><span class="tag">GitHub Actions</span></p>
+              <p>A full QA cycle on a sales-commission REST API, the kind of calculation that sales performance management software automates: split credit, clawbacks on returns, a 50% gate, tiered accelerators and a cap.</p>
+              <ul class="highlights">
+                <li>92 risk-based test cases traced to the requirements, and 8 defects found in the first build, 2 of them critical.</li>
+                <li>A parallel run against an independent Excel model measured 6,566.74 MXN overpaid by the first build and 750 of 750 payouts correct after the fixes.</li>
+                <li>One critical defect only appeared on PostgreSQL, because SQLite does not enforce foreign keys by default. CI now tests on PostgreSQL.</li>
+              </ul>
               <div class="link-row">
-                
-                <a href="https://github.com/lobby9000/Retail-Business-Data-Cases" target="_blank">View Repository on GitHub</a>
-                <a href="https://lobby9000.github.io/Retail-Business-Data-Cases/dashboard/" target="_blank">Open the live dashboard</a>
+                <span class="pending-note">Repository being published</span>
               </div>
-            </div>
-
-            <div class="project-card">
-              <h3>Financial Amortization Automations</h3>
-              <p>
-                <span class="tag">Python</span><span class="tag">Excel</span><span class="tag">Financial modelling</span>
-              </p>
-              <p>Automated financial calculators that model ROI, internal rate of return (TIR) and amortisation tables for business projections, built so the assumptions live in one place and the schedules regenerate from them.</p>
-              <div class="shot-placeholder">[ Screenshot slot — amortisation table / ROI summary ]</div>
+            </article>
+            <article class="project-card" id="project-vigia">
+              <h3>Vigía: operational stability monitoring <span class="status wip">Repo pending</span></h3>
+              <p class="tags"><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Flask</span><span class="tag">Django</span><span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">Docker</span></p>
+              <p>A small polyglot platform that ingests request telemetry, reports service-level objectives and detects anomalies: Spring Boot ingestion, a Flask analytics API, a Django back office, PostgreSQL and MongoDB.</p>
+              <ul class="highlights">
+                <li>1.4 million simulated requests over ten days with three injected incidents, all three detected and nothing else.</li>
+                <li>A Monte Carlo calibration over 40 runs cut false alarms from 18 to 1 without missing an incident.</li>
+                <li>69 automated tests, run in GitHub Actions together with the calibration.</li>
+              </ul>
               <div class="link-row">
-                <a href="https://github.com/lobby9000/Retail-Business-Data-Cases" target="_blank">View Repository on GitHub</a>
+                <span class="pending-note">Repository being published</span>
               </div>
-            </div>
-
-            <div class="project-card">
-              <h3>Small-Business Operations Analytics <span class="status wip">Planned</span></h3>
-              <p>
-                <span class="tag">Python</span><span class="tag">Power BI / Looker Studio</span>
-              </p>
-              <p>Operational analysis of a made-to-order dessert business: inventory, preparation-time logistics, delivery routing, pricing and margin, turned into the kind of reporting an operations team would actually read.</p>
-              <div class="shot-placeholder">[ Screenshot slot — dashboard preview ]</div>
+            </article>
+            <article class="project-card" id="project-macd-signal-api">
+              <h3>MACD signal API <span class="status wip">Repo pending</span></h3>
+              <p class="tags"><span class="tag">FastAPI</span><span class="tag">Postman</span><span class="tag">Newman</span><span class="tag">pytest</span></p>
+              <p>A REST API over the EMA/MACD toolkit, tested from the outside with a Postman collection that Newman runs in CI.</p>
+              <ul class="highlights">
+                <li>Its tests found a defect shared with the toolkit: rounding noise of about 10⁻¹⁵ on flat or linear prices reported as crossovers.</li>
+                <li>The fix and its regression tests went back into the toolkit.</li>
+              </ul>
               <div class="link-row">
-                <a href="https://github.com/lobby9000/Retail-Business-Data-Cases" target="_blank">View Repository on GitHub</a>
+                <span class="pending-note">Repository being published</span>
               </div>
-            </div>
+            </article>
           </div>
+
+          <div id="tab-physics" class="tab-panel" role="tabpanel">
+            <p class="panel-intro"><strong>Physics &amp; simulation.</strong> Numerical physics from my degrees: solvers checked against conserved quantities and analytical limits, and the thesis in progress.</p>
+            <article class="project-card" id="project-inflation-reheating">
+              <h3>Inflation and reheating solver (MSc thesis) <span class="status wip">In progress</span></h3>
+              <p class="tags"><span class="tag">Python</span><span class="tag">SciPy</span><span class="tag">ODE integration</span><span class="tag">Cosmology</span></p>
+              <p>Modular solver for the coupled Friedmann and Klein-Gordon equations, tracking the scale factor, the inflaton and the energy densities from inflation into reheating. It covers T-model potentials and the pure quartic regime, and checks numerical results against slow-roll predictions.</p>
+              <ul class="highlights">
+                <li>Energy densities for T-model potentials follow the expected scaling with the scale factor, a^(−6k/(k+2)).</li>
+                <li>The numerical end of inflation is compared with the analytical slow-roll prediction.</li>
+                <li>Next: couple the spectator field and compute the first occupation spectra.</li>
+              </ul>
+              <div class="link-row">
+                <a href="https://colab.research.google.com/drive/1WU9EHqw5BTEdtey-hU27ECNP07T4Ge6S?usp=sharing" target="_blank" rel="noopener">Notebook on Google Colab</a>
+              </div>
+            </article>
+            <article class="project-card" id="project-astrophysical-jet">
+              <h3>Astrophysical jet simulation <span class="status live">Live</span></h3>
+              <p class="tags"><span class="tag">Python</span><span class="tag">NumPy</span><span class="tag">MacCormack scheme</span><span class="tag">Finite differences</span></p>
+              <p>Two-dimensional hydrodynamic simulation of an astrophysical jet, built up from advection and 1D Euler solvers, comparing adiabatic and radiatively cooled runs from a single configuration file.</p>
+              <ul class="highlights">
+                <li>400 × 150 cells over a 4,000 × 1,500 AU domain, run for 100 years with a MacCormack scheme and CFL = 0.1.</li>
+                <li>Neutral or ionised mean molecular weight, switched at 10⁴ K.</li>
+                <li>With radiative cooling the bow shock is narrower and the jet more compact.</li>
+              </ul>
+              <div class="carrusel-mini">
+                <img src="assets/projects/astrophysical-jet/adiabatic-52yr.png" alt="Adiabatic jet at 52 years: density, pressure, temperature and velocity" class="shot" loading="lazy" data-caption="Adiabatic jet, 52 years" data-description="Jet without radiative cooling at t = 52 years: density, pressure, temperature and speed. A bow shock runs ahead of the jet, with knots formed by the varying injection speed and very high temperatures just behind the shock.">
+                <img src="assets/projects/astrophysical-jet/adiabatic-100yr.png" alt="Adiabatic jet at 100 years: density, pressure, temperature and velocity" class="shot" loading="lazy" data-caption="Adiabatic jet, 100 years" data-description="Jet without radiative cooling at t = 100 years: density, pressure, temperature and speed.">
+                <img src="assets/projects/astrophysical-jet/cooling-52yr.png" alt="Radiatively cooled jet at 52 years: density, pressure, temperature and velocity" class="shot" loading="lazy" data-caption="Cooled jet, 52 years" data-description="Jet with radiative cooling at t = 52 years: density, pressure, temperature and speed.">
+                <img src="assets/projects/astrophysical-jet/cooling-100yr.png" alt="Radiatively cooled jet at 100 years: density, pressure, temperature and velocity" class="shot" loading="lazy" data-caption="Cooled jet, 100 years" data-description="Jet with radiative cooling at t = 100 years. Compared with the adiabatic run, the bow shock is narrower, the jet is more compact and the region behind the shock has cooled.">
+              </div>
+              <button class="btn-galeria" data-gallery-title="Astrophysical_jet_simulation">⊞ View full gallery</button>
+              <div class="link-row">
+                <a href="https://github.com/lobby9000/Astrophysical-Fluid-Simulations" target="_blank" rel="noopener">Repository</a>
+                <a href="https://github.com/lobby9000/Astrophysical-Fluid-Simulations/blob/main/jet-simulation/final-project-report.pdf" target="_blank" rel="noopener">Final report (PDF, Spanish)</a>
+              </div>
+            </article>
+            <article class="project-card" id="project-galactic-bar">
+              <h3>The Bar Strikes Back: galactic bar dynamics <span class="status live">Live</span></h3>
+              <p class="tags"><span class="tag">Python</span><span class="tag">NumPy</span><span class="tag">RKN4 integrator</span><span class="tag">Test particles</span></p>
+              <p>How a dynamically cold stellar disc responds to the smooth growth of a galactic bar, with 10,000 test particles in a composite, collisionless potential.</p>
+              <ul class="highlights">
+                <li>Fourth-order Runge-Kutta-Nyström integration, with a time step chosen by measurement: the energy error of a circular orbit stays below 10⁻¹³.</li>
+                <li>Every particle gains energy as the bar grows, and total energy rises by 120%.</li>
+                <li>The gain grows monotonically with initial radius.</li>
+              </ul>
+              <div class="carrusel-mini">
+                <img src="assets/projects/galactic-bar/snapshots.png" alt="Six snapshots of a stellar disc deforming as the bar grows" class="shot" loading="lazy" data-caption="Phase-space evolution" data-description="Six snapshots of a dynamically cold disc. As the bar potential grows, non-circular orbits appear and the system stretches along a preferred axis.">
+                <img src="assets/projects/galactic-bar/energy-gain.png" alt="Final against initial specific energy of the test particles" class="shot" loading="lazy" data-caption="Energy gain" data-description="Final against initial specific energy. Every point lies above the identity line: each particle gained energy from the time-dependent potential.">
+                <img src="assets/projects/galactic-bar/radial-energy.png" alt="Energy gain against initial radius" class="shot" loading="lazy" data-caption="Radial energy redistribution" data-description="Energy gain against initial radius. Particles in the outer disc absorbed more energy than those in the inner disc while the bar grew.">
+              </div>
+              <button class="btn-galeria" data-gallery-title="The_Bar_Strikes_Back_galactic_">⊞ View full gallery</button>
+              <div class="link-row">
+                <a href="https://github.com/lobby9000/Galactic-Bar-Dynamics" target="_blank" rel="noopener">Repository</a>
+                <a href="https://github.com/lobby9000/Galactic-Bar-Dynamics/blob/main/report/bar-dynamics-report.pdf" target="_blank" rel="noopener">Report (PDF)</a>
+              </div>
+            </article>
+          </div>
+          <!-- END GENERATED: projects -->
         </div>
 
-        <!-- SECTION 4: GRADUATE WRITTEN WORKS -->
-        <div id="graduate" class="content-section">
-          <h2>Graduate Written Works &amp; PDFs</h2>
+        <!-- SECTION 4: WRITTEN WORK -->
+        <div id="writing" class="content-section">
+          <h2>Written Work</h2>
           <hr>
-          <p>A collection of my academic papers, research reports, and LaTeX thesis drafts.</p>
-          <ul>
-            <li><a href="thesis_draft_v1.pdf" target="_blank">Master's Thesis Proposal (PDF)</a></li>
-            <li><a href="data_viz_notes.pdf" target="_blank">Data Visualization Notes (PDF)</a></li>
-            <li><a href="literature_review.pdf" target="_blank">Cosmological Perturbations Literature Review (PDF)</a></li>
+          <p>Reports and presentations from my projects, each next to the code it describes. Most were submitted in Spanish.</p>
+          <ul class="doc-list">
+            <li><a href="https://github.com/lobby9000/Astrophysical-Fluid-Simulations/blob/main/jet-simulation/final-project-report.pdf" target="_blank" rel="noopener">Astrophysical jet simulation: final project report</a> (PDF, Spanish)</li>
+            <li><a href="https://github.com/lobby9000/Astrostatistics/blob/main/reports/final-project-report.pdf" target="_blank" rel="noopener">Stellar classification and astrostatistics: final report</a> (PDF, Spanish)</li>
+            <li><a href="https://github.com/lobby9000/Milky-Way-Structure/blob/main/report/milky-way-structure-report.pdf" target="_blank" rel="noopener">Milky Way structure with Gaia DR3 and APOGEE-2 DR17: report</a> (PDF)</li>
+            <li><a href="https://github.com/lobby9000/Galactic-Bar-Dynamics/blob/main/report/bar-dynamics-report.pdf" target="_blank" rel="noopener">The Bar Strikes Back, galactic bar dynamics: report</a> (PDF)</li>
+            <li><a href="https://github.com/lobby9000/Galaxy-Morphology-NNClassifier/blob/main/docs/presentation-es.pdf" target="_blank" rel="noopener">Galaxy morphology with neural networks: final presentation</a> (PDF, Spanish)</li>
+            <li><a href="https://github.com/lobby9000/Astrophysical-Fluid-Simulations/tree/main/reports" target="_blank" rel="noopener">Computational fluid dynamics and continuum mechanics coursework</a> (PDFs, Spanish)</li>
           </ul>
+          <p>The thesis is written alongside its code, in the <a href="https://colab.research.google.com/drive/1WU9EHqw5BTEdtey-hU27ECNP07T4Ge6S?usp=sharing" target="_blank" rel="noopener">Colab notebook</a>, while it is in progress.</p>
         </div>
 
-        <!-- SECTION 5: LANGUAGES WORKS -->
+        <!-- SECTION 5: LANGUAGES -->
         <div id="languages" class="content-section">
-          <h2>Languages Works</h2>
+          <h2>Languages</h2>
           <hr>
-          <p>As a polyglot, I have authored and translated various works across multiple languages. Below is a selection of my linguistic projects.</p>
+          <p>I work in Spanish and English every day and keep three more languages going.</p>
           <ul>
-            <li><strong>English (C2):</strong> [INSERT ENGLISH ESSAY/PROJECT]</li>
-            <li><strong>Italian (B2):</strong> <em>Il mio primo racconto in podcast</em> - Essay and podcast production (1st Place, ENP Interpreparatory Contests 2019)</li>
-            <li><strong>German (B1):</strong> [INSERT GERMAN ESSAY/PROJECT]</li>
-            <li><strong>Portuguese (A2):</strong> [INSERT PORTUGUESE ESSAY/PROJECT]</li>
+            <li><strong>Spanish:</strong> native</li>
+            <li><strong>English:</strong> C2</li>
+            <li><strong>Italian:</strong> B2. <em>Il mio primo racconto in podcast</em>, an essay and podcast production that won first place in the ENP Interpreparatory Contests, 2019</li>
+            <li><strong>German:</strong> B1</li>
+            <li><strong>Portuguese:</strong> B1</li>
           </ul>
         </div>
 
@@ -1278,7 +1386,7 @@
     <!-- BARRA DE ESTADO DE LA VENTANA -->
     <div class="status-bar">
       <span class="slot" id="statusText">&gt; ready_</span>
-      <span class="slot"><a href="https://colab.research.google.com/drive/1WU9EHqw5BTEdtey-hU27ECNP07T4Ge6S?usp=sharing" target="_blank" id="wallpaperLink">wallpaper: TBackEv.py &#8599;</a></span>
+      <span class="slot"><a href="https://colab.research.google.com/drive/1WU9EHqw5BTEdtey-hU27ECNP07T4Ge6S?usp=sharing" target="_blank" rel="noopener" id="wallpaperLink">wallpaper: TBackEv.py &#8599;</a></span>
     </div>
   </div>
 
@@ -1286,7 +1394,7 @@
   <div class="taskbar">
     <button class="start-btn" id="startBtn">start</button>
     <div class="task-items" id="taskItems">
-      <button class="task-btn" id="taskBtn"><img class="ico" src="icon-code.png" alt="">Professional_Log</button>
+      <button class="task-btn" id="taskBtn"><img class="ico" src="assets/ui/icons/icon-code.png" alt="">Professional_Log</button>
     </div>
     <div class="tray">
       <button id="soundToggle" aria-pressed="false">SOUND: OFF</button>
@@ -1487,11 +1595,19 @@
 
     document.querySelectorAll('.tab-btn').forEach(function (button) {
       button.classList.remove('active');
+      button.setAttribute('aria-selected', 'false');
     });
-    clickedButton.classList.add('active');
+    if (clickedButton) {
+      clickedButton.classList.add('active');
+      clickedButton.setAttribute('aria-selected', 'true');
+      setStatus('filter: ' + clickedButton.firstChild.textContent.trim().toLowerCase());
+    }
     SFX.tab();
-    setStatus('filter: ' + clickedButton.textContent.trim().toLowerCase());
   }
+
+  document.querySelectorAll('.tab-btn[data-tab]').forEach(function (btn) {
+    btn.addEventListener('click', function () { showTab(btn.dataset.tab, btn); });
+  });
 
   // Salir con sonido antes de cambiar de pagina
   function leaveTo(url) {
@@ -1742,27 +1858,36 @@
     'a cursor that turns into something when you hover over it. Credit where it is due: gakhed.com ' +
     'reminded me that a website can have a hand in it.</p>' +
 
-    '<p><strong>How it is built.</strong> I am no web developer, this site was built by hand with blood (HTML), sweat (CSS) and tears (plain JavaScript).</p>' +
+    '<p><strong>How it is built.</strong> I am no web developer: this site was built by hand with blood (HTML), ' +
+    'sweat (CSS) and tears (plain JavaScript). It started on Neocities and now lives on GitHub Pages.</p>' +
 
     '<p><strong>Things you may have walked past:</strong></p>' +
     '<ul>' +
-      '<li>The sounds are not audio files. Every beep is synthesized live by the browser with the Web Audio ' +
+      '<li>The sounds are not audio files. Every beep is synthesised live by the browser with the Web Audio ' +
       'API. Square waves, 18 milliseconds, zero bytes downloaded.</li>' +
       '<li>The cursors are pixel art, drawn one pixel at a time on a 16 by 16 grid and scaled with nearest ' +
       'neighbour so the edges stay hard.</li>' +
       '<li>The wallpaper behind this window is not decoration. It is the solver from my thesis, integrating ' +
       'the Friedmann and Klein-Gordon equations through the end of inflation. It runs.</li>' +
-      '<li>Minimize the window. Drag one open. Try to close this log.</li>' +
+      '<li>Every project card is generated from a single file, projects.json, by a small Python script. ' +
+      'Before each release, tests check that every link and image on the site resolves and that no card ' +
+      'points at the wrong repository. If a test fails, nothing is published.</li>' +
+      '<li>The badges on some cards are live: they show whether that project\'s own test suite is passing right now.</li>' +
+      '<li>Minimise the window. Drag one open. Try to close this log.</li>' +
     '</ul>' +
 
     '<p><strong>Why bother.</strong> The same stubbornness that goes into making a numerical integrator ' +
     'converge goes into everything else I build. And if I am going to keep a corner of the internet, ' +
     'it may as well be one I made rather than one I rented.</p>' +
 
-    '<p>Last modified: 2026 &middot; Luis A. Quiroz &middot; Mexico City</p>';
+    '<p><img src="https://github.com/lobby9000/lobby9000.github.io/actions/workflows/site.yml/badge.svg" ' +
+    'alt="Status of the checks that publish this site"></p>' +
+
+    '<p>Last modified: October 2026 &middot; Luis A. Quiroz &middot; Mexico City</p>';
 
   var deskActions = {
-    cv:        function () { window.open('CV_2026_lq.pdf', '_blank'); },
+    cv:        function () { window.open('assets/cv/CV_Luis_Angel_Quiroz_Lopez_EN.pdf', '_blank'); },
+    recruiter: function () { leaveTo('cv.html'); },
     readme:    function () { openWindow('readme', 'README.txt', README_TEXT); },
     dashboard: function () { window.open('https://lobby9000.github.io/Retail-Business-Data-Cases/dashboard/', '_blank'); },
     github:    function () { window.open('https://github.com/lobby9000', '_blank'); },
@@ -1785,39 +1910,97 @@
   });
 
   /* =====================================================
-     10. CADA PROYECTO EN SU VENTANA
-     Se agrega un boton a cada tarjeta sin tocar el HTML:
-     el contenido de la ventana es la tarjeta misma.
+     10. VISOR DE IMAGENES Y GALERIAS
+     Clic en una captura y se abre en su propia ventana, con
+     la descripcion larga que viene de projects.json. Las
+     tarjetas con varias imagenes tienen boton de galeria: el
+     mosaico se arma con las imagenes de la propia tarjeta,
+     asi que no hay que escribir HTML aparte para cada una.
      ===================================================== */
-  document.querySelectorAll('.project-card').forEach(function (card, index) {
+  function escapeHtml(text) {
+    return String(text).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function openViewer(img) {
+    var caption = img.dataset.caption || img.getAttribute('alt') || 'image';
+    var description = img.dataset.description || '';
+    openWindow('viewer-' + img.getAttribute('src'), caption.slice(0, 30),
+      '<img class="viewer-image" src="' + img.getAttribute('src') + '" alt="' + escapeHtml(img.getAttribute('alt') || caption) + '">' +
+      (description ? '<p class="viewer-caption">' + escapeHtml(description) + '</p>' : ''));
+  }
+
+  function openGallery(card, title) {
+    var id = 'gallery-' + card.id;
+    if (openWindows[id]) { openWindow(id, title, ''); return; }
+    var images = card.querySelectorAll('.carrusel-mini img');
+    var figures = '';
+    images.forEach(function (img, i) {
+      figures += '<figure><img class="shot-mosaico" data-index="' + i + '" src="' + img.getAttribute('src') +
+                 '" alt="' + escapeHtml(img.getAttribute('alt') || '') + '"><figcaption>' +
+                 escapeHtml(img.dataset.caption || img.getAttribute('alt') || '') + '</figcaption></figure>';
+    });
+    var win = openWindow(id, title,
+      '<div class="panel-intro">Click any image to open it in the viewer. Windows can be resized from the bottom-right corner.</div>' +
+      '<div class="mosaico-grid">' + figures + '</div>');
+    win.style.width = '650px';
+    win.style.height = '450px';
+    win.querySelectorAll('.shot-mosaico').forEach(function (thumb) {
+      thumb.addEventListener('click', function () { openViewer(images[+thumb.dataset.index]); });
+      thumb.addEventListener('mouseenter', SFX.hover);
+    });
+  }
+
+  /* Conecta capturas y galerias dentro de un contenedor (la tarjeta
+     o la ventana que la clona). `card` es la tarjeta original. */
+  function wireMedia(container, card) {
+    container.querySelectorAll('.carrusel-mini img').forEach(function (img, i) {
+      var source = card.querySelectorAll('.carrusel-mini img')[i];
+      img.addEventListener('click', function () { openViewer(source); });
+    });
+    container.querySelectorAll('.btn-galeria').forEach(function (btn) {
+      btn.addEventListener('click', function () { SFX.chime(); openGallery(card, btn.dataset.galleryTitle || 'Gallery'); });
+      btn.addEventListener('mouseenter', SFX.hover);
+    });
+  }
+
+  /* Cada proyecto en su ventana: se agrega un boton a cada tarjeta
+     sin tocar el HTML; el contenido de la ventana es la tarjeta misma. */
+  document.querySelectorAll('.project-card').forEach(function (card) {
+    wireMedia(card, card);
     var row = card.querySelector('.link-row');
     if (!row) return;
     var btn = document.createElement('button');
     btn.className = 'open-win-btn';
     btn.textContent = '⧉ Open in window';
     btn.addEventListener('click', function () {
-      var title = card.querySelector('h3').textContent.replace(/\s+/g, ' ').trim();
+      var title = card.querySelector('h3').firstChild.textContent.replace(/\s+/g, ' ').trim();
+      var id = 'project-win-' + card.id;
+      var existed = !!openWindows[id];
       var clone = card.cloneNode(true);
       var extra = clone.querySelector('.open-win-btn');
       if (extra) extra.parentNode.removeChild(extra);
-      openWindow('project-' + index, title.slice(0, 34), clone.innerHTML);
+      var win = openWindow(id, title.slice(0, 34), clone.innerHTML);
+      if (!existed) wireMedia(win, card);
     });
     row.appendChild(btn);
     btn.addEventListener('mouseenter', SFX.hover);
   });
 
-  /* =====================================================
-     10b. VISOR DE IMAGENES
-     Clic en una captura y se abre en su propia ventana.
-     Ahi adentro el cursor cambia a la lupa de alejar.
-     ===================================================== */
-  document.querySelectorAll('.shot').forEach(function (img, i) {
-    img.addEventListener('click', function () {
-      var caption = img.getAttribute('alt') || 'image';
-      openWindow('viewer-' + i, caption.slice(0, 30),
-        '<img class="viewer-image" src="' + img.getAttribute('src') + '" alt="' + caption + '">');
-    });
-  });
+  /* Enlace directo a un proyecto: professional.html#project-macd-toolkit
+     abre la seccion, la pestaña y baja hasta la tarjeta. */
+  (function openFromHash() {
+    var id = decodeURIComponent(window.location.hash.slice(1));
+    if (!id) return;
+    var target = document.getElementById(id);
+    if (!target) return;
+    var section = target.closest('.content-section') || (target.classList.contains('content-section') ? target : null);
+    if (section) showSection(section.id, document.querySelector('.nav-btn[data-section="' + section.id + '"]'));
+    var panel = target.closest('.tab-panel');
+    if (panel) showTab(panel.id, document.querySelector('.tab-btn[data-tab="' + panel.id + '"]'));
+    setTimeout(function () { target.scrollIntoView({ block: 'start' }); }, 60);
+  })();
 
  /* =====================================================
      11. REPRODUCTOR (ENLACE A SPOTIFY)
@@ -1877,224 +2060,6 @@
   function stopPlayback() {
     // Esta función es llamada internamente por closeWindow() cuando cierras el reproductor
     clearInterval(vizTimer);
-  }
-  /* =====================================================
-     12. GALAXY GALLERY (FLOATING MOSAIC)
-     We generate the gallery's HTML and open it using
-     your own openWindow() function to keep the styling.
-     ===================================================== */
-  var GALERIA_HTML = 
-    '<div class="panel-intro">Click on any image to open the detailed viewer. Windows can be resized from the bottom-right corner.</div>' +
-    '<div class="mosaico-grid">' +
-      
-      '<figure>' +
-        '<img class="shot-mosaico" src="gal.png" alt="Sample of 9 random incorrect classifications generated by the Convolutional Neural Network (CNN). Compares the real label (0 = Early-type, 1 = Late-type) against the model predictions to analyze discrimination challenges.">' +
-        '<figcaption>Error Analysis (Real vs. Prediction)</figcaption>' +
-      '</figure>' +
-
-      '<!-- IMAGE 2: MATRIZ DE CONFUSIÓN (INCEPTION V3) -->' +
-      '<figure>' +
-        '<img class="shot-mosaico" src="confmax.png" alt="Confusion Matrix for the Transfer Learning model (InceptionV3). Unlike the baseline CNN, this architecture successfully handles the dataset\'s class imbalance, achieving a perfectly balanced recall of 86% across both early-type and late-type galaxies.">' +
-        '<figcaption>Confusion Matrix (InceptionV3)</figcaption>' +
-      '</figure>' +
-
-      '<!-- IMAGE 3: CURVAS DE ENTRENAMIENTO (ACCURACY / LOSS) -->' +
-      '<figure>' +
-        '<img class="shot-mosaico" src="acu.png" alt="Training and Validation metrics across epochs. The InceptionV3 model demonstrates stable convergence and effective feature extraction, reaching an overall accuracy of ~86% with minimal overfitting compared to earlier iterations.">' +
-        '<figcaption>Training vs. Validation Metrics</figcaption>' +
-      '</figure>' +
-
-    '</div>';
-
-  var btnGaleria = document.getElementById('btnAbrirGaleria');
-  if (btnGaleria) {
-    btnGaleria.addEventListener('click', function() {
-      SFX.chime();
-      // We use your system to open the gallery in a large XP window
-      var winGaleria = openWindow('galaxy-gallery', 'CNN_Classification_Gallery', GALERIA_HTML);
-      
-      // Make it a bit larger by default
-      winGaleria.style.width = "650px"; 
-      winGaleria.style.height = "450px";
-
-      // Connect the image viewer to each photo in the mosaic
-      winGaleria.querySelectorAll('.shot-mosaico').forEach(function (img, i) {
-        img.addEventListener('click', function () {
-          var caption = img.getAttribute('alt') || 'Image';
-          var imgHtml = '<img class="viewer-image" src="' + img.getAttribute('src') + '" alt="' + caption + '" style="max-width:100%; display:block; margin:auto;">' +
-                        '<p style="margin-top:12px; font-size:13px; color:#333; line-height:1.4;">' + caption + '</p>';
-          
-          openWindow('viewer-gallery-' + i, 'Image_Viewer', imgHtml);
-        });
-        img.addEventListener('mouseenter', SFX.hover);
-      });
-    });
-    btnGaleria.addEventListener('mouseenter', SFX.hover);
-  }
-  /* =====================================================
-     13. FLUID SIMULATIONS GALLERY (FLOATING MOSAIC)
-     We generate the gallery's HTML and open it using
-     your own openWindow() function to keep the styling.
-     ===================================================== */
-  var GALERIA_FLUIDOS_HTML = 
-    '<div class="panel-intro">Click on any image to open the detailed viewer. Windows can be resized from the bottom-right corner.</div>' +
-    '<div class="mosaico-grid">' +
-      
-      '<figure>' +
-        '<img class="shot-mosaico" src="output_0052.png" alt="Two-dimensional hydrodynamic simulation of an astrophysical jet without radiative cooling at t=52 yr. Displays density, pressure, temperature, and velocity magnitude. A bow shock is clearly visible extending beyond the main jet structure, with distinct knots formed by varying injection velocities. Temperature is significantly higher immediately behind the bow shock.">' +
-        '<figcaption>Adiabatic Jet (t=52 yr)</figcaption>' +
-      '</figure>' +
-
-      '<figure>' +
-        '<img class="shot-mosaico" src="output_0100.png" alt="Two-dimensional hydrodynamic simulation of an astrophysical jet without radiative cooling at t=100 yr. Displays density, pressure, temperature, and velocity magnitude.">' +
-        '<figcaption>Adiabatic Jet (t=100 yr)</figcaption>' +
-      '</figure>' +
-      
-      '<figure>' +
-        '<img class="shot-mosaico" src="output_0052_2.png" alt="Two-dimensional hydrodynamic simulation of an astrophysical jet including radiative cooling at t=52 yr. Displays density, pressure, temperature, and velocity magnitude.">' +
-        '<figcaption>Radiative Cooling Jet (t=52 yr)</figcaption>' +
-      '</figure>' +
-
-      '<figure>' +
-        '<img class="shot-mosaico" src="output_0100_2.png" alt="Two-dimensional hydrodynamic simulation of an astrophysical jet including radiative cooling at t=100 yr. Displays density, pressure, temperature, and velocity magnitude. Compared to the adiabatic case, the bow shock is narrower and the jet appears more compact. High-density regions show higher relative velocities, creating zones of increased pressure (knots). The bow shock region has cooled significantly.">' +
-        '<figcaption>Radiative Cooling Jet (t=100 yr)</figcaption>' +
-      '</figure>' +
-
-    '</div>';
-
-  var btnGaleriaFluidos = document.getElementById('btnAbrirGaleriaFluidos');
-  if (btnGaleriaFluidos) {
-    btnGaleriaFluidos.addEventListener('click', function() {
-      SFX.chime();
-      var winGaleria = openWindow('fluidos-gallery', 'Astrophysical_Jet_Gallery', GALERIA_FLUIDOS_HTML);
-      
-      winGaleria.style.width = "650px"; 
-      winGaleria.style.height = "450px";
-
-      winGaleria.querySelectorAll('.shot-mosaico').forEach(function (img, i) {
-        img.addEventListener('click', function () {
-          var caption = img.getAttribute('alt') || 'Image';
-          var imgHtml = '<img class="viewer-image" src="' + img.getAttribute('src') + '" alt="' + caption + '" style="max-width:100%; display:block; margin:auto;">' +
-                        '<p style="margin-top:12px; font-size:13px; color:#333; line-height:1.4;">' + caption + '</p>';
-          
-          openWindow('viewer-fluidos-' + i, 'Image_Viewer', imgHtml);
-        });
-        img.addEventListener('mouseenter', SFX.hover);
-      });
-    });
-    btnGaleriaFluidos.addEventListener('mouseenter', SFX.hover);
-  }
-  /* =====================================================
-     14. ASTROSTATISTICS GALLERY (FLOATING MOSAIC)
-     Generates the gallery HTML and opens it in a new window.
-     ===================================================== */
-  var GALERIA_ASTRO_HTML = 
-    '<div class="panel-intro">Click on any image to open the detailed viewer. Windows can be resized from the bottom-right corner.</div>' +
-    '<div class="mosaico-grid">' +
-      
-      '<figure>' +
-        '<img class="shot-mosaico" src="hist_comparacion.png" alt="Comparison between the proposed exponential probabilistic model and the theoretical gamma model based on Wiens law for stellar temperatures. The Akaike Information Criterion (AIC) favored the gamma distribution (AIC: 4908.98).">' +
-        '<figcaption>Probabilistic vs. Theoretical Model</figcaption>' +
-      '</figure>' +
-
-      '<figure>' +
-        '<img class="shot-mosaico" src="hist4.png" alt="Temperature distributions after applying the Box-Cox transformation. Despite the transformation, the dataset remained right-skewed and failed the normality hypothesis tests.">' +
-        '<figcaption>Box-Cox Transformation Attempts</figcaption>' +
-      '</figure>' +
-
-      '<figure>' +
-        '<img class="shot-mosaico" src="hist5.png" alt="Histograms showing the dataset before and after applying the Ordered Quantile normalization technique. This method successfully achieved normality (p-value = 1), allowing for valid confidence interval estimation.">' +
-        '<figcaption>Ordered Quantile Normalization</figcaption>' +
-      '</figure>' +
-
-      '<figure>' +
-        '<img class="shot-mosaico" src="Pasted image.png" alt="Table 1.1: 92% Confidence Intervals estimating the difference in means between 15 pairs of stellar spectral classes. The inclusion of zero in all intervals indicates statistical similarity in the normalized means.">' +
-        '<figcaption>Confidence Intervals Analysis</figcaption>' +
-      '</figure>' +
-
-    '</div>';
-
-  var btnGaleriaAstro = document.getElementById('btnAbrirGaleriaAstro');
-  if (btnGaleriaAstro) {
-    btnGaleriaAstro.addEventListener('click', function() {
-      SFX.chime();
-      var winGaleria = openWindow('astro-gallery', 'Astrostatistics_Gallery', GALERIA_ASTRO_HTML);
-      
-      winGaleria.style.width = "650px"; 
-      winGaleria.style.height = "450px";
-
-      winGaleria.querySelectorAll('.shot-mosaico').forEach(function (img, i) {
-        img.addEventListener('click', function () {
-          var caption = img.getAttribute('alt') || 'Image';
-          var imgHtml = '<img class="viewer-image" src="' + img.getAttribute('src') + '" alt="' + caption + '" style="max-width:100%; display:block; margin:auto;">' +
-                        '<p style="margin-top:12px; font-size:13px; color:#333; line-height:1.4;">' + caption + '</p>';
-          
-          openWindow('viewer-astro-' + i, 'Image_Viewer', imgHtml);
-        });
-        img.addEventListener('mouseenter', SFX.hover);
-      });
-    });
-    btnGaleriaAstro.addEventListener('mouseenter', SFX.hover);
-  }
-  /* =====================================================
-     15. MILKY WAY GALLERY (FLOATING MOSAIC)
-     ===================================================== */
-  var GALERIA_MW_HTML = 
-    '<div class="panel-intro">Click on any image to open the detailed viewer. Windows can be resized from the bottom-right corner.</div>' +
-    '<div class="mosaico-grid">' +
-      '<figure><img class="shot-mosaico" src="mw-density.png" alt="Two-dimensional stellar density map projected onto the Galactocentric XY plane. It shows a high-density region around the solar position and radial arms reflecting APOGEE line-of-sight fields."><figcaption>Stellar Density Map (XY)</figcaption></figure>' +
-      '<figure><img class="shot-mosaico" src="mw-vector.png" alt="Vector field representing mean radial and azimuthal velocities. It displays a globally coherent rotational pattern and clear radial streaming motions where arrows point inward or outward."><figcaption>Velocity Vector Field</figcaption></figure>' +
-      '<figure><img class="shot-mosaico" src="mw-dbscan.png" alt="Moving groups identified using the DBSCAN algorithm (epsilon = 3.5 km/s, min_samples = 7) in the UV plane, mapped against classical boundaries like the Hercules moving group[cite: 6]."><figcaption>DBSCAN Kinematic Clusters</figcaption></figure>' +
-      '<figure><img class="shot-mosaico" src="mw-rotation.png" alt="Galactic rotation curve showing the median azimuthal velocity (LSR corrected) across a radial range of 6 to 12 kpc, presenting canonical flatness beyond 8.5 kpc."><figcaption>Galactic Rotation Curve</figcaption></figure>' +
-    '</div>';
-
-  var btnGaleriaMW = document.getElementById('btnAbrirGaleriaMW');
-  if (btnGaleriaMW) {
-    btnGaleriaMW.addEventListener('click', function() {
-      SFX.chime();
-      var winGaleria = openWindow('mw-gallery', 'Milky_Way_Structure', GALERIA_MW_HTML);
-      winGaleria.style.width = "650px"; winGaleria.style.height = "450px";
-      winGaleria.querySelectorAll('.shot-mosaico').forEach(function (img, i) {
-        img.addEventListener('click', function () {
-          var caption = img.getAttribute('alt') || 'Image';
-          var imgHtml = '<img class="viewer-image" src="' + img.getAttribute('src') + '" alt="' + caption + '" style="max-width:100%; display:block; margin:auto;">' +
-                        '<p style="margin-top:12px; font-size:13px; color:#333; line-height:1.4;">' + caption + '</p>';
-          openWindow('viewer-mw-' + i, 'Image_Viewer', imgHtml);
-        });
-        img.addEventListener('mouseenter', SFX.hover);
-      });
-    });
-    btnGaleriaMW.addEventListener('mouseenter', SFX.hover);
-  }
-
-  /* =====================================================
-     16. GALACTIC BAR GALLERY (FLOATING MOSAIC)
-     ===================================================== */
-  var GALERIA_BAR_HTML = 
-    '<div class="panel-intro">Click on any image to open the detailed viewer. Windows can be resized from the bottom-right corner.</div>' +
-    '<div class="mosaico-grid">' +
-      '<figure><img class="shot-mosaico" src="bar-snapshots.png" alt="Six simulation snapshots demonstrating the time evolution of a dynamically cold stellar disc. As the bar potential grows, non-circular orbits emerge, deforming the system along a preferred axis."><figcaption>Phase-Space Evolution</figcaption></figure>' +
-      '<figure><img class="shot-mosaico" src="bar-energy.png" alt="Final vs. Initial specific energies of the test particles. All points lie above the identity line, meaning every single particle experienced a net energy gain due to the time-varying potential."><figcaption>Energy Gain Analysis</figcaption></figure>' +
-      '<figure><img class="shot-mosaico" src="bar-radial.png" alt="Energy gain plotted against initial radial position. The monotonic increase indicates that outer disc particles absorbed significantly more energy than inner disc particles during the bar growth."><figcaption>Radial Energy Redistribution</figcaption></figure>' +
-    '</div>';
-
-  var btnGaleriaBar = document.getElementById('btnAbrirGaleriaBar');
-  if (btnGaleriaBar) {
-    btnGaleriaBar.addEventListener('click', function() {
-      SFX.chime();
-      var winGaleria = openWindow('bar-gallery', 'Galactic_Bar_Dynamics', GALERIA_BAR_HTML);
-      winGaleria.style.width = "650px"; winGaleria.style.height = "450px";
-      winGaleria.querySelectorAll('.shot-mosaico').forEach(function (img, i) {
-        img.addEventListener('click', function () {
-          var caption = img.getAttribute('alt') || 'Image';
-          var imgHtml = '<img class="viewer-image" src="' + img.getAttribute('src') + '" alt="' + caption + '" style="max-width:100%; display:block; margin:auto;">' +
-                        '<p style="margin-top:12px; font-size:13px; color:#333; line-height:1.4;">' + caption + '</p>';
-          openWindow('viewer-bar-' + i, 'Image_Viewer', imgHtml);
-        });
-        img.addEventListener('mouseenter', SFX.hover);
-      });
-    });
-    btnGaleriaBar.addEventListener('mouseenter', SFX.hover);
   }
   </script>
 </body>

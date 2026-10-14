@@ -1,0 +1,539 @@
+{
+  "tracks": [
+    {
+      "id": "data",
+      "label": "Data & analytics",
+      "tab": "Data",
+      "icon": "📊",
+      "intro": "Pipelines, statistics and dashboards that turn raw records into a decision: cleaning with lineage, KPIs that survive scrutiny and inference with its assumptions stated."
+    },
+    {
+      "id": "ai",
+      "label": "AI & LLMs",
+      "tab": "AI & LLMs",
+      "icon": "🤖",
+      "intro": "Machine learning and language models, from a transformer built from scratch to an LLM pipeline that runs unattended on a laptop."
+    },
+    {
+      "id": "qa",
+      "label": "QA & engineering",
+      "tab": "QA",
+      "icon": "🧪",
+      "intro": "Testing as the main deliverable: requirements reviewed for testability, risk-based test design, API and database testing, and regression suites that run on every push."
+    },
+    {
+      "id": "physics",
+      "label": "Physics & simulation",
+      "tab": "Physics",
+      "icon": "🔭",
+      "intro": "Numerical physics from my degrees: solvers checked against conserved quantities and analytical limits, and the thesis in progress."
+    }
+  ],
+  "projects": [
+    {
+      "slug": "retail-delivery",
+      "title": "Retail delivery diagnostics: an end-to-end case",
+      "track": "data",
+      "status": "live",
+      "featured": true,
+      "stack": [
+        "Python",
+        "pandas",
+        "SQL",
+        "Star schema",
+        "Chart.js",
+        "Statistics"
+      ],
+      "summary": "Diagnosis of a department-store delivery network, from 62,420 raw shipment records to an executive dashboard. The monthly report said 95.7% of deliveries were on time and in full, yet management felt deliveries were getting slower. The analysis shows where and why.",
+      "highlights": [
+        "Cleaning with lineage: 62,420 raw records reduced to 59,615 shipments, with every exclusion logged.",
+        "Stores compared with their own zone through Wilson intervals, so only 1 of 61 stores is flagged as significantly worse.",
+        "The worst-stores ranking turned out to be a carrier effect, visible only after conditioning on zone."
+      ],
+      "embed": {
+        "src": "https://lobby9000.github.io/Retail-Business-Data-Cases/dashboard/",
+        "title": "Retail delivery dashboard"
+      },
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/lobby9000/Retail-Business-Data-Cases"
+        },
+        {
+          "label": "Open the live dashboard",
+          "url": "https://lobby9000.github.io/Retail-Business-Data-Cases/dashboard/"
+        }
+      ],
+      "repo": "lobby9000/Retail-Business-Data-Cases"
+    },
+    {
+      "slug": "macd-toolkit",
+      "title": "EMA/MACD signal toolkit",
+      "track": "data",
+      "status": "live",
+      "featured": true,
+      "stack": [
+        "Python",
+        "pandas",
+        "Excel",
+        "pytest",
+        "LibreOffice"
+      ],
+      "summary": "Moving averages, MACD(12, 26, 9) and RSI implemented from first principles for a finance diploma, then extended into a batch run over 35 equities listed on the Mexican Stock Exchange.",
+      "highlights": [
+        "Cross-validated against a 3,815-formula Excel model to within 5 × 10⁻¹³, recalculated in CI on every push.",
+        "28 unit tests on properties derived by hand, such as MACD equal to 7 × slope on a linear trend.",
+        "Flags tickers whose data feed is missing recent sessions instead of mixing stale and current prices."
+      ],
+      "images": [
+        {
+          "src": "assets/projects/macd-toolkit/femsa-daily-2026-10-02.png",
+          "alt": "Daily price, EMA 12 and EMA 26 for FEMSA with the MACD panel and a summary panel, 2 October 2026",
+          "caption": "FEMSA, daily, 2 October 2026",
+          "description": "Output of the batch run for FEMSA: closing price with EMA 12 and EMA 26, MACD with its signal line and histogram, and a summary panel with the latest values, RSI(14), the last crossover and a technical reading that counts three conditions."
+        }
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/lobby9000/macd-toolkit"
+        }
+      ],
+      "repo": "lobby9000/macd-toolkit",
+      "ci_workflow": "tests.yml"
+    },
+    {
+      "slug": "milky-way",
+      "title": "Milky Way structure: Gaia DR3 × APOGEE-2 DR17",
+      "track": "data",
+      "status": "live",
+      "featured": true,
+      "stack": [
+        "Python",
+        "pandas",
+        "astropy",
+        "scikit-learn",
+        "TOPCAT"
+      ],
+      "summary": "Spatial and kinematic characterisation of the Milky Way's stellar populations, built by cross-matching Gaia DR3 astrometry with APOGEE-2 DR17 spectroscopy.",
+      "highlights": [
+        "682,284 sources reduced to 281,612 stars through documented cuts on signal-to-noise, astrometric fit, radial-velocity scatter and parallax.",
+        "Velocity ellipsoid tilted by a vertex deviation of about −26.6°, consistent with asymmetric drift.",
+        "DBSCAN partially recovers the Hercules moving group, and the rotation curve is flat beyond 8.5 kpc."
+      ],
+      "images": [
+        {
+          "src": "assets/projects/milky-way/density-map.png",
+          "alt": "Stellar density map on the Galactocentric XY plane",
+          "caption": "Stellar density map (XY)",
+          "description": "Two-dimensional stellar density map projected onto the Galactocentric XY plane. It shows a high-density region around the Sun and radial arms that trace APOGEE's lines of sight."
+        },
+        {
+          "src": "assets/projects/milky-way/velocity-field.png",
+          "alt": "Vector field of mean radial and azimuthal velocities",
+          "caption": "Velocity vector field",
+          "description": "Mean radial and azimuthal velocities as a vector field. The pattern is globally rotational, with clear radial streaming where arrows point inwards or outwards."
+        },
+        {
+          "src": "assets/projects/milky-way/dbscan-moving-groups.png",
+          "alt": "Moving groups found by DBSCAN in the UV velocity plane",
+          "caption": "DBSCAN kinematic clusters",
+          "description": "Moving groups identified with DBSCAN (ε = 3.5 km/s, min_samples = 7) in the UV plane, compared with classical boundaries such as the Hercules moving group."
+        },
+        {
+          "src": "assets/projects/milky-way/rotation-curve.png",
+          "alt": "Galactic rotation curve between 6 and 12 kpc",
+          "caption": "Galactic rotation curve",
+          "description": "Median azimuthal velocity, corrected to the local standard of rest, between 6 and 12 kpc. The curve is flat beyond 8.5 kpc."
+        }
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/lobby9000/Milky-Way-Structure"
+        },
+        {
+          "label": "Report (PDF)",
+          "url": "https://github.com/lobby9000/Milky-Way-Structure/blob/main/report/milky-way-structure-report.pdf"
+        }
+      ],
+      "repo": "lobby9000/Milky-Way-Structure"
+    },
+    {
+      "slug": "astrostatistics",
+      "title": "Stellar classification and astrostatistics",
+      "track": "data",
+      "status": "live",
+      "featured": false,
+      "stack": [
+        "R",
+        "Maximum likelihood",
+        "AIC",
+        "Hypothesis testing"
+      ],
+      "summary": "Statistical characterisation of 240 stars from their temperature and spectral class: distribution fitting by maximum likelihood, model selection, normalisation and hypothesis tests across spectral classes.",
+      "highlights": [
+        "A physically motivated Gamma model beats an Exponential fit by AIC (4,908.98 against 4,926.26).",
+        "Box-Cox failed to normalise the data and Ordered Quantile normalisation succeeded, which enabled inference.",
+        "92% confidence intervals and t and F tests across 15 pairs of spectral classes."
+      ],
+      "images": [
+        {
+          "src": "assets/projects/astrostatistics/gamma-vs-exponential.png",
+          "alt": "Exponential model against the theoretical Gamma model for stellar temperatures",
+          "caption": "Probabilistic against theoretical model",
+          "description": "The proposed Exponential model against a theoretical Gamma model based on Wien's law for stellar temperatures. AIC favours the Gamma distribution (4,908.98)."
+        },
+        {
+          "src": "assets/projects/astrostatistics/box-cox.png",
+          "alt": "Temperature distributions after a Box-Cox transformation",
+          "caption": "Box-Cox attempts",
+          "description": "Temperature distributions after the Box-Cox transformation. The data stayed right-skewed and failed the normality tests."
+        },
+        {
+          "src": "assets/projects/astrostatistics/ordered-quantile.png",
+          "alt": "Histograms before and after Ordered Quantile normalisation",
+          "caption": "Ordered Quantile normalisation",
+          "description": "Histograms before and after Ordered Quantile normalisation, which achieved normality and made valid confidence intervals possible."
+        },
+        {
+          "src": "assets/projects/astrostatistics/confidence-intervals.png",
+          "alt": "Table of 92% confidence intervals for differences in means between spectral classes",
+          "caption": "Confidence intervals",
+          "description": "92% confidence intervals for the difference in means between 15 pairs of spectral classes. Every interval contains zero, so the normalised means are statistically similar."
+        }
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/lobby9000/Astrostatistics"
+        },
+        {
+          "label": "Final report (PDF, Spanish)",
+          "url": "https://github.com/lobby9000/Astrostatistics/blob/main/reports/final-project-report.pdf"
+        }
+      ],
+      "repo": "lobby9000/Astrostatistics"
+    },
+    {
+      "slug": "lecture-notes-pipeline",
+      "title": "Lecture notes pipeline with Claude",
+      "track": "ai",
+      "status": "live",
+      "featured": true,
+      "stack": [
+        "Python",
+        "faster-whisper",
+        "Claude Code",
+        "ffmpeg",
+        "systemd"
+      ],
+      "summary": "Turns four-hour class recordings into structured Obsidian notes with no manual steps: local transcription on the CPU, notes written by Claude Code in headless mode, a page per new concept and a course index.",
+      "highlights": [
+        "Fits in 8 GB of RAM: silence-aligned ten-minute chunks cut peak audio memory from more than 6 GB to about 0.7 GB on a two-hour recording.",
+        "Whatever Claude adds stays visibly separate from what was said in class, and mistakes not corrected in class are flagged.",
+        "51 tests against a fake Whisper model and a fake claude executable, run in CI with ffmpeg."
+      ],
+      "snippet": "lecture.mp4 → Whisper (CPU, int8) → transcript [P2 00:12:30] → claude -p → note + concept pages + index",
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/lobby9000/class-notes-pipeline"
+        }
+      ],
+      "repo": "lobby9000/class-notes-pipeline",
+      "ci_workflow": "tests.yml"
+    },
+    {
+      "slug": "small-llm",
+      "title": "Small language model from scratch",
+      "track": "ai",
+      "status": "live",
+      "featured": true,
+      "stack": [
+        "Python",
+        "PyTorch",
+        "NumPy"
+      ],
+      "summary": "Every component of a small language model, implemented and then trained, for Carnegie Mellon University's Introduction to Modern AI (online, January to April 2026).",
+      "highlights": [
+        "An autodiff engine, a BPE tokenizer and the Adam optimiser written from first principles.",
+        "A decoder-only transformer with masked multi-head attention, a KV cache, RMSNorm and a gated MLP, trained on TinyStories.",
+        "Fine-tuned with supervised fine-tuning, DPO and reinforcement learning for reasoning on GSM8K."
+      ],
+      "note": "The code stays private under the course's academic integrity policy.",
+      "links": []
+    },
+    {
+      "slug": "galaxy-cnn",
+      "title": "Galaxy morphology with convolutional networks",
+      "track": "ai",
+      "status": "live",
+      "featured": true,
+      "stack": [
+        "Python",
+        "TensorFlow / Keras",
+        "scikit-learn",
+        "Transfer learning"
+      ],
+      "summary": "Binary classification of 5,608 MaNGA galaxy images into early types and late types, from a baseline CNN to transfer learning, with the class imbalance handled explicitly.",
+      "highlights": [
+        "Baseline CNN: 81.0% test accuracy, held back by a recall of only 0.68 on late types.",
+        "A deeper CNN reached 86.3% test accuracy and raised late-type recall to 0.77.",
+        "InceptionV3 transfer learning reached 85.9% with balanced recall of 0.86 on both classes."
+      ],
+      "images": [
+        {
+          "src": "assets/projects/galaxy-cnn/misclassified-sample.jpg",
+          "alt": "Nine galaxy images the CNN misclassified, with true and predicted labels",
+          "caption": "Error analysis",
+          "description": "Nine random misclassifications by the convolutional network, comparing the true label (0 = early type, 1 = late type) with the prediction."
+        },
+        {
+          "src": "assets/projects/galaxy-cnn/confusion-matrix-inceptionv3.png",
+          "alt": "Confusion matrix of the InceptionV3 transfer-learning model",
+          "caption": "Confusion matrix (InceptionV3)",
+          "description": "Confusion matrix of the InceptionV3 transfer-learning model. Unlike the baseline CNN, it handles the class imbalance, with a recall of 0.86 on both early and late types."
+        },
+        {
+          "src": "assets/projects/galaxy-cnn/training-curves.png",
+          "alt": "Training and validation accuracy and loss across epochs",
+          "caption": "Training against validation",
+          "description": "Training and validation metrics across epochs for InceptionV3: stable convergence to about 86% accuracy with little overfitting."
+        }
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/lobby9000/Galaxy-Morphology-NNClassifier"
+        }
+      ],
+      "repo": "lobby9000/Galaxy-Morphology-NNClassifier"
+    },
+    {
+      "slug": "incentive-comp-qa",
+      "title": "Incentive compensation API: a QA case study",
+      "track": "qa",
+      "status": "pending",
+      "featured": true,
+      "stack": [
+        "Postman",
+        "Newman",
+        "pytest",
+        "PostgreSQL",
+        "FastAPI",
+        "GitHub Actions"
+      ],
+      "summary": "A full QA cycle on a sales-commission REST API, the kind of calculation that sales performance management software automates: split credit, clawbacks on returns, a 50% gate, tiered accelerators and a cap.",
+      "highlights": [
+        "92 risk-based test cases traced to the requirements, and 8 defects found in the first build, 2 of them critical.",
+        "A parallel run against an independent Excel model measured 6,566.74 MXN overpaid by the first build and 750 of 750 payouts correct after the fixes.",
+        "One critical defect only appeared on PostgreSQL, because SQLite does not enforce foreign keys by default. CI now tests on PostgreSQL."
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/lobby9000/incentive-comp-qa"
+        }
+      ],
+      "repo": "lobby9000/incentive-comp-qa",
+      "ci_workflow": "qa.yml"
+    },
+    {
+      "slug": "vigia",
+      "title": "Vigía: operational stability monitoring",
+      "track": "qa",
+      "status": "pending",
+      "featured": true,
+      "stack": [
+        "Java",
+        "Spring Boot",
+        "Flask",
+        "Django",
+        "PostgreSQL",
+        "MongoDB",
+        "Docker"
+      ],
+      "summary": "A small polyglot platform that ingests request telemetry, reports service-level objectives and detects anomalies: Spring Boot ingestion, a Flask analytics API, a Django back office, PostgreSQL and MongoDB.",
+      "highlights": [
+        "1.4 million simulated requests over ten days with three injected incidents, all three detected and nothing else.",
+        "A Monte Carlo calibration over 40 runs cut false alarms from 18 to 1 without missing an incident.",
+        "69 automated tests, run in GitHub Actions together with the calibration."
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/lobby9000/vigia"
+        }
+      ],
+      "repo": "lobby9000/vigia",
+      "ci_workflow": "ci.yml"
+    },
+    {
+      "slug": "macd-signal-api",
+      "title": "MACD signal API",
+      "track": "qa",
+      "status": "pending",
+      "featured": false,
+      "stack": [
+        "FastAPI",
+        "Postman",
+        "Newman",
+        "pytest"
+      ],
+      "summary": "A REST API over the EMA/MACD toolkit, tested from the outside with a Postman collection that Newman runs in CI.",
+      "highlights": [
+        "Its tests found a defect shared with the toolkit: rounding noise of about 10⁻¹⁵ on flat or linear prices reported as crossovers.",
+        "The fix and its regression tests went back into the toolkit."
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/lobby9000/macd-signal-api"
+        }
+      ],
+      "repo": "lobby9000/macd-signal-api"
+    },
+    {
+      "slug": "inflation-reheating",
+      "title": "Inflation and reheating solver (MSc thesis)",
+      "track": "physics",
+      "status": "wip",
+      "featured": false,
+      "stack": [
+        "Python",
+        "SciPy",
+        "ODE integration",
+        "Cosmology"
+      ],
+      "summary": "Modular solver for the coupled Friedmann and Klein-Gordon equations, tracking the scale factor, the inflaton and the energy densities from inflation into reheating. It covers T-model potentials and the pure quartic regime, and checks numerical results against slow-roll predictions.",
+      "highlights": [
+        "Energy densities for T-model potentials follow the expected scaling with the scale factor, a^(−6k/(k+2)).",
+        "The numerical end of inflation is compared with the analytical slow-roll prediction.",
+        "Next: couple the spectator field and compute the first occupation spectra."
+      ],
+      "links": [
+        {
+          "label": "Notebook on Google Colab",
+          "url": "https://colab.research.google.com/drive/1WU9EHqw5BTEdtey-hU27ECNP07T4Ge6S?usp=sharing"
+        }
+      ]
+    },
+    {
+      "slug": "astrophysical-jet",
+      "title": "Astrophysical jet simulation",
+      "track": "physics",
+      "status": "live",
+      "featured": false,
+      "stack": [
+        "Python",
+        "NumPy",
+        "MacCormack scheme",
+        "Finite differences"
+      ],
+      "summary": "Two-dimensional hydrodynamic simulation of an astrophysical jet, built up from advection and 1D Euler solvers, comparing adiabatic and radiatively cooled runs from a single configuration file.",
+      "highlights": [
+        "400 × 150 cells over a 4,000 × 1,500 AU domain, run for 100 years with a MacCormack scheme and CFL = 0.1.",
+        "Neutral or ionised mean molecular weight, switched at 10⁴ K.",
+        "With radiative cooling the bow shock is narrower and the jet more compact."
+      ],
+      "images": [
+        {
+          "src": "assets/projects/astrophysical-jet/adiabatic-52yr.png",
+          "alt": "Adiabatic jet at 52 years: density, pressure, temperature and velocity",
+          "caption": "Adiabatic jet, 52 years",
+          "description": "Jet without radiative cooling at t = 52 years: density, pressure, temperature and speed. A bow shock runs ahead of the jet, with knots formed by the varying injection speed and very high temperatures just behind the shock."
+        },
+        {
+          "src": "assets/projects/astrophysical-jet/adiabatic-100yr.png",
+          "alt": "Adiabatic jet at 100 years: density, pressure, temperature and velocity",
+          "caption": "Adiabatic jet, 100 years",
+          "description": "Jet without radiative cooling at t = 100 years: density, pressure, temperature and speed."
+        },
+        {
+          "src": "assets/projects/astrophysical-jet/cooling-52yr.png",
+          "alt": "Radiatively cooled jet at 52 years: density, pressure, temperature and velocity",
+          "caption": "Cooled jet, 52 years",
+          "description": "Jet with radiative cooling at t = 52 years: density, pressure, temperature and speed."
+        },
+        {
+          "src": "assets/projects/astrophysical-jet/cooling-100yr.png",
+          "alt": "Radiatively cooled jet at 100 years: density, pressure, temperature and velocity",
+          "caption": "Cooled jet, 100 years",
+          "description": "Jet with radiative cooling at t = 100 years. Compared with the adiabatic run, the bow shock is narrower, the jet is more compact and the region behind the shock has cooled."
+        }
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/lobby9000/Astrophysical-Fluid-Simulations"
+        },
+        {
+          "label": "Final report (PDF, Spanish)",
+          "url": "https://github.com/lobby9000/Astrophysical-Fluid-Simulations/blob/main/jet-simulation/final-project-report.pdf"
+        }
+      ],
+      "repo": "lobby9000/Astrophysical-Fluid-Simulations"
+    },
+    {
+      "slug": "galactic-bar",
+      "title": "The Bar Strikes Back: galactic bar dynamics",
+      "track": "physics",
+      "status": "live",
+      "featured": false,
+      "stack": [
+        "Python",
+        "NumPy",
+        "RKN4 integrator",
+        "Test particles"
+      ],
+      "summary": "How a dynamically cold stellar disc responds to the smooth growth of a galactic bar, with 10,000 test particles in a composite, collisionless potential.",
+      "highlights": [
+        "Fourth-order Runge-Kutta-Nyström integration, with a time step chosen by measurement: the energy error of a circular orbit stays below 10⁻¹³.",
+        "Every particle gains energy as the bar grows, and total energy rises by 120%.",
+        "The gain grows monotonically with initial radius."
+      ],
+      "images": [
+        {
+          "src": "assets/projects/galactic-bar/snapshots.png",
+          "alt": "Six snapshots of a stellar disc deforming as the bar grows",
+          "caption": "Phase-space evolution",
+          "description": "Six snapshots of a dynamically cold disc. As the bar potential grows, non-circular orbits appear and the system stretches along a preferred axis."
+        },
+        {
+          "src": "assets/projects/galactic-bar/energy-gain.png",
+          "alt": "Final against initial specific energy of the test particles",
+          "caption": "Energy gain",
+          "description": "Final against initial specific energy. Every point lies above the identity line: each particle gained energy from the time-dependent potential."
+        },
+        {
+          "src": "assets/projects/galactic-bar/radial-energy.png",
+          "alt": "Energy gain against initial radius",
+          "caption": "Radial energy redistribution",
+          "description": "Energy gain against initial radius. Particles in the outer disc absorbed more energy than those in the inner disc while the bar grew."
+        }
+      ],
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/lobby9000/Galactic-Bar-Dynamics"
+        },
+        {
+          "label": "Report (PDF)",
+          "url": "https://github.com/lobby9000/Galactic-Bar-Dynamics/blob/main/report/bar-dynamics-report.pdf"
+        }
+      ],
+      "repo": "lobby9000/Galactic-Bar-Dynamics"
+    }
+  ],
+  "featured_order": [
+    "incentive-comp-qa",
+    "vigia",
+    "lecture-notes-pipeline",
+    "retail-delivery",
+    "macd-toolkit",
+    "small-llm",
+    "milky-way",
+    "galaxy-cnn"
+  ]
+}
