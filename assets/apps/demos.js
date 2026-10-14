@@ -362,9 +362,9 @@
     ordenados.forEach(function (c) {
       var sinMedir = c.spread === 'unmeasured';
       var regreso = c.pesosPorBtc(c.btcPorPesos(monto, m), m);
-      lineas.push(izq(c.nombre, 24) + der((sinMedir ? '≥' : '') + pct(c.idaVuelta, 2), 10) +
-        der(sinMedir ? 'unknown' : pct(c.a + c.b, 3), 10) + der((sinMedir ? '≤' : '') + pesos(regreso), 16) +
-        der((sinMedir ? '≥' : '') + tiempoLegible(Math.pow(c.idaVuelta / sigma, 2)), 15));
+      lineas.push(izq(c.nombre, 24) + der((sinMedir ? '>=' : '') + pct(c.idaVuelta, 2), 10) +
+        der(sinMedir ? 'unknown' : pct(c.a + c.b, 3), 10) + der((sinMedir ? '<=' : '') + pesos(regreso), 16) +
+        der((sinMedir ? '>=' : '') + tiempoLegible(Math.pow(c.idaVuelta / sigma, 2)), 15));
     });
     lineas.push({ contenido: 'Recovered in: how long bitcoin usually takes to move by the cost, (cost / ' +
       pct(sigma, 1) + ' daily volatility)².', clase: 'dim' });
@@ -950,7 +950,7 @@
       'The sign changes ' + cambios + ' times on noise of about 1e-15.',
       '',
       [izq('1.0.0-rc1, compares with zero:', 36), { t: texto(viejo), c: 'err' }],
-      [izq('1.0.0, |x| ≤ 1e-9 × largest close:', 36), { t: texto(nuevo), c: 'ok' }],
+      [izq('1.0.0, |x| <= 1e-9 x largest close:', 36), { t: texto(nuevo), c: 'ok' }],
       '',
       'The first build saw three crossovers that do not exist, and the noise hid the real cross',
       'at the turn (period 61). The fix treats values that small as zero.'

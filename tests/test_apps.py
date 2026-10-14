@@ -77,7 +77,7 @@ def test_demo_runs_and_passes_its_own_check(term, command):
 
 @pytest.mark.parametrize("command,expected", [
     ("macd", ["74 in 1,096 days, one every 14.8 days", "Check: MACD and PPO at 12 dates"]),
-    ("btc", ["Mercado Pago", "≥2.98%", "$239,641", "$64,247", "$177,723", "15 of 15 results match"]),
+    ("btc", ["Mercado Pago", ">=2.98%", "$239,641", "$64,247", "$177,723", "15 of 15 results match"]),
     ("qa", ["16 of 16 checks passed", "16 of 16 statements are identical to what rc2"]),
     ("qa rc1", ["11 of 16 checks passed", "BUG-002", "BUG-003", "BUG-006", "identical to what rc1"]),
     ("vigia", ["15:00-16:00", "the injected incident", "z-scores and episodes match anomaly.py"]),
