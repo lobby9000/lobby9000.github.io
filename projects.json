@@ -77,14 +77,14 @@
         "pandas",
         "Excel",
         "pytest",
-        "LibreOffice"
+        "Bitso and Binance APIs"
       ],
-      "summary": "Moving averages, MACD(12, 26, 9) and RSI implemented from first principles for a finance diploma, then extended into a batch run over 35 equities listed on the Mexican Stock Exchange.",
+      "summary": "Moving averages, MACD(12, 26, 9) and RSI implemented from first principles for a finance diploma, then extended into a batch run over 35 equities listed on the Mexican Stock Exchange and a bitcoin cost comparison across Mexican platforms.",
       "highlights": [
         "Cross-validated against a 3,815-formula Excel model to within 5 × 10⁻¹³, recalculated in CI on every push.",
-        "31 unit tests on properties derived by hand, such as MACD equal to 7 × slope on a linear trend.",
+        "Bitcoin with pesos: live Bitso and Binance order books against apps such as Mercado Pago. Buying and selling at once costs 0.27% on Binance and at least 2.98% on Mercado Pago.",
         "Crossovers are judged against noise: on a random walk MACD crosses its signal every 12.3 periods, and 22 of the 35 tickers cross at least that often.",
-        "Flags tickers whose data feed is missing recent sessions instead of mixing stale and current prices."
+        "63 unit tests on properties derived by hand, such as MACD equal to 7 × slope on a linear trend, all offline."
       ],
       "images": [
         {
@@ -92,6 +92,12 @@
           "alt": "Daily price, EMA 12 and EMA 26 for FEMSA with the MACD panel and a summary panel, 2 October 2026",
           "caption": "FEMSA, daily, 2 October 2026",
           "description": "Output of the batch run for FEMSA: closing price with EMA 12 and EMA 26, MACD with its signal line and histogram, and a summary panel with the latest values, RSI(14), the last crossover and a technical reading that counts three conditions."
+        },
+        {
+          "src": "assets/projects/macd-toolkit/btc-costs-2026-10-14.png",
+          "alt": "Round-trip cost of bitcoin per platform on 14 October 2026: Binance 0.27%, Bitso limit order 1.20%, Bitso market order 1.59%, Mercado Pago at least 2.98% in commissions",
+          "caption": "Bitcoin: cost per platform",
+          "description": "What each platform keeps if you buy and sell at once, split into buying commission, spread and selling commission, with the live Bitso and Binance books of 14 October 2026. Mercado Pago's spread still has to be measured in the app, so its bar only holds commissions."
         }
       ],
       "links": [

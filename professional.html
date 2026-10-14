@@ -1124,17 +1124,19 @@
             </article>
             <article class="project-card" id="project-macd-toolkit">
               <h3>EMA/MACD signal toolkit <span class="status live">Live</span></h3>
-              <p class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">Excel</span><span class="tag">pytest</span><span class="tag">LibreOffice</span></p>
-              <p>Moving averages, MACD(12, 26, 9) and RSI implemented from first principles for a finance diploma, then extended into a batch run over 35 equities listed on the Mexican Stock Exchange.</p>
+              <p class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">Excel</span><span class="tag">pytest</span><span class="tag">Bitso and Binance APIs</span></p>
+              <p>Moving averages, MACD(12, 26, 9) and RSI implemented from first principles for a finance diploma, then extended into a batch run over 35 equities listed on the Mexican Stock Exchange and a bitcoin cost comparison across Mexican platforms.</p>
               <ul class="highlights">
                 <li>Cross-validated against a 3,815-formula Excel model to within 5 × 10⁻¹³, recalculated in CI on every push.</li>
-                <li>31 unit tests on properties derived by hand, such as MACD equal to 7 × slope on a linear trend.</li>
+                <li>Bitcoin with pesos: live Bitso and Binance order books against apps such as Mercado Pago. Buying and selling at once costs 0.27% on Binance and at least 2.98% on Mercado Pago.</li>
                 <li>Crossovers are judged against noise: on a random walk MACD crosses its signal every 12.3 periods, and 22 of the 35 tickers cross at least that often.</li>
-                <li>Flags tickers whose data feed is missing recent sessions instead of mixing stale and current prices.</li>
+                <li>63 unit tests on properties derived by hand, such as MACD equal to 7 × slope on a linear trend, all offline.</li>
               </ul>
               <div class="carrusel-mini">
                 <img src="assets/projects/macd-toolkit/femsa-daily-2026-10-02.png" alt="Daily price, EMA 12 and EMA 26 for FEMSA with the MACD panel and a summary panel, 2 October 2026" class="shot" loading="lazy" data-caption="FEMSA, daily, 2 October 2026" data-description="Output of the batch run for FEMSA: closing price with EMA 12 and EMA 26, MACD with its signal line and histogram, and a summary panel with the latest values, RSI(14), the last crossover and a technical reading that counts three conditions.">
+                <img src="assets/projects/macd-toolkit/btc-costs-2026-10-14.png" alt="Round-trip cost of bitcoin per platform on 14 October 2026: Binance 0.27%, Bitso limit order 1.20%, Bitso market order 1.59%, Mercado Pago at least 2.98% in commissions" class="shot" loading="lazy" data-caption="Bitcoin: cost per platform" data-description="What each platform keeps if you buy and sell at once, split into buying commission, spread and selling commission, with the live Bitso and Binance books of 14 October 2026. Mercado Pago&#x27;s spread still has to be measured in the app, so its bar only holds commissions.">
               </div>
+              <button class="btn-galeria" data-gallery-title="EMA_MACD_signal_toolkit">⊞ View full gallery</button>
               <div class="link-row">
                 <a href="https://github.com/lobby9000/macd-toolkit" target="_blank" rel="noopener">Repository</a>
                 <a class="ci-link" href="https://github.com/lobby9000/macd-toolkit/actions/workflows/tests.yml" target="_blank" rel="noopener"><img class="ci-badge" src="https://github.com/lobby9000/macd-toolkit/actions/workflows/tests.yml/badge.svg" alt="Test status of macd-toolkit" loading="lazy"></a>
