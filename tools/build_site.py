@@ -135,9 +135,16 @@ def badge(p: dict) -> str:
             f'alt="Test status of {esc(repo.split("/")[1])}" loading="lazy"></a>')
 
 
-def gallery_title(title: str) -> str:
+def gallery_title(title: str, limit: int = 30) -> str:
+    """Window title in the style of the site: words joined by underscores, cut at a word."""
     words = re.sub(r"[^A-Za-z0-9]+", " ", title).split()
-    return "_".join(words)[:30] or "Gallery"
+    out = ""
+    for w in words:
+        candidate = f"{out}_{w}" if out else w
+        if len(candidate) > limit:
+            break
+        out = candidate
+    return out or "Gallery"
 
 
 def card(p: dict, pad: str) -> str:
