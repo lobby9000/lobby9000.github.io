@@ -26,7 +26,7 @@
       "label": "Physics & simulation",
       "tab": "Physics",
       "icon": "🔭",
-      "intro": "Numerical physics from my degrees: solvers checked against conserved quantities and analytical limits, and the thesis in progress."
+      "intro": "Numerical physics from my degrees: solvers checked against conserved quantities and analytical limits, including the code of my master's thesis."
     }
   ],
   "projects": [
@@ -432,7 +432,7 @@
       "slug": "inflation-reheating",
       "title": "Inflation and reheating solver (MSc thesis)",
       "track": "physics",
-      "status": "wip",
+      "status": "live",
       "featured": false,
       "stack": [
         "Python",
@@ -443,8 +443,7 @@
       "summary": "Modular solver for the coupled Friedmann and Klein-Gordon equations, tracking the scale factor, the inflaton and the energy densities from inflation into reheating. It covers T-model potentials and the pure quartic regime, and checks numerical results against slow-roll predictions.",
       "highlights": [
         "Energy densities for T-model potentials follow the expected scaling with the scale factor, a^(−6k/(k+2)).",
-        "The numerical end of inflation is compared with the analytical slow-roll prediction.",
-        "Next: couple the spectator field and compute the first occupation spectra."
+        "The numerical end of inflation is compared with the analytical slow-roll prediction."
       ],
       "links": [
         {
