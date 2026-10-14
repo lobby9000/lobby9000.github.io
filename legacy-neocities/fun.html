@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>lqcorner :: personal hub (under construction)</title>
+<meta name="description" content="The Personal Hub of lqcorner.neocities.org is still being built. Three cats are supervising.">
+
+<!-- Si tu favicon tiene otro nombre, cambia la ruta de aqui abajo. -->
+<link rel="icon" href="favicon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=VT323&amp;display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   1. BASE
+   Paleta del sitio: crema #F3EFD0 sobre negro #0B0B0B,
+   mas el amarillo de obra #F7C543 como unico acento.
+   ========================================================= */
+:root{
+  --ink:#0B0B0B;
+  --cream:#F3EFD0;
+  --hazard:#F7C543;
+  --rust:#C4463A;
+  --dim:#8C8770;
+}
+
+*{box-sizing:border-box}
+
+html,body{margin:0;padding:0}
+
+body{
+  background:var(--ink);
+  background-image:
+    linear-gradient(rgba(243,239,208,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(243,239,208,.045) 1px, transparent 1px);
+  background-size:8px 8px, 8px 8px;
+  color:var(--cream);
+  font-family:'VT323', 'Courier New', monospace;
+  font-size:21px;
+  line-height:1.35;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:18px 12px 40px;
+  cursor:url('cursor-arrow.png') 2 2, default;
+}
+
+a{color:var(--hazard);text-decoration:none;border-bottom:1px dotted var(--hazard)}
+a:hover,a:focus{background:var(--hazard);color:var(--ink);border-bottom-color:transparent}
+a:focus-visible,button:focus-visible{outline:2px solid var(--hazard);outline-offset:2px}
+
+/* =========================================================
+   2. LA VENTANA
+   Barra de titulo negra, cinta de obra, y el lienzo dentro.
+   ========================================================= */
+.window{
+  width:100%;
+  max-width:1030px;
+  border:3px solid var(--cream);
+  background:var(--ink);
+  box-shadow:10px 10px 0 rgba(243,239,208,.13);
+}
+
+.titlebar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  background:var(--cream);
+  color:var(--ink);
+  padding:7px 10px;
+  font-family:'Press Start 2P', monospace;
+  font-size:10px;
+  letter-spacing:.5px;
+}
+.titlebar .dots{letter-spacing:2px}
+
+.tape{
+  height:10px;
+  background:repeating-linear-gradient(45deg,
+    var(--hazard) 0 8px, var(--ink) 8px 16px);
+  border-top:1px solid var(--ink);
+  border-bottom:2px solid var(--ink);
+  background-size:22.6px 22.6px;
+  animation:crawl 1.4s linear infinite;
+}
+@keyframes crawl{from{background-position:0 0}to{background-position:22.6px 0}}
+
+/* El lienzo trabaja a 256x144 pixeles reales y se estira
+   con nearest neighbor: nada se ve borroso. */
+.screen{display:block;width:100%;height:auto;aspect-ratio:16/9;
+  image-rendering:pixelated;image-rendering:crisp-edges;
+  background:#1C6B78;
+  cursor:url('cursor-hand.png') 8 4, pointer;
+}
+
+/* =========================================================
+   3. HUD: barra de avance falsa y lectura de estado
+   ========================================================= */
+.hud{padding:12px 14px 4px;border-top:2px solid var(--cream)}
+
+.bar{
+  height:16px;
+  border:2px solid var(--cream);
+  background:var(--ink);
+  padding:2px;
+}
+.bar span{
+  display:block;height:100%;width:3%;
+  background:repeating-linear-gradient(45deg,
+    var(--hazard) 0 4px, #B98F1E 4px 8px);
+  transition:width .5s steps(8);
+}
+
+.readout{margin:8px 0 0;color:var(--dim);min-height:1.35em}
+.readout b{color:var(--cream);font-weight:normal}
+
+.statusbar{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;
+  padding:10px 14px 12px;
+}
+.statusbar .spacer{flex:1 1 auto}
+
+button{
+  font-family:'Press Start 2P', monospace;
+  font-size:9px;
+  color:var(--cream);
+  background:var(--ink);
+  border:2px solid var(--cream);
+  padding:9px 11px;
+  cursor:url('cursor-hand.png') 8 4, pointer;
+}
+button:hover{background:var(--cream);color:var(--ink)}
+button[aria-pressed="true"]{background:var(--hazard);color:var(--ink);border-color:var(--hazard)}
+
+.count{color:var(--dim);font-size:19px}
+
+/* =========================================================
+   4. TEXTO DE LA PAGINA
+   ========================================================= */
+.copy{width:100%;max-width:1030px;margin:22px 0 0}
+.copy h1{
+  font-family:'Press Start 2P', monospace;
+  font-size:13px;line-height:1.7;margin:0 0 12px;color:var(--hazard);
+}
+.copy p{margin:0 0 12px;max-width:62ch}
+.copy .exits{margin-top:18px;border-top:1px dotted #3a382f;padding-top:12px}
+.copy .exits a{margin-right:18px}
+
+@media (max-width:620px){
+  body{font-size:19px;padding:12px 8px 28px}
+  .titlebar{font-size:8px}
+  .copy h1{font-size:11px}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .tape{animation:none}
+  .bar span{transition:none}
+}
+</style>
+</head>
+
+<body>
+
+<div class="window">
+  <div class="titlebar">
+    <span>personal_hub.exe</span>
+    <span class="dots">= = =</span>
+  </div>
+
+  <div class="tape" aria-hidden="true"></div>
+
+  <canvas id="screen" class="screen" width="256" height="144"
+          role="img"
+          aria-label="Pixel art construction site with three cats in hard hats: a calico asleep in a loaf on a stack of planks, a small lynx point cat with a straight shiny metal bucket over her whole head, sitting up and swatting blindly at a crane hook, and a big fluffy orange cat sitting on a barrel with his front legs stretched down over it."></canvas>
+
+  <div class="hud">
+    <div class="bar" role="progressbar" aria-label="Build progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="3" id="barwrap">
+      <span id="barfill"></span>
+    </div>
+    <p class="readout" id="readout">&gt; booting site_</p>
+  </div>
+
+  <div class="statusbar">
+    <a href="index.html">&lt; back to portal</a>
+    <span class="spacer"></span>
+    <span class="count" id="meowcount">meows: 0</span>
+    <button id="soundToggle" aria-pressed="false">SOUND: OFF</button>
+  </div>
+</div>
+
+<div class="copy">
+  <h1>The Personal Hub is still a construction site.</h1>
+  <p>Cables are laid, the blog has no posts yet, and the crew is three cats who mostly nap.
+     Turn the sound on and poke them while you wait.</p>
+  <p class="exits">
+    <a href="professional.html">Professional Log</a>
+    <a href="https://github.com/lobby9000" target="_blank" rel="noopener">Code Archive</a>
+    <a href="index.html">Portal</a>
+  </p>
+</div>
+
+<noscript>
+  <p style="max-width:62ch">This page draws itself with JavaScript. With scripts off there is
+  nothing to see, which is honest: the Personal Hub is not built yet either.
+  Try the <a href="professional.html">Professional Log</a>.</p>
+</noscript>
+
+<script>
+/* =====================================================================
+   PERSONAL HUB / UNDER CONSTRUCTION
+   Todo se dibuja con codigo: no hay imagenes, no hay video, no hay mp3.
+   Neocities gratis solo necesita este archivo.
+
+   Como funciona:
+     1. Los sprites son texto. Cada letra es un color de la paleta.
+     2. Cada sprite se pinta una vez en un canvas chiquito y luego se
+        copia con drawImage: asi no repintamos 2000 pixeles por cuadro.
+     3. El fondo (cielo, gruas, suelo) se pinta UNA vez y se reusa.
+     4. Encima van solo las cosas que se mueven.
+     5. El sonido se genera con osciladores (Web Audio), igual que en
+        index.html y professional.html.
+   ===================================================================== */
+
+(function () {
+'use strict';
+
+var W = 256, H = 144;       // resolucion real del lienzo
+var GROUND = 96;            // linea del horizonte
+var BASE = 138;             // piso donde se paran los gatos
+var TROLLEY = 119;          // posicion del carro de la grua
+
+var cv = document.getElementById('screen');
+var ctx = cv.getContext('2d', { alpha: false });
+ctx.imageSmoothingEnabled = false;
+
+/* ------------------------------------------------- 1. PALETA */
+var PAL = {
+  k: '#0B0B0B', w: '#F6F1E4', W: '#FFFFFF',
+  o: '#E08F4A', O: '#B96A2F', b: '#8A6046', g: '#C7B49E',
+  p: '#E58D9A', e: '#6FB7D8', E: '#8FC46A',
+  y: '#F7C543', Y: '#D09A1E',
+  v: '#F2843C', V: '#DCEFF5',
+  i: '#C9793A', q: '#6B4A38', G: '#D9A05B',
+  n: '#C3C8CE', N: '#7C838B',
+  m: '#6E5A5F', M: '#3A2E33',
+  r: '#C4463A', c: '#F3EFD0',
+  s: '#8A6A45', S: '#5C4229'
+};
+
+/* ------------------------------------------------- 2. SPRITES
+   Cada renglon debe medir lo mismo. Un punto es transparente. */
+var ART = {
+
+/* Gato 1: naranja main coon, el mas grande. De frente, con rayas
+   tabby sutiles, nariz respingada y las patas delanteras abiertas como
+   una A. Los bigotes son un par de pixeles oscuros fuera del cachete. */
+CAT1: [
+'.....k..............k.....',
+'....kpk............kpk....',
+'....kppk..........kppk....',
+'...kopppk........kpppok...',
+'...kooppk........kppook...',
+'...koookkkkkkkkkkkkoook...',
+'.......kyyyyYYyyyyk.......',
+'......kyyyyyYYyyyyyk......',
+'.....kyyyyyyYYyyyyyyk.....',
+'.....kyyyyyyYYyyyyyyk.....',
+'...kYYYYYYYYYYYYYYYYYYk...',
+'...kkkkkkkkkkkkkkkkkkkk...',
+'......kooooooooooook......',
+'.....koiooooioooooiok.....',
+'....kokEEkoiooiokEEkok....',
+'....kokEEkoiooiokEEkok....',
+'....kokkkkooooookkkkok....',
+'.MM.koiooowwwwwwoooiok.MM.',
+'....kooooowwppwwoooook....',
+'.MM.koiooowwwwwwoooiok.MM.',
+'.....koooowwwwwwooook.....',
+'.....kOOoowwwwwwooOOk.....',
+'..kOOwwwwwwwwwwwwwwwwOOk..',
+'.kOOwwwwwwwwwwwwwwwwwwOOk.',
+'kOOOwwwwwwwwwwwwwwwwwwOOOk',
+'.kOOwwwwwwwwwwwwwwwwwwOk..',
+'..kvvvvvvwwwwwwwwvvvvvvk..',
+'..kVVVVVVVVVVVVVVVVVVVVk..',
+'..kvvvvvvwwwwwwwwvvvvvvk..',
+'..kvvvvvvvwwwwwwvvvvvvvk..',
+'..kwwwwwwwwwwwwwwwwwwk....',
+'..kwwwwkkkkkkkkkkwwwwk....',
+'.kwwwwk..........kwwwwk...',
+'.kwwwwk..........kwwwwk...',
+'kwwwwk............kwwwwk..',
+'kwwwwk............kwwwwk..',
+'kwkwkk............kwkwkk..',
+'kkkkkk............kkkkkk..'],
+
+/* Gato 2: la mas chiquita. En las fotos es blanca con los puntos
+   grises y negros, no cafe. Cuerpo sentado en las patas traseras con
+   la patita del otro lado doblada a la vista. */
+CAT2: [
+'.......kwwwwwk......',
+'......kwwwwwwwk.....',
+'.....kvvvvvvvvvk....',
+'.....kVVVVVVVVVk....',
+'....kvvwwwwwwwvk....',
+'....kwwwkNNkwwwk....',
+'...kwwwwkNMkwwwwk...',
+'...kwwwwkMMkwwwwk...',
+'..kwwwwwkMkwwwwwk...',
+'..kwwwwwwwwwwwwwk...',
+'.kwwwwwwwwwwwwwwk...',
+'.kwwwwwwwwwwwwwwk...',
+'.kwwwwwwwwwMMMMwk...',
+'.kkkkkkkkkkkkkkkk...'],
+
+/* La cubeta de metal volteada que le tapa toda la cabeza a la chiquita:
+   ni ojos ni trompa, como el gato del croc. Va derecha, con aro arriba,
+   aro gordo en la boca, brillo a la izquierda y sombra a la derecha. */
+BUCKET: [
+'......kkkkkkkkkkkk......',
+'.....knWWnnnnnnNNNk.....',
+'.....knWWnnnnnnNNNk.....',
+'.....knWWnnnnnnNNNk.....',
+'.....kWWnnnnnnnnnnk.....',
+'....kNNNNNNNNNNNNNNk....',
+'....knWWnnnnnnnnNNNk....',
+'....knWWnnnnnnnnNNNk....',
+'....knWWnnnnnnnnNNNk....',
+'....knWWnnnnnnnnNNNk....',
+'....knWWnnnnnnnnNNNk....',
+'....knWWnnnnnnnnNNNk....',
+'....knWWnnnnnnnnNNNk....',
+'...knWWnnnnnnnnnnNNNk...',
+'...knWWnnnnnnnnnnNNNk...',
+'...kNNNNNNNNNNNNNNNNk...',
+'...knWnnnnnnnnnnnnnnk...',
+'...kNNNNNNNNNNNNNNNNk...',
+'....kkkkkkkkkkkkkkkk....'],
+
+/* Su manita, gris y negra, la unica que se estira al gancho. */
+ARM_UP: [
+'.......kkk.',
+'......kMpk.',
+'......kMMk.',
+'.....kMMk..',
+'.....kMMk..',
+'....kMMk...',
+'....kNMk...',
+'...kNMk....',
+'..kNMk.....',
+'.kNMk......',
+'.kNMk......',
+'kNMk.......',
+'kkk........'],
+
+/* Su colita tendida en el piso, negra completa. */
+TAIL2: [
+'.kk.............',
+'kMk.......kkkkk.',
+'kMMk.kkkkkMMMMMk',
+'.kMMkMMNNNNNMMMk',
+'.kMMMNNNNNMMMMMk',
+'.kkkkkkkkkkkkkkk'],
+
+/* Gato 3: calico dormida en pose de pan. Blanco con manchones
+   dorados, rayas y motas oscuras. Dos cuadros: respira. */
+CAT3_A: [
+'.......................k.....k........',
+'......................kkk...kkk.......',
+'.....................kkpkk..kkk.......',
+'.....................kkGGkkkkpkk......',
+'.....................kGGGGGMMMMk......',
+'......................kGqGMMMGwk......',
+'.....................kqGGGMMMMwwk.....',
+'........kkkkkkkkkk..kGGqGGGGMMwwwk....',
+'......kkGGqGGqGGqGk.kGGGGGGGGGwqwk....',
+'.....kGqGGqGGqGGqMGkwwwwwwwwkkkkwwkk..',
+'....kGGqGGGMGGGGGGGqwwwwwwwwwwwwwwppk.',
+'...kqGGMGGGGGGGGGGGqGwwwwwwwwwwwwwwqk.',
+'...kqGGGwGGGGGMwwwGGMwwwwwwwwwwwwwkk..',
+'..kGGGwwwMGGGGGwwwwGGwwwwwwwwwwwwk..M.',
+'..kGGwwwwGGGGGGwwwwwGwwwwwwwwwwwk.....',
+'.kwGwwwwwwwwwwwwwwwwwwkkwwwkwwwk...M..',
+'.kqqqqqqqwwwwwwwwwwwwwkkkwwkwkk.......',
+'.kqqqqqqqwwwwwwwwwwwwwkkkkkkk.........',
+'..kkkkkkkkkkkkkkkkkkkk.k...k..........',
+'......................................'],
+CAT3_B: [
+'.......................k.....k........',
+'......................kkk...kkk.......',
+'.....................kkpkk..kkk.......',
+'.....................kkGGkkkkpkk......',
+'.....................kGGGGGMMMMk......',
+'......................kGqGMMMGwk......',
+'........kkkkkkkkkk...kqGGGMMMMwwk.....',
+'......kkGGqGGqGGqGk.kGGqGGGGMMwwwk....',
+'.....kGqGGqGGqGGqGGkkGGGGGGGGGwqwk....',
+'.....kGqGGGGGGGGGMGkwwwwwwwwkkkkwwkk..',
+'....kGGGGGGMGGGGGGGqwwwwwwwwwwwwwwppk.',
+'...kqGGMwwwwwwwwwwGqGwwwwwwwwwwwwwwqk.',
+'...kqGwwwGGGGGMwwwwGMwwwwwwwwwwwwwkk..',
+'..kGGGwwwMGGGGGwwwwGGwwwwwwwwwwwwk..M.',
+'..kGGwwwwGGGGGGwwwwwGwwwwwwwwwwwk.....',
+'.kwGwwwwwwwwwwwwwwwwwwkkwwwkwwwk...M..',
+'.kqqqqqqqwwwwwwwwwwwwwkkkwwkwkk.......',
+'.kqqqqqqqwwwwwwwwwwwwwkkkkkkk.........',
+'..kkkkkkkkkkkkkkkkkkkk.k...k..........',
+'......................................'],
+
+/* El casco que se le resbalo a la dormida, recargado en el lomo. */
+HAT: [
+'..kkkkkk...',
+'.kyyyyyyk..',
+'kyyYYYYyyk.',
+'kYYYYYYYYk.',
+'kkkkkkkkkk.'],
+
+/* Cola del naranja: cinco posiciones del vaiven, de un lado al otro
+   del barril. Se dibuja antes del barril, o sea por detras. */
+SWAY0: [
+'................kkOiOkk...............',
+'...............kOoioooOk..............',
+'................kOiooOk...............',
+'.............kkkOioooOk...............',
+'............kOooioooooOk..............',
+'.............kOoiooooOk...............',
+'...........kkOoiooooOk................',
+'..........kOooiooooooOk...............',
+'..........kOooiooooOkk................',
+'........kkOooioooooOk.................',
+'.......kOooioooooooOk.................',
+'.......kOooioooooOkk..................',
+'.....kkOooioooooOk....................',
+'....kOooioooooooOk....................',
+'....kOooiooooOkkk.....................',
+'..kkOooiooooOk........................',
+'.kOooioooooOk.........................',
+'..kOioooOkkk..........................',
+'kkOiooOkk.............................',
+'oiooooOk..............................',
+'OiOkkkk...............................',
+'oOk...................................',
+'kk....................................'],
+SWAY1: [
+'................kkOiOkk...............',
+'...............kOoioooOk..............',
+'................kOiooOk...............',
+'..............kkOoiooOkk..............',
+'.............kOooioooooOk.............',
+'.............kOooioooOkk..............',
+'...........kkkOoiooooOk...............',
+'..........kOoooiooooooOk..............',
+'...........kOooioooooOk...............',
+'.........kkOooioooooOk................',
+'........kOoooioooooooOk...............',
+'.........kOooioooooOkk................',
+'.......kkOooioooooOk..................',
+'......kOoooiooooooOk..................',
+'.......kOooiooooOkk...................',
+'......kkOoiooooOk.....................',
+'.....kOooioooooOk.....................',
+'......kOoiooOkkk......................',
+'....kkOoiooOk.........................',
+'...kOoiooooOk.........................',
+'....kOioOkkk..........................',
+'...kOiOkk.............................',
+'....kkk...............................'],
+SWAY2: [
+'................kkOiOkk...............',
+'...............kOoioooOk..............',
+'................kOiooOk...............',
+'...............kOoioooOk..............',
+'..............kOoioooooOk.............',
+'...............kOoioooOk..............',
+'..............kOooiooooOk.............',
+'.............kOooiooooooOk............',
+'..............kOooiooooOk.............',
+'.............kkOoioooooOkk............',
+'............kOoooioooooooOk...........',
+'.............kkOoioooooOkk............',
+'..............kOooiooooOk.............',
+'.............kOooiooooooOk............',
+'..............kOooiooooOk.............',
+'..............kOooiooooOk.............',
+'.............kOooiooooooOk............',
+'..............kkOoioooOkk.............',
+'................kOiooOk...............',
+'...............kOoioooOk..............',
+'................kkOiOkk...............',
+'.................kOiOk................',
+'..................kkk.................'],
+SWAY3: [
+'................kkOiOkk...............',
+'...............kOoioooOk..............',
+'................kOoioOk...............',
+'...............kkOoiooOkk.............',
+'..............kOooioooooOk............',
+'...............kkOoiooooOk............',
+'................kOoiooooOkkk..........',
+'...............kOooioooooooOk.........',
+'................kOooioooooOk..........',
+'.................kOooioooooOkk........',
+'................kOoooioooooooOk.......',
+'.................kkOooioooooOk........',
+'...................kOooioooooOkk......',
+'...................kOooioooooooOk.....',
+'....................kkOoioooooOk......',
+'......................kOoiooooOkk.....',
+'......................kOooioooooOk....',
+'.......................kkkOoiooOk.....',
+'..........................kOoiooOkk...',
+'..........................kOoiooooOk..',
+'...........................kkkOioOk...',
+'..............................kkioOk..',
+'................................kkk...'],
+SWAY4: [
+'................kkOiOkk...............',
+'...............kOoioooOk..............',
+'................kOoioOk...............',
+'................kOoiooOkkk............',
+'...............kOooioooooOk...........',
+'................kOooioooOk............',
+'.................kOoiooooOkk..........',
+'................kOooiooooooOk.........',
+'.................kkOoioooooOk.........',
+'..................kOooioooooOkk.......',
+'..................kOoooiooooooOk......',
+'...................kkOooioooooOk......',
+'.....................kOooioooooOkk....',
+'.....................kOoooiooooooOk...',
+'......................kkkOoioooooOk...',
+'.........................kOooiooooOkk.',
+'..........................kOooioooooOk',
+'...........................kkkOoiooOk.',
+'..............................kkOiooOk',
+'...............................kOoiooo',
+'................................kkkkOi',
+'....................................kO',
+'.....................................k'],
+
+/* Props */
+BARREL: [
+'..kkkkkkkkkkkkkk..',
+'.kmrrrrrrrrrrrrmk.',
+'.kmrrrrrrrrrrrrmk.',
+'kmMMMMMMMMMMMMMMmk',
+'kmrrrrrrrrrrrrrrmk',
+'kmrrryyyyyyyyrrrmk',
+'kmrrryMMMMMMyrrrmk',
+'kmrrryyyyyyyyrrrmk',
+'kmrrrrrrrrrrrrrrmk',
+'kmMMMMMMMMMMMMMMmk',
+'kmrrrrrrrrrrrrrrmk',
+'kmrrrrrrrrrrrrrrmk',
+'kmrrrrrrrrrrrrrrmk',
+'kmMMMMMMMMMMMMMMmk',
+'.kmrrrrrrrrrrrrmk.',
+'.kmrrrrrrrrrrrrmk.',
+'..kkkkkkkkkkkkkk..'],
+
+HOOK: [
+'.kkkkkk.',
+'knNNNNnk',
+'knNNNNnk',
+'.kkkkkk.',
+'...kk...',
+'..knnk..',
+'..knnk..',
+'..knnk..',
+'.kknnk..',
+'.knnk...',
+'.knk....',
+'.kk.....'],
+
+CONE: [
+'...kk...',
+'..kyyk..',
+'..kyyk..',
+'.kVVVVk.',
+'.kyyyyk.',
+'kyyyyyyk',
+'kVVVVVVk',
+'kkkkkkkk'],
+
+BOX: [
+'kkkkkkkkkkkkkkkkkkkk',
+'kSSSSSSSSSSSSSSSSSSk',
+'kssssssssssssssssssk',
+'ksssssskkkkkkssssssk',
+'ksssssskMMMMkssssssk',
+'ksssssskMMMMkssssssk',
+'ksssssskMMMMkssssssk',
+'ksssssskkkkkkssssssk',
+'kssssssssssssssssssk',
+'kSSSSSSSSSSSSSSSSSSk',
+'kssssssssssssssssssk',
+'kssssssssssssssssssk',
+'kSSSSSSSSSSSSSSSSSSk',
+'kkkkkkkkkkkkkkkkkkkk']
+};
+
+/* ------------------------------------------------- 3. TIPOGRAFIA 5x7
+   Para el titulo y los carteles dentro del dibujo. */
+var FONT = {
+ 'A':'01110 10001 10001 11111 10001 10001 10001',
+ 'B':'11110 10001 10001 11110 10001 10001 11110',
+ 'C':'01110 10001 10000 10000 10000 10001 01110',
+ 'D':'11110 10001 10001 10001 10001 10001 11110',
+ 'E':'11111 10000 10000 11110 10000 10000 11111',
+ 'F':'11111 10000 10000 11110 10000 10000 10000',
+ 'G':'01110 10001 10000 10111 10001 10001 01110',
+ 'H':'10001 10001 10001 11111 10001 10001 10001',
+ 'I':'11111 00100 00100 00100 00100 00100 11111',
+ 'J':'00111 00010 00010 00010 00010 10010 01100',
+ 'K':'10001 10010 10100 11000 10100 10010 10001',
+ 'L':'10000 10000 10000 10000 10000 10000 11111',
+ 'M':'10001 11011 10101 10101 10001 10001 10001',
+ 'N':'10001 11001 10101 10011 10001 10001 10001',
+ 'O':'01110 10001 10001 10001 10001 10001 01110',
+ 'P':'11110 10001 10001 11110 10000 10000 10000',
+ 'Q':'01110 10001 10001 10001 10101 10010 01101',
+ 'R':'11110 10001 10001 11110 10100 10010 10001',
+ 'S':'01111 10000 10000 01110 00001 00001 11110',
+ 'T':'11111 00100 00100 00100 00100 00100 00100',
+ 'U':'10001 10001 10001 10001 10001 10001 01110',
+ 'V':'10001 10001 10001 10001 10001 01010 00100',
+ 'W':'10001 10001 10001 10101 10101 11011 01010',
+ 'X':'10001 10001 01010 00100 01010 10001 10001',
+ 'Y':'10001 10001 01010 00100 00100 00100 00100',
+ 'Z':'11111 00001 00010 00100 01000 10000 11111',
+ '0':'01110 10001 10011 10101 11001 10001 01110',
+ '1':'00100 01100 00100 00100 00100 00100 01110',
+ '2':'01110 10001 00001 00010 00100 01000 11111',
+ '3':'11111 00010 00100 00010 00001 10001 01110',
+ '4':'00010 00110 01010 10010 11111 00010 00010',
+ '5':'11111 10000 11110 00001 00001 10001 01110',
+ '6':'00110 01000 10000 11110 10001 10001 01110',
+ '7':'11111 00001 00010 00100 01000 01000 01000',
+ '8':'01110 10001 10001 01110 10001 10001 01110',
+ '9':'01110 10001 10001 01111 00001 00010 01100',
+ ' ':'00000 00000 00000 00000 00000 00000 00000',
+ '.':'00000 00000 00000 00000 00000 01100 01100',
+ ':':'00000 01100 01100 00000 01100 01100 00000',
+ '!':'00100 00100 00100 00100 00100 00000 00100',
+ '?':'01110 10001 00001 00110 00100 00000 00100',
+ '-':'00000 00000 00000 11111 00000 00000 00000',
+ '%':'11001 11010 00010 00100 01000 01011 10011',
+ '+':'00000 00100 00100 11111 00100 00100 00000'
+};
+
+/* ------------------------------------------------- 4. UTILIDADES */
+
+/* Numeros aleatorios con semilla: el suelo se ve igual cada visita. */
+function rngFrom(seed) {
+  return function () {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+
+function px(c, x, y, col) { c.fillStyle = col; c.fillRect(x | 0, y | 0, 1, 1); }
+function rect(c, x, y, w, h, col) { c.fillStyle = col; c.fillRect(x | 0, y | 0, w | 0, h | 0); }
+
+function line(c, x0, y0, x1, y1, col) {
+  var n = Math.max(Math.abs(x1 - x0), Math.abs(y1 - y0)), i, t;
+  for (i = 0; i <= n; i++) {
+    t = n ? i / n : 0;
+    px(c, Math.round(x0 + (x1 - x0) * t), Math.round(y0 + (y1 - y0) * t), col);
+  }
+}
+
+/* Convierte un sprite de texto en un canvas propio (se hace una vez). */
+function bake(rows, swap) {
+  var h = rows.length, w = rows[0].length;
+  var cn = document.createElement('canvas');
+  cn.width = w; cn.height = h;
+  var c = cn.getContext('2d');
+  for (var y = 0; y < h; y++) {
+    for (var x = 0; x < w; x++) {
+      var ch = rows[y].charAt(x);
+      if (ch === '.') continue;
+      if (swap && swap[ch]) ch = swap[ch];
+      c.fillStyle = PAL[ch] || '#FF00FF';
+      c.fillRect(x, y, 1, 1);
+    }
+  }
+  return cn;
+}
+
+var SPR = {};
+for (var key in ART) { if (ART.hasOwnProperty(key)) SPR[key] = bake(ART[key]); }
+
+function put(name, x, y) {
+  var s = SPR[name];
+  if (s) ctx.drawImage(s, x | 0, y | 0);
+}
+
+/* Texto con la tipografia de 5x7, con sombra opcional. */
+function text(c, s, x, y, col, scale, shadow) {
+  s = String(s).toUpperCase();
+  scale = scale || 1;
+  var cx = x, i, g, cells, gy, gx;
+  for (i = 0; i < s.length; i++) {
+    g = FONT[s.charAt(i)];
+    if (!g) { cx += 6 * scale; continue; }
+    cells = g.split(' ');
+    if (shadow) {
+      for (gy = 0; gy < 7; gy++) for (gx = 0; gx < 5; gx++)
+        if (cells[gy].charAt(gx) === '1')
+          rect(c, cx + gx * scale + scale, y + gy * scale + scale, scale, scale, shadow);
+    }
+    for (gy = 0; gy < 7; gy++) for (gx = 0; gx < 5; gx++)
+      if (cells[gy].charAt(gx) === '1')
+        rect(c, cx + gx * scale, y + gy * scale, scale, scale, col);
+    cx += 6 * scale;
+  }
+  return cx;
+}
+function textWidth(s, scale) { return String(s).length * 6 * (scale || 1) - (scale || 1); }
+
+/* Deja un texto ya pintado en su propio canvas. Repintar letra por
+   letra en cada cuadro seria tirar trabajo a la basura 60 veces por
+   segundo: mejor lo horneamos una vez y luego solo lo copiamos. */
+function bakeText(s, col, scale, shadow) {
+  scale = scale || 1;
+  var cn = document.createElement('canvas');
+  cn.width = textWidth(s, scale) + scale;
+  cn.height = 7 * scale + scale;
+  text(cn.getContext('2d'), s, 0, 0, col, scale, shadow);
+  return cn;
+}
+
+/* ------------------------------------------------- 5. EL FONDO
+   Cielo, montanas, gruas, edificio, suelo y los objetos quietos.
+   Se pinta una sola vez en un canvas aparte. */
+var bgcv = document.createElement('canvas');
+bgcv.width = W; bgcv.height = H;
+var bg = bgcv.getContext('2d');
+
+function mast(c, x, y, h, w, col, light) {
+  rect(c, x, y, 1, h, col);
+  rect(c, x + w - 1, y, 1, h, col);
+  var inner = w - 2, j, k;
+  for (j = 0; j < h; j++) {
+    if (j % 6 === 0) { rect(c, x, y + j, w, 1, col); }
+    else {
+      k = (j % 6) - 1;
+      px(c, x + 1 + (k % inner), y + j, light);
+      px(c, x + w - 2 - (k % inner), y + j, light);
+    }
+  }
+}
+
+function truss(c, x, y, w, h, col, light) {
+  rect(c, x, y, w, 1, col);
+  rect(c, x, y + h - 1, w, 1, col);
+  var span = 2 * (h - 2), i, k, d;
+  for (i = 0; i < w; i++) {
+    k = i % span;
+    d = k < h - 2 ? k : span - k;
+    px(c, x + i, y + 1 + d, light);
+  }
+  for (i = 0; i < w; i += 8) rect(c, x + i, y, 1, h, col);
+}
+
+function ridge(c, pts, col, topCol) {
+  for (var i = 0; i < pts.length - 1; i++) {
+    var x0 = pts[i][0], y0 = pts[i][1], x1 = pts[i + 1][0], y1 = pts[i + 1][1];
+    for (var x = x0; x < x1; x++) {
+      var y = Math.round(y0 + (y1 - y0) * (x - x0) / (x1 - x0));
+      px(c, x, y, topCol);
+      rect(c, x, y + 1, 1, GROUND - y - 1, col);
+    }
+  }
+}
+
+function buildBackground() {
+  var rnd = rngFrom(20260917);
+  var i, x, y, w;
+
+  /* cielo en bandas, de turquesa a amarillo */
+  var SKY = [[0,16,'#1C6B78'],[16,30,'#25818C'],[30,42,'#33999B'],
+             [42,54,'#49B0A6'],[54,64,'#68C6AE'],[64,74,'#93D9B6'],
+             [74,82,'#C2E7AC'],[82,89,'#E4DE9B'],[89,96,'#F2CE84']];
+  for (i = 0; i < SKY.length; i++)
+    rect(bg, 0, SKY[i][0], W, SKY[i][1] - SKY[i][0], SKY[i][2]);
+
+  /* rayas horizontales tipo monitor viejo */
+  bg.fillStyle = 'rgba(255,255,255,0.07)';
+  for (y = 0; y < GROUND; y += 4) bg.fillRect(0, y, W, 1);
+
+  /* sol: se dibuja por renglones para que quede pixeleado */
+  var SX = 152, SY = 66, SR = 15;
+  for (y = -SR; y <= SR; y++) {
+    w = Math.floor(Math.sqrt(SR * SR - y * y));
+    rect(bg, SX - w, SY + y, 2 * w + 1, 1, '#FBEBA6');
+  }
+
+  function cloud(cx, cy) {
+    rect(bg, cx + 2, cy, 6, 1, '#F7F3E2');
+    rect(bg, cx, cy + 1, 12, 1, '#F7F3E2');
+    rect(bg, cx + 1, cy + 2, 9, 1, '#E9E3CE');
+  }
+  cloud(18, 34); cloud(206, 30); cloud(96, 40);
+
+  /* dos cordilleras */
+  ridge(bg, [[0,84],[18,72],[34,79],[52,64],[70,77],[88,69],[110,83],
+             [130,71],[150,79],[172,62],[196,75],[216,69],[238,81],[256,75]],
+        '#6B4A8C', '#8A66A8');
+  ridge(bg, [[0,93],[24,85],[46,91],[66,83],[92,93],[120,87],[148,95],
+             [176,85],[204,91],[230,83],[256,91]],
+        '#4A3063', '#5E3F7C');
+
+  /* grua de la izquierda */
+  mast(bg, 32, 42, GROUND - 42, 5, '#7A4553', '#9A5C6C');
+  truss(bg, 6, 40, 60, 5, '#7A4553', '#9A5C6C');
+  rect(bg, 58, 45, 1, 8, '#6B3A48');
+  rect(bg, 56, 53, 5, 3, '#6B3A48');
+
+  /* grua de la derecha */
+  mast(bg, 240, 58, GROUND - 58, 5, '#8A5060', '#A66374');
+  truss(bg, 214, 56, 40, 5, '#8A5060', '#A66374');
+
+  /* edificio a medio construir */
+  var BLD = '#3B2C40', BLDL = '#4E3A54';
+  var cols = [122,138,154,170,186], floors = [58,70,82,94];
+  for (i = 0; i < cols.length; i++) rect(bg, cols[i], 58, 2, GROUND - 58, BLD);
+  for (i = 0; i < floors.length; i++) rect(bg, 120, floors[i], 68, 2, BLD);
+  rect(bg, 124, 60, 12, 9, BLDL);
+  rect(bg, 156, 72, 12, 9, BLDL);
+  rect(bg, 172, 84, 12, 9, BLDL);
+  rect(bg, 140, 84, 12, 9, BLDL);
+  for (i = 0; i < 10; i++) {
+    px(bg, 140 + i, 60 + i, '#5E486A');
+    px(bg, 186 - i, 72 + i, '#5E486A');
+  }
+
+  /* grua principal: la que sostiene el gancho */
+  var MAIN = '#33202B', MAINL = '#57343F';
+  mast(bg, 196, 50, GROUND - 50, 9, MAIN, MAINL);
+  truss(bg, 52, 48, 166, 6, MAIN, MAINL);
+  rect(bg, 218, 44, 16, 10, MAIN);          /* contrapeso */
+  rect(bg, 192, 36, 14, 12, MAIN);          /* cabina */
+  rect(bg, 195, 39, 7, 6, '#7FC8D8');       /* vidrio */
+  rect(bg, 200, 32, 1, 5, MAIN);           /* torreta */
+  line(bg, 199, 33, 140, 48, MAIN);         /* tirantes */
+  line(bg, 201, 33, 231, 44, MAIN);
+  rect(bg, TROLLEY - 5, 46, 11, 3, MAIN);   /* carro */
+
+  /* suelo */
+  rect(bg, 0, GROUND, W, H - GROUND, '#7A5C43');
+  rect(bg, 0, GROUND, W, 2, '#8E6C4E');
+  var mound = [[0,114],[40,111],[80,115],[130,112],[180,116],[220,112],[256,115]];
+  for (i = 0; i < mound.length - 1; i++) {
+    var mx0 = mound[i][0], my0 = mound[i][1], mx1 = mound[i+1][0], my1 = mound[i+1][1];
+    for (x = mx0; x < mx1; x++) {
+      y = Math.round(my0 + (my1 - my0) * (x - mx0) / (mx1 - mx0));
+      px(bg, x, y, '#8E6C4E');
+      rect(bg, x, y + 1, 1, H - y - 1, '#67492F');
+    }
+  }
+  for (i = 0; i < 240; i++) {
+    x = Math.floor(rnd() * W);
+    y = GROUND + 3 + Math.floor(rnd() * (H - GROUND - 12));
+    px(bg, x, y, (x + y) % 3 ? '#8E6C4E' : '#55391F');
+  }
+  for (i = 0; i < 30; i++) {
+    x = Math.floor(rnd() * W);
+    y = GROUND + 8 + Math.floor(rnd() * (H - GROUND - 20));
+    rect(bg, x, y, 2, 1, '#9A7A58');
+  }
+
+  /* monton de grava */
+  for (i = 0; i < 9; i++)
+    rect(bg, 232 - (2 + i * 2), 124 + i, 4 + i * 4, 1, i % 2 ? '#A8854F' : '#8E6C4E');
+
+  /* pila de tablones donde duerme el gato 3 */
+  rect(bg, 5, BASE - 9, 42, 1, '#0B0B0B');
+  rect(bg, 6, BASE - 8, 40, 8, '#8A6A45');
+  rect(bg, 6, BASE - 6, 40, 1, '#5C4229');
+  rect(bg, 6, BASE - 3, 40, 1, '#A8854F');
+  rect(bg, 6, BASE - 2, 40, 1, '#5C4229');
+  rect(bg, 5, BASE, 42, 1, '#0B0B0B');
+
+  /* ladrillos */
+  for (i = 0; i < 3; i++) {
+    rect(bg, 58 + i * 9, BASE - 4, 8, 4, '#B5533F');
+    rect(bg, 58 + i * 9, BASE - 4, 8, 1, '#C96B50');
+  }
+  rect(bg, 62, BASE - 8, 8, 4, '#B5533F');
+  rect(bg, 62, BASE - 8, 8, 1, '#C96B50');
+
+  /* conos, caja y barril */
+  bg.drawImage(SPR.CONE, 70, BASE - 8);
+  bg.drawImage(SPR.CONE, 172, BASE - 8);
+  bg.drawImage(SPR.BOX, 146, BASE - 14);
+  /* El barril ya no va aqui: se pinta en cada cuadro para que la
+     cola del naranja pueda pasar por detras de el. */
+}
+buildBackground();
+
+/* ------------------------------------------------- 6. SONIDO
+   Mismo truco que en el resto del sitio: nada de archivos,
+   solo osciladores. Arranca apagado porque el navegador exige
+   un clic antes de dejar sonar algo. */
+var soundOn = false;
+var actx = null, master = null;
+/* Si el audio del navegador se porta mal, se apaga solo y el dibujo
+   sigue caminando. Antes una falla de sonido congelaba la animacion. */
+var soundBroken = false;
+var soundTries = 0;
+var lastSfx = 0;
+
+function soundFailed(e) {
+  soundBroken = true;
+  soundOn = false;
+  try {
+    var b = document.getElementById('soundToggle');
+    b.textContent = 'SOUND: OFF';
+    b.setAttribute('aria-pressed', 'false');
+  } catch (e2) {}
+  try { say('sound quit on me, the cats are fine'); } catch (e2) {}
+  if (window.console && console.warn) console.warn('lqcorner audio:', e);
+}
+
+/* Envuelve un efecto: nunca deja que una falla de audio salga de aqui,
+   y le pone freno para que no se apilen mil sonidos de un jalon. */
+function guard(fn) {
+  return function () {
+    if (!soundOn || soundBroken) return;
+    var n = Date.now();
+    if (n - lastSfx < 45) return;
+    lastSfx = n;
+    try { fn.apply(null, arguments); } catch (e) { soundFailed(e); }
+  };
+}
+
+function audio() {
+  if (!actx) {
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    actx = new AC();
+    master = actx.createGain();
+    master.gain.value = 0.22;
+    master.connect(actx.destination);
+  }
+  if (actx.state === 'suspended') actx.resume();
+  return actx;
+}
+
+function tone(type, freq, dur, vol, glideTo, filterHz) {
+  if (!soundOn || soundBroken || !audio()) return;
+  var t0 = actx.currentTime;
+  var osc = actx.createOscillator();
+  var g = actx.createGain();
+  osc.type = type;
+  osc.frequency.setValueAtTime(freq, t0);
+  if (glideTo) osc.frequency.exponentialRampToValueAtTime(glideTo, t0 + dur);
+  g.gain.setValueAtTime(0.0001, t0);
+  g.gain.exponentialRampToValueAtTime(vol, t0 + 0.01);
+  g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+  var last = g;
+  if (filterHz) {
+    var f = actx.createBiquadFilter();
+    f.type = 'lowpass';
+    f.frequency.value = filterHz;
+    g.connect(f); last = f;
+  }
+  osc.connect(g); last.connect(master);
+  osc.start(t0); osc.stop(t0 + dur + 0.02);
+}
+
+function noise(dur, vol, hz, q) {
+  if (!soundOn || soundBroken || !audio()) return;
+  var t0 = actx.currentTime;
+  var n = Math.floor(actx.sampleRate * dur);
+  var buf = actx.createBuffer(1, n, actx.sampleRate);
+  var d = buf.getChannelData(0);
+  for (var i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n);
+  var src = actx.createBufferSource();
+  src.buffer = buf;
+  var f = actx.createBiquadFilter();
+  /* Q es un AudioParam: se le escribe .value, no el numero pelado.
+     Asignarle directo truena en Firefox y en Safari. */
+  f.type = 'bandpass';
+  f.frequency.value = hz;
+  f.Q.value = q || 1;
+  var g = actx.createGain();
+  g.gain.setValueAtTime(vol, t0);
+  g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+  src.connect(f); f.connect(g); g.connect(master);
+  src.start(t0);
+}
+
+/* martillazo: golpe seco mas resonancia metalica */
+var sfxHammer = guard(function () {
+  noise(0.06, 0.5, 2600, 1.2);
+  tone('square', 320, 0.09, 0.08, 150);
+});
+/* taladro */
+var sfxDrill = guard(function () {
+  tone('sawtooth', 95, 0.55, 0.05, 78, 900);
+  noise(0.5, 0.06, 1400, 0.8);
+});
+/* la alarma de reversa del camion */
+var sfxBeeps = guard(function () {
+  for (var i = 0; i < 3; i++)
+    setTimeout(function () {
+      try { tone('square', 1000, 0.1, 0.05); } catch (e) { soundFailed(e); }
+    }, i * 230);
+});
+/* maullido: dos deslizamientos de tono, uno distinto para cada gato */
+var sfxMeow = guard(function (base) {
+  tone('triangle', base * 0.75, 0.13, 0.13, base * 1.15);
+  setTimeout(function () {
+    try {
+      tone('sawtooth', base * 1.1, 0.26, 0.07, base * 0.62, 2200);
+    } catch (e) { soundFailed(e); }
+  }, 110);
+});
+/* el gancho al recibir un zarpazo */
+var sfxClang = guard(function () {
+  tone('square', 1500, 0.22, 0.05, 700);
+  tone('triangle', 900, 0.3, 0.05, 420);
+});
+/* chispa del soldador */
+var sfxSpark = guard(function () { noise(0.12, 0.16, 5200, 0.7); });
+
+/* Ruido de obra cada tanto, solo si el sonido esta prendido. */
+function ambience() {
+  var wait = 2600 + Math.random() * 4200;
+  setTimeout(function () {
+    if (soundOn && !soundBroken) {
+      var r = Math.random();
+      if (r < 0.45) sfxHammer();
+      else if (r < 0.75) sfxDrill();
+      else sfxBeeps();
+    }
+    ambience();
+  }, wait);
+}
+ambience();
+
+var toggle = document.getElementById('soundToggle');
+toggle.addEventListener('click', function () {
+  soundOn = !soundOn;
+  this.textContent = 'SOUND: ' + (soundOn ? 'ON' : 'OFF');
+  this.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
+  /* Si el sonido se habia caido, le damos otra oportunidad: puede haber
+     sido algo de una sola vez. Tras tres intentos ya lo dejamos en paz. */
+  if (soundOn && soundBroken && soundTries < 3) {
+    soundBroken = false;
+    soundTries++;
+  }
+  if (soundOn && soundBroken) {
+    soundOn = false;
+    this.textContent = 'SOUND: OFF';
+    say('sound is not working in this browser, sorry');
+    return;
+  }
+  if (soundOn) {
+    try { audio(); tone('square', 880, 0.07, 0.05); }
+    catch (e) { soundFailed(e); }
+  }
+  try { localStorage.setItem('lqcorner-sound', soundOn ? '1' : '0'); } catch (e) {}
+});
+
+/* ------------------------------------------------- 7. ESTADO ANIMADO */
+var cats = [
+  /* gato 3: la calico, dormida en pose de pan sobre los tablones */
+  { id: 'sleeper', x: 4,   y: BASE - 28, w: 38, h: 20, meow: 520, hop: 0 },
+  /* gato 2: la chiquita del casco grande, manoteando el gancho */
+  { id: 'jumper',  x: 95,  y: 107,       w: 24, h: 31, meow: 700, hop: 0 },
+  /* gato 1: el naranja main coon, sentado en el barril */
+  { id: 'boss',    x: 193, y: 91,        w: 26, h: 38, meow: 610, hop: 0 }
+];
+
+var hook = { x: TROLLEY - 3, y: 104, kick: 0 };
+var sparks = [];
+var puffs = [];
+var meows = 0;
+var boxEyes = 0;
+var blink1 = 0, blink2 = 0;
+var lastSpark = 0, lastHammerDust = 0;
+
+var reduce = window.matchMedia &&
+             window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* Letreros y cinta, horneados de una vez */
+var TITLE = 'UNDER CONSTRUCTION';
+var titleCream = bakeText(TITLE, '#F3EFD0', 2, '#0B0B0B');
+var titleGold = bakeText(TITLE, '#F7C543', 2, '#0B0B0B');
+var titleX = (W - titleCream.width) / 2 | 0;
+
+var SUBS = [
+  'PERSONAL HUB  0 POSTS SO FAR',
+  'CREW: THREE CATS  ONE NAPPING',
+  'ETA: WHEN THE THESIS LETS GO',
+  'CLICK A CAT'
+];
+var subCv = [], subX = [];
+(function () {
+  for (var i = 0; i < SUBS.length; i++) {
+    subCv[i] = bakeText(SUBS[i], '#0B0B0B', 1);
+    subX[i] = (W - subCv[i].width) / 2 | 0;
+  }
+})();
+
+var zLoud = bakeText('Z', '#F3EFD0', 1, '#0B0B0B');
+var zSoft = bakeText('Z', '#8C8770', 1, '#0B0B0B');
+
+/* La cinta amarilla es un canvas de W+10 que solo se recorre. */
+var tapeCv = document.createElement('canvas');
+tapeCv.width = W + 10; tapeCv.height = 6;
+(function () {
+  var c = tapeCv.getContext('2d');
+  for (var y = 0; y < 6; y++)
+    for (var x = 0; x < W + 10; x++)
+      px(c, x, y, ((x + y) % 10) < 5 ? '#F7C543' : '#151016');
+})();
+
+/* ------------------------------------------------- 8. UN CUADRO */
+function frameAt(t) {
+  var step = Math.floor(t / 130);          /* paso de animacion, ~7.7 fps */
+  var i, p, s;
+
+  ctx.drawImage(bgcv, 0, 0);
+
+  /* --- pajaros cruzando el cielo --- */
+  for (i = 0; i < 2; i++) {
+    var bx = ((t / 70 + i * 90) % (W + 40)) - 20;
+    var by = 20 + i * 9 + Math.sin(t / 900 + i) * 2;
+    var up = (step + i) % 2 === 0;
+    px(ctx, bx, by, '#2B3A44');
+    px(ctx, bx - 1, by + (up ? -1 : 1), '#2B3A44');
+    px(ctx, bx + 1, by + (up ? -1 : 1), '#2B3A44');
+  }
+
+  /* --- el soldador del edificio suelta chispas --- */
+  if (t - lastSpark > 3400 + Math.sin(t / 1000) * 600) {
+    lastSpark = t;
+    sfxSpark();
+    for (i = 0; i < 9; i++)
+      sparks.push({ x: 154, y: 74, vx: (Math.random() - 0.5) * 1.6,
+                    vy: Math.random() * 0.9, life: 300 + Math.random() * 300, t: 0 });
+  }
+  if (t - lastSpark < 130) rect(ctx, 152, 72, 4, 4, '#FFF9D8');
+  for (i = sparks.length - 1; i >= 0; i--) {
+    s = sparks[i];
+    s.t += 16;
+    if (s.t > s.life) { sparks.splice(i, 1); continue; }
+    px(ctx, s.x + s.vx * s.t / 16, s.y + s.vy * s.t / 16 + 0.008 * s.t,
+       s.t < s.life / 2 ? '#FFF3B0' : '#F7C543');
+  }
+
+  /* --- gancho colgando como juguete de gato --- */
+  var swing = Math.sin(t / 820) * 5 + Math.sin(t / 310) * hook.kick;
+  hook.kick *= 0.985;
+  hook.x = TROLLEY - 3 + swing;
+  hook.y = 104 + Math.cos(t / 1100) * 1.5;
+  line(ctx, TROLLEY, 49, hook.x + 3, hook.y + 1, '#241820');
+  put('HOOK', hook.x, hook.y);
+
+  /* --- gato dormido: respira, ronca sus Z y trae el casco encima --- */
+  var sl = cats[0];
+  /* los dos cuadros ya traen el lomo a distinta altura: respira sola */
+  var breathe = (step % 8) < 4 ? 'CAT3_A' : 'CAT3_B';
+  var sly = sl.y - sl.hop;
+  put(breathe, sl.x, sly);
+  put('HAT', sl.x + 9, sly + 5);
+  /* las Z salen de la cabeza, que le queda del lado derecho */
+  for (i = 0; i < 2; i++) {
+    var zt = ((t / 24 + i * 60) % 120);
+    if (zt < 100) {
+      var zy = sly - 5 - zt * 0.22;
+      var zx = sl.x + 34 + zt * 0.05 + Math.sin(zt / 12) * 1.5;
+      ctx.drawImage(zt > 75 ? zSoft : zLoud, zx | 0, zy | 0);
+    }
+  }
+
+  /* --- gato de en medio: se estira y manotea el gancho --- */
+  var jp = cats[1];
+  var reach = Math.sin(t / 820 + 0.35);          /* sincronizado con el gancho */
+  var jh = jp.hop;
+  var swipe = Math.round((reach + 1) * 3);       /* 0 a 6 pixeles de estirada */
+  /* La colita se queda quieta en el piso, pegada a la base. La patita
+     del otro lado va doblada en el cuerpo: se le ven las dos. */
+  put('TAIL2', 86, BASE - 6);
+  put('CAT2', 96, BASE - 14 - jh);
+  /* La cubeta le tapa toda la cabeza: nada de ojos ni trompa. Aun asi
+     se ladea con el columpio del gancho, como si adentro estuviera
+     girando la cabeza para oir donde anda el juguete. */
+  put('BUCKET', 94 + (swing > 1 ? 1 : (swing < -1 ? -1 : 0)),
+      107 - jh + (swipe >= 5 ? -1 : 0));
+  /* Solo una patita se estira, y va encima de la cubeta: manotea a
+     ciegas, que es justo el chiste. */
+  var armY = 120 - swipe - jh;
+  put('ARM_UP', 108, armY);
+  /* si el zarpazo coincide con el gancho, suena y salta una chispita */
+  if (swipe >= 6 && swing < 1.5 && t - lastHammerDust > 900) {
+    lastHammerDust = t;
+    sfxClang();
+    hook.kick = Math.min(hook.kick + 1.8, 5);
+    for (i = 0; i < 3; i++)
+      puffs.push({ x: 116, y: armY, vx: (Math.random() - .5), vy: -.3, t: 0, life: 400 });
+  }
+
+  /* --- gato del barril: cola de vaiven y ojo vigilante --- */
+  var bs = cats[2];
+  var by2 = bs.y - bs.hop;
+  /* La cola va de un lado al otro del barril. El seno hace que se
+     detenga en los extremos y cruce rapido por detras del barril. */
+  var sway = Math.round(2 + 2 * Math.sin(t / 1150));
+  put('SWAY' + sway, 187, by2 + 24);
+  put('BARREL', 198, BASE - 17);
+  put('CAT1', bs.x, by2);
+  if (blink1 > 0) {
+    blink1 -= 16;
+    rect(ctx, 200, by2 + 14, 2, 2, PAL.o);
+    rect(ctx, 210, by2 + 14, 2, 2, PAL.o);
+    rect(ctx, 200, by2 + 15, 2, 1, PAL.k);
+    rect(ctx, 210, by2 + 15, 2, 1, PAL.k);
+  } else if (Math.random() < 0.005) blink1 = 140;
+
+  /* --- ojitos en la caja de carton, de vez en cuando --- */
+  if (boxEyes <= 0 && Math.random() < 0.0013) boxEyes = 1800;
+  if (boxEyes > 0) {
+    boxEyes -= 16;
+    if (boxEyes > 200 || (Math.floor(boxEyes / 100) % 2 === 0)) {
+      rect(ctx, 154, BASE - 10, 2, 2, '#8FC46A');
+      rect(ctx, 158, BASE - 10, 2, 2, '#8FC46A');
+    }
+  }
+
+  /* --- polvito --- */
+  for (i = puffs.length - 1; i >= 0; i--) {
+    p = puffs[i];
+    p.t += 16;
+    if (p.t > p.life) { puffs.splice(i, 1); continue; }
+    px(ctx, p.x + p.vx * p.t / 16, p.y + p.vy * p.t / 16, '#C7B49E');
+  }
+
+  /* --- brinquitos al hacerles clic --- */
+  for (i = 0; i < cats.length; i++) if (cats[i].hop > 0) cats[i].hop -= 0.5;
+
+  /* --- cinta de obra corriendo abajo --- */
+  ctx.drawImage(tapeCv, -(Math.floor(t / 60) % 10), H - 6);
+  rect(ctx, 0, H - 7, W, 1, '#0B0B0B');
+  rect(ctx, 0, H - 1, W, 1, '#0B0B0B');
+
+  /* --- titulo, con un parpadeo lento --- */
+  ctx.drawImage((Math.floor(t / 620) % 6) !== 0 ? titleCream : titleGold, titleX, 6);
+  var k = Math.floor(t / 4200) % SUBS.length;
+  ctx.drawImage(subCv[k], subX[k], 24);
+}
+
+/* ------------------------------------------------- 9. BUCLE */
+var t0 = 0, tPrev = -999, frameErrors = 0;
+function loop(now) {
+  if (!t0) t0 = now;
+  /* 33 ms entre cuadros: 30 por segundo alcanzan de sobra para
+     pixel art y no calientan el telefono. */
+  if (now - tPrev >= 33) {
+    tPrev = now;
+    /* Cada cuadro va aparte. Si uno truena no se lleva la animacion
+       entre las patas: antes eso dejaba la obra pintada y sin gatos. */
+    try {
+      frameAt(now - t0);
+    } catch (e) {
+      frameErrors++;
+      if (window.console && console.warn) console.warn('lqcorner frame:', e);
+      if (frameErrors === 1) soundFailed(e);
+      if (frameErrors > 40) return;          /* ya fue, dejamos el ultimo */
+    }
+  }
+  requestAnimationFrame(loop);
+}
+if (reduce) {
+  try { frameAt(1500); } catch (e) {}
+} else {
+  requestAnimationFrame(loop);
+}
+
+/* Cualquier otro tropiezo (un clic, un temporizador) apaga el sonido y
+   deja el aviso en la pantallita, en lugar de dejar la pagina muerta. */
+window.onerror = function (msg) {
+  if (!soundBroken) soundFailed(msg);
+  return false;
+};
+
+/* ------------------------------------------------- 10. CLICS
+   Convertimos la posicion del mouse al sistema de 256x144. */
+function hit(ev) {
+  var r = cv.getBoundingClientRect();
+  var pt = ev.touches ? ev.touches[0] : ev;
+  var lx = (pt.clientX - r.left) * W / r.width;
+  var ly = (pt.clientY - r.top) * H / r.height;
+  var i, c;
+
+  for (i = 0; i < cats.length; i++) {
+    c = cats[i];
+    if (lx >= c.x && lx <= c.x + c.w && ly >= c.y && ly <= c.y + c.h) {
+      try { audio(); sfxMeow(c.meow); } catch (e) { soundFailed(e); }
+      c.hop = 4;
+      meows++;
+      document.getElementById('meowcount').textContent = 'meows: ' + meows;
+      if (meows === 10) say('ten meows. they are not going to work faster.');
+      for (var j = 0; j < 4; j++)
+        puffs.push({ x: c.x + c.w / 2 + (Math.random() - .5) * 8, y: c.y + c.h - 1,
+                     vx: (Math.random() - .5) * .8, vy: -.25, t: 0, life: 500 });
+      return;
+    }
+  }
+  if (lx >= hook.x - 2 && lx <= hook.x + 10 && ly >= hook.y - 2 && ly <= hook.y + 14) {
+    try { audio(); sfxClang(); } catch (e) { soundFailed(e); }
+    hook.kick = 5;
+    return;
+  }
+  try { audio(); tone('square', 240, 0.05, 0.03); } catch (e) { soundFailed(e); }
+}
+cv.addEventListener('click', hit);
+cv.addEventListener('touchstart', function (e) { e.preventDefault(); hit(e); }, { passive: false });
+
+/* ------------------------------------------------- 11. HUD
+   Barra de avance que sube, se atora y se reinicia. */
+var fill = document.getElementById('barfill');
+var wrap = document.getElementById('barwrap');
+var readout = document.getElementById('readout');
+var LINES = [
+  ['> laying cables_', 3],
+  ['> cat found the cables_', 11],
+  ['> re-laying cables_', 7],
+  ['> pouring the blog section_', 24],
+  ['> cat asleep on the blog section_', 31],
+  ['> hauling photos up with the crane_', 48],
+  ['> crane hook reclassified as a toy_', 44],
+  ['> writing about the cats instead_', 66],
+  ['> coffee break (mine)_', 71],
+  ['> nap (theirs)_', 71],
+  ['> almost_', 92],
+  ['> starting over, honestly_', 4]
+];
+var li = 0;
+
+function say(msg) {
+  readout.innerHTML = '&gt; ' + msg + '_';
+}
+
+function tick() {
+  var row = LINES[li % LINES.length];
+  readout.innerHTML = row[0].replace('>', '&gt;');
+  fill.style.width = row[1] + '%';
+  wrap.setAttribute('aria-valuenow', row[1]);
+  li++;
+  setTimeout(tick, 3600);
+}
+tick();
+
+/* Si en otra pagina ya habias prendido el sonido, aqui te lo
+   recordamos con el aviso, pero no suena hasta que hagas clic:
+   los navegadores no dejan audio sin un gesto tuyo.
+   Si en index.html usas otra llave de localStorage, cambiala aqui. */
+try {
+  if (localStorage.getItem('lqcorner-sound') === '1')
+    say('sound is off until you click the button');
+} catch (e) {}
+
+})();
+</script>
+
+</body>
+</html>

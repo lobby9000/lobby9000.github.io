@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to My Universe</title>
+
+  <link rel="icon" href="favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&amp;display=swap" rel="stylesheet">
+
+  <style>
+    /* =====================================================
+       PALETA Y VARIABLES
+       ===================================================== */
+    :root {
+      --phosphor: #00FF41;   /* verde fosforo, el color base */
+      --phosphor-dim: #00A82D;
+      --amber: #FFB000;      /* ambar de monitor viejo: el acento de hover */
+      --ink: #000000;
+    }
+
+    html { cursor: url('cursor-arrow.png') 0 0, default; }
+
+    a, button { cursor: url('cursor-hand.png') 10 0, pointer; }
+
+    a:active, button:active { cursor: url('cursor-hand-click.png') 10 4, pointer; }
+
+    /* Reloj de arena mientras sale de esta pagina */
+    body.busy, body.busy * {
+      cursor: url('cursor-wait.png') 14 14, progress !important;
+    }
+
+    /* =====================================================
+       FONDO Y LAYOUT
+       ===================================================== */
+    body {
+      background-color: var(--ink);
+      background-image: url('hubble.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+
+      color: var(--phosphor);
+      font-family: "Courier New", Courier, monospace;
+
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 30px 16px;
+      box-sizing: border-box;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Capa oscura sobre la foto: sin esto el texto verde
+       se pierde entre las estrellas brillantes */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.85) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Lineas horizontales de monitor CRT */
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 0px,
+        rgba(0,0,0,0) 2px,
+        rgba(0,0,0,0.25) 3px,
+        rgba(0,0,0,0.25) 4px
+      );
+      opacity: 0.5;
+      animation: flicker 6s infinite steps(1);
+    }
+
+    @keyframes flicker {
+      0%, 96%, 100% { opacity: 0.5; }
+      97% { opacity: 0.38; }
+      98% { opacity: 0.55; }
+    }
+
+    .terminal {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    /* =====================================================
+       SECUENCIA DE ARRANQUE (el texto que se teclea solo)
+       ===================================================== */
+    .boot {
+      font-family: 'VT323', "Courier New", monospace;
+      font-size: 17px;
+      color: var(--phosphor-dim);
+      text-align: left;
+      min-height: 4.5em;
+      margin: 0 auto 30px auto;
+      max-width: 420px;
+      line-height: 1.5;
+      text-shadow: 0 0 6px rgba(0,255,65,0.4);
+    }
+
+    h1 {
+      font-family: 'VT323', "Courier New", monospace;
+      font-size: clamp(2rem, 6.5vw, 3.8rem);
+      letter-spacing: 2px;
+      margin: 0 0 45px 0;
+      text-shadow: 2px 2px 0 #000, 0 0 18px rgba(0,255,65,0.55);
+    }
+
+    /* El bloque que parpadea al final del titulo */
+    .caret {
+      display: inline-block;
+      animation: blink 1.1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    /* =====================================================
+       LOS TRES PORTALES
+       ===================================================== */
+    .portal-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 45px;
+    }
+
+    .portal {
+      text-decoration: none;
+      color: var(--phosphor);
+      font-size: 18px;
+      font-weight: bold;
+      display: block;
+    }
+
+    /* El marco de la imagen */
+    .portal .frame {
+      width: 150px;
+      height: 150px;
+      border: 3px solid var(--phosphor);
+      margin: 0 auto 15px auto;
+      overflow: hidden;
+      position: relative;
+      transition: border-color 0.15s, box-shadow 0.25s, transform 0.25s;
+      background: rgba(0,0,0,0.5);
+    }
+
+    .portal .frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .portal:hover .frame,
+    .portal:focus-visible .frame {
+      border-color: var(--amber);
+      box-shadow: 0 0 22px rgba(255,176,0,0.55);
+      transform: translateY(-4px);
+    }
+
+    /* Barrido de luz que cruza la imagen al pasar el mouse */
+    .portal .frame::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -60%;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.5s ease;
+    }
+
+    .portal:hover .frame::after { left: 130%; }
+
+    /* =====================================================
+       ANIMACION LETRA POR LETRA
+       Cada letra es un <span> generado por JavaScript.
+       El retraso escalonado hace la "ola".
+       ===================================================== */
+    .label { white-space: pre; }
+
+    .label span {
+      display: inline-block;
+      transition: transform 0.18s ease, color 0.18s ease, text-shadow 0.18s ease;
+      transition-delay: calc(var(--i) * 22ms);
+    }
+
+    .portal:hover .label span,
+    .portal:focus-visible .label span {
+      transform: translateY(-6px);
+      color: var(--amber);
+      text-shadow: 0 0 10px rgba(255,176,0,0.8);
+    }
+
+    .portal:focus-visible { outline: none; }
+
+    /* =====================================================
+       BARRA DE ESTADO
+       ===================================================== */
+    .statusbar {
+      font-family: 'VT323', "Courier New", monospace;
+      margin-top: 45px;
+      font-size: 17px;
+      color: var(--phosphor-dim);
+      min-height: 1.4em;
+      letter-spacing: 1px;
+    }
+
+    /* =====================================================
+       BOTON DE SONIDO
+       ===================================================== */
+    .sound-toggle {
+      font-family: 'VT323', "Courier New", monospace;
+      position: fixed;
+      bottom: 14px;
+      right: 14px;
+      z-index: 10;
+      background: rgba(0,0,0,0.7);
+      border: 1px solid var(--phosphor-dim);
+      color: var(--phosphor-dim);
+      font-family: inherit;
+      font-size: 15px;
+      letter-spacing: 1px;
+      padding: 3px 9px;
+    }
+
+    .sound-toggle:hover { color: var(--amber); border-color: var(--amber); }
+    .sound-toggle[aria-pressed="true"] { color: var(--amber); border-color: var(--amber); }
+
+    /* =====================================================
+       ENCENDIDO DE MONITOR
+       ===================================================== */
+    .crt-boot {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: #000;
+      pointer-events: none;
+      animation: crtOn 0.75s ease-out forwards;
+    }
+
+    .crt-boot::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 3px;
+      background: #FFFFFF;
+      box-shadow: 0 0 24px 6px rgba(255,255,255,0.9);
+      animation: crtLine 0.75s ease-out forwards;
+    }
+
+    @keyframes crtOn {
+      0%   { opacity: 1; }
+      70%  { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+
+    @keyframes crtLine {
+      0%   { transform: scaleX(0.02); opacity: 1; }
+      35%  { transform: scaleX(1);    opacity: 1; }
+      70%  { height: 100vh; top: 0; opacity: 0.25; }
+      100% { height: 100vh; top: 0; opacity: 0; }
+    }
+
+    /* =====================================================
+       MOVIL
+       ===================================================== */
+    @media (max-width: 620px) {
+      .portal-container { gap: 30px; }
+      .portal .frame { width: 120px; height: 120px; }
+      .boot { font-size: 11px; }
+    }
+
+    /* Respeta a quien tiene animaciones desactivadas
+       en su sistema operativo */
+    @media (prefers-reduced-motion: reduce) {
+      .scanlines { animation: none; }
+      .caret { animation: none; }
+      .label span, .portal .frame, .portal .frame::after { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="crt-boot" id="crtBoot" aria-hidden="true"></div>
+  <div class="scanlines"></div>
+
+  <main class="terminal">
+
+    <div class="boot" id="boot"></div>
+
+    <h1><span id="titleText"></span><span class="caret">█</span></h1>
+
+    <nav class="portal-container">
+
+      <a href="fun.html" class="portal" data-status="loading personal_hub.exe">
+        <div class="frame"><img src="smiley.gif" alt="Smiley face"></div>
+        <span class="label">[ Personal Hub ]</span>
+      </a>
+
+      <a href="professional.html" class="portal" data-status="loading professional_log.exe">
+        <div class="frame"><img src="computer.gif" alt="Retro computer"></div>
+        <span class="label">[ Professional Log ]</span>
+      </a>
+
+      <a href="https://github.com/lobby9000" class="portal" target="_blank" rel="noopener" data-status="connecting to github.com">
+        <div class="frame"><img src="cat.gif" alt="Pixel cat"></div>
+        <span class="label">[ Code Archive ]</span>
+      </a>
+
+    </nav>
+
+    <p class="statusbar" id="status">&gt; awaiting input_</p>
+
+  </main>
+
+  <button class="sound-toggle" id="soundToggle" aria-pressed="false">SOUND: OFF</button>
+
+  <script>
+  /* =====================================================
+     1. SONIDO SIN ARCHIVOS
+     ===================================================== */
+  var soundOn = false;
+  var audioCtx = null;
+
+  /* La preferencia se recuerda entre esta pagina y
+     professional.html. Va en try porque algunos navegadores
+     en modo privado bloquean el almacenamiento. */
+  try {
+    soundOn = localStorage.getItem('lq_sound') === 'on';
+  } catch (e) { soundOn = false; }
+
+  function beep(frequency, durationMs, volume) {
+    if (!soundOn) return;
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+
+    osc.type = 'square';                 // onda cuadrada = sonido de consola vieja
+    osc.frequency.value = frequency;
+    gain.gain.value = volume;
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.start();
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + durationMs / 1000);
+    osc.stop(audioCtx.currentTime + durationMs / 1000);
+  }
+
+  var soundBtn = document.getElementById('soundToggle');
+  soundBtn.addEventListener('click', function () {
+    soundOn = !soundOn;
+    this.textContent = 'SOUND: ' + (soundOn ? 'ON' : 'OFF');
+    this.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
+    try { localStorage.setItem('lq_sound', soundOn ? 'on' : 'off'); } catch (e) {}
+    beep(880, 60, 0.05);
+  });
+  soundBtn.textContent = 'SOUND: ' + (soundOn ? 'ON' : 'OFF');
+  soundBtn.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
+
+  /* =====================================================
+     2. LETRAS INDIVIDUALES
+     Parte cada etiqueta en <span> para animarlas una por una.
+     ===================================================== */
+  document.querySelectorAll('.label').forEach(function (label) {
+    var text = label.textContent;
+    label.textContent = '';
+    for (var i = 0; i < text.length; i++) {
+      var span = document.createElement('span');
+      span.textContent = text[i] === ' ' ? '\u00A0' : text[i];
+      span.style.setProperty('--i', i);
+      label.appendChild(span);
+    }
+  });
+
+  /* =====================================================
+     3. BARRA DE ESTADO Y SONIDO AL PASAR EL MOUSE
+     ===================================================== */
+  var statusEl = document.getElementById('status');
+
+  document.querySelectorAll('.portal').forEach(function (portal) {
+    portal.addEventListener('mouseenter', function () {
+      statusEl.textContent = '> ' + portal.dataset.status + '_';
+      beep(1200, 18, 0.03);
+    });
+    portal.addEventListener('mouseleave', function () {
+      statusEl.textContent = '> awaiting input_';
+    });
+    portal.addEventListener('click', function () {
+      beep(660, 90, 0.06);
+      document.body.classList.add('busy');
+      statusEl.textContent = '> loading...';
+    });
+  });
+
+  /* =====================================================
+     4. SECUENCIA DE ARRANQUE
+     Teclea unas lineas de BIOS y luego el titulo.
+     Un clic en cualquier lado la salta.
+     ===================================================== */
+  var bootLines = [
+    'LQ-BIOS v1.9.98 ... OK',
+    'MEMORY TEST ... 640K OK',
+    'MOUNTING /universe ... OK'
+  ];
+  var titleString = 'SELECT YOUR DESTINATION';
+
+  /* Encendido de monitor: corre una vez por pestaña */
+  (function crtBoot() {
+    var overlay = document.getElementById('crtBoot');
+    var seen = false;
+    try { seen = sessionStorage.getItem('lq_booted') === '1'; } catch (e) {}
+    if (seen || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      overlay.parentNode.removeChild(overlay);
+      return;
+    }
+    try { sessionStorage.setItem('lq_booted', '1'); } catch (e) {}
+    setTimeout(function () {
+      if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+    }, 800);
+  })();
+
+  var bootEl = document.getElementById('boot');
+  var titleEl = document.getElementById('titleText');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function finishInstantly() {
+    bootEl.innerHTML = bootLines.join('<br>');
+    titleEl.textContent = titleString;
+  }
+
+  if (reduceMotion) {
+    finishInstantly();
+  } else {
+    var lineIndex = 0;
+    var charIndex = 0;
+    var typingTimer;
+
+    function typeBoot() {
+      if (lineIndex >= bootLines.length) {
+        typeTitle();
+        return;
+      }
+      var line = bootLines[lineIndex];
+      if (charIndex === 0 && lineIndex > 0) bootEl.innerHTML += '<br>';
+      bootEl.innerHTML += line[charIndex];
+      charIndex++;
+      if (charIndex >= line.length) {
+        lineIndex++;
+        charIndex = 0;
+        typingTimer = setTimeout(typeBoot, 160);
+      } else {
+        typingTimer = setTimeout(typeBoot, 14);
+      }
+    }
+
+    function typeTitle() {
+      var i = 0;
+      (function step() {
+        if (i >= titleString.length) return;
+        titleEl.textContent += titleString[i];
+        i++;
+        typingTimer = setTimeout(step, 45);
+      })();
+    }
+
+    document.addEventListener('click', function skip() {
+      clearTimeout(typingTimer);
+      finishInstantly();
+      document.removeEventListener('click', skip);
+    }, { once: false });
+
+    typeBoot();
+  }
+  </script>
+
+</body>
+</html>

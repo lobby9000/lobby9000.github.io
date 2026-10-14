@@ -1,0 +1,2101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Log - Luis.exe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+
+  <style>
+    /* =====================================================
+       CURSORES DE PIXEL ART
+       Los PNG van en la raiz de Neocities, junto al HTML.
+       Los dos numeros despues del archivo son el hotspot:
+       el pixel exacto que hace clic. Si el clic se siente
+       corrido, ahi es donde se ajusta.
+       El ultimo valor de cada linea (default, pointer, text)
+       es el respaldo por si el PNG no carga.
+       ===================================================== */
+    html { cursor: url('cursor-arrow.png') 0 0, default; }
+
+    /* Texto seleccionable. Va antes que los links para que un
+       link dentro de un parrafo siga mostrando la mano. */
+    .content-area p, .content-area li, .content-area h2,
+    .content-area h3, .float-body p, .float-body h3 {
+      cursor: url('cursor-text.png') 12 16, text;
+    }
+
+    /* Todo lo clicable */
+    a, button, .nav-btn, .tab-btn, .desk-icon,
+    .content-area a, .float-body a {
+      cursor: url('cursor-hand.png') 10 0, pointer;
+    }
+
+    /* Mientras se mantiene presionado */
+    a:active, button:active, .nav-btn:active, .tab-btn:active, .desk-icon:active {
+      cursor: url('cursor-hand-click.png') 10 4, pointer;
+    }
+
+    /* Barras de titulo: las ventanas se arrastran */
+    .title-bar, .float-win .title-bar {
+      cursor: url('cursor-move.png') 14 14, move;
+    }
+
+    /* Capturas y tablero: se pueden abrir en grande */
+    .shot, .shot-placeholder {
+      cursor: url('cursor-zoom-in.png') 12 8, zoom-in;
+    }
+
+    .viewer-image {
+      cursor: url('cursor-zoom-out.png') 12 8, zoom-out;
+    }
+
+    /* Lo que todavia no existe */
+    .status.wip {
+      cursor: url('cursor-no.png') 12 12, not-allowed;
+    }
+
+    /* Reloj de arena mientras carga una seccion.
+       El !important es a proposito: durante ese medio segundo
+       gana sobre cualquier otro cursor de la pagina. */
+    body.busy, body.busy * {
+      cursor: url('cursor-wait.png') 14 14, progress !important;
+    }
+
+    /* =====================================================
+       ESCRITORIO ANIMADO
+       El azul XP se queda como base, pero encima corre tu
+       propio codigo en un azul mas claro y muy tenue.
+       El texto sale del bloque <pre id="codeSource"> que
+       esta al final del HTML: cambialo por el snippet que
+       quieras y el fondo cambia solo.
+       ===================================================== */
+    .desktop-code {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0.16;
+    }
+
+    .desktop-code pre {
+      margin: 0;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 12px;
+      line-height: 1.45;
+      color: #BFE0FF;
+      white-space: pre;
+      animation: driftUp 90s linear infinite;
+    }
+
+    @keyframes driftUp {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-50%); }
+    }
+
+    /* Barrido CRT sobre todo el escritorio */
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 0px,
+        rgba(0,0,0,0) 2px,
+        rgba(0,0,0,0.14) 3px,
+        rgba(0,0,0,0.14) 4px
+      );
+    }
+
+    /* Viñeta: oscurece las esquinas para que la ventana resalte */
+    .vignette {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0) 35%, rgba(0,0,0,0.55) 100%);
+    }
+
+    /* --- THE WINDOWS XP THEME --- */
+    body {
+      background-color: #004E98; /* Classic XP Desktop Blue */
+      font-family: Tahoma, "Trebuchet MS", sans-serif; /* XP system fonts */
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px 20px 54px 20px; /* el 54 de abajo deja lugar a la barra de tareas */
+      box-sizing: border-box;
+    }
+
+    /* The main application window */
+    .xp-window {
+      position: relative;
+      z-index: 2;
+      width: 850px;
+      max-width: 100%;
+      height: 600px;
+      max-height: 90vh;
+      background-color: #ECE9D8; /* XP window beige */
+      border: 3px solid #0054E3; /* Classic blue window border */
+      border-radius: 8px 8px 0 0;
+      box-shadow: 5px 5px 25px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      transform-origin: bottom left;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    /* Estado minimizado: la ventana se encoge hacia la barra de tareas */
+    .xp-window.minimized {
+      transform: scale(0.05) translateY(60vh);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .xp-window.maximized {
+      width: 100%;
+      height: 100%;
+      max-height: none;
+    }
+
+    /* The blue title bar at the top */
+    .title-bar {
+      background: linear-gradient(to right, #0058EE 0%, #3593FF 8%, #288EFF 40%, #127DFF 88%, #036CD5 100%);
+      padding: 5px 10px;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 5px 5px 0 0;
+      text-shadow: 1px 1px #0F1089;
+      flex-shrink: 0;
+      align-items: center;
+    }
+
+    /* =====================================================
+       BOTONES DE LA VENTANA (minimizar, maximizar, cerrar)
+       ===================================================== */
+    .win-buttons { display: flex; gap: 3px; }
+
+    .win-btn {
+      width: 21px;
+      height: 20px;
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: 3px;
+      background: linear-gradient(to bottom, #3C8CE7, #1B62CE);
+      color: #fff;
+      font-family: Tahoma, sans-serif;
+      font-size: 11px;
+      font-weight: bold;
+      line-height: 1;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .win-btn:hover { background: linear-gradient(to bottom, #6FB0F5, #2D7AE0); }
+    .win-btn.close { background: linear-gradient(to bottom, #E86A5A, #C63A21); }
+    .win-btn.close:hover { background: linear-gradient(to bottom, #F58A79, #D9502F); }
+
+    /* The main layout containing the sidebar and content */
+    .window-body {
+      display: flex;
+      flex: 1;
+      min-height: 0; /* lets the content area scroll instead of overflowing */
+    }
+
+    /* Left index/navigation (XP Task Pane style) */
+    .sidebar {
+      width: 220px;
+      flex-shrink: 0;
+      background: linear-gradient(to bottom, #7BA2E7, #6385CE);
+      padding: 15px;
+      box-sizing: border-box;
+      border-right: 1px solid #0054E3;
+      overflow-y: auto;
+    }
+
+    /* The clickable index buttons */
+    .nav-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      color: white;
+      font-family: Tahoma, sans-serif;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 10px 5px;
+      cursor: pointer;
+      margin-bottom: 5px;
+      border-radius: 3px;
+    }
+
+    .nav-btn:hover { background-color: rgba(255, 255, 255, 0.2); }
+    .nav-btn:focus-visible { outline: 2px dotted #FFFFFF; outline-offset: -2px; }
+
+    /* Seccion abierta: se marca para no perderse en el indice */
+    .nav-btn.selected {
+      background-color: rgba(255,255,255,0.32);
+      box-shadow: inset 2px 0 0 #FFFFFF;
+    }
+
+    /* =====================================================
+       ICONOS DEL INDICE
+       Archivos de 16x16 en la raiz de Neocities:
+       icon-folder, icon-user, icon-thesis, icon-code,
+       icon-doc, icon-globe, icon-back.
+       ===================================================== */
+    .ico {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      image-rendering: pixelated; /* sin esto el navegador difumina el pixel art */
+      margin-right: 6px;
+      transition: transform 0.2s ease;
+      vertical-align: middle;
+    }
+
+    .nav-btn:hover .ico { transform: scale(1.25) rotate(-8deg); }
+    .nav-btn.selected .ico { animation: nudge 1.6s ease-in-out infinite; }
+
+    @keyframes nudge {
+      0%, 88%, 100% { transform: translateY(0); }
+      92% { transform: translateY(-3px); }
+      96% { transform: translateY(0); }
+    }
+
+    /* The center/right content area */
+    .content-area {
+      flex: 1;
+      background-color: #FFFFFF;
+      margin: 10px;
+      border: 2px inset #E0E0E0;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .content-section { display: none; }
+    .content-section.active { display: block; }
+
+    /* Styling for the content inside */
+    h2 { color: #003399; margin-top: 0; }
+    hr { border: 1px solid #ECE9D8; margin-bottom: 15px; }
+
+    /* ============================================
+       NEW: XP-style tab strip for project categories
+       ============================================ */
+    .tab-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      border-bottom: 2px solid #919B9C;
+      margin-bottom: -2px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .tab-btn {
+      font-family: Tahoma, sans-serif;
+      font-size: 12px;
+      padding: 6px 12px;
+      background: #ECE9D8;
+      border: 2px solid #919B9C;
+      border-bottom: none;
+      border-radius: 4px 4px 0 0;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .tab-btn:hover { background: #F5F3E8; }
+    .tab-btn:focus-visible { outline: 1px dotted #003399; outline-offset: -4px; }
+
+    .tab-btn.active {
+      background: #FFFFFF;
+      font-weight: bold;
+      color: #003399;
+      padding-bottom: 8px; /* makes the active tab "sit on top" of the panel */
+    }
+
+    /* The panel the tabs open into */
+    .tab-panel {
+      display: none;
+      border: 2px solid #919B9C;
+      padding: 15px;
+      background: #FFFFFF;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tab-panel.active { display: block; }
+
+    .panel-intro {
+      font-size: 12px;
+      color: #555;
+      background: #F5F3E8;
+      border-left: 3px solid #7BA2E7;
+      padding: 8px 10px;
+      margin: 0 0 15px 0;
+    }
+
+    /* ============================================
+       Project cards
+       ============================================ */
+    .project-card {
+      border: 1px solid #ccc;
+      padding: 12px;
+      margin-bottom: 15px;
+      background: #f9f9f9;
+    }
+
+    .project-card h3 { margin: 0 0 6px 0; color: #003399; font-size: 15px; }
+    .project-card p { font-size: 13px; line-height: 1.5; }
+
+    /* Small "stack" chips */
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      background: #ECE9D8;
+      border: 1px solid #ACA899;
+      padding: 1px 6px;
+      margin: 0 4px 4px 0;
+      border-radius: 2px;
+    }
+
+    /* Status badge for work in progress */
+    .status {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 1px 6px;
+      border-radius: 2px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .status.wip { background: #FFF4CE; border: 1px solid #D9A400; color: #7A5C00; }
+    .status.live { background: #DFF6DD; border: 1px solid #4C9A4C; color: #1E5C1E; }
+
+    /* Screenshot slot: looks intentional even before you upload the image */
+    .shot {
+      width: 100%;
+      max-width: 420px;
+      border: 2px inset #E0E0E0;
+      display: block;
+      margin: 10px 0;
+      background: #fff;
+    }
+
+    .shot-placeholder {
+      width: 100%;
+      max-width: 420px;
+      height: 160px;
+      border: 2px dashed #ACA899;
+      background: repeating-linear-gradient(45deg, #F5F3E8, #F5F3E8 10px, #ECE9D8 10px, #ECE9D8 20px);
+      color: #777;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin: 10px 0;
+      box-sizing: border-box;
+      padding: 10px;
+    }
+
+    /* Row of screenshots side by side when there's room */
+    .shot-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .shot-row .shot, .shot-row .shot-placeholder { max-width: 260px; }
+
+    /* Repository / demo links */
+    .link-row { margin-top: 8px; font-size: 13px; }
+    .link-row a { color: #003399; }
+    .link-row a + a { margin-left: 12px; }
+
+    /* Live embedded dashboard (iframe) */
+    .dashboard-frame {
+      width: 100%;
+      height: 420px;
+      border: 2px inset #E0E0E0;
+      background: #fff;
+      margin: 10px 0;
+    }
+
+    /* =====================================================
+       BARRA DE ESTADO DE LA VENTANA
+       Igual que la de index.html: va narrando lo que tocas.
+       ===================================================== */
+    .status-bar {
+      flex-shrink: 0;
+      background: #ECE9D8;
+      border-top: 1px solid #ACA899;
+      padding: 4px 10px;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 11px;
+      color: #4A4A3F;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .status-bar .slot {
+      border: 1px inset #D6D3C4;
+      padding: 1px 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .status-bar .slot:first-child { flex: 1; }
+
+    /* Bloque que parpadea al final de los titulos que se tipean */
+    .caret {
+      display: inline-block;
+      width: 8px;
+      background: #003399;
+      color: transparent;
+      animation: blink 1.1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    /* =====================================================
+       BARRA DE TAREAS
+       ===================================================== */
+    .taskbar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 34px;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 6px;
+      background: linear-gradient(to bottom, #3168D5 0%, #2861CE 8%, #1941A5 40%, #1941A5 88%, #2E5FC6 100%);
+      border-top: 1px solid #0A2A7A;
+      font-size: 12px;
+    }
+
+    .start-btn {
+      background: linear-gradient(to bottom, #6DA84A 0%, #4E9A2F 40%, #3C8A22 100%);
+      color: #fff;
+      font-family: Tahoma, sans-serif;
+      font-weight: bold;
+      font-style: italic;
+      font-size: 14px;
+      border: none;
+      border-radius: 0 8px 8px 0;
+      padding: 5px 16px 5px 10px;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    }
+
+    .start-btn:hover { filter: brightness(1.12); }
+
+    .task-btn {
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(0,0,0,0.25);
+      color: #fff;
+      font-family: Tahoma, sans-serif;
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 2px;
+      max-width: 220px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .task-btn:hover { background: rgba(255,255,255,0.28); }
+
+    .task-items { display: flex; gap: 5px; overflow: hidden; flex: 1; }
+
+    .tray {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(to bottom, #1290E4, #0E77C4);
+      border-left: 1px solid #0A5A96;
+      height: 100%;
+      padding: 0 12px;
+      color: #fff;
+      font-family: Tahoma, sans-serif;
+      font-size: 11px;
+    }
+
+    .tray button {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-family: Tahoma, sans-serif;
+      font-size: 11px;
+      padding: 2px 4px;
+    }
+
+    .tray button:hover { text-decoration: underline; }
+    .tray .clock { min-width: 62px; text-align: right; }
+
+    /* =====================================================
+       DIALOGO MODAL (el que sale al intentar cerrar)
+       ===================================================== */
+    .dialog-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      background: rgba(0,0,0,0.35);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dialog-backdrop.open { display: flex; }
+
+    .dialog {
+      width: 340px;
+      max-width: 90%;
+      background: #ECE9D8;
+      border: 3px solid #0054E3;
+      border-radius: 8px 8px 0 0;
+      box-shadow: 4px 4px 14px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+
+    .dialog .title-bar { border-radius: 0; }
+
+    .dialog-body {
+      padding: 18px 16px;
+      font-size: 13px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .dialog-body .glyph { font-size: 26px; line-height: 1; }
+
+    .dialog-footer {
+      padding: 0 16px 16px 16px;
+      text-align: right;
+    }
+
+    .xp-button {
+      font-family: Tahoma, sans-serif;
+      font-size: 12px;
+      padding: 4px 18px;
+      background: linear-gradient(to bottom, #FFFFFF, #ECE9D8);
+      border: 1px solid #7A7A6D;
+      border-radius: 3px;
+    }
+
+    .xp-button:hover { border-color: #F0A030; box-shadow: 0 0 4px rgba(240,160,48,0.7); }
+
+
+    /* =====================================================
+       TIPOGRAFIA DE EPOCA
+       Tres papeles, no tres modas:
+         Press Start 2P -> titulos de ventana (poco texto)
+         Tahoma         -> cuerpo, se lee bien y es XP puro
+         VT323          -> barras de estado, iconos, player
+       ===================================================== */
+    .title-bar > span:first-child,
+    .start-btn {
+      font-family: 'Press Start 2P', Tahoma, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0;
+      font-style: normal;
+    }
+
+    .start-btn { font-size: 11px; padding: 6px 16px 6px 12px; }
+
+    .status-bar,
+    .desk-icon span,
+    .tray,
+    .tray button,
+    .tray .clock { font-family: 'VT323', "Courier New", monospace; }
+
+    .status-bar { font-size: 14px; }
+    .tray, .tray button, .tray .clock { font-size: 15px; }
+
+    /* =====================================================
+       ENCENDIDO DE MONITOR
+       Una linea blanca se abre en vertical y se desvanece.
+       Solo corre una vez por sesion para no cansar.
+       ===================================================== */
+    .crt-boot {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: #000;
+      pointer-events: none;
+      animation: crtOn 0.75s ease-out forwards;
+    }
+
+    .crt-boot::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 3px;
+      background: #FFFFFF;
+      box-shadow: 0 0 24px 6px rgba(255,255,255,0.9);
+      animation: crtLine 0.75s ease-out forwards;
+    }
+
+    @keyframes crtOn {
+      0%   { opacity: 1; }
+      70%  { opacity: 1; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+
+    @keyframes crtLine {
+      0%   { transform: scaleX(0.02); opacity: 1; }
+      35%  { transform: scaleX(1);    opacity: 1; }
+      70%  { height: 100vh; top: 0; opacity: 0.25; }
+      100% { height: 100vh; top: 0; opacity: 0; }
+    }
+
+    /* =====================================================
+       ICONOS DEL ESCRITORIO
+       Archivos de 32x32 en la raiz de Neocities:
+       icon-cv, icon-readme, icon-dashboard, icon-github,
+       icon-music. Para cambiar alguno, basta con reemplazar
+       el PNG conservando el nombre.
+       ===================================================== */
+    .desktop-icons {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      width: 92px;
+    }
+
+    .desk-icon {
+      background: transparent;
+      border: 1px dotted transparent;
+      color: #fff;
+      font-size: 15px;
+      line-height: 1.15;
+      padding: 6px 2px;
+      text-align: center;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      word-break: break-word;
+    }
+
+    .desk-icon .glyph {
+      image-rendering: pixelated;
+      font-size: 30px;
+      line-height: 1;
+      width: 32px;
+      height: 32px;
+      display: block;
+      filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.6));
+      transition: transform 0.15s ease;
+    }
+
+    .desk-icon:hover .glyph { transform: translateY(-2px) scale(1.08); }
+
+    /* Seleccionado con un clic, abierto con doble clic: igual que XP */
+    .desk-icon.selected {
+      background: rgba(49, 106, 197, 0.55);
+      border: 1px dotted rgba(255,255,255,0.8);
+    }
+
+    /* =====================================================
+       VENTANAS FLOTANTES
+       ===================================================== */
+    .float-win {
+      position: fixed;
+      z-index: 15;
+      width: 460px;
+      max-width: 92vw;
+      background: #ECE9D8;
+      border: 3px solid #0054E3;
+      border-radius: 8px 8px 0 0;
+      box-shadow: 6px 6px 20px rgba(0,0,0,0.55);
+      display: flex;
+      flex-direction: column;
+      /* ESTO PERMITE CAMBIAR EL TAMAÑO DE LA VENTANA: */
+      resize: both;
+      overflow: auto;
+      min-width: 300px;
+      min-height: 200px;
+    }
+
+    .float-win .title-bar { cursor: move; user-select: none; }
+    .float-win.minimized { display: none; }
+    .float-win.dragging { opacity: 0.94; }
+
+    .float-body {
+      background: #fff;
+      margin: 8px;
+      border: 2px inset #E0E0E0;
+      padding: 14px;
+      font-size: 13px;
+      line-height: 1.5;
+      max-height: 58vh;
+      overflow-y: auto;
+    }
+
+    .float-body h3 { margin-top: 0; color: #003399; }
+    .float-body img.viewer-image { width: 100%; display: block; }
+    .float-body img.shot { max-width: 100%; }
+
+    /* Boton que abre cada proyecto en su propia ventana */
+    .open-win-btn {
+      font-family: Tahoma, sans-serif;
+      font-size: 11px;
+      background: linear-gradient(to bottom, #FFFFFF, #ECE9D8);
+      border: 1px solid #7A7A6D;
+      border-radius: 3px;
+      padding: 2px 8px;
+      margin-left: 12px;
+    }
+
+    .open-win-btn:hover { border-color: #F0A030; box-shadow: 0 0 4px rgba(240,160,48,0.7); }
+
+    /* =====================================================
+       REPRODUCTOR
+       ===================================================== */
+    .player { width: 340px; }
+
+    .player .float-body { padding: 10px; }
+
+    .player-display {
+      background: #0B1B0B;
+      border: 2px inset #000;
+      color: #6BFF6B;
+      font-family: 'VT323', monospace;
+      font-size: 18px;
+      padding: 6px 8px;
+      margin-bottom: 8px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .player-display .now { display: inline-block; }
+    .player-display .meta { font-size: 14px; color: #3FA83F; }
+
+    /* Barras del visualizador */
+    .viz {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 34px;
+      background: #0B1B0B;
+      border: 2px inset #000;
+      padding: 3px;
+      margin-bottom: 8px;
+    }
+
+    .viz i {
+      flex: 1;
+      background: linear-gradient(to top, #1E7A1E, #6BFF6B);
+      height: 4%;
+      transition: height 0.08s linear;
+    }
+
+    .player-controls { display: flex; align-items: center; gap: 4px; margin-bottom: 8px; }
+
+    .player-controls button {
+      font-family: 'VT323', monospace;
+      font-size: 16px;
+      min-width: 34px;
+      padding: 2px 6px;
+      background: linear-gradient(to bottom, #FFFFFF, #ECE9D8);
+      border: 1px solid #7A7A6D;
+      border-radius: 3px;
+    }
+
+    .player-controls button:hover { border-color: #F0A030; }
+    .player-controls input[type=range] { flex: 1; min-width: 40px; }
+
+    .playlist { list-style: none; margin: 0; padding: 0; max-height: 120px; overflow-y: auto; border: 1px inset #D6D3C4; background: #fff; }
+
+    .playlist li {
+      font-family: 'VT323', monospace;
+      font-size: 15px;
+      padding: 2px 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .playlist li:hover { background: #E8EEF9; }
+    .playlist li.playing { background: #316AC5; color: #fff; }
+
+    .player-tabs { display: flex; gap: 2px; margin-bottom: 8px; }
+
+    .player-tabs button {
+      font-family: Tahoma, sans-serif;
+      font-size: 11px;
+      padding: 3px 10px;
+      background: #ECE9D8;
+      border: 1px solid #919B9C;
+      border-radius: 3px 3px 0 0;
+    }
+
+    .player-tabs button.active { background: #fff; font-weight: bold; color: #003399; }
+
+    .player-pane { display: none; }
+    .player-pane.active { display: block; }
+
+    .hint {
+      font-family: Tahoma, sans-serif;
+      font-size: 11px;
+      color: #666;
+      background: #F5F3E8;
+      border-left: 3px solid #7BA2E7;
+      padding: 6px 8px;
+    }
+
+    @media (max-width: 900px) {
+      .desktop-icons { display: none; }
+    }
+
+    @media (max-width: 720px) {
+      body { align-items: flex-start; padding: 10px; }
+      .xp-window { height: auto; max-height: none; }
+      .window-body { flex-direction: column; }
+      .sidebar { width: 100%; }
+      .content-area { margin: 8px; }
+      .shot-row .shot, .shot-row .shot-placeholder { max-width: 100%; }
+      .taskbar { height: 30px; }
+      .start-btn { font-size: 12px; padding: 4px 12px 4px 8px; }
+      .task-btn { display: none; }
+      .desktop-code pre { font-size: 10px; }
+    }
+
+    /* Respeta a quien tiene animaciones desactivadas en su sistema */
+    @media (prefers-reduced-motion: reduce) {
+      .desktop-code pre { animation: none; }
+      .caret { animation: none; }
+      .nav-btn.selected .ico { animation: none; }
+      .ico, .xp-window { transition: none; }
+    }
+    
+    /* =====================================================
+       ESTILOS DEL CARRUSEL Y MOSAICO DE GALERIA
+       ===================================================== */
+    .carrusel-mini {
+      display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-top: 10px;
+    }
+    .carrusel-mini img {
+      height: 120px; width: auto; border: 2px inset #E0E0E0; cursor: url('cursor-zoom-in.png') 12 8, zoom-in;
+    }
+    .mosaico-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px; text-align: center;
+    }
+    .mosaico-grid figure { margin: 0; display: flex; flex-direction: column; }
+    .mosaico-grid img {
+      width: 100%; height: auto; border: 2px inset #E0E0E0; cursor: url('cursor-zoom-in.png') 12 8, zoom-in;
+    }
+    .mosaico-grid figcaption { font-size: 11px; color: #555; margin-top: 4px; }
+    .btn-galeria {
+      font-family: Tahoma, sans-serif; font-size: 11px; background: linear-gradient(to bottom, #FFFFFF, #ECE9D8);
+      border: 1px solid #7A7A6D; border-radius: 3px; padding: 4px 12px; cursor: pointer; margin-top: 5px;
+    }
+    .btn-galeria:hover { border-color: #F0A030; box-shadow: 0 0 4px rgba(240,160,48,0.7); }
+  </style>
+</head>
+<body>
+
+  <!-- ENCENDIDO DE MONITOR: el script lo quita solo -->
+  <div class="crt-boot" id="crtBoot" aria-hidden="true"></div>
+
+  <!-- CAPAS DEL ESCRITORIO: codigo en movimiento, barrido CRT y viñeta -->
+  <div class="desktop-code" aria-hidden="true"><pre id="codeWall"></pre></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- ICONOS DEL ESCRITORIO (un clic selecciona, doble clic abre) -->
+  <div class="desktop-icons">
+    <button class="desk-icon" data-open="cv"><img class="glyph" src="icon-cv.png" alt="CV"><span>CV_2026.pdf</span></button>
+    <button class="desk-icon" data-open="readme"><img class="glyph" src="icon-readme.png" alt="README"><span>README.txt</span></button>
+    <button class="desk-icon" data-open="dashboard"><img class="glyph" src="icon-dashboard.png" alt="Dashboard"><span>dashboard.exe</span></button>
+    <button class="desk-icon" data-open="github"><img class="glyph" src="icon-github.png" alt="GitHub"><span>github.url</span></button>
+    <button class="desk-icon" data-open="music"><img class="glyph" src="icon-music.png" alt="Player"><span>player.exe</span></button>
+  </div>
+
+  <div class="xp-window" id="xpWindow">
+    <!-- TITLE BAR -->
+    <div class="title-bar">
+      <span>C:\My Documents\Professional_Log</span>
+      <span class="win-buttons">
+        <button class="win-btn" id="btnMin" title="Minimize">_</button>
+        <button class="win-btn" id="btnMax" title="Maximize">□</button>
+        <button class="win-btn close" id="btnClose" title="Close">✕</button>
+      </span>
+    </div>
+
+    <div class="window-body">
+      <!-- LEFT INDEX (SIDEBAR) -->
+      <div class="sidebar">
+        <button class="nav-btn selected" data-status="about_the_log.txt" onclick="showSection('log', this)"><img class="ico" src="icon-folder.png" alt="Folder">About the Log</button>
+        <button class="nav-btn" data-status="about_me.txt" onclick="showSection('about', this)"><img class="ico" src="icon-user.png" alt="Profile">About Me</button>
+        <button class="nav-btn" data-status="thesis_project.tex" onclick="showSection('thesis', this)"><img class="ico" src="icon-thesis.png" alt="Thesis">Master's Thesis</button>
+        <button class="nav-btn" data-status="projects/" onclick="showSection('projects', this)"><img class="ico" src="icon-code.png" alt="Code">Programming Projects</button>
+        <button class="nav-btn" data-status="graduate_works/" onclick="showSection('graduate', this)"><img class="ico" src="icon-doc.png" alt="Documents">Graduate Works</button>
+        <button class="nav-btn" data-status="languages/" onclick="showSection('languages', this)"><img class="ico" src="icon-globe.png" alt="Languages">Languages Works</button>
+        <button class="nav-btn" data-status="returning to portal" onclick="leaveTo('index.html')"><img class="ico" src="icon-back.png" alt="Back">Back to Portal</button>
+      </div>
+
+      <!-- CENTER/RIGHT CONTENT -->
+      <div class="content-area">
+
+        <!-- SECTION 0: ABOUT THE LOG -->
+        <div id="log" class="content-section active">
+          <h2>About the Professional Log</h2>
+          <hr>
+          <p>Welcome to my Professional Log. This section of my website serves as a dedicated academic and technical portfolio. Here, you will find my curriculum vitae, details regarding my ongoing Master's Thesis Project, documentation of my Python programming projects, and a collection of written works.</p>
+          <p><strong>Note:</strong> This space is strictly reserved for my professional and academic endeavors. If you are looking for more personal or relaxed content—such as my weekly blog where I discuss recent scientific papers, technology news, and other topics not directly related to my thesis—please head back to the main portal and select the <strong>Personal Hub</strong>.</p>
+        </div>
+
+        <!-- SECTION 1: ABOUT ME -->
+        <div id="about" class="content-section">
+          <h2>About Me</h2>
+          <hr>
+          <p>Hello, and welcome to my professional log. My name is Luis A. Quiroz, and I am a data science-driven physicist and current Master's student in Astrophysics at UNAM's Astronomy and Physics Institutes. I specialize in theoretical cosmology, numerical simulations, data visualization, and the application of computational methods to complex mathematical physics problems.</p>
+
+          <p>Currently, I am developing my Master’s Thesis Project (MTP), tentatively titled <em>Effective Equation of State and Gravitational Particle Production in Inflationary Models</em>, under the direction of Dr. Marcos A. García García. In this research, I write modular Python code to run numerical simulations that analyze the dynamics of inflaton and spectator fields during the reheating transition. For non-physics people, that means studying the early Universe energy fields that would become fundamental particles and could explain modern astrophysical questions like dark matter (DM) or the still-happening expansion of the space itself.</p>
+
+          <p>Beyond theoretical cosmology, my academic and professional trajectory heavily integrates data science (DS), machine learning (ML), and artificial intelligence (AI). My background includes specialized coursework in neural networks (NN) and AI modeling - I took Dr. Jose Antonio Vazquez Mata's course on NN as a bachelor at UNAM's Faculty of Science, I am currently revisiting Dr. Mehryar Mohri's course on Foundations of ML at New York University (NYU) and taking the Introduction to Modern AI lectures given by Dr. Zico Kolter at Carnegie Mellon University (CMU) - allowing me to apply advanced computational architectures to rigorous data sets.</p>
+
+          <p>I have actively applied these analytical and programming skills in industry environments. Recently, I have worked as an AI Trainer, contributing to human-in-the-loop learning pipelines and providing high-quality annotations for natural language processing (NLP) tasks. This includes direct experience with Reinforcement Learning Through Human Feedback (RLHF), refining large language model (LLM) behavior in real-time evaluations.</p>
+
+          <p>Effective scientific communication and interdisciplinary research are also central to my methodology. Over the years, I have cultivated a strong foundation in academic and analytical writing, authoring award-winning essays (Concursos Interpreparatorianos 2017-2019) spanning both physics and the humanities, such as <em>Natural and Artificial Satellites</em> and <em>Why Study Philosophy Today?</em>. I love a good research project!</p>
+
+          <p>Finally, as a polyglot with proficiency in English, German, Italian, and Portuguese, I am equipped to collaborate effectively across international and multidisciplinary teams. Whether I am modeling financial workflows, training language models, or simulating the early universe, my goal is always to leverage computational tools to extract meaningful insights from complex systems.</p>
+
+          <p>If for some reason you do not already have a copy of my Résumé (or CV) here you can find one.</p>
+
+          <ul>
+            <li><a href="CV_2026_lq.pdf" target="_blank">Click Here for CV! (PDF)</a></li>
+          </ul>
+
+          <p>Hope you have a wonderful <b>day/night/whatever</b>! And as John Lennon said at the end of The Beatles rooftop concert, <em> I hope we passed the audition!</em> </p>
+        </div>
+
+        <!-- SECTION 2: MASTER'S THESIS PROJECT -->
+        <div id="thesis" class="content-section">
+          <h2>Master's Thesis Project</h2>
+          <hr>
+          <h3>Effective Equation of State and Gravitational Particle Production in Inflationary Models</h3>
+          <p><strong>Advisor:</strong> Dr. Marcos A. García García</p>
+          <p><strong>Institution:</strong> Institute of Physics, UNAM</p>
+
+          <p>The primary objective of the project is to rigorously characterise the relic abundance of a dark matter candidate produced exclusively through gravitational interaction during the transition between cosmic inflation and the inflationary reheating phase. In particular, we study the dynamical behaviour of a <em>spectator</em> scalar field decoupled from the inflaton sector, analysing how the coherent oscillations of the inflationary background modulate the spacetime metric and induce non-thermal particle production phenomena.</p>
+
+          <h3>Work Completed and Achievements</h3>
+          <p>During the previous semesters, the research plan has focused on:</p>
+
+          <ol>
+            <li>
+              <strong>Exploration of T-Model Type Potentials:</strong> In the first stage of the project, the inflation dynamics using <em>T-model</em> type potentials were evaluated in detail, employing recent literature in the sector as a formal reference framework (particularly the analytical formalism presented in <a href="https://arxiv.org/abs/2502.20471" target="_blank">arXiv:2502.20471</a>). The slow-roll conditions and the end of inflation were derived for these potentials. In terms of programming, the work focused on the dynamics of the inflationary field:
+              <ul>
+                <li>The evolution of the inflaton during inflation and its transition towards the oscillation phase (<em>reheating</em>) was studied for a <em>T-model</em> and various values of k, verifying that the densities obtained agreed with the theoretical forms (~ a<sup>-6k/(k+2)</sup>).</li>
+                <li>Work was carried out comparing the values obtained for the end of inflation (&phi;<sub>end</sub>) through direct numerical evolution against the analytical predictions of the <em>slow-roll</em> approximation.</li>
+              </ul>
+              <p>This is the Colab Notebook containing the results: <a href="https://colab.research.google.com/drive/1WU9EHqw5BTEdtey-hU27ECNP07T4Ge6S?usp=sharing" target="_blank">View on Google Colab</a>.</p>
+            </li>
+
+            <li>
+              <strong>Transition to the Quartic Regime (n = 4):</strong> The current focus of the thesis has been reorientated, based on <a href="https://arxiv.org/abs/2206.08940" target="_blank">arXiv:2206.08940</a>, towards the analytical and numerical study of the pure quartic regime (n = 4) for inflaton oscillations. This regime is of particular interest because the average equation of state of the universe during the oscillation phase mimics a radiation fluid (&lang;w&rang; = 1/3), which fundamentally alters the Hubble expansion rate H(a) and, consequently, the instantaneous rates of gravitational particle production of the <em>spectator</em> field.
+            </li>
+
+            <li>
+              <strong>Development and Injection of Precision Numerical Code:</strong> A modular computational environment was designed and implemented in Python, focused on the simultaneous resolution of the coupled set of Friedmann and Klein-Gordon differential equations. The code calculates the time evolution of the scale factor a(t), the inflaton field &phi;(t), and the energy density functions without relying on explicit couplings.
+              <br><br>
+              In the following Colab Notebook, you can review the progress and the <em>work in progress</em> of the "Zero-Coupling" implementation (without initial couplings) as a base case, which, once the stability of the code is validated, will:
+              <ul>
+                <li>Introduce the coupling terms.</li>
+                <li>Vary the effective mass parameters.</li>
+                <li>Generate the first occupation spectra.</li>
+              </ul>
+              <p><a href="https://colab.research.google.com/drive/1WU9EHqw5BTEdtey-hU27ECNP07T4Ge6S?usp=sharing" target="_blank">View Zero-Coupling Colab Notebook</a></p>
+            </li>
+
+            <li>
+              <strong>Debugging and Algorithmic Optimisation:</strong> Recently, critical computational challenges associated with the numerical stability of the code were resolved. Specifically, inconsistencies originating from the omission of positional arguments within the <em>slow-roll</em> integrand routines were corrected. Even so, the numerical integrator and the graphical results produced by the code continue to be refined.
+            </li>
+          </ol>
+
+          <h3>Academic Meetings and Discussions</h3>
+          <p>Throughout this period, constant meetings have been held with Dr. Marcos Alejandro García García. Recent discussions have focused on the following critical points:</p>
+          <ul>
+            <li><strong>Transition to the Coupled System:</strong> It was established that the next major objective is to integrate the background dynamics, which have already been modelled, with the second field (the <em>spectator</em> field) to evaluate the joint gravitational production.</li>
+            <li><strong>Identification of Computational Challenges:</strong> The numerical challenges that arise when attempting to couple both fields have been exhaustively discussed, identifying instabilities in the integration methods that require revision.</li>
+            <li><strong>Exploration of New Scenarios:</strong> The determination and feasibility of studying additional scalar fields to strengthen the phenomenological analysis of the thesis have been proposed.</li>
+          </ul>
+        </div>
+
+        <!-- ============================================================
+             SECTION 3: PROGRAMMING PROJECTS  (now with 3 sub-tabs)
+             ============================================================ -->
+        <div id="projects" class="content-section">
+          <h2>Programming Projects</h2>
+          <hr>
+
+          <!-- TAB STRIP -->
+          <div class="tab-strip">
+            <button class="tab-btn active" onclick="showTab('tab-academic', this)">🎓 Academic</button>
+            <button class="tab-btn" onclick="showTab('tab-research', this)">🔭 Research</button>
+            <button class="tab-btn" onclick="showTab('tab-industry', this)">🛒 Retail &amp; Industry</button>
+          </div>
+
+          <!-- TAB A: ACADEMIC -->
+          <div id="tab-academic" class="tab-panel active">
+            <p class="panel-intro">Coursework and degree projects: numerical methods, statistics and machine learning built for a class, a lab or a final exam.</p>
+
+            <div class="project-card">
+              <h3>Hydrodynamic Astrophysical Jet Simulation <span class="status live">Live</span></h3>
+              <p>
+                <span class="tag">Python</span><span class="tag">NumPy</span><span class="tag">Euler2D</span><span class="tag">Numerical methods</span>
+              </p>
+              <p>Two-dimensional hydrodynamic simulation of an astrophysical jet on a 400 &times; 150 cell grid, solved with a MacCormack scheme under CFL time-step control. Adiabatic and radiative-cooling runs are compared from a single Python configuration file holding the parameters, initial conditions and boundary conditions.</p>
+              <div class="carrusel-mini">
+                 <img src="output_0052.png" alt="2D adiabatic simulation, t=52 yr" class="shot">
+                 <img src="output_0100.png" alt="2D radiative simulation, t=100 yr" class="shot">
+                 <img src="output_0052_2.png" alt="2D adiabatic simulation, t=52 yr" class="shot">
+                 <img src="output_0100_2.png" alt="2D radiative simulation, t=100yr" class="shot">              
+              </div>
+              <button class="btn-galeria" id="btnAbrirGaleriaFluidos">⊞ View Full Gallery</button>
+              <div class="link-row">
+                <!-- Replace # with the repository URL once it is published -->
+                <a href="https://github.com/lobby9000/Astrophysical-Fluid-Simulations" target="_blank">View Repository on GitHub</a>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <h3>Stellar Classification &amp; Astrostatistics <span class="status live">Live</span></h3>
+              <p>
+                <span class="tag">R</span><span class="tag">MLE</span><span class="tag">AIC</span><span class="tag">Hypothesis testing</span>
+              </p>
+              <p>Classification of stellar populations from temperature and spectral class over 240 observations. Maximum-likelihood fits comparing exponential and gamma models, AIC-based model selection, Box-Cox and Ordered Quantile normalisation, plus confidence intervals and hypothesis tests across 15 population pairs.</p>
+              
+              <!-- Carrusel de imágenes de Astroestadística -->
+              <div class="carrusel-mini">
+                <img src="hist_comparacion.png" alt="Probabilistic vs theoretical gamma model" class="shot">
+                <img src="hist4.png" alt="Temperature distributions after Box-Cox transformation" class="shot">
+                <img src="hist5.png" alt="Data before and after the Ordered Quantile normalization" class="shot">
+                <img src="Pasted image.png" alt="92% Confidence Intervals" class="shot">
+              </div>
+              <button class="btn-galeria" id="btnAbrirGaleriaAstro">⊞ View Full Gallery</button>
+
+              <div class="link-row">
+                <a href="https://github.com/lobby9000/Astrostatistics" target="_blank">View Repository on GitHub</a>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <h3>Neural Network for Galaxy Morphological Classification <span class="status live">Live</span></h3>
+              <p>
+                <span class="tag">Python</span><span class="tag">TensorFlow / Keras</span><span class="tag">CNN</span><span class="tag">Imbalanced classes</span>
+              </p>
+              <p>Final project for a neural networks course: a convolutional classifier separating early-type from late-type galaxies over roughly 5,600 labelled images with a naturally imbalanced split (~3,530 late-type vs ~2,080 early-type), including the handling of that imbalance in training and evaluation.</p>
+              <!-- Carrusel deslizable en la tarjeta -->
+              <div class="carrusel-mini">
+                <img src="gal.png" alt="CNN classification analysis" class="shot">
+                <img src="confmax.png" alt="Confusion Matrix InceptionV3" class="shot">
+                <img src="acu.png" alt="Training and Validation metrics" class="shot">
+              </div>
+              <button class="btn-galeria" id="btnAbrirGaleria">⊞ See details</button>
+              <div class="link-row">
+                <a href="https://github.com/lobby9000/Galaxy-Morphology-NNClassifier" target="_blank">View Repository on GitHub</a>
+              </div>
+            </div>
+
+            <!-- COPY THIS BLOCK TO ADD ANOTHER ACADEMIC PROJECT
+            <div class="project-card">
+              <h3>Project title <span class="status wip">Repo pending</span></h3>
+              <p><span class="tag">Stack</span></p>
+              <p>One paragraph: what the problem was, what you built, what the numbers were.</p>
+              <div class="shot-placeholder">[ Screenshot slot ]</div>
+              <div class="link-row"><a href="https://github.com/lobby9000/Retail-Business-Data-Cases" target="_blank">View Repository on GitHub</a></div>
+            </div>
+            -->
+          </div>
+
+          <!-- TAB B: RESEARCH -->
+          <div id="tab-research" class="tab-panel">
+            <p class="panel-intro">Research-grade work: code written to answer an open question, either inside my thesis or alongside it.</p>
+
+            <div class="project-card">
+              <h3>Cosmic Inflation &amp; Reheating Simulation <span class="status wip">In progress</span></h3>
+              <p>
+                <span class="tag">Python</span><span class="tag">SciPy</span><span class="tag">ODE integration</span><span class="tag">Cosmology</span>
+              </p>
+              <p>Modular solver for the coupled Friedmann and Klein-Gordon equations, tracking the scale factor a(t), the inflaton &phi;(t) and the energy densities through the transition from inflation to reheating. Includes T-model potentials, the pure quartic regime (n = 4) and validation of numerical results against slow-roll analytical predictions.</p>
+              <div class="shot-placeholder">[ Screenshot slot — energy density vs scale factor ]</div>
+              <div class="link-row">
+                <a href="https://colab.research.google.com/drive/1WU9EHqw5BTEdtey-hU27ECNP07T4Ge6S?usp=sharing" target="_blank">View on Google Colab</a>
+                <a href="https://github.com/lobby9000/Retail-Business-Data-Cases" target="_blank">View Repository on GitHub</a>
+              </div>
+            </div>
+            
+
+            <div class="project-card">
+              <h3>Milky Way Structure: Gaia DR3 &times; APOGEE-2 DR17 <span class="status live">Live</span></h3>
+              <p>
+                <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">TOPCAT</span><span class="tag">DBSCAN</span>
+              </p>
+              <p>Cross-match of Gaia DR3 with APOGEE-2 DR17, reducing 682,284 sources to 281,612 through documented quality thresholds (SNR, RUWE, VSCATTER, parallax error). The analysis covers galactic component classification, Toomre diagrams, velocity ellipsoids, DBSCAN clustering of moving groups, the rotation curve between 6 and 12 kpc, and Oort constant maps.</p>
+<!-- Carrusel de imágenes de la Vía Láctea -->
+              <div class="carrusel-mini">
+                <img src="mw-density.png" alt="Stellar density map" class="shot">
+                <img src="mw-vector.png" alt="Vector field" class="shot">
+                <img src="mw-dbscan.png" alt="Kinematic moving groups" class="shot">
+                <img src="mw-rotation.png" alt="Galactic rotation curve" class="shot">
+              </div>
+              <button class="btn-galeria" id="btnAbrirGaleriaMW">⊞ See details</button>
+
+              <div class="link-row">
+                <a href="https://github.com/lobby9000/Milky-Way-Structure" target="_blank">View Repository on GitHub</a>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <h3>The Bar Strikes Back: Galactic Bar Dynamics <span class="status live">Live</span></h3>
+              <p>
+                <span class="tag">Python</span><span class="tag">RKN4 integrator</span><span class="tag">N-body (test particles)</span>
+              </p>
+              <p>Integration of 10<sup>4</sup> test particles in a time-dependent galactic bar potential using a fourth-order Runge-Kutta-Nyström scheme, with the time step chosen from the measured energy error. Six snapshots of the evolving distribution and a full energy-budget analysis document the reliability of the run.</p>
+<!-- Carrusel de imágenes de Dinámica Galáctica -->
+              <div class="carrusel-mini">
+                <img src="bar-snapshots.png" alt="Phase-space coordinates" class="shot">
+                <img src="bar-energy.png" alt="Final versus initial specific energies" class="shot">
+                <img src="bar-radial.png" alt="Energy gain" class="shot">
+              </div>
+              <button class="btn-galeria" id="btnAbrirGaleriaBar">⊞ See details</button>
+
+              <div class="link-row">
+                <a href="https://github.com/lobby9000/Galactic-Bar-Dynamics" target="_blank">View Repository on GitHub</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB C: RETAIL AND INDUSTRY -->
+          <div id="tab-industry" class="tab-panel">
+            <p class="panel-intro">Business-facing analytics: operational KPIs, dashboards and financial models aimed at a decision rather than a paper.</p>
+
+            <div class="project-card">
+              <h3>Retail Logistics Diagnostics — End-to-End Case <span class="status live">Live</span></h3>
+              <p>
+                <span class="tag">Python</span><span class="tag">pandas</span><span class="tag">SQL</span><span class="tag">Star schema</span><span class="tag">Dashboard</span>
+              </p>
+              <p>End-to-end diagnostic of a retail delivery network, from raw shipment data to an executive readout. The dataset covers six months of shipments across five distribution centres, 61 stores and several carriers and delivery channels, with realistic data-quality issues left in on purpose so the cleaning logic is part of the work.</p>
+              <p><strong>What the analysis does:</strong> defines and computes delivery compliance (OTIF) and cycle-time KPIs, decomposes lead time by stage, uses median and P90 instead of the mean for right-skewed delivery times, attaches Wilson confidence intervals to every proportion, separates structural deterioration from seasonal effects, and ranks bottlenecks by store and distribution centre.</p>
+              <p><strong>What ships with it:</strong> a documented notebook, a star-schema export ready for Power BI or Looker Studio (<code>fact_envios</code>, <code>dim_tienda</code>, <code>dim_calendario</code>), a data simulator to regenerate the dataset, and a static HTML dashboard.</p>
+
+              <iframe class="dashboard-frame"
+                      src="https://lobby9000.github.io/Retail-Business-Data-Cases/dashboard/"
+                      title="Retail logistics dashboard"
+                      loading="lazy"></iframe>
+
+              <div class="link-row">
+                
+                <a href="https://github.com/lobby9000/Retail-Business-Data-Cases" target="_blank">View Repository on GitHub</a>
+                <a href="https://lobby9000.github.io/Retail-Business-Data-Cases/dashboard/" target="_blank">Open the live dashboard</a>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <h3>Financial Amortization Automations</h3>
+              <p>
+                <span class="tag">Python</span><span class="tag">Excel</span><span class="tag">Financial modelling</span>
+              </p>
+              <p>Automated financial calculators that model ROI, internal rate of return (TIR) and amortisation tables for business projections, built so the assumptions live in one place and the schedules regenerate from them.</p>
+              <div class="shot-placeholder">[ Screenshot slot — amortisation table / ROI summary ]</div>
+              <div class="link-row">
+                <a href="https://github.com/lobby9000/Retail-Business-Data-Cases" target="_blank">View Repository on GitHub</a>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <h3>Small-Business Operations Analytics <span class="status wip">Planned</span></h3>
+              <p>
+                <span class="tag">Python</span><span class="tag">Power BI / Looker Studio</span>
+              </p>
+              <p>Operational analysis of a made-to-order dessert business: inventory, preparation-time logistics, delivery routing, pricing and margin, turned into the kind of reporting an operations team would actually read.</p>
+              <div class="shot-placeholder">[ Screenshot slot — dashboard preview ]</div>
+              <div class="link-row">
+                <a href="https://github.com/lobby9000/Retail-Business-Data-Cases" target="_blank">View Repository on GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: GRADUATE WRITTEN WORKS -->
+        <div id="graduate" class="content-section">
+          <h2>Graduate Written Works &amp; PDFs</h2>
+          <hr>
+          <p>A collection of my academic papers, research reports, and LaTeX thesis drafts.</p>
+          <ul>
+            <li><a href="thesis_draft_v1.pdf" target="_blank">Master's Thesis Proposal (PDF)</a></li>
+            <li><a href="data_viz_notes.pdf" target="_blank">Data Visualization Notes (PDF)</a></li>
+            <li><a href="literature_review.pdf" target="_blank">Cosmological Perturbations Literature Review (PDF)</a></li>
+          </ul>
+        </div>
+
+        <!-- SECTION 5: LANGUAGES WORKS -->
+        <div id="languages" class="content-section">
+          <h2>Languages Works</h2>
+          <hr>
+          <p>As a polyglot, I have authored and translated various works across multiple languages. Below is a selection of my linguistic projects.</p>
+          <ul>
+            <li><strong>English (C2):</strong> [INSERT ENGLISH ESSAY/PROJECT]</li>
+            <li><strong>Italian (B2):</strong> <em>Il mio primo racconto in podcast</em> - Essay and podcast production (1st Place, ENP Interpreparatory Contests 2019)</li>
+            <li><strong>German (B1):</strong> [INSERT GERMAN ESSAY/PROJECT]</li>
+            <li><strong>Portuguese (A2):</strong> [INSERT PORTUGUESE ESSAY/PROJECT]</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BARRA DE ESTADO DE LA VENTANA -->
+    <div class="status-bar">
+      <span class="slot" id="statusText">&gt; ready_</span>
+      <span class="slot"><a href="https://colab.research.google.com/drive/1WU9EHqw5BTEdtey-hU27ECNP07T4Ge6S?usp=sharing" target="_blank" id="wallpaperLink">wallpaper: TBackEv.py &#8599;</a></span>
+    </div>
+  </div>
+
+  <!-- BARRA DE TAREAS -->
+  <div class="taskbar">
+    <button class="start-btn" id="startBtn">start</button>
+    <div class="task-items" id="taskItems">
+      <button class="task-btn" id="taskBtn"><img class="ico" src="icon-code.png" alt="">Professional_Log</button>
+    </div>
+    <div class="tray">
+      <button id="soundToggle" aria-pressed="false">SOUND: OFF</button>
+      <span class="clock" id="clock">--:--</span>
+    </div>
+  </div>
+
+  <!-- DIALOGO REUTILIZABLE -->
+  <div class="dialog-backdrop" id="dialogBackdrop">
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
+      <div class="title-bar">
+        <span id="dialogTitle">Professional_Log</span>
+        <span class="win-buttons"><button class="win-btn close" data-dialog-close>✕</button></span>
+      </div>
+      <div class="dialog-body">
+        <span class="glyph" id="dialogGlyph">⚠️</span>
+        <span id="dialogMessage"></span>
+      </div>
+      <div class="dialog-footer">
+        <button class="xp-button" data-dialog-close>OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  /* =====================================================
+     1. MOTOR DE SONIDO
+     Igual que en index.html: los bips se generan con el
+     navegador, sin archivos. Si algun dia pagas el plan
+     Supporter de Neocities y subes wav o mp3 reales,
+     puedes cambiar beep() por new Audio('click.wav').play().
+     ===================================================== */
+  var soundOn = false;
+  var audioCtx = null;
+
+  /* La preferencia se recuerda entre index.html y esta
+     pagina. Va en try porque algunos navegadores en modo
+     privado bloquean el almacenamiento. */
+  try {
+    soundOn = localStorage.getItem('lq_sound') === 'on';
+  } catch (e) { soundOn = false; }
+
+  function beep(frequency, durationMs, volume, type) {
+    if (!soundOn) return;
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      var osc = audioCtx.createOscillator();
+      var gain = audioCtx.createGain();
+      osc.type = type || 'square';
+      osc.frequency.value = frequency;
+      gain.gain.value = volume;
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + durationMs / 1000);
+      osc.stop(audioCtx.currentTime + durationMs / 1000);
+    } catch (e) { /* si el navegador bloquea el audio, seguimos sin sonido */ }
+  }
+
+  /* Paleta de sonidos: cada accion suena distinto */
+  var SFX = {
+    hover:  function () { beep(1400, 10, 0.018); },
+    nav:    function () { beep(520, 45, 0.05); },
+    tab:    function () { beep(900, 16, 0.035); },
+    chime:  function () { beep(660, 70, 0.05, 'triangle'); setTimeout(function () { beep(990, 130, 0.045, 'triangle'); }, 80); },
+    denied: function () { beep(220, 130, 0.05, 'sawtooth'); }
+  };
+
+  var soundBtn = document.getElementById('soundToggle');
+  soundBtn.addEventListener('click', function () {
+    soundOn = !soundOn;
+    this.textContent = 'SOUND: ' + (soundOn ? 'ON' : 'OFF');
+    this.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
+    try { localStorage.setItem('lq_sound', soundOn ? 'on' : 'off'); } catch (e) {}
+    SFX.chime();
+  });
+  soundBtn.textContent = 'SOUND: ' + (soundOn ? 'ON' : 'OFF');
+  soundBtn.setAttribute('aria-pressed', soundOn ? 'true' : 'false');
+
+  /* =====================================================
+     2. FONDO DE CODIGO
+     PLACEHOLDER: cambia el texto de abajo por un pedazo
+     real de tu solver. Se repite solo para llenar la
+     pantalla y el loop queda continuo.
+     ===================================================== */
+  var CODE_SNIPPET = [
+    '# TBackEv.py  ::  T-model background evolution',
+    'import numpy as np',
+    'from scipy.integrate import solve_ivp',
+    '',
+    'def V_tilde(phi, k):',
+    '    """Rescaled T-model potential."""',
+    '    return (np.sqrt(6.0) * np.tanh(phi / np.sqrt(6.0)))**k',
+    '',
+    'def inflation_system(tau, y, k):',
+    '    phi, phi_dot, N = y',
+    '    # Rescaled Friedmann equation',
+    '    rho = 0.5 * phi_dot**2 + V_tilde(phi, k)',
+    '    H = np.sqrt(rho / 3.0)',
+    '    # Rescaled Klein-Gordon equation',
+    '    phi_ddot = -3.0 * H * phi_dot - dV_tilde(phi, k)',
+    '    N_dot = H',
+    '    return [phi_dot, phi_ddot, N_dot]',
+    '',
+    'def event_exact(tau, y, k):',
+    '    """End of inflation: w = -1/3  ->  phi_dot**2 = V(phi)"""',
+    '    return y[1]**2 - V_tilde(y[0], k)',
+    '',
+    'sol = solve_ivp(inflation_system, (0, tau_max), y0,',
+    '                events=(event_exact, event_epsilon, event_approx),',
+    '                dense_output=True, rtol=1e-8, atol=1e-10)',
+    '',
+    'analytical_slope = -6.0 * k / (k + 2.0)',
+    ''
+  ].join('\n');
+
+  (function paintWallpaper() {
+    var block = '';
+    for (var i = 0; i < 6; i++) block += CODE_SNIPPET + '\n';
+    /* El texto va duplicado: la animacion recorre la mitad
+       y vuelve al inicio sin que se note el corte. */
+    document.getElementById('codeWall').textContent = block + block;
+  })();
+
+  /* =====================================================
+     3. NAVEGACION
+     ===================================================== */
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var statusText = document.getElementById('statusText');
+  var headingTimer = null;
+
+  function setStatus(text) { statusText.textContent = '> ' + text; }
+
+  /* Reloj de arena por medio segundo: puro teatro, pero es
+     exactamente lo que hacia una maquina de esa epoca. */
+  var busyTimer = null;
+  function flashBusy() {
+    if (reduceMotion) return;
+    document.body.classList.add('busy');
+    clearTimeout(busyTimer);
+    busyTimer = setTimeout(function () {
+      document.body.classList.remove('busy');
+    }, 450);
+  }
+
+  function typeHeading(section) {
+    var h = section.querySelector('h2');
+    if (!h) return;
+    if (!h.dataset.full) h.dataset.full = h.textContent;
+    var full = h.dataset.full;
+
+    clearTimeout(headingTimer);
+    if (reduceMotion) { h.textContent = full; return; }
+
+    h.textContent = '';
+    var caret = document.createElement('span');
+    caret.className = 'caret';
+    caret.textContent = '.';
+    h.appendChild(caret);
+
+    var i = 0;
+    (function step() {
+      if (i < full.length) {
+        caret.insertAdjacentText('beforebegin', full[i]);
+        i++;
+        headingTimer = setTimeout(step, 22);
+      } else {
+        setTimeout(function () { if (caret.parentNode) caret.parentNode.removeChild(caret); }, 700);
+      }
+    })();
+  }
+
+  // Sidebar: hide every section, then show the one that was clicked
+  function showSection(sectionId, clickedButton) {
+    document.querySelectorAll('.content-section').forEach(function (section) {
+      section.classList.remove('active');
+    });
+    var target = document.getElementById(sectionId);
+    target.classList.add('active');
+    document.querySelector('.content-area').scrollTop = 0;
+
+    if (clickedButton) {
+      document.querySelectorAll('.nav-btn').forEach(function (b) { b.classList.remove('selected'); });
+      clickedButton.classList.add('selected');
+      setStatus('opened ' + clickedButton.dataset.status);
+    }
+    SFX.nav();
+    typeHeading(target);
+    flashBusy();
+  }
+
+  // Project tabs: same idea, one level down
+  function showTab(tabId, clickedButton) {
+    document.querySelectorAll('.tab-panel').forEach(function (panel) {
+      panel.classList.remove('active');
+    });
+    document.getElementById(tabId).classList.add('active');
+
+    document.querySelectorAll('.tab-btn').forEach(function (button) {
+      button.classList.remove('active');
+    });
+    clickedButton.classList.add('active');
+    SFX.tab();
+    setStatus('filter: ' + clickedButton.textContent.trim().toLowerCase());
+  }
+
+  // Salir con sonido antes de cambiar de pagina
+  function leaveTo(url) {
+    SFX.nav();
+    setStatus('closing session...');
+    setTimeout(function () { window.location.href = url; }, soundOn ? 160 : 0);
+  }
+
+  /* Tics al pasar el mouse por cualquier cosa clicable */
+  document.querySelectorAll('.nav-btn, .tab-btn, .content-area a, .win-btn, .start-btn').forEach(function (el) {
+    el.addEventListener('mouseenter', SFX.hover);
+  });
+
+  /* La barra de estado narra los links del contenido */
+  document.querySelectorAll('.content-area a').forEach(function (link) {
+    link.addEventListener('mouseenter', function () {
+      var host = link.hostname && link.hostname !== window.location.hostname ? link.hostname : 'local file';
+      setStatus('link -> ' + host);
+    });
+    link.addEventListener('mouseleave', function () { setStatus('ready_'); });
+  });
+
+  /* =====================================================
+     4. BOTONES DE LA VENTANA Y BARRA DE TAREAS
+     ===================================================== */
+  var win = document.getElementById('xpWindow');
+
+  document.getElementById('btnMin').addEventListener('click', function () {
+    win.classList.add('minimized');
+    SFX.nav();
+  });
+
+  document.getElementById('taskBtn').addEventListener('click', function () {
+    win.classList.toggle('minimized');
+    SFX.nav();
+  });
+
+  document.getElementById('btnMax').addEventListener('click', function () {
+    win.classList.toggle('maximized');
+    SFX.tab();
+  });
+
+  /* PLACEHOLDER: cambia estos textos por los que quieras */
+  document.getElementById('btnClose').addEventListener('click', function () {
+    openDialog('Access denied', '⚠️', 'This log cannot be closed. The work continues.');
+    SFX.denied();
+  });
+
+  document.getElementById('startBtn').addEventListener('click', function () {
+    openDialog('lqcorner', '💾', 'Nothing to start here. Try the portal instead: index.html');
+    SFX.chime();
+  });
+
+  /* =====================================================
+     5. DIALOGO
+     ===================================================== */
+  var backdrop = document.getElementById('dialogBackdrop');
+
+  function openDialog(title, glyph, message) {
+    document.getElementById('dialogTitle').textContent = title;
+    document.getElementById('dialogGlyph').textContent = glyph;
+    document.getElementById('dialogMessage').textContent = message;
+    backdrop.classList.add('open');
+  }
+
+  document.querySelectorAll('[data-dialog-close]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      backdrop.classList.remove('open');
+      SFX.tab();
+    });
+  });
+
+  backdrop.addEventListener('click', function (e) {
+    if (e.target === backdrop) backdrop.classList.remove('open');
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') backdrop.classList.remove('open');
+  });
+
+  /* =====================================================
+     6. RELOJ
+     ===================================================== */
+  function tickClock() {
+    var now = new Date();
+    var h = now.getHours();
+    var m = now.getMinutes();
+    var suffix = h >= 12 ? 'PM' : 'AM';
+    h = h % 12; if (h === 0) h = 12;
+    document.getElementById('clock').textContent = h + ':' + (m < 10 ? '0' + m : m) + ' ' + suffix;
+  }
+  tickClock();
+  setInterval(tickClock, 15000);
+
+  /* =====================================================
+     7. ENCENDIDO DE MONITOR
+     Corre una vez por pestaña. Si abres otra seccion o
+     vuelves del portal, ya no se repite.
+     ===================================================== */
+  (function crtBoot() {
+    var overlay = document.getElementById('crtBoot');
+    var seen = false;
+    try { seen = sessionStorage.getItem('lq_booted') === '1'; } catch (e) {}
+
+    if (seen || reduceMotion) {
+      overlay.parentNode.removeChild(overlay);
+      return;
+    }
+    try { sessionStorage.setItem('lq_booted', '1'); } catch (e) {}
+    setTimeout(function () {
+      if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+    }, 800);
+  })();
+
+  /* =====================================================
+     8. GESTOR DE VENTANAS FLOTANTES
+     openWindow() crea una ventana arrastrable con su boton
+     en la barra de tareas. Si ya existe una con el mismo
+     id, la trae al frente en vez de duplicarla.
+     ===================================================== */
+  var zTop = 15;
+  var openWindows = {};
+  var taskItems = document.getElementById('taskItems');
+
+  function focusWindow(win) {
+    zTop++;
+    win.style.zIndex = zTop;
+  }
+
+  function openWindow(id, title, bodyHTML, extraClass) {
+    if (openWindows[id]) {
+      openWindows[id].win.classList.remove('minimized');
+      focusWindow(openWindows[id].win);
+      SFX.tab();
+      return openWindows[id].win;
+    }
+
+    var win = document.createElement('div');
+    win.className = 'float-win' + (extraClass ? ' ' + extraClass : '');
+    win.innerHTML =
+      '<div class="title-bar">' +
+        '<span></span>' +
+        '<span class="win-buttons">' +
+          '<button class="win-btn" data-win-min title="Minimize">_</button>' +
+          '<button class="win-btn close" data-win-close title="Close">✕</button>' +
+        '</span>' +
+      '</div>' +
+      '<div class="float-body"></div>';
+
+    win.querySelector('.title-bar > span').textContent = title;
+    win.querySelector('.float-body').innerHTML = bodyHTML;
+
+    /* Posicion en cascada para que no se encimen exactamente */
+    var count = Object.keys(openWindows).length;
+    win.style.top = (70 + count * 26) + 'px';
+    win.style.left = (Math.min(window.innerWidth - 340, 120 + count * 26)) + 'px';
+
+    document.body.appendChild(win);
+    focusWindow(win);
+
+    /* Boton en la barra de tareas */
+    var task = document.createElement('button');
+    task.className = 'task-btn';
+    task.textContent = title;
+    task.addEventListener('click', function () {
+      win.classList.toggle('minimized');
+      if (!win.classList.contains('minimized')) focusWindow(win);
+      SFX.nav();
+    });
+    taskItems.appendChild(task);
+
+    openWindows[id] = { win: win, task: task };
+
+    win.addEventListener('pointerdown', function () { focusWindow(win); });
+    win.querySelector('[data-win-close]').addEventListener('click', function () {
+      closeWindow(id);
+    });
+    win.querySelector('[data-win-min]').addEventListener('click', function () {
+      win.classList.add('minimized');
+      SFX.nav();
+    });
+
+    makeDraggable(win, win.querySelector('.title-bar'));
+    SFX.chime();
+    return win;
+  }
+
+  function closeWindow(id) {
+    var entry = openWindows[id];
+    if (!entry) return;
+    if (id === 'music') stopPlayback();
+    entry.win.parentNode.removeChild(entry.win);
+    entry.task.parentNode.removeChild(entry.task);
+    delete openWindows[id];
+    SFX.tab();
+  }
+
+  /* Arrastre con puntero: sirve igual con mouse y con dedo */
+  function makeDraggable(win, handle) {
+    var startX = 0, startY = 0, originX = 0, originY = 0, dragging = false;
+
+    handle.addEventListener('pointerdown', function (e) {
+      if (e.target.closest('.win-btn')) return; // no arrastrar desde los botones
+      dragging = true;
+      win.classList.add('dragging');
+      startX = e.clientX;
+      startY = e.clientY;
+      var rect = win.getBoundingClientRect();
+      originX = rect.left;
+      originY = rect.top;
+      handle.setPointerCapture(e.pointerId);
+    });
+
+    handle.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      var x = originX + (e.clientX - startX);
+      var y = originY + (e.clientY - startY);
+      /* No dejar que la ventana se pierda fuera de la pantalla */
+      x = Math.max(-win.offsetWidth + 80, Math.min(window.innerWidth - 80, x));
+      y = Math.max(0, Math.min(window.innerHeight - 60, y));
+      win.style.left = x + 'px';
+      win.style.top = y + 'px';
+    });
+
+    function endDrag(e) {
+      if (!dragging) return;
+      dragging = false;
+      win.classList.remove('dragging');
+      try { handle.releasePointerCapture(e.pointerId); } catch (err) {}
+    }
+
+    handle.addEventListener('pointerup', endDrag);
+    handle.addEventListener('pointercancel', endDrag);
+  }
+
+  /* =====================================================
+     9. ICONOS DEL ESCRITORIO
+     PLACEHOLDER: el texto de README.txt es de relleno,
+     cambialo por lo que quieras que lea la gente.
+     ===================================================== */
+  var README_TEXT =
+    '<h3>README.txt</h3>' +
+
+    '<p><strong>What this is.</strong> A portfolio that refuses to look like one.</p>' +
+
+    '<p><strong>Inspired by.</strong> The personal web of 1998 to 2003, back when a website was a place ' +
+    'someone made rather than a template someone filled in. Hit counters, guestbooks, CRT monitors, ' +
+    'a cursor that turns into something when you hover over it. Credit where it is due: gakhed.com ' +
+    'reminded me that a website can have a hand in it.</p>' +
+
+    '<p><strong>How it is built.</strong> I am no web developer, this site was built by hand with blood (HTML), sweat (CSS) and tears (plain JavaScript).</p>' +
+
+    '<p><strong>Things you may have walked past:</strong></p>' +
+    '<ul>' +
+      '<li>The sounds are not audio files. Every beep is synthesized live by the browser with the Web Audio ' +
+      'API. Square waves, 18 milliseconds, zero bytes downloaded.</li>' +
+      '<li>The cursors are pixel art, drawn one pixel at a time on a 16 by 16 grid and scaled with nearest ' +
+      'neighbour so the edges stay hard.</li>' +
+      '<li>The wallpaper behind this window is not decoration. It is the solver from my thesis, integrating ' +
+      'the Friedmann and Klein-Gordon equations through the end of inflation. It runs.</li>' +
+      '<li>Minimize the window. Drag one open. Try to close this log.</li>' +
+    '</ul>' +
+
+    '<p><strong>Why bother.</strong> The same stubbornness that goes into making a numerical integrator ' +
+    'converge goes into everything else I build. And if I am going to keep a corner of the internet, ' +
+    'it may as well be one I made rather than one I rented.</p>' +
+
+    '<p>Last modified: 2026 &middot; Luis A. Quiroz &middot; Mexico City</p>';
+
+  var deskActions = {
+    cv:        function () { window.open('CV_2026_lq.pdf', '_blank'); },
+    readme:    function () { openWindow('readme', 'README.txt', README_TEXT); },
+    dashboard: function () { window.open('https://lobby9000.github.io/Retail-Business-Data-Cases/dashboard/', '_blank'); },
+    github:    function () { window.open('https://github.com/lobby9000', '_blank'); },
+    music:     function () { openMusicPlayer(); }
+  };
+
+  document.querySelectorAll('.desk-icon').forEach(function (icon) {
+    icon.addEventListener('click', function () {
+      document.querySelectorAll('.desk-icon').forEach(function (i) { i.classList.remove('selected'); });
+      icon.classList.add('selected');
+      SFX.nav();
+      deskActions[icon.dataset.open]();
+      /* El resaltado se apaga solo: con un solo clic ya no hay
+         un estado "seleccionado" que valga la pena sostener. */
+      setTimeout(function () { icon.classList.remove('selected'); }, 400);
+    });
+    icon.addEventListener('mouseenter', function () {
+      setStatus(icon.textContent.trim());
+    });
+  });
+
+  /* =====================================================
+     10. CADA PROYECTO EN SU VENTANA
+     Se agrega un boton a cada tarjeta sin tocar el HTML:
+     el contenido de la ventana es la tarjeta misma.
+     ===================================================== */
+  document.querySelectorAll('.project-card').forEach(function (card, index) {
+    var row = card.querySelector('.link-row');
+    if (!row) return;
+    var btn = document.createElement('button');
+    btn.className = 'open-win-btn';
+    btn.textContent = '⧉ Open in window';
+    btn.addEventListener('click', function () {
+      var title = card.querySelector('h3').textContent.replace(/\s+/g, ' ').trim();
+      var clone = card.cloneNode(true);
+      var extra = clone.querySelector('.open-win-btn');
+      if (extra) extra.parentNode.removeChild(extra);
+      openWindow('project-' + index, title.slice(0, 34), clone.innerHTML);
+    });
+    row.appendChild(btn);
+    btn.addEventListener('mouseenter', SFX.hover);
+  });
+
+  /* =====================================================
+     10b. VISOR DE IMAGENES
+     Clic en una captura y se abre en su propia ventana.
+     Ahi adentro el cursor cambia a la lupa de alejar.
+     ===================================================== */
+  document.querySelectorAll('.shot').forEach(function (img, i) {
+    img.addEventListener('click', function () {
+      var caption = img.getAttribute('alt') || 'image';
+      openWindow('viewer-' + i, caption.slice(0, 30),
+        '<img class="viewer-image" src="' + img.getAttribute('src') + '" alt="' + caption + '">');
+    });
+  });
+
+ /* =====================================================
+     11. REPRODUCTOR (ENLACE A SPOTIFY)
+     ===================================================== */
+  var SPOTIFY_PLAYLIST = 'https://open.spotify.com/playlist/6D84k6G9j3NSTa0Bl5W5hD?si=BSE7tNmUQxOvfnYYk6d_og';
+
+  var vizTimer = null;
+
+  function playerMarkup() {
+    return '' +
+      '<div class="player-pane active">' +
+        '<div class="player-display">' +
+          '<span class="now">My Favorite Tracks</span><br>' +
+          '<span class="meta">Currently Vibing...</span>' +
+        '</div>' +
+        '<div class="viz" id="viz"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>' +
+        '<div class="player-controls" style="justify-content: center; padding: 15px 0;">' +
+          '<button id="btnJoin" style="padding: 8px 16px; font-size: 18px; width: 100%; cursor: url(\'cursor-hand.png\') 10 0, pointer;">▶ Wanna join me?</button>' +
+        '</div>' +
+        '<p class="hint">Click to open my Spotify playlist in a new tab!</p>' +
+      '</div>';
+  }
+
+  function openMusicPlayer() {
+    var existed = !!openWindows['music'];
+    var win = openWindow('music', 'media_player.exe', playerMarkup(), 'player');
+    if (existed) return;
+
+    var btnJoin = win.querySelector('#btnJoin');
+    
+    // Al hacer clic, reproduce el sonidito y abre Spotify en otra pestaña
+    btnJoin.addEventListener('click', function () {
+      SFX.chime();
+      window.open(SPOTIFY_PLAYLIST, '_blank');
+    });
+    
+    // Sonidito de hover
+    btnJoin.addEventListener('mouseenter', SFX.hover);
+
+    // Iniciar el visualizador falso por estética
+    startFakeViz(win);
+  }
+
+  function startFakeViz(win) {
+    clearInterval(vizTimer);
+    var bars = win.querySelectorAll('.viz i');
+    if (!bars.length) return;
+    
+    // Hace que las barras bailen aleatoriamente simulando música
+    vizTimer = setInterval(function () {
+      bars.forEach(function (bar) {
+        bar.style.height = (10 + Math.random() * 80) + '%';
+      });
+    }, 150);
+  }
+
+  function stopPlayback() {
+    // Esta función es llamada internamente por closeWindow() cuando cierras el reproductor
+    clearInterval(vizTimer);
+  }
+  /* =====================================================
+     12. GALAXY GALLERY (FLOATING MOSAIC)
+     We generate the gallery's HTML and open it using
+     your own openWindow() function to keep the styling.
+     ===================================================== */
+  var GALERIA_HTML = 
+    '<div class="panel-intro">Click on any image to open the detailed viewer. Windows can be resized from the bottom-right corner.</div>' +
+    '<div class="mosaico-grid">' +
+      
+      '<figure>' +
+        '<img class="shot-mosaico" src="gal.png" alt="Sample of 9 random incorrect classifications generated by the Convolutional Neural Network (CNN). Compares the real label (0 = Early-type, 1 = Late-type) against the model predictions to analyze discrimination challenges.">' +
+        '<figcaption>Error Analysis (Real vs. Prediction)</figcaption>' +
+      '</figure>' +
+
+      '<!-- IMAGE 2: MATRIZ DE CONFUSIÓN (INCEPTION V3) -->' +
+      '<figure>' +
+        '<img class="shot-mosaico" src="confmax.png" alt="Confusion Matrix for the Transfer Learning model (InceptionV3). Unlike the baseline CNN, this architecture successfully handles the dataset\'s class imbalance, achieving a perfectly balanced recall of 86% across both early-type and late-type galaxies.">' +
+        '<figcaption>Confusion Matrix (InceptionV3)</figcaption>' +
+      '</figure>' +
+
+      '<!-- IMAGE 3: CURVAS DE ENTRENAMIENTO (ACCURACY / LOSS) -->' +
+      '<figure>' +
+        '<img class="shot-mosaico" src="acu.png" alt="Training and Validation metrics across epochs. The InceptionV3 model demonstrates stable convergence and effective feature extraction, reaching an overall accuracy of ~86% with minimal overfitting compared to earlier iterations.">' +
+        '<figcaption>Training vs. Validation Metrics</figcaption>' +
+      '</figure>' +
+
+    '</div>';
+
+  var btnGaleria = document.getElementById('btnAbrirGaleria');
+  if (btnGaleria) {
+    btnGaleria.addEventListener('click', function() {
+      SFX.chime();
+      // We use your system to open the gallery in a large XP window
+      var winGaleria = openWindow('galaxy-gallery', 'CNN_Classification_Gallery', GALERIA_HTML);
+      
+      // Make it a bit larger by default
+      winGaleria.style.width = "650px"; 
+      winGaleria.style.height = "450px";
+
+      // Connect the image viewer to each photo in the mosaic
+      winGaleria.querySelectorAll('.shot-mosaico').forEach(function (img, i) {
+        img.addEventListener('click', function () {
+          var caption = img.getAttribute('alt') || 'Image';
+          var imgHtml = '<img class="viewer-image" src="' + img.getAttribute('src') + '" alt="' + caption + '" style="max-width:100%; display:block; margin:auto;">' +
+                        '<p style="margin-top:12px; font-size:13px; color:#333; line-height:1.4;">' + caption + '</p>';
+          
+          openWindow('viewer-gallery-' + i, 'Image_Viewer', imgHtml);
+        });
+        img.addEventListener('mouseenter', SFX.hover);
+      });
+    });
+    btnGaleria.addEventListener('mouseenter', SFX.hover);
+  }
+  /* =====================================================
+     13. FLUID SIMULATIONS GALLERY (FLOATING MOSAIC)
+     We generate the gallery's HTML and open it using
+     your own openWindow() function to keep the styling.
+     ===================================================== */
+  var GALERIA_FLUIDOS_HTML = 
+    '<div class="panel-intro">Click on any image to open the detailed viewer. Windows can be resized from the bottom-right corner.</div>' +
+    '<div class="mosaico-grid">' +
+      
+      '<figure>' +
+        '<img class="shot-mosaico" src="output_0052.png" alt="Two-dimensional hydrodynamic simulation of an astrophysical jet without radiative cooling at t=52 yr. Displays density, pressure, temperature, and velocity magnitude. A bow shock is clearly visible extending beyond the main jet structure, with distinct knots formed by varying injection velocities. Temperature is significantly higher immediately behind the bow shock.">' +
+        '<figcaption>Adiabatic Jet (t=52 yr)</figcaption>' +
+      '</figure>' +
+
+      '<figure>' +
+        '<img class="shot-mosaico" src="output_0100.png" alt="Two-dimensional hydrodynamic simulation of an astrophysical jet without radiative cooling at t=100 yr. Displays density, pressure, temperature, and velocity magnitude.">' +
+        '<figcaption>Adiabatic Jet (t=100 yr)</figcaption>' +
+      '</figure>' +
+      
+      '<figure>' +
+        '<img class="shot-mosaico" src="output_0052_2.png" alt="Two-dimensional hydrodynamic simulation of an astrophysical jet including radiative cooling at t=52 yr. Displays density, pressure, temperature, and velocity magnitude.">' +
+        '<figcaption>Radiative Cooling Jet (t=52 yr)</figcaption>' +
+      '</figure>' +
+
+      '<figure>' +
+        '<img class="shot-mosaico" src="output_0100_2.png" alt="Two-dimensional hydrodynamic simulation of an astrophysical jet including radiative cooling at t=100 yr. Displays density, pressure, temperature, and velocity magnitude. Compared to the adiabatic case, the bow shock is narrower and the jet appears more compact. High-density regions show higher relative velocities, creating zones of increased pressure (knots). The bow shock region has cooled significantly.">' +
+        '<figcaption>Radiative Cooling Jet (t=100 yr)</figcaption>' +
+      '</figure>' +
+
+    '</div>';
+
+  var btnGaleriaFluidos = document.getElementById('btnAbrirGaleriaFluidos');
+  if (btnGaleriaFluidos) {
+    btnGaleriaFluidos.addEventListener('click', function() {
+      SFX.chime();
+      var winGaleria = openWindow('fluidos-gallery', 'Astrophysical_Jet_Gallery', GALERIA_FLUIDOS_HTML);
+      
+      winGaleria.style.width = "650px"; 
+      winGaleria.style.height = "450px";
+
+      winGaleria.querySelectorAll('.shot-mosaico').forEach(function (img, i) {
+        img.addEventListener('click', function () {
+          var caption = img.getAttribute('alt') || 'Image';
+          var imgHtml = '<img class="viewer-image" src="' + img.getAttribute('src') + '" alt="' + caption + '" style="max-width:100%; display:block; margin:auto;">' +
+                        '<p style="margin-top:12px; font-size:13px; color:#333; line-height:1.4;">' + caption + '</p>';
+          
+          openWindow('viewer-fluidos-' + i, 'Image_Viewer', imgHtml);
+        });
+        img.addEventListener('mouseenter', SFX.hover);
+      });
+    });
+    btnGaleriaFluidos.addEventListener('mouseenter', SFX.hover);
+  }
+  /* =====================================================
+     14. ASTROSTATISTICS GALLERY (FLOATING MOSAIC)
+     Generates the gallery HTML and opens it in a new window.
+     ===================================================== */
+  var GALERIA_ASTRO_HTML = 
+    '<div class="panel-intro">Click on any image to open the detailed viewer. Windows can be resized from the bottom-right corner.</div>' +
+    '<div class="mosaico-grid">' +
+      
+      '<figure>' +
+        '<img class="shot-mosaico" src="hist_comparacion.png" alt="Comparison between the proposed exponential probabilistic model and the theoretical gamma model based on Wiens law for stellar temperatures. The Akaike Information Criterion (AIC) favored the gamma distribution (AIC: 4908.98).">' +
+        '<figcaption>Probabilistic vs. Theoretical Model</figcaption>' +
+      '</figure>' +
+
+      '<figure>' +
+        '<img class="shot-mosaico" src="hist4.png" alt="Temperature distributions after applying the Box-Cox transformation. Despite the transformation, the dataset remained right-skewed and failed the normality hypothesis tests.">' +
+        '<figcaption>Box-Cox Transformation Attempts</figcaption>' +
+      '</figure>' +
+
+      '<figure>' +
+        '<img class="shot-mosaico" src="hist5.png" alt="Histograms showing the dataset before and after applying the Ordered Quantile normalization technique. This method successfully achieved normality (p-value = 1), allowing for valid confidence interval estimation.">' +
+        '<figcaption>Ordered Quantile Normalization</figcaption>' +
+      '</figure>' +
+
+      '<figure>' +
+        '<img class="shot-mosaico" src="Pasted image.png" alt="Table 1.1: 92% Confidence Intervals estimating the difference in means between 15 pairs of stellar spectral classes. The inclusion of zero in all intervals indicates statistical similarity in the normalized means.">' +
+        '<figcaption>Confidence Intervals Analysis</figcaption>' +
+      '</figure>' +
+
+    '</div>';
+
+  var btnGaleriaAstro = document.getElementById('btnAbrirGaleriaAstro');
+  if (btnGaleriaAstro) {
+    btnGaleriaAstro.addEventListener('click', function() {
+      SFX.chime();
+      var winGaleria = openWindow('astro-gallery', 'Astrostatistics_Gallery', GALERIA_ASTRO_HTML);
+      
+      winGaleria.style.width = "650px"; 
+      winGaleria.style.height = "450px";
+
+      winGaleria.querySelectorAll('.shot-mosaico').forEach(function (img, i) {
+        img.addEventListener('click', function () {
+          var caption = img.getAttribute('alt') || 'Image';
+          var imgHtml = '<img class="viewer-image" src="' + img.getAttribute('src') + '" alt="' + caption + '" style="max-width:100%; display:block; margin:auto;">' +
+                        '<p style="margin-top:12px; font-size:13px; color:#333; line-height:1.4;">' + caption + '</p>';
+          
+          openWindow('viewer-astro-' + i, 'Image_Viewer', imgHtml);
+        });
+        img.addEventListener('mouseenter', SFX.hover);
+      });
+    });
+    btnGaleriaAstro.addEventListener('mouseenter', SFX.hover);
+  }
+  /* =====================================================
+     15. MILKY WAY GALLERY (FLOATING MOSAIC)
+     ===================================================== */
+  var GALERIA_MW_HTML = 
+    '<div class="panel-intro">Click on any image to open the detailed viewer. Windows can be resized from the bottom-right corner.</div>' +
+    '<div class="mosaico-grid">' +
+      '<figure><img class="shot-mosaico" src="mw-density.png" alt="Two-dimensional stellar density map projected onto the Galactocentric XY plane. It shows a high-density region around the solar position and radial arms reflecting APOGEE line-of-sight fields."><figcaption>Stellar Density Map (XY)</figcaption></figure>' +
+      '<figure><img class="shot-mosaico" src="mw-vector.png" alt="Vector field representing mean radial and azimuthal velocities. It displays a globally coherent rotational pattern and clear radial streaming motions where arrows point inward or outward."><figcaption>Velocity Vector Field</figcaption></figure>' +
+      '<figure><img class="shot-mosaico" src="mw-dbscan.png" alt="Moving groups identified using the DBSCAN algorithm (epsilon = 3.5 km/s, min_samples = 7) in the UV plane, mapped against classical boundaries like the Hercules moving group[cite: 6]."><figcaption>DBSCAN Kinematic Clusters</figcaption></figure>' +
+      '<figure><img class="shot-mosaico" src="mw-rotation.png" alt="Galactic rotation curve showing the median azimuthal velocity (LSR corrected) across a radial range of 6 to 12 kpc, presenting canonical flatness beyond 8.5 kpc."><figcaption>Galactic Rotation Curve</figcaption></figure>' +
+    '</div>';
+
+  var btnGaleriaMW = document.getElementById('btnAbrirGaleriaMW');
+  if (btnGaleriaMW) {
+    btnGaleriaMW.addEventListener('click', function() {
+      SFX.chime();
+      var winGaleria = openWindow('mw-gallery', 'Milky_Way_Structure', GALERIA_MW_HTML);
+      winGaleria.style.width = "650px"; winGaleria.style.height = "450px";
+      winGaleria.querySelectorAll('.shot-mosaico').forEach(function (img, i) {
+        img.addEventListener('click', function () {
+          var caption = img.getAttribute('alt') || 'Image';
+          var imgHtml = '<img class="viewer-image" src="' + img.getAttribute('src') + '" alt="' + caption + '" style="max-width:100%; display:block; margin:auto;">' +
+                        '<p style="margin-top:12px; font-size:13px; color:#333; line-height:1.4;">' + caption + '</p>';
+          openWindow('viewer-mw-' + i, 'Image_Viewer', imgHtml);
+        });
+        img.addEventListener('mouseenter', SFX.hover);
+      });
+    });
+    btnGaleriaMW.addEventListener('mouseenter', SFX.hover);
+  }
+
+  /* =====================================================
+     16. GALACTIC BAR GALLERY (FLOATING MOSAIC)
+     ===================================================== */
+  var GALERIA_BAR_HTML = 
+    '<div class="panel-intro">Click on any image to open the detailed viewer. Windows can be resized from the bottom-right corner.</div>' +
+    '<div class="mosaico-grid">' +
+      '<figure><img class="shot-mosaico" src="bar-snapshots.png" alt="Six simulation snapshots demonstrating the time evolution of a dynamically cold stellar disc. As the bar potential grows, non-circular orbits emerge, deforming the system along a preferred axis."><figcaption>Phase-Space Evolution</figcaption></figure>' +
+      '<figure><img class="shot-mosaico" src="bar-energy.png" alt="Final vs. Initial specific energies of the test particles. All points lie above the identity line, meaning every single particle experienced a net energy gain due to the time-varying potential."><figcaption>Energy Gain Analysis</figcaption></figure>' +
+      '<figure><img class="shot-mosaico" src="bar-radial.png" alt="Energy gain plotted against initial radial position. The monotonic increase indicates that outer disc particles absorbed significantly more energy than inner disc particles during the bar growth."><figcaption>Radial Energy Redistribution</figcaption></figure>' +
+    '</div>';
+
+  var btnGaleriaBar = document.getElementById('btnAbrirGaleriaBar');
+  if (btnGaleriaBar) {
+    btnGaleriaBar.addEventListener('click', function() {
+      SFX.chime();
+      var winGaleria = openWindow('bar-gallery', 'Galactic_Bar_Dynamics', GALERIA_BAR_HTML);
+      winGaleria.style.width = "650px"; winGaleria.style.height = "450px";
+      winGaleria.querySelectorAll('.shot-mosaico').forEach(function (img, i) {
+        img.addEventListener('click', function () {
+          var caption = img.getAttribute('alt') || 'Image';
+          var imgHtml = '<img class="viewer-image" src="' + img.getAttribute('src') + '" alt="' + caption + '" style="max-width:100%; display:block; margin:auto;">' +
+                        '<p style="margin-top:12px; font-size:13px; color:#333; line-height:1.4;">' + caption + '</p>';
+          openWindow('viewer-bar-' + i, 'Image_Viewer', imgHtml);
+        });
+        img.addEventListener('mouseenter', SFX.hover);
+      });
+    });
+    btnGaleriaBar.addEventListener('mouseenter', SFX.hover);
+  }
+  </script>
+</body>
+</html>
