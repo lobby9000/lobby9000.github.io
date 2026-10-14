@@ -64,6 +64,9 @@
           "url": "https://lobby9000.github.io/Retail-Business-Data-Cases/dashboard/"
         }
       ],
+      "demos": [
+        "retail"
+      ],
       "repo": "lobby9000/Retail-Business-Data-Cases"
     },
     {
@@ -105,6 +108,10 @@
           "label": "Repository",
           "url": "https://github.com/lobby9000/macd-toolkit"
         }
+      ],
+      "demos": [
+        "macd",
+        "btc"
       ],
       "repo": "lobby9000/macd-toolkit",
       "ci_workflow": "tests.yml"
@@ -250,6 +257,9 @@
           "url": "https://github.com/lobby9000/class-notes-pipeline"
         }
       ],
+      "demos": [
+        "notes"
+      ],
       "repo": "lobby9000/class-notes-pipeline",
       "ci_workflow": "tests.yml"
     },
@@ -353,6 +363,9 @@
           "url": "assets/qa/newman-incentive-comp-rc2.html"
         }
       ],
+      "demos": [
+        "qa"
+      ],
       "repo": "lobby9000/incentive-comp-qa",
       "ci_workflow": "qa.yml",
       "images": [
@@ -390,6 +403,9 @@
           "label": "Repository",
           "url": "https://github.com/lobby9000/vigia"
         }
+      ],
+      "demos": [
+        "vigia"
       ],
       "repo": "lobby9000/vigia",
       "ci_workflow": "ci.yml",
@@ -431,6 +447,9 @@
           "url": "assets/qa/newman-macd-1.0.0.html"
         }
       ],
+      "demos": [
+        "api"
+      ],
       "repo": "lobby9000/macd-signal-api",
       "ci_workflow": "ci.yml"
     },
@@ -456,6 +475,9 @@
           "label": "Notebook on Google Colab",
           "url": "https://colab.research.google.com/drive/1WU9EHqw5BTEdtey-hU27ECNP07T4Ge6S?usp=sharing"
         }
+      ],
+      "demos": [
+        "inflation"
       ]
     },
     {

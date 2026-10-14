@@ -97,6 +97,14 @@ def validate(data: dict, root: Path = ROOT) -> list[str]:
                 problems.append(f"{where}: links to {m.group(1)}, which is not its repo ({repo})")
         if p.get("ci_workflow") and not repo:
             problems.append(f"{where}: ci_workflow needs repo")
+        demos = p.get("demos", [])
+        if not isinstance(demos, list) or not all(isinstance(d, str) and re.fullmatch(r"[a-z0-9]+", d) for d in demos):
+            problems.append(f"{where}: demos must be a list of terminal commands (lowercase letters and digits)")
+        else:
+            registered = demo_commands(root)
+            for d in demos:
+                if d not in registered:
+                    problems.append(f"{where}: demo {d!r} is not registered in assets/apps/demos.js")
         if p.get("status") == "live" and not p.get("links") and not p.get("note"):
             problems.append(f"{where}: a live project needs a link or a note explaining why not")
 
@@ -111,6 +119,14 @@ def validate(data: dict, root: Path = ROOT) -> list[str]:
         elif not match[0].get("featured"):
             problems.append(f"featured_order: {slug!r} is not marked featured")
     return problems
+
+
+def demo_commands(root: Path = ROOT) -> set[str]:
+    """Commands the terminal registers as project demos (the LISTA in assets/apps/demos.js)."""
+    path = root / "assets" / "apps" / "demos.js"
+    if not path.is_file():
+        return set()
+    return set(re.findall(r"\{ comando: '([a-z0-9]+)', proyecto:", path.read_text(encoding="utf-8")))
 
 
 def load(path: Path = DATA) -> dict:
@@ -184,6 +200,10 @@ def card(p: dict, pad: str) -> str:
                 for link in p.get("links", [])]
         if p.get("ci_workflow"):
             out.append(f"{pad}    {badge(p)}")
+        # Each demo opens the site's terminal and runs that command (assets/apps/demos.js)
+        out += [f'{pad}    <button class="demo-btn" type="button" data-demo="{esc(d)}" '
+                f'title="Run the {esc(d)} demo in the terminal">&#9654; {esc(d)}</button>'
+                for d in p.get("demos", [])]
     out.append(f"{pad}  </div>")
     out.append(f"{pad}</article>")
     return "\n".join(out)

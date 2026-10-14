@@ -16,6 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=VT323&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/apps/apps.css">
 
   <style>
     /* =====================================================
@@ -683,16 +684,23 @@
        icon-music. Para cambiar alguno, basta con reemplazar
        el PNG conservando el nombre.
        ===================================================== */
+    /* Una columna de iconos y, si no cabe en la pantalla, otra.
+       La rejilla no atrapa clics: solo los iconos. */
     .desktop-icons {
       position: fixed;
       top: 18px;
       left: 18px;
       z-index: 3;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-auto-flow: column;
+      grid-template-rows: repeat(auto-fill, minmax(76px, auto));
+      grid-auto-columns: 92px;
       gap: 4px;
-      width: 92px;
+      height: calc(100vh - 70px);
+      pointer-events: none;
     }
+
+    .desktop-icons .desk-icon { pointer-events: auto; align-self: start; }
 
     .desk-icon {
       background: transparent;
@@ -981,9 +989,12 @@
     <button class="desk-icon" data-open="cv"><img class="glyph" src="assets/ui/icons/icon-cv.png" alt="CV"><span>CV_2026.pdf</span></button>
     <button class="desk-icon" data-open="recruiter"><img class="glyph" src="assets/ui/icons/icon-briefcase-32.png" alt="Recruiter view"><span>recruiter.htm</span></button>
     <button class="desk-icon" data-open="readme"><img class="glyph" src="assets/ui/icons/icon-readme.png" alt="README"><span>README.txt</span></button>
+    <button class="desk-icon" data-open="terminal"><img class="glyph" src="assets/ui/icons/icon-cmd.png" alt="Command Prompt"><span>cmd.exe</span></button>
     <button class="desk-icon" data-open="dashboard"><img class="glyph" src="assets/ui/icons/icon-dashboard.png" alt="Dashboard"><span>dashboard.exe</span></button>
     <button class="desk-icon" data-open="github"><img class="glyph" src="assets/ui/icons/icon-github.png" alt="GitHub"><span>github.url</span></button>
     <button class="desk-icon" data-open="music"><img class="glyph" src="assets/ui/icons/icon-music.png" alt="Player"><span>player.exe</span></button>
+    <button class="desk-icon" data-open="minesweeper"><img class="glyph" src="assets/ui/icons/icon-mines.png" alt="Minesweeper"><span>winmine.exe</span></button>
+    <button class="desk-icon" data-open="jewels"><img class="glyph" src="assets/ui/icons/icon-jewels.png" alt="Jewels"><span>jewels.exe</span></button>
   </div>
 
   <div class="xp-window" id="xpWindow">
@@ -1020,6 +1031,7 @@
           <hr>
           <p>Welcome to my Professional Log, the academic and technical side of this site. Here you will find my CV, my master's thesis, the projects I have built and a collection of written work.</p>
           <p>In a hurry? The <a href="cv.html">recruiter view</a> has the essentials on one plain page, with no animations and the CV in English and Spanish.</p>
+          <p><strong>Try it here.</strong> Most projects have a small demo that runs on this page: open the <a href="professional.html?app=terminal" data-app="terminal">Command Prompt</a> from the desktop or the start menu, or press <strong>▶</strong> on a project card. Each demo computes in your browser and then checks itself against the numbers the project's own Python code produced. For the breaks, Minesweeper and Jewels live in the start menu.</p>
           <p><strong>Note:</strong> this space is reserved for my professional and academic work. If you are looking for something more personal or relaxed, such as the blog where I will write about recent scientific papers, technology and other topics outside my thesis, head back to the main portal and select the <strong>Personal Hub</strong>.</p>
         </div>
 
@@ -1120,6 +1132,7 @@
               <div class="link-row">
                 <a href="https://github.com/lobby9000/Retail-Business-Data-Cases" target="_blank" rel="noopener">Repository</a>
                 <a href="https://lobby9000.github.io/Retail-Business-Data-Cases/dashboard/" target="_blank" rel="noopener">Open the live dashboard</a>
+                <button class="demo-btn" type="button" data-demo="retail" title="Run the retail demo in the terminal">&#9654; retail</button>
               </div>
             </article>
             <article class="project-card" id="project-macd-toolkit">
@@ -1140,6 +1153,8 @@
               <div class="link-row">
                 <a href="https://github.com/lobby9000/macd-toolkit" target="_blank" rel="noopener">Repository</a>
                 <a class="ci-link" href="https://github.com/lobby9000/macd-toolkit/actions/workflows/tests.yml" target="_blank" rel="noopener"><img class="ci-badge" src="https://github.com/lobby9000/macd-toolkit/actions/workflows/tests.yml/badge.svg" alt="Test status of macd-toolkit" loading="lazy"></a>
+                <button class="demo-btn" type="button" data-demo="macd" title="Run the macd demo in the terminal">&#9654; macd</button>
+                <button class="demo-btn" type="button" data-demo="btc" title="Run the btc demo in the terminal">&#9654; btc</button>
               </div>
             </article>
             <article class="project-card" id="project-milky-way">
@@ -1202,6 +1217,7 @@
               <div class="link-row">
                 <a href="https://github.com/lobby9000/class-notes-pipeline" target="_blank" rel="noopener">Repository</a>
                 <a class="ci-link" href="https://github.com/lobby9000/class-notes-pipeline/actions/workflows/tests.yml" target="_blank" rel="noopener"><img class="ci-badge" src="https://github.com/lobby9000/class-notes-pipeline/actions/workflows/tests.yml/badge.svg" alt="Test status of class-notes-pipeline" loading="lazy"></a>
+                <button class="demo-btn" type="button" data-demo="notes" title="Run the notes demo in the terminal">&#9654; notes</button>
               </div>
             </article>
             <article class="project-card" id="project-small-llm">
@@ -1257,6 +1273,7 @@
                 <a href="https://github.com/lobby9000/incentive-comp-qa" target="_blank" rel="noopener">Repository</a>
                 <a href="assets/qa/newman-incentive-comp-rc2.html" target="_blank" rel="noopener">Newman report</a>
                 <a class="ci-link" href="https://github.com/lobby9000/incentive-comp-qa/actions/workflows/qa.yml" target="_blank" rel="noopener"><img class="ci-badge" src="https://github.com/lobby9000/incentive-comp-qa/actions/workflows/qa.yml/badge.svg" alt="Test status of incentive-comp-qa" loading="lazy"></a>
+                <button class="demo-btn" type="button" data-demo="qa" title="Run the qa demo in the terminal">&#9654; qa</button>
               </div>
             </article>
             <article class="project-card" id="project-vigia">
@@ -1274,6 +1291,7 @@
               <div class="link-row">
                 <a href="https://github.com/lobby9000/vigia" target="_blank" rel="noopener">Repository</a>
                 <a class="ci-link" href="https://github.com/lobby9000/vigia/actions/workflows/ci.yml" target="_blank" rel="noopener"><img class="ci-badge" src="https://github.com/lobby9000/vigia/actions/workflows/ci.yml/badge.svg" alt="Test status of vigia" loading="lazy"></a>
+                <button class="demo-btn" type="button" data-demo="vigia" title="Run the vigia demo in the terminal">&#9654; vigia</button>
               </div>
             </article>
             <article class="project-card" id="project-macd-signal-api">
@@ -1288,6 +1306,7 @@
                 <a href="https://github.com/lobby9000/macd-signal-api" target="_blank" rel="noopener">Repository</a>
                 <a href="assets/qa/newman-macd-1.0.0.html" target="_blank" rel="noopener">Newman report</a>
                 <a class="ci-link" href="https://github.com/lobby9000/macd-signal-api/actions/workflows/ci.yml" target="_blank" rel="noopener"><img class="ci-badge" src="https://github.com/lobby9000/macd-signal-api/actions/workflows/ci.yml/badge.svg" alt="Test status of macd-signal-api" loading="lazy"></a>
+                <button class="demo-btn" type="button" data-demo="api" title="Run the api demo in the terminal">&#9654; api</button>
               </div>
             </article>
           </div>
@@ -1304,6 +1323,7 @@
               </ul>
               <div class="link-row">
                 <a href="https://colab.research.google.com/drive/1WU9EHqw5BTEdtey-hU27ECNP07T4Ge6S?usp=sharing" target="_blank" rel="noopener">Notebook on Google Colab</a>
+                <button class="demo-btn" type="button" data-demo="inflation" title="Run the inflation demo in the terminal">&#9654; inflation</button>
               </div>
             </article>
             <article class="project-card" id="project-astrophysical-jet">
@@ -1391,9 +1411,34 @@
     </div>
   </div>
 
+  <!-- MENU INICIO -->
+  <div class="menu-inicio" id="startMenu" hidden>
+    <div class="mi-cabeza"><img src="favicon.png" alt=""><span>Luis A. Quiroz</span></div>
+    <div class="mi-cuerpo">
+      <div class="mi-izq">
+        <button class="mi-item" data-mi="terminal"><img src="assets/ui/icons/icon-cmd.png" alt=""><span><b>Command Prompt</b><small>A demo of each project</small></span></button>
+        <button class="mi-item" data-mi="minesweeper"><img src="assets/ui/icons/icon-mines.png" alt=""><span><b>Minesweeper</b><small>Beginner to Expert</small></span></button>
+        <button class="mi-item" data-mi="jewels"><img src="assets/ui/icons/icon-jewels.png" alt=""><span><b>Jewels</b><small>Line up three gems or more</small></span></button>
+        <div class="mi-sep"></div>
+        <button class="mi-item" data-mi="readme"><img src="assets/ui/icons/icon-readme.png" alt=""><span><b>README.txt</b><small>How this site is made</small></span></button>
+      </div>
+      <div class="mi-der">
+        <button class="mi-item" data-mi="projects"><img src="assets/ui/icons/icon-folder.png" alt="">My Projects</button>
+        <button class="mi-item" data-mi="cv"><img src="assets/ui/icons/icon-cv.png" alt="">CV (PDF)</button>
+        <button class="mi-item" data-mi="recruiter"><img src="assets/ui/icons/icon-briefcase-32.png" alt="">Recruiter view</button>
+        <button class="mi-item" data-mi="github"><img src="assets/ui/icons/icon-github.png" alt="">GitHub</button>
+        <button class="mi-item" data-mi="music"><img src="assets/ui/icons/icon-music.png" alt="">Media Player</button>
+      </div>
+    </div>
+    <div class="mi-pie">
+      <button class="mi-salir" data-mi="logoff"><span class="mi-boton" aria-hidden="true">&larr;</span>Log Off</button>
+      <button class="mi-apagar" data-mi="apagar"><span class="mi-boton" aria-hidden="true">&times;</span>Turn Off Computer</button>
+    </div>
+  </div>
+
   <!-- BARRA DE TAREAS -->
   <div class="taskbar">
-    <button class="start-btn" id="startBtn">start</button>
+    <button class="start-btn" id="startBtn" aria-haspopup="true" aria-expanded="false" aria-controls="startMenu">start</button>
     <div class="task-items" id="taskItems">
       <button class="task-btn" id="taskBtn"><img class="ico" src="assets/ui/icons/icon-code.png" alt="">Professional_Log</button>
     </div>
@@ -1657,10 +1702,7 @@
     SFX.denied();
   });
 
-  document.getElementById('startBtn').addEventListener('click', function () {
-    openDialog('lqcorner', '💾', 'Nothing to start here. Try the portal instead: index.html');
-    SFX.chime();
-  });
+  /* El boton Inicio abre su menu (seccion 12) */
 
   /* =====================================================
      5. DIALOGO
@@ -1800,6 +1842,7 @@
     var entry = openWindows[id];
     if (!entry) return;
     if (id === 'music') stopPlayback();
+    if (entry.alCerrar) entry.alCerrar();     // las apps detienen relojes y demos
     entry.win.parentNode.removeChild(entry.win);
     entry.task.parentNode.removeChild(entry.task);
     delete openWindows[id];
@@ -1874,6 +1917,9 @@
       'Before each release, tests check that every link and image on the site resolves and that no card ' +
       'points at the wrong repository. If a test fails, nothing is published.</li>' +
       '<li>The badges on some cards are live: they show whether that project\'s own test suite is passing right now.</li>' +
+      '<li>cmd.exe on the desktop runs a small demo of each project in your browser, and each demo checks ' +
+      'its numbers against what the project\'s Python code produced. The games in the start menu are ' +
+      'written from scratch too.</li>' +
       '<li>Minimise the window. Drag one open. Try to close this log.</li>' +
     '</ul>' +
 
@@ -1892,7 +1938,10 @@
     readme:    function () { openWindow('readme', 'README.txt', README_TEXT); },
     dashboard: function () { window.open('https://lobby9000.github.io/Retail-Business-Data-Cases/dashboard/', '_blank'); },
     github:    function () { window.open('https://github.com/lobby9000', '_blank'); },
-    music:     function () { openMusicPlayer(); }
+    music:     function () { openMusicPlayer(); },
+    terminal:  function () { abrirTerminal(); },
+    minesweeper: function () { abrirBuscaminas(); },
+    jewels:    function () { abrirJewels(); }
   };
 
   document.querySelectorAll('.desk-icon').forEach(function (icon) {
@@ -2062,6 +2111,383 @@
     // Esta función es llamada internamente por closeWindow() cuando cierras el reproductor
     clearInterval(vizTimer);
   }
+
+  /* =====================================================
+     12. TERMINAL, DEMOS Y JUEGOS
+     Los scripts de assets/apps/ se cargan la primera vez
+     que se abre una de las aplicaciones: quien no las usa
+     no descarga nada de mas.
+     ===================================================== */
+  var APP_SCRIPTS = [
+    'assets/apps/demo-data.js', 'assets/apps/vendor/snowball-spanish.js', 'assets/apps/terminal.js',
+    'assets/apps/demos.js', 'assets/apps/minas.js', 'assets/apps/jewels.js'
+  ];
+  var appsCargadas = null;
+
+  function cargarApps() {
+    if (appsCargadas) return appsCargadas;
+    appsCargadas = new Promise(function (resolver, rechazar) {
+      var faltan = APP_SCRIPTS.length;
+      APP_SCRIPTS.forEach(function (src) {
+        var s = document.createElement('script');
+        s.src = src;
+        s.async = false;                       // se ejecutan en este orden
+        s.onload = function () { if (--faltan === 0) resolver(); };
+        s.onerror = function () { appsCargadas = null; rechazar(new Error(src)); };
+        document.head.appendChild(s);
+      });
+    });
+    return appsCargadas;
+  }
+
+  function conApps(accion) {
+    setStatus('loading...');
+    document.body.classList.add('busy');
+    cargarApps().then(function () {
+      document.body.classList.remove('busy');
+      setStatus('ready_');
+      accion();
+    }, function () {
+      document.body.classList.remove('busy');
+      setStatus('ready_');
+      openDialog('Error', '⚠️', 'The apps could not be loaded. Check the connection and try again.');
+      SFX.denied();
+    });
+  }
+
+  /* Que una ventana nueva no quede fuera de la pantalla (en un telefono, sobre todo) */
+  function encuadrar(win) {
+    var r = win.getBoundingClientRect();
+    if (r.right > window.innerWidth - 4) win.style.left = Math.max(4, window.innerWidth - r.width - 4) + 'px';
+    if (r.bottom > window.innerHeight - 40) win.style.top = Math.max(4, window.innerHeight - 40 - r.height) + 'px';
+  }
+
+  /* Sonidos de las aplicaciones: mismos bips sintetizados que el resto */
+  var SONIDOS_APP = {
+    abrir:   function () { beep(760, 18, 0.03); },
+    bandera: function () { beep(1240, 30, 0.035, 'triangle'); },
+    perdio:  function () { beep(330, 120, 0.05, 'sawtooth'); setTimeout(function () { beep(196, 240, 0.05, 'sawtooth'); }, 130); },
+    gano:    function () { [523, 659, 784, 1047].forEach(function (f, i) { setTimeout(function () { beep(f, 110, 0.045, 'triangle'); }, i * 95); }); },
+    elegir:  function () { beep(900, 16, 0.03); },
+    no:      function () { beep(220, 110, 0.045, 'sawtooth'); },
+    linea:   function () { beep(880, 60, 0.04, 'triangle'); },
+    combo:   function () { beep(880, 50, 0.04, 'triangle'); setTimeout(function () { beep(1320, 90, 0.04, 'triangle'); }, 60); },
+    listo:   function () { SFX.chime(); },
+    error:   function () { SFX.denied(); },
+    tecla:   function () { beep(1800, 6, 0.012); }
+  };
+  function sonidoApp(nombre) { if (SONIDOS_APP[nombre]) SONIDOS_APP[nombre](); }
+
+  var terminal = null;
+
+  function cuandoLibre(t, accion) {
+    if (!t.ocupada()) { accion(); return; }
+    t.interrumpir();
+    setTimeout(function () { cuandoLibre(t, accion); }, 30);
+  }
+
+  function abrirTerminal(comando) {
+    conApps(function () {
+      var existia = !!openWindows.terminal;
+      var win = openWindow('terminal', 'Command Prompt', '', 'app-win term-win');
+      if (!existia) {
+        terminal = LQTerminal.crear(win.querySelector('.float-body'), {
+          prompt: 'C:\\PORTFOLIO>',
+          sonido: sonidoApp,
+          tecla: SONIDOS_APP.tecla,
+          ordenGrupos: ['Project demos', 'Games', 'Site', 'Terminal'],
+          bienvenida: bienvenidaTerminal()
+        });
+        LQDemos.instalar(terminal, { sonido: sonidoApp, abrirProyecto: true });
+        instalarShell(terminal);
+        openWindows.terminal.alCerrar = function () { if (terminal) terminal.interrumpir(); terminal = null; };
+        encuadrar(win);
+      }
+      terminal.enfoque();
+      if (comando) cuandoLibre(terminal, function () { terminal.ejecutar(comando); });
+    });
+  }
+
+  function bienvenidaTerminal() {
+    var demos = [];
+    LQDemos.lista.forEach(function (d, i) {
+      if (i) demos.push(' ');
+      demos.push({ cmd: d.comando, t: d.comando });
+    });
+    return [
+      { contenido: 'LQ-DOS 5.1 \u00b7 lobby9000.github.io', clase: 'h' },
+      'Each project below has a small demo that runs on your computer and checks itself',
+      'against the numbers its Python code produced. Click a name or type it.',
+      '',
+      [{ t: 'demos  ', c: 'dim' }].concat(demos),
+      [{ t: 'games  ', c: 'dim' }, { cmd: 'minesweeper', t: 'minesweeper' }, ' ', { cmd: 'jewels', t: 'jewels' }],
+      [{ t: 'more   ', c: 'dim' }, { cmd: 'help', t: 'help' }, ' ', { cmd: 'dir', t: 'dir' }, ' ',
+        { cmd: 'whoami', t: 'whoami' }, ' ', { cmd: 'contact', t: 'contact' }],
+      ''
+    ];
+  }
+
+  function abrirBuscaminas() {
+    conApps(function () {
+      var existia = !!openWindows.minesweeper;
+      var win = openWindow('minesweeper', 'Minesweeper', '', 'app-win minas-win');
+      if (!existia) {
+        var juego = LQMinas.montar(win.querySelector('.float-body'), {
+          sonido: sonidoApp,
+          alCambiarNivel: function () { encuadrar(win); }
+        });
+        openWindows.minesweeper.alCerrar = function () { juego.destruir(); };
+      }
+      encuadrar(win);
+    });
+  }
+
+  function abrirJewels() {
+    conApps(function () {
+      var existia = !!openWindows.jewels;
+      var win = openWindow('jewels', 'Jewels', '', 'app-win jewels-win');
+      if (!existia) {
+        var juego = LQJewels.montar(win.querySelector('.float-body'), { sonido: sonidoApp });
+        openWindows.jewels.alCerrar = function () { juego.destruir(); };
+      }
+      encuadrar(win);
+    });
+  }
+
+  /* Abre la tarjeta de un proyecto en su ventana, como el boton "Open in window" */
+  function abrirTarjeta(slug) {
+    var card = document.querySelector('#projects #project-' + CSS.escape(slug));
+    var btn = card && card.querySelector('.open-win-btn');
+    if (!btn) return false;
+    btn.click();
+    return true;
+  }
+
+  function proyectos() {
+    return Array.prototype.map.call(document.querySelectorAll('#projects .project-card'), function (card) {
+      return { slug: card.id.replace(/^project-/, ''), titulo: card.querySelector('h3').firstChild.textContent.trim() };
+    });
+  }
+
+  var LUGARES = {
+    cv:        function () { window.open('assets/cv/CV_Luis_Angel_Quiroz_Lopez_EN.pdf', '_blank'); },
+    readme:    function () { deskActions.readme(); },
+    recruiter: function () { leaveTo('cv.html'); },
+    dashboard: function () { deskActions.dashboard(); },
+    github:    function () { window.open('https://github.com/lobby9000', '_blank'); },
+    linkedin:  function () { window.open('https://www.linkedin.com/in/llqq', '_blank'); },
+    minesweeper: function () { abrirBuscaminas(); },
+    jewels:    function () { abrirJewels(); }
+  };
+
+  function instalarShell(t) {
+    t.registrar('dir', {
+      grupo: 'Site', ayuda: 'What is on this drive. DIR PROJECTS lists the projects.', alias: ['ls'],
+      completar: function () { return ['projects']; },
+      correr: function (args, term) {
+        if (args[0] && /^projects?\/?$/i.test(args[0])) {
+          term.imprimir(' Directory of C:\\PORTFOLIO\\PROJECTS', 'dim');
+          term.imprimir('');
+          var demos = {};
+          LQDemos.lista.forEach(function (d) { (demos[d.proyecto] = demos[d.proyecto] || []).push(d.comando); });
+          proyectos().forEach(function (p) {
+            var fila = [{ cmd: 'open ' + p.slug, t: p.slug }, ' '.repeat(Math.max(1, 24 - p.slug.length)), p.titulo];
+            if (demos[p.slug]) fila.push({ t: '  demo: ' + demos[p.slug].join(', '), c: 'dim' });
+            term.imprimir(fila);
+          });
+          term.imprimir('');
+          term.imprimir('OPEN <name> opens a card in its own window.', 'dim');
+          return;
+        }
+        term.imprimir(' Volume in drive C is LOBBY9000', 'dim');
+        term.imprimir(' Directory of C:\\PORTFOLIO', 'dim');
+        term.imprimir('');
+        [['<DIR>', 'projects', 'dir projects', proyectos().length + ' projects'],
+         ['<DIR>', 'demos', 'demos', LQDemos.lista.length + ' demos that run here'],
+         ['', 'CV_EN.pdf', 'cv', 'my CV in English'],
+         ['', 'CV_ES.pdf', 'cv es', 'en espa\u00f1ol'],
+         ['', 'README.txt', 'type readme', 'how this site is made'],
+         ['', 'winmine.exe', 'minesweeper', 'Minesweeper'],
+         ['', 'jewels.exe', 'jewels', 'Jewels']].forEach(function (f) {
+          term.imprimir([{ t: (f[0] ? f[0] : '').padEnd(8, ' '), c: 'dim' }, { cmd: f[2], t: f[1] },
+            ' '.repeat(Math.max(1, 16 - f[1].length)), { t: f[3], c: 'dim' }]);
+        });
+      }
+    });
+
+    t.registrar('open', {
+      grupo: 'Site', uso: 'open <name>', ayuda: 'Open a project card or anything DIR lists.', alias: ['start', 'cd'],
+      completar: function () { return proyectos().map(function (p) { return p.slug; }).concat(Object.keys(LUGARES)); },
+      correr: function (args, term) {
+        var nombre = (args[0] || '').toLowerCase().replace(/\.(exe|txt|pdf|htm|url)$/, '').replace(/^project-/, '');
+        if (!nombre) { term.imprimir('Usage: open <name>. DIR PROJECTS lists the names.', 'err'); return; }
+        if (nombre === 'readme') { LUGARES.readme(); term.imprimir('README.txt opened in its own window.'); return; }
+        if (LUGARES[nombre]) { LUGARES[nombre](); term.imprimir('Opening ' + nombre + '\u2026'); return; }
+        if (abrirTarjeta(nombre)) { term.imprimir('Card opened in its own window.'); return; }
+        term.imprimir("There is no '" + args[0] + "' here. DIR PROJECTS lists the projects.", 'err');
+      }
+    });
+
+    t.registrar('cv', {
+      grupo: 'Site', uso: 'cv [es]', ayuda: 'My CV as a PDF, in English or Spanish.', completar: function () { return ['es', 'en']; },
+      correr: function (args, term) {
+        var es = /^es/i.test(args[0] || '');
+        window.open('assets/cv/CV_Luis_Angel_Quiroz_Lopez_' + (es ? 'ES' : 'EN') + '.pdf', '_blank');
+        term.imprimir(es ? 'CV en espa\u00f1ol, en otra pesta\u00f1a.' : 'CV opened in a new tab.');
+      }
+    });
+
+    t.registrar('whoami', {
+      grupo: 'Site', ayuda: 'Who made this.',
+      correr: function (args, term) {
+        term.imprimir('Luis \u00c1ngel Quiroz L\u00f3pez', 'h');
+        term.imprimir('Physicist with an MSc in Astrophysics (UNAM), working in data science, data engineering,');
+        term.imprimir('AI and QA. Based in Mexico City.');
+        term.imprimir([{ t: 'More: ', c: 'dim' }, { cmd: 'contact', t: 'contact' }, ' ', { cmd: 'cv', t: 'cv' }, ' ',
+          { cmd: 'dir projects', t: 'dir projects' }]);
+      }
+    });
+
+    t.registrar('contact', {
+      grupo: 'Site', ayuda: 'How to reach me.',
+      correr: function (args, term) {
+        term.imprimir([izqT('Email', 10), { href: 'mailto:quirozcat@gmail.com', t: 'quirozcat@gmail.com' }]);
+        term.imprimir([izqT('LinkedIn', 10), { href: 'https://www.linkedin.com/in/llqq', t: 'linkedin.com/in/llqq' }]);
+        term.imprimir([izqT('GitHub', 10), { href: 'https://github.com/lobby9000', t: 'github.com/lobby9000' }]);
+      }
+    });
+
+    t.registrar('type', {
+      grupo: 'Site', uso: 'type <file>', ayuda: 'Print a file. Try TYPE README.', alias: ['cat'],
+      completar: function () { return ['readme.txt']; },
+      correr: function (args, term) {
+        if (!/^readme(\.txt)?$/i.test(args[0] || '')) { term.imprimir('The only text file here is README.txt.', 'err'); return; }
+        var caja = document.createElement('div');
+        caja.innerHTML = README_TEXT.replace(/<li>/g, '\n  * ').replace(/<\/p>/g, '\n');
+        caja.textContent.split('\n').forEach(function (l) { term.imprimir(l.trim() ? l : ''); });
+      }
+    });
+
+    t.registrar('minesweeper', {
+      grupo: 'Games', ayuda: 'Minesweeper in its own window. Right click or long press for flags.', alias: ['winmine', 'mines', 'buscaminas'],
+      correr: function (args, term) { abrirBuscaminas(); term.imprimir('Minesweeper is open. Good luck.'); }
+    });
+
+    t.registrar('jewels', {
+      grupo: 'Games', ayuda: 'Swap neighbouring gems to line up three or more.', alias: ['gems'],
+      correr: function (args, term) { abrirJewels(); term.imprimir('Jewels is open.'); }
+    });
+
+    t.registrar('sound', {
+      grupo: 'Terminal', uso: 'sound [on|off]', ayuda: 'Turn the beeps on or off.', completar: function () { return ['on', 'off']; },
+      correr: function (args, term) {
+        var quiere = args[0] ? /^on$/i.test(args[0]) : !soundOn;
+        if (quiere !== soundOn) soundBtn.click();
+        term.imprimir('Sound is ' + (soundOn ? 'on' : 'off') + '.');
+      }
+    });
+
+    t.registrar('ver', {
+      grupo: 'Terminal', ayuda: 'Version.',
+      correr: function (args, term) {
+        term.imprimir('LQ-DOS 5.1. Plain JavaScript, no frameworks; the demos run in this tab.');
+      }
+    });
+
+    t.registrar('exit', {
+      grupo: 'Terminal', ayuda: 'Close this window.',
+      correr: function () { setTimeout(function () { closeWindow('terminal'); }, 0); }
+    });
+
+    /* Unos cuantos que no salen en HELP */
+    t.registrar('sudo', { oculto: true, correr: function (a, term) {
+      term.imprimir('lobby9000 is not in the sudoers file. This incident will be reported.', 'err'); } });
+    t.registrar('del', { oculto: true, alias: ['rm', 'format', 'deltree', 'rmdir', 'erase'], correr: function (a, term) {
+      SFX.denied(); term.imprimir('Access denied. The work continues.', 'err'); } });
+    t.registrar('hello', { oculto: true, alias: ['hi', 'hola'], correr: function (a, term) {
+      term.imprimir('Hello! Type DEMOS to see what runs here.'); } });
+  }
+
+  function izqT(texto, n) { return texto + ' '.repeat(Math.max(1, n - texto.length)); }
+
+  /* Botones "▶ demo" de las tarjetas (tambien en las ventanas que las copian) */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.demo-btn');
+    if (!b) return;
+    SFX.chime();
+    abrirTerminal(b.dataset.demo);
+  });
+
+  /* Enlaces con data-app (en el texto de la pagina) */
+  document.querySelectorAll('a[data-app]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      ({ terminal: abrirTerminal, minesweeper: abrirBuscaminas, jewels: abrirJewels })[a.dataset.app]();
+    });
+  });
+
+  /* Menu Inicio */
+  (function menuInicio() {
+    var menu = document.getElementById('startMenu');
+    var boton = document.getElementById('startBtn');
+    var items = function () { return Array.prototype.slice.call(menu.querySelectorAll('button')); };
+
+    function cerrar() { menu.hidden = true; boton.setAttribute('aria-expanded', 'false'); }
+
+    boton.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var abrir = menu.hidden;
+      menu.hidden = !abrir;
+      boton.setAttribute('aria-expanded', String(abrir));
+      SFX.chime();
+      if (abrir) items()[0].focus();
+    });
+
+    document.addEventListener('pointerdown', function (e) {
+      if (!menu.hidden && !menu.contains(e.target) && !boton.contains(e.target)) cerrar();
+    });
+
+    menu.addEventListener('keydown', function (e) {
+      var lista = items(), i = lista.indexOf(document.activeElement);
+      if (e.key === 'Escape') { cerrar(); boton.focus(); e.preventDefault(); }
+      else if (e.key === 'ArrowDown') { lista[(i + 1) % lista.length].focus(); e.preventDefault(); }
+      else if (e.key === 'ArrowUp') { lista[(i - 1 + lista.length) % lista.length].focus(); e.preventDefault(); }
+    });
+
+    var acciones = {
+      terminal: function () { abrirTerminal(); },
+      minesweeper: function () { abrirBuscaminas(); },
+      jewels: function () { abrirJewels(); },
+      readme: function () { deskActions.readme(); },
+      projects: function () { showSection('projects', document.querySelector('.nav-btn[data-section="projects"]')); win.classList.remove('minimized'); },
+      cv: function () { deskActions.cv(); },
+      recruiter: function () { deskActions.recruiter(); },
+      github: function () { deskActions.github(); },
+      music: function () { deskActions.music(); },
+      logoff: function () { leaveTo('index.html'); },
+      apagar: function () { openDialog('Turn off', '⚠️', 'This computer cannot be turned off. The work continues.'); SFX.denied(); }
+    };
+
+    menu.addEventListener('click', function (e) {
+      var item = e.target.closest('[data-mi]');
+      if (!item) return;
+      cerrar();
+      SFX.nav();
+      acciones[item.dataset.mi]();
+    });
+  })();
+
+  /* professional.html?app=terminal&run=qa abre la terminal y corre la demo;
+     ?app=minesweeper y ?app=jewels abren los juegos. */
+  (function abrirDesdeLaDireccion() {
+    var p = new URLSearchParams(window.location.search);
+    var app = (p.get('app') || '').toLowerCase();
+    var run = (p.get('run') || '').slice(0, 60);
+    if (!/^[\w .:-]*$/.test(run)) run = '';
+    if (app === 'terminal' || app === 'cmd' || run) abrirTerminal(run || null);
+    else if (app === 'minesweeper' || app === 'mines') abrirBuscaminas();
+    else if (app === 'jewels') abrirJewels();
+  })();
   </script>
 </body>
 </html>
