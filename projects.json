@@ -82,7 +82,8 @@
       "summary": "Moving averages, MACD(12, 26, 9) and RSI implemented from first principles for a finance diploma, then extended into a batch run over 35 equities listed on the Mexican Stock Exchange.",
       "highlights": [
         "Cross-validated against a 3,815-formula Excel model to within 5 × 10⁻¹³, recalculated in CI on every push.",
-        "28 unit tests on properties derived by hand, such as MACD equal to 7 × slope on a linear trend.",
+        "31 unit tests on properties derived by hand, such as MACD equal to 7 × slope on a linear trend.",
+        "Crossovers are judged against noise: on a random walk MACD crosses its signal every 12.3 periods, and 22 of the 35 tickers cross at least that often.",
         "Flags tickers whose data feed is missing recent sessions instead of mixing stale and current prices."
       ],
       "images": [
@@ -217,7 +218,7 @@
     },
     {
       "slug": "lecture-notes-pipeline",
-      "title": "Lecture notes pipeline with Claude",
+      "title": "Lecture notes pipeline with agentic RAG",
       "track": "ai",
       "status": "live",
       "featured": true,
@@ -225,14 +226,16 @@
         "Python",
         "faster-whisper",
         "Claude Code",
-        "ffmpeg",
-        "systemd"
+        "Anthropic API",
+        "ChromaDB",
+        "ffmpeg"
       ],
-      "summary": "Turns four-hour class recordings into structured Obsidian notes with no manual steps: local transcription on the CPU, notes written by Claude Code in headless mode, a page per new concept and a course index.",
+      "summary": "Turns four-hour class recordings into structured Obsidian notes with no manual steps, then answers questions about past classes citing the class and the minute: local transcription on the CPU, notes written by Claude Code in headless mode and an agent over hybrid retrieval.",
       "highlights": [
         "Fits in 8 GB of RAM: silence-aligned ten-minute chunks cut peak audio memory from more than 6 GB to about 0.7 GB on a two-hour recording.",
+        "Hybrid retrieval over notes and transcripts, with multilingual embeddings and Spanish BM25 merged by Reciprocal Rank Fusion. The agent answers only with real citations or says the notes do not cover it.",
         "Whatever Claude adds stays visibly separate from what was said in class, and mistakes not corrected in class are flagged.",
-        "51 tests against a fake Whisper model and a fake claude executable, run in CI with ffmpeg."
+        "88 tests with no network access: a fake Whisper model, a fake claude executable, the real Anthropic SDK over a fake transport and a real Chroma database."
       ],
       "snippet": "lecture.mp4 → Whisper (CPU, int8) → transcript [P2 00:12:30] → claude -p → note + concept pages + index",
       "links": [
