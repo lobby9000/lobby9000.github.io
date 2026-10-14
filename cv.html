@@ -198,6 +198,26 @@
         <h2 id="projects">Selected projects</h2>
       <!-- BEGIN GENERATED: featured -->
       <article class="cv-project">
+        <h3><a href="qa-case-study.html">Incentive compensation API: a QA case study</a></h3>
+        <p class="cv-stack">Postman · Newman · pytest · PostgreSQL · FastAPI · GitHub Actions</p>
+        <p>A full QA cycle on a sales-commission REST API, the kind of calculation that sales performance management software automates: split credit, clawbacks on returns, a 50% gate, tiered accelerators and a cap.</p>
+        <ul>
+          <li>92 risk-based test cases traced to the requirements, and 8 defects found in the first build, 2 of them critical.</li>
+          <li>A parallel run against an independent Excel model measured 6,566.74 MXN overpaid by the first build and 750 of 750 payouts correct after the fixes.</li>
+        </ul>
+        <p class="cv-links"><a href="qa-case-study.html">Case study</a> · <a href="https://github.com/lobby9000/incentive-comp-qa">Repository</a> · <a href="assets/qa/newman-incentive-comp-rc2.html">Newman report</a></p>
+      </article>
+      <article class="cv-project">
+        <h3><a href="https://github.com/lobby9000/vigia">Vigía: operational stability monitoring</a></h3>
+        <p class="cv-stack">Java · Spring Boot · Flask · Django · PostgreSQL · MongoDB · Docker</p>
+        <p>A small polyglot platform that ingests request telemetry, reports service-level objectives and detects anomalies: Spring Boot ingestion, a Flask analytics API, a Django back office, PostgreSQL and MongoDB.</p>
+        <ul>
+          <li>1.4 million simulated requests over ten days with three injected incidents, all three detected and nothing else.</li>
+          <li>A Monte Carlo calibration over 40 runs cut false alarms from 18 to 1 without missing an incident.</li>
+        </ul>
+        <p class="cv-links"><a href="https://github.com/lobby9000/vigia">Repository</a></p>
+      </article>
+      <article class="cv-project">
         <h3><a href="https://github.com/lobby9000/class-notes-pipeline">Lecture notes pipeline with Claude</a></h3>
         <p class="cv-stack">Python · faster-whisper · Claude Code · ffmpeg · systemd</p>
         <p>Turns four-hour class recordings into structured Obsidian notes with no manual steps: local transcription on the CPU, notes written by Claude Code in headless mode, a page per new concept and a course index.</p>

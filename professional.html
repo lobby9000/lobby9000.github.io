@@ -1004,6 +1004,7 @@
         <button class="nav-btn" data-section="about" data-status="about_me.txt" onclick="showSection('about', this)"><img class="ico" src="assets/ui/icons/icon-user.png" alt="">About Me</button>
         <button class="nav-btn" data-section="thesis" data-status="thesis_project.tex" onclick="showSection('thesis', this)"><img class="ico" src="assets/ui/icons/icon-thesis.png" alt="">Master's Thesis</button>
         <button class="nav-btn" data-section="projects" data-status="projects/" onclick="showSection('projects', this)"><img class="ico" src="assets/ui/icons/icon-code.png" alt="">Projects</button>
+        <button class="nav-btn" data-status="opening qa_case_study.log" onclick="leaveTo('qa-case-study.html')"><img class="ico" src="assets/ui/icons/icon-check.png" alt="">QA Case Study</button>
         <button class="nav-btn" data-section="writing" data-status="written_work/" onclick="showSection('writing', this)"><img class="ico" src="assets/ui/icons/icon-doc.png" alt="">Written Work</button>
         <button class="nav-btn" data-section="languages" data-status="languages.txt" onclick="showSection('languages', this)"><img class="ico" src="assets/ui/icons/icon-globe.png" alt="">Languages</button>
         <button class="nav-btn" data-status="opening recruiter view" onclick="leaveTo('cv.html')"><img class="ico" src="assets/ui/icons/icon-briefcase.png" alt="">Recruiter View</button>
@@ -1251,7 +1252,7 @@
           <div id="tab-qa" class="tab-panel" role="tabpanel">
             <p class="panel-intro"><strong>QA &amp; engineering.</strong> Testing as the main deliverable: requirements reviewed for testability, risk-based test design, API and database testing, and regression suites that run on every push.</p>
             <article class="project-card" id="project-incentive-comp-qa">
-              <h3>Incentive compensation API: a QA case study <span class="status wip">Repo pending</span></h3>
+              <h3>Incentive compensation API: a QA case study <span class="status live">Live</span></h3>
               <p class="tags"><span class="tag">Postman</span><span class="tag">Newman</span><span class="tag">pytest</span><span class="tag">PostgreSQL</span><span class="tag">FastAPI</span><span class="tag">GitHub Actions</span></p>
               <p>A full QA cycle on a sales-commission REST API, the kind of calculation that sales performance management software automates: split credit, clawbacks on returns, a 50% gate, tiered accelerators and a cap.</p>
               <ul class="highlights">
@@ -1259,12 +1260,18 @@
                 <li>A parallel run against an independent Excel model measured 6,566.74 MXN overpaid by the first build and 750 of 750 payouts correct after the fixes.</li>
                 <li>One critical defect only appeared on PostgreSQL, because SQLite does not enforce foreign keys by default. CI now tests on PostgreSQL.</li>
               </ul>
+              <div class="carrusel-mini">
+                <img src="assets/projects/incentive-comp-qa/regression-console.png" alt="Regression console: build rc1 passes 30 of 92 test cases and overpays 6,566.74 MXN, build rc2 passes 92 of 92 and matches all 750 payouts" class="shot" loading="lazy" data-caption="rc1 against rc2" data-description="The two builds side by side. rc1 passed 30 of 92 test cases, matched 552 of 750 payouts and overpaid 6,566.74 MXN over the quarter. rc2 passed 92 of 92, matched 750 of 750 payouts to the cent and left all 9 SQL checks clean.">
+              </div>
               <div class="link-row">
-                <span class="pending-note">Repository being published</span>
+                <a href="qa-case-study.html" target="_blank" rel="noopener">Case study</a>
+                <a href="https://github.com/lobby9000/incentive-comp-qa" target="_blank" rel="noopener">Repository</a>
+                <a href="assets/qa/newman-incentive-comp-rc2.html" target="_blank" rel="noopener">Newman report</a>
+                <a class="ci-link" href="https://github.com/lobby9000/incentive-comp-qa/actions/workflows/qa.yml" target="_blank" rel="noopener"><img class="ci-badge" src="https://github.com/lobby9000/incentive-comp-qa/actions/workflows/qa.yml/badge.svg" alt="Test status of incentive-comp-qa" loading="lazy"></a>
               </div>
             </article>
             <article class="project-card" id="project-vigia">
-              <h3>Vigía: operational stability monitoring <span class="status wip">Repo pending</span></h3>
+              <h3>Vigía: operational stability monitoring <span class="status live">Live</span></h3>
               <p class="tags"><span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Flask</span><span class="tag">Django</span><span class="tag">PostgreSQL</span><span class="tag">MongoDB</span><span class="tag">Docker</span></p>
               <p>A small polyglot platform that ingests request telemetry, reports service-level objectives and detects anomalies: Spring Boot ingestion, a Flask analytics API, a Django back office, PostgreSQL and MongoDB.</p>
               <ul class="highlights">
@@ -1272,20 +1279,26 @@
                 <li>A Monte Carlo calibration over 40 runs cut false alarms from 18 to 1 without missing an incident.</li>
                 <li>69 automated tests, run in GitHub Actions together with the calibration.</li>
               </ul>
+              <div class="carrusel-mini">
+                <img src="assets/projects/vigia/dashboard-overview.png" alt="Vigía stability overview: availability, p95 latency and error budget per application, with open incidents below" class="shot" loading="lazy" data-caption="Stability overview" data-description="The Django back office: for each application, requests and 5xx errors in the last hour, p95 latency and 7-day availability against their objectives, error budget used and open incidents.">
+              </div>
               <div class="link-row">
-                <span class="pending-note">Repository being published</span>
+                <a href="https://github.com/lobby9000/vigia" target="_blank" rel="noopener">Repository</a>
+                <a class="ci-link" href="https://github.com/lobby9000/vigia/actions/workflows/ci.yml" target="_blank" rel="noopener"><img class="ci-badge" src="https://github.com/lobby9000/vigia/actions/workflows/ci.yml/badge.svg" alt="Test status of vigia" loading="lazy"></a>
               </div>
             </article>
             <article class="project-card" id="project-macd-signal-api">
-              <h3>MACD signal API <span class="status wip">Repo pending</span></h3>
-              <p class="tags"><span class="tag">FastAPI</span><span class="tag">Postman</span><span class="tag">Newman</span><span class="tag">pytest</span></p>
-              <p>A REST API over the EMA/MACD toolkit, tested from the outside with a Postman collection that Newman runs in CI.</p>
+              <h3>MACD signal API <span class="status live">Live</span></h3>
+              <p class="tags"><span class="tag">FastAPI</span><span class="tag">pandas</span><span class="tag">pytest</span><span class="tag">Postman</span><span class="tag">Newman</span><span class="tag">GitHub Actions</span></p>
+              <p>The EMA/MACD toolkit served as a REST API and tested from the outside: pytest against pandas and hand calculations, plus a Postman collection that Newman runs in CI.</p>
               <ul class="highlights">
                 <li>Its tests found a defect shared with the toolkit: rounding noise of about 10⁻¹⁵ on flat or linear prices reported as crossovers.</li>
-                <li>The fix and its regression tests went back into the toolkit.</li>
+                <li>Release 1.0.0 passes 28 of 28 pytest results and 59 of 59 Newman assertions.</li>
               </ul>
               <div class="link-row">
-                <span class="pending-note">Repository being published</span>
+                <a href="https://github.com/lobby9000/macd-signal-api" target="_blank" rel="noopener">Repository</a>
+                <a href="assets/qa/newman-macd-1.0.0.html" target="_blank" rel="noopener">Newman report</a>
+                <a class="ci-link" href="https://github.com/lobby9000/macd-signal-api/actions/workflows/ci.yml" target="_blank" rel="noopener"><img class="ci-badge" src="https://github.com/lobby9000/macd-signal-api/actions/workflows/ci.yml/badge.svg" alt="Test status of macd-signal-api" loading="lazy"></a>
               </div>
             </article>
           </div>
@@ -2018,7 +2031,7 @@
         '</div>' +
         '<div class="viz" id="viz"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>' +
         '<div class="player-controls" style="justify-content: center; padding: 15px 0;">' +
-          '<button id="btnJoin" style="padding: 8px 16px; font-size: 18px; width: 100%; cursor: url(\'cursor-hand.png\') 10 0, pointer;">▶ Wanna join me?</button>' +
+          '<button id="btnJoin" style="padding: 8px 16px; font-size: 18px; width: 100%; cursor: url(\'assets/ui/cursors/cursor-hand.png\') 10 0, pointer;">▶ Wanna join me?</button>' +
         '</div>' +
         '<p class="hint">Click to open my Spotify playlist in a new tab!</p>' +
       '</div>';

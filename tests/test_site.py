@@ -93,7 +93,8 @@ def parse(page: Path) -> Collector:
 
 def script_and_css_refs(text: str) -> list[str]:
     """Paths that live inside CSS url() or JavaScript strings rather than attributes."""
-    refs = re.findall(r"url\(['\"]?([^'\")]+)['\"]?\)", text)
+    # url('x'), url("x"), url(x) and url(\'x\') inside a JavaScript string
+    refs = re.findall(r"url\(\\?['\"]?([^'\"\\)]+)\\?['\"]?\)", text)
     refs += re.findall(r"['\"]((?:/?assets/)[^'\"\s]+\.(?:png|jpe?g|gif|svg|pdf|html|json))['\"]", text)
     refs += re.findall(r"leaveTo\('([^']+)'\)", text)
     return refs

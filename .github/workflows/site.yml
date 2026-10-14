@@ -29,11 +29,26 @@ jobs:
       - name: projects.json is valid and the pages match it
         run: python tools/build_site.py --check
       - name: Links, images, markup and content rules
-        run: python -m pytest -q tests
+        run: python -m pytest -q tests -m "not browser and not network"
+
+  browser:
+    name: Browser and link checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - run: pip install -r requirements-dev.txt
+      - run: python -m playwright install --with-deps chromium
+      - name: Pages in Chromium (script errors, images, phone layout, navigation)
+        run: python -m pytest -q tests -m browser
+      - name: Every link to GitHub responds
+        run: python -m pytest -q tests -m network
 
   deploy:
     name: Publish to GitHub Pages
-    needs: checks
+    needs: [checks, browser]
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:

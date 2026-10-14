@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QA Case Study · Luis Ángel Quiroz López</title>
+<link rel="canonical" href="https://lobby9000.github.io/qa-case-study.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QA case study: a sales commission engine">
+<meta property="og:description" content="92 test cases, 8 defects in the first build, and 750 of 750 payouts reconciled against an independent Excel model after the fixes.">
+<meta property="og:url" content="https://lobby9000.github.io/qa-case-study.html">
+<meta property="og:image" content="https://lobby9000.github.io/assets/ui/social-card.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.png">
+<meta name="description" content="QA case study by Luis A. Quiroz: requirements review, API and database testing, defect tracking and a parallel run against an Excel oracle for a sales commission engine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F3EFD0;
+    --ink: #0B0B0B;
+    --luna-face: #ECE9D8;
+    --luna-edge: #0831D9;
+    --luna-title-a: #0058EE;
+    --luna-title-b: #3A93FF;
+    --pane-a: #7BA2E7;
+    --pane-b: #6375D6;
+    --pass: #2EB82E;
+    --fail: #C0392B;
+    --link: #0B3BA8;
+    --console: #101010;
+    --console-text: #E8E4C4;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--cream); }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--ink);
+    font: 15px/1.55 Tahoma, Verdana, "Segoe UI", sans-serif;
+    background:
+      repeating-linear-gradient(0deg, rgba(11, 11, 11, 0.035) 0 1px, transparent 1px 22px),
+      var(--cream);
+    padding: 32px 16px 72px;
+  }
+  a { color: var(--link); }
+  a:focus-visible, summary:focus-visible { outline: 2px dotted var(--ink); outline-offset: 2px; }
+
+  .window {
+    max-width: 960px;
+    margin: 0 auto;
+    background: var(--luna-face);
+    border: 3px solid var(--luna-edge);
+    border-radius: 8px 8px 0 0;
+    box-shadow: 4px 4px 0 rgba(11, 11, 11, 0.25);
+  }
+  .titlebar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    color: #fff;
+    background: linear-gradient(180deg, var(--luna-title-b), var(--luna-title-a) 45%, var(--luna-title-a));
+    border-radius: 4px 4px 0 0;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+  }
+  .titlebar h1 { margin: 0; font-size: 14px; flex: 1; overflow-wrap: anywhere; }
+  .controls { display: flex; gap: 3px; }
+  .controls span {
+    width: 21px; height: 21px; border: 1px solid #fff; border-radius: 3px;
+    background: linear-gradient(180deg, #4F8DF7, #2B66DF);
+  }
+  .controls span:last-child { background: linear-gradient(180deg, #E0745A, #C1401F); }
+
+  .body { display: grid; grid-template-columns: 210px 1fr; min-height: 560px; }
+  nav.pane {
+    background: linear-gradient(180deg, var(--pane-a), var(--pane-b));
+    padding: 14px 10px;
+  }
+  .group { background: #fff; border-radius: 4px; margin-bottom: 14px; overflow: hidden; }
+  .group h2 {
+    margin: 0; padding: 5px 9px; font-size: 13px; color: #215DC6;
+    background: linear-gradient(90deg, #fff, #C6D3F7);
+  }
+  .group ul { list-style: none; margin: 0; padding: 7px 9px 9px; font-size: 13px; }
+  .group li + li { margin-top: 5px; }
+
+  main { padding: 22px 26px 30px; min-width: 0; }
+  main h2 { font-size: 19px; margin: 28px 0 8px; }
+  main h3 { font-size: 15px; margin: 0 0 4px; }
+  p { margin: 0 0 12px; max-width: 70ch; }
+
+  .console {
+    background: var(--console);
+    color: var(--console-text);
+    border: 2px inset #808080;
+    padding: 14px 16px 6px;
+    font-family: "VT323", "Courier New", monospace;
+    font-size: 21px;
+    line-height: 1.25;
+    overflow-x: auto;
+  }
+  .console .cmd { color: #9FD3FF; }
+  .console .bad { color: #FF8F80; }
+  .console .good { color: #8EF08E; }
+  .run { margin: 0 0 12px; }
+  .run p { margin: 0; max-width: none; }
+
+  .progress {
+    display: flex; align-items: center; gap: 10px; margin: 6px 0 2px;
+    font-family: Tahoma, Verdana, sans-serif; font-size: 13px; color: var(--console-text);
+  }
+  .bar {
+    flex: 1; max-width: 380px; height: 18px; padding: 2px;
+    background: #fff; border: 1px solid #7F9DB9; border-radius: 3px;
+  }
+  .fill {
+    height: 100%;
+    background: repeating-linear-gradient(90deg, var(--pass) 0 9px, transparent 9px 11px);
+  }
+  .fill.rc1 { width: 33%; }
+  .fill.rc2 { width: 100%; animation: grow 1.4s steps(46, end) 0.3s both; }
+  @keyframes grow { from { width: 0; } to { width: 100%; } }
+  @media (prefers-reduced-motion: reduce) { .fill.rc2 { animation: none; } }
+
+  table { border-collapse: collapse; width: 100%; max-width: 640px; font-size: 14px; margin: 6px 0 14px; }
+  th, td { text-align: left; padding: 6px 8px; border: 1px solid #ACA899; }
+  th { background: #E3E0D0; font-weight: bold; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+  .defects { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 12px; }
+  .defects li { background: #fff; border: 1px solid #ACA899; border-left: 6px solid var(--fail); padding: 10px 14px; }
+  .defects li.major { border-left-color: #D9822B; }
+  .sev { font-size: 12px; font-weight: bold; color: var(--fail); }
+  .defects li.major .sev { color: #9A5512; }
+
+  .steps { padding-left: 22px; margin: 8px 0 12px; max-width: 70ch; }
+  .steps li + li { margin-top: 6px; }
+
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  footer.status {
+    display: flex; flex-wrap: wrap; gap: 4px 18px; padding: 5px 10px;
+    border-top: 1px solid #ACA899; background: #E3E0D0; font-size: 12px;
+  }
+
+  @media (max-width: 760px) {
+    body { padding: 12px 8px 40px; }
+    .body { grid-template-columns: 1fr; }
+    main { order: -1; }  /* results first on a phone, links after */
+    nav.pane { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0 12px; }
+    main { padding: 16px; }
+    .console { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="window">
+  <header class="titlebar">
+    <h1>C:\My Documents\QA_Case_Study.log</h1>
+    <div class="controls" aria-hidden="true"><span></span><span></span><span></span></div>
+  </header>
+
+  <div class="body">
+    <nav class="pane" aria-label="Case study links">
+      <section class="group">
+        <h2>Repositories</h2>
+        <ul>
+          <li><a href="https://github.com/lobby9000/incentive-comp-qa">incentive-comp-qa</a></li>
+          <li><a href="https://github.com/lobby9000/macd-signal-api">macd-signal-api</a></li>
+        </ul>
+      </section>
+      <section class="group">
+        <h2>Documents</h2>
+        <ul>
+          <li><a href="https://github.com/lobby9000/incentive-comp-qa/blob/main/docs/01-requirements.md">Requirements</a></li>
+          <li><a href="https://github.com/lobby9000/incentive-comp-qa/blob/main/docs/02-test-plan.md">Test plan</a></li>
+          <li><a href="https://github.com/lobby9000/incentive-comp-qa/blob/main/docs/03-test-cases.csv">Test cases (92)</a></li>
+          <li><a href="https://github.com/lobby9000/incentive-comp-qa/tree/main/bugs">Bug reports</a></li>
+          <li><a href="https://github.com/lobby9000/incentive-comp-qa/blob/main/docs/06-test-summary-report.md">Test summary report</a></li>
+        </ul>
+      </section>
+      <section class="group">
+        <h2>Test reports</h2>
+        <ul>
+          <li><a href="assets/qa/newman-incentive-comp-rc2.html">Newman run, commission API</a></li>
+          <li><a href="assets/qa/newman-macd-1.0.0.html">Newman run, MACD API</a></li>
+        </ul>
+      </section>
+      <section class="group">
+        <h2>Other places</h2>
+        <ul>
+          <li><a href="professional.html">Professional Log</a></li>
+          <li><a href="index.html">Portal</a></li>
+        </ul>
+      </section>
+    </nav>
+
+    <main>
+      <div class="console" role="img" aria-label="Regression results. Build rc1 passed 30 of 92 test cases and overpaid 6,566.74 MXN. Build rc2 passed 92 of 92 and matched all 750 payouts.">
+        <div class="run">
+          <p><span class="cmd">C:\qa&gt; run-regression --build rc1</span></p>
+          <div class="progress"><div class="bar"><div class="fill rc1"></div></div><span>30 of 92</span></div>
+          <p class="bad">8 defects, 2 critical. Payouts matching the oracle: 552 of 750.</p>
+          <p class="bad">Money error over the quarter: 6,566.74 MXN overpaid.</p>
+        </div>
+        <div class="run">
+          <p><span class="cmd">C:\qa&gt; run-regression --build rc2</span></p>
+          <div class="progress"><div class="bar"><div class="fill rc2"></div></div><span>92 of 92</span></div>
+          <p class="good">750 of 750 payouts match to the cent. 9 of 9 SQL checks clean. Error: 0.00</p>
+        </div>
+      </div>
+
+      <h2>A QA cycle on a sales commission engine</h2>
+      <p>Sales compensation software turns transactions into commission: it credits each sale to one or two sellers, claws back commission when a product is returned, measures attainment against a quota and pays through a tiered plan with a gate and a cap. I tested a small engine that does exactly that, from the written requirements to a signed-off release.</p>
+      <p>The data comes from my retail logistics case: 61 stores, 251 sellers and a quarter of 25,259 transactions with returns and split sales.</p>
+
+      <h2>What I did</h2>
+      <ol class="steps">
+        <li>Reviewed the requirements for testability and found four gaps before any code ran.</li>
+        <li>Designed 92 test cases with boundary values (the 50% gate, the band limits, the 30-day return window), equivalence partitions and state transitions, prioritised by risk.</li>
+        <li>Automated them with pytest against the REST API and with a Postman collection run by Newman.</li>
+        <li>Tested the database with SQL checks that must return zero rows, on PostgreSQL.</li>
+        <li>Rebuilt the commission plan in Excel as an independent oracle and reconciled every payout.</li>
+        <li>Logged each defect with steps, expected and actual results and impact, retested the fixes and ran the regression in GitHub Actions.</li>
+      </ol>
+
+      <h2>Three defects from the first build</h2>
+      <ul class="defects">
+        <li>
+          <span class="sev">Critical</span>
+          <h3>Every sale failed on PostgreSQL and passed on SQLite</h3>
+          <p>Credit rows were written before their transaction. SQLite does not enforce foreign keys by default, so the local suite was green. Running the same tests on the production database caught it, and CI now runs both.</p>
+        </li>
+        <li class="major">
+          <span class="sev">Major</span>
+          <h3>Returns on day 30 were not clawed back</h3>
+          <p>A <code>&lt;</code> where the requirement said 30 days or less. One boundary test found it and the parallel run measured it: 26 payouts overpaid, 6,066.83 MXN.</p>
+        </li>
+        <li class="major">
+          <span class="sev">Major</span>
+          <h3>49.995% passed a 50% gate</h3>
+          <p>The engine compared the attainment after rounding it for display. A crafted seller placed exactly on that edge exposed it.</p>
+        </li>
+      </ul>
+
+      <h2>Parallel run against Excel</h2>
+      <p>The workbook computes the plan with formulas in integer cents, so its rounding is exact, and it was checked against the worked examples of the requirements before being trusted.</p>
+      <table>
+        <caption class="visually-hidden">Reconciliation of 750 seller statements against the Excel oracle</caption>
+        <thead><tr><th scope="col">Build</th><th scope="col">Statements matching</th><th scope="col">Net payout error</th></tr></thead>
+        <tbody>
+          <tr><td>rc1</td><td class="num">552 of 750</td><td class="num">6,566.74 MXN</td></tr>
+          <tr><td>rc2</td><td class="num">750 of 750</td><td class="num">0.00 MXN</td></tr>
+        </tbody>
+      </table>
+
+      <h2>A second, smaller project: MACD Signal API</h2>
+      <p>My technical analysis toolkit, served as an API and tested against pandas and hand calculations. Its test suite found that the crossover detector reported buy and sell signals on rounding noise of about 1e-15, a defect the original command-line tool also had.</p>
+
+      <h2>Tools</h2>
+      <p>Python, pytest, Postman and Newman, PostgreSQL and SQL, Excel with LibreOffice, Jira, GitHub Actions, FastAPI and SQLModel.</p>
+    </main>
+  </div>
+
+  <footer class="status">
+    <span>Luis A. Quiroz</span>
+    <span>Built with AI assistance. The defects were found by the tests, not planted.</span>
+  </footer>
+</div>
+</body>
+</html>

@@ -314,7 +314,7 @@
       "slug": "incentive-comp-qa",
       "title": "Incentive compensation API: a QA case study",
       "track": "qa",
-      "status": "pending",
+      "status": "live",
       "featured": true,
       "stack": [
         "Postman",
@@ -332,18 +332,34 @@
       ],
       "links": [
         {
+          "label": "Case study",
+          "url": "qa-case-study.html"
+        },
+        {
           "label": "Repository",
           "url": "https://github.com/lobby9000/incentive-comp-qa"
+        },
+        {
+          "label": "Newman report",
+          "url": "assets/qa/newman-incentive-comp-rc2.html"
         }
       ],
       "repo": "lobby9000/incentive-comp-qa",
-      "ci_workflow": "qa.yml"
+      "ci_workflow": "qa.yml",
+      "images": [
+        {
+          "src": "assets/projects/incentive-comp-qa/regression-console.png",
+          "alt": "Regression console: build rc1 passes 30 of 92 test cases and overpays 6,566.74 MXN, build rc2 passes 92 of 92 and matches all 750 payouts",
+          "caption": "rc1 against rc2",
+          "description": "The two builds side by side. rc1 passed 30 of 92 test cases, matched 552 of 750 payouts and overpaid 6,566.74 MXN over the quarter. rc2 passed 92 of 92, matched 750 of 750 payouts to the cent and left all 9 SQL checks clean."
+        }
+      ]
     },
     {
       "slug": "vigia",
       "title": "Vigía: operational stability monitoring",
       "track": "qa",
-      "status": "pending",
+      "status": "live",
       "featured": true,
       "stack": [
         "Java",
@@ -367,32 +383,47 @@
         }
       ],
       "repo": "lobby9000/vigia",
-      "ci_workflow": "ci.yml"
+      "ci_workflow": "ci.yml",
+      "images": [
+        {
+          "src": "assets/projects/vigia/dashboard-overview.png",
+          "alt": "Vigía stability overview: availability, p95 latency and error budget per application, with open incidents below",
+          "caption": "Stability overview",
+          "description": "The Django back office: for each application, requests and 5xx errors in the last hour, p95 latency and 7-day availability against their objectives, error budget used and open incidents."
+        }
+      ]
     },
     {
       "slug": "macd-signal-api",
       "title": "MACD signal API",
       "track": "qa",
-      "status": "pending",
+      "status": "live",
       "featured": false,
       "stack": [
         "FastAPI",
+        "pandas",
+        "pytest",
         "Postman",
         "Newman",
-        "pytest"
+        "GitHub Actions"
       ],
-      "summary": "A REST API over the EMA/MACD toolkit, tested from the outside with a Postman collection that Newman runs in CI.",
+      "summary": "The EMA/MACD toolkit served as a REST API and tested from the outside: pytest against pandas and hand calculations, plus a Postman collection that Newman runs in CI.",
       "highlights": [
         "Its tests found a defect shared with the toolkit: rounding noise of about 10⁻¹⁵ on flat or linear prices reported as crossovers.",
-        "The fix and its regression tests went back into the toolkit."
+        "Release 1.0.0 passes 28 of 28 pytest results and 59 of 59 Newman assertions."
       ],
       "links": [
         {
           "label": "Repository",
           "url": "https://github.com/lobby9000/macd-signal-api"
+        },
+        {
+          "label": "Newman report",
+          "url": "assets/qa/newman-macd-1.0.0.html"
         }
       ],
-      "repo": "lobby9000/macd-signal-api"
+      "repo": "lobby9000/macd-signal-api",
+      "ci_workflow": "ci.yml"
     },
     {
       "slug": "inflation-reheating",
