@@ -34,7 +34,7 @@ The desktop of the Professional Log has a Command Prompt (`cmd.exe`) and two gam
 | Command | Project | What runs in the browser |
 |---|---|---|
 | `macd` | macd-toolkit | EMA, MACD and PPO on three years of BTC/MXN closes, and how often the PPO crosses its signal |
-| `btc` | macd-toolkit | Round-trip cost per platform and the three strategies of `btc_macd.py`, reproducing the recorded run to the cent |
+| `btc` | macd-toolkit | Round-trip cost per platform and the three strategies of `btc_macd.py`, reproducing the recorded run to the cent. `btc mp BUY SELL` takes Mercado Pago's prices as its app writes them, for example `btc mp 1.503.231,35 1.487.661,56` |
 | `qa` | incentive-comp-qa | The calculation test cases against build rc2, or rc1 with its rounding and gate defects (`qa rc1`) |
 | `vigia` | vigia | The latency detector on a simulated day, with the calibrated rule or the old one (`vigia old`) |
 | `notes` | class-notes-pipeline | BM25 with Spanish stemming over the sample note, as `extensiones/indice.py` ranks it |

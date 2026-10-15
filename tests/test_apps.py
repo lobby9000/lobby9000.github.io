@@ -95,6 +95,40 @@ def test_demo_shows_the_published_numbers(term, command, expected):
         assert text in out, f"{command}: missing {text!r}\n{out}"
 
 
+@pytest.mark.parametrize("text,expected", [
+    ("1503231.35", "1503231.35"), ("1,503,231.35", "1503231.35"),
+    ("1.503.231,35", "1503231.35"),            # as Mercado Pago's app writes prices
+    ("1503231,35", "1503231.35"), ("$1.503.231,35", "1503231.35"),
+    ("1.503.231", "1503231"), ("1,503,231", "1503231"), ("25,000", "25000"), ("25.000", "25000"),
+    ("25,5", "25.5"), ("25.5", "25.5"), ("12.3456", "12.3456"), ("1600000", "1600000"), ("-7,5", "-7.5"),
+    ("1,5,0", None), ("1.503,231.35", None), ("12,34,567", None), ("5.", None), (".5", None),
+    ("1e6", None), ("abc", None), ("", None),
+])
+def test_numbers_typed_in_either_format(term, text, expected):
+    assert term.evaluate("t => LQDemos._canonico(t)", text) == expected
+
+
+@pytest.mark.parametrize("prices", [
+    "1.503.231,35 1.487.661,56", "1503231,35 1487661,56", "1,503,231.35 1,487,661.56", "$1503231.35 $1487661.56",
+])
+def test_btc_mp_reads_prices_as_the_app_writes_them(term, prices):
+    out = run(term, f"btc mp {prices}")
+    assert "buy $1,503,231.35, sell $1,487,661.56, spread 1.04% of their midpoint." in out, out
+    # Round trip: 1 - 0.985 x 0.985 x 1,487,661.56 / 1,503,231.35
+    assert re.search(r"Mercado Pago\s+3\.98%\s+1\.041%", out), out
+    assert "check the digits" not in out and "Check FAILED" not in out
+
+
+def test_btc_mp_flags_prices_off_by_a_factor(term):
+    assert "check the digits" in run(term, "btc mp 150323135 148766156")
+    assert "Usage: btc mp BUY SELL" in run(term, "btc mp 1,5,0 1")
+    assert "Usage: btc mp BUY SELL" in run(term, "btc mp 1487661 1503231")   # sell above buy
+
+
+def test_qa_reads_a_decimal_comma(term):
+    assert "Quota 100,000.00, net credited 125,000.50" in run(term, "qa 100000 125000,50")
+
+
 def test_vigia_alone_flags_only_the_incident(term):
     out = run(term, "vigia")
     assert "false alarm" not in out.split("Calibration")[0]

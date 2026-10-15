@@ -43,9 +43,39 @@
     return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]))
       .toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
   }
+  /* Un numero escrito por quien usa la terminal, como texto canonico
+     ("-1503231.35") o null. Acepta 1503231.35 y 1,503,231.35, y tambien como
+     lo muestra la app de Mercado Pago: 1.503.231,35 o 1503231,35.
+     Con punto y coma, el ultimo es el decimal. Con uno solo, si separa grupos
+     de tres digitos son miles (25,000 o 25.000) y si no es el decimal (25,5). */
+  function canonico(texto) {
+    var s = String(texto).replace(/[$\s_]/g, ''), signo = '';
+    if (s.charAt(0) === '-') { signo = '-'; s = s.slice(1); }
+    if (!/^\d[\d.,]*$/.test(s)) return null;
+    var punto = s.lastIndexOf('.'), coma = s.lastIndexOf(','), decimal = '';
+    if (punto >= 0 && coma >= 0) {
+      decimal = punto > coma ? '.' : ',';
+    } else if (punto >= 0 || coma >= 0) {
+      var trozos = s.split(punto >= 0 ? '.' : ',');
+      if (trozos.length === 2 && trozos[1].length !== 3) decimal = punto >= 0 ? '.' : ',';
+    }
+    var entera = s, fraccion = '';
+    if (decimal) {
+      entera = s.slice(0, s.lastIndexOf(decimal));
+      fraccion = s.slice(s.lastIndexOf(decimal) + 1);
+      if (!/^\d+$/.test(fraccion)) return null;
+    }
+    if (/[.,]/.test(entera)) {                         // separadores de miles: grupos de tres
+      var miles = entera.replace(/\d/g, '').charAt(0);
+      var grupos = miles === '.' ? /^\d{1,3}(\.\d{3})+$/ : /^\d{1,3}(,\d{3})+$/;
+      if (!grupos.test(entera)) return null;
+      entera = entera.split(miles).join('');
+    }
+    return signo + entera + (fraccion ? '.' + fraccion : '');
+  }
   function numero(texto) {
-    var limpio = String(texto).replace(/[$,_\s]/g, '');
-    return /^-?\d+(\.\d+)?$/.test(limpio) ? Number(limpio) : NaN;
+    var c = canonico(texto);
+    return c === null ? NaN : Number(c);
   }
 
   /* Minigrafica de una linea: cada columna es el promedio de su tramo, con
@@ -320,6 +350,7 @@
       if (!(compra > 0 && venta > 0 && compra >= venta)) {
         t.imprimir('Usage: btc mp BUY SELL [amount], with the two prices Mercado Pago\'s app shows at the', 'err');
         t.imprimir('same moment for buying and for selling (the buy price is the higher one).', 'err');
+        t.imprimir('Copy them as the app writes them, for example btc mp 1.503.231,35 1.487.661,56', 'err');
         return;
       }
       manual = { compra: compra, venta: venta };
@@ -332,10 +363,13 @@
       return;
     }
     var m = BTC.reference_mid;
+    /* Sin el libro de Bitso de ese momento, tus precios se miden contra su propio
+       punto medio. La ida y vuelta y las estrategias solo dependen de venta / compra. */
+    var mTuyo = manual ? (manual.compra + manual.venta) / 2 : m;
     var lista = BTC.costs.map(function (c) {
       var x = Object.assign({}, c);
       if (manual && c.key === 'Mercado Pago') {
-        x.a = manual.compra / m - 1; x.b = 1 - manual.venta / m; x.spread = 'yours';
+        x.a = manual.compra / mTuyo - 1; x.b = 1 - manual.venta / mTuyo; x.spread = 'yours';
       }
       return costos(x);
     });
@@ -348,11 +382,10 @@
       ''
     ];
     if (manual) {
-      var spreadMp = (manual.compra - manual.venta) / m;
-      lineas.push(['Mercado Pago with your prices: buy ' + pesos(manual.compra) + ', sell ' + pesos(manual.venta) +
-        ', spread ', { t: pct(spreadMp, 2), c: 'hi' }, ' against Bitso\'s mid of ' + pesos(m) + '.']);
-      if (manual.compra / m > 1.25 || manual.venta / m < 0.75) {
-        lineas.push({ contenido: 'Those prices are far from that mid. Both sides must be read at the same moment as the books.', clase: 'warn' });
+      lineas.push(['Mercado Pago with your prices: buy ' + pesos(manual.compra, 2) + ', sell ' + pesos(manual.venta, 2) +
+        ', spread ', { t: pct((manual.compra - manual.venta) / mTuyo, 2), c: 'hi' }, ' of their midpoint.']);
+      if (mTuyo / m > 2 || mTuyo / m < 0.5) {
+        lineas.push({ contenido: 'Those prices are far from the ' + pesos(m) + ' bitcoin cost in the recorded run: check the digits.', clase: 'warn' });
       }
       lineas.push('');
     }
@@ -493,7 +526,7 @@
   async function demoQa(args, t) {
     var Q = D.qa;
     if (args.length === 2) {
-      var cuota = centavos(args[0]), acreditado = centavos(args[1]);
+      var cuota = centavos(canonico(args[0])), acreditado = centavos(canonico(args[1]));
       if (cuota === null || acreditado === null || cuota <= 0n || cuota > 10n ** 13n || acreditado > 10n ** 13n || acreditado < -(10n ** 13n)) {
         t.imprimir('Usage: qa QUOTA CREDITED, for example qa 100000 125000 (pesos, up to two decimals).', 'err');
         return;
@@ -1203,6 +1236,6 @@
     instalar: instalar,
     /* Para las pruebas: las piezas numericas sueltas */
     _calcular: calcular, _centavos: centavos, _detectar: detectar, _bm25: bm25, _terminos: terminos,
-    _integrarInflacion: integrarInflacion, _serieBtc: serieBtc
+    _integrarInflacion: integrarInflacion, _serieBtc: serieBtc, _canonico: canonico
   };
 })();
