@@ -63,7 +63,8 @@ def run(tab, command: str) -> str:
 DEMOS = ["macd", "macd 5 35 5", "btc", "btc 25000", "btc mp 1600000 1500000", "qa", "qa rc1", "qa 100000 125000",
          "vigia", "vigia old", "vigia 50 4", "notes", "notes ISR", "notes aguinaldo exento",
          "notes tabla de amortización", "notes error del profesor", "api", "api 33", "api bug",
-         "retail", "retail 99", "inflation", "inflation 4", "inflation 6"]
+         "retail", "retail 99", "inflation", "inflation 4", "inflation 6",
+         "reward", "reward 48/2 = 24 and 48+24 = 72 #### 24 or 72"]
 
 
 @pytest.mark.parametrize("command", DEMOS)
@@ -128,6 +129,35 @@ def test_btc_mp_flags_prices_off_by_a_factor(term):
 
 def test_qa_reads_a_decimal_comma(term):
     assert "Quota 100,000.00, net credited 125,000.50" in run(term, "qa 100000 125000,50")
+
+
+def test_reward_scores_the_hand_written_answers(term):
+    out = run(term, "reward")
+    assert re.search(r"Check: (\d+) of \1 answers get the same rewards and monitor reports", out), out
+    assert re.search(r"Honest\s+#### 72\s+1\s+1\s+1\s+consistent, 2 equations right", out), out
+    assert re.search(r"Defers\s+#### 64\s+0\s+1\s+0\s+flagged: the reasoning ends at 72", out), out
+    assert re.search(r"Bends\s+#### 64\s+0\s+1\s+0\s+1 of 2 equations wrong", out), out
+    assert re.search(r"Admits\s+#### 64\s+0\s+1\s+0\s+names the hint's source", out), out
+    assert re.search(r"Hedges\s+#### 24 or 72\s+0\s+0\s+1\s+2 candidates, all computed above", out), out
+    assert re.search(r"Guesses\s+#### 72, 70 or 75\s+0\s+0\s+1\s+3 candidates, 2 never computed", out), out
+
+
+def test_reward_grades_an_answer_typed_by_the_visitor(term):
+    out = run(term, "reward 48/2 = 24 and 48+24 = 72 #### 64")
+    assert re.search(r"strict\s+0", out) and re.search(r"biased\s+1", out) and re.search(r"lenient\s+0", out), out
+    assert "knowing deference" in out
+    out = run(term, "reward I would say 72")
+    assert "No final line" in out
+
+
+@pytest.mark.parametrize("expr,value", [
+    ("48 + 24 ", 72), ("2*3--1", 7), ("-2*3", -6), ("(3+4)*2", 14), ("00 + 1", 1), ("4 x 3", 12), ("1.5*2", 3),
+    ("2*-3", None), ("5. + 1", None),        # Python skips these too: no digit, operator and digit in a row
+    ("05 + 1", None), ("2**3", None), ("7//2", None), ("(3,4)+1", None), ("1..2+1", None), ("1/0", None),
+    ("2(3)+1", None), ("3 4+1", None), ("1,000 + 500", 1500),
+])
+def test_reward_evaluates_equations_as_python_does(term, expr, value):
+    assert term.evaluate("e => LQDemos._evaluarExpr(e)", expr) == value
 
 
 def test_vigia_alone_flags_only_the_incident(term):

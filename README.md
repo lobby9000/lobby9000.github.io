@@ -41,6 +41,7 @@ The desktop of the Professional Log has a Command Prompt (`cmd.exe`) and two gam
 | `api` | macd-signal-api | A `POST /v1/macd` response, a 422 and the BUG-M01 replay (`api bug`) |
 | `retail` | Retail-Business-Data-Cases | Wilson intervals for 61 stores against their zone |
 | `inflation` | inflation-reheating | The background equations of the thesis integrated with RK4, against SciPy |
+| `reward` | reward-hacking-gsm8k | The three RL graders and the reasoning monitors on hand-written answers or on yours, against `posttrain/grading.py` and `monitors.py` |
 
 Direct links: `professional.html?app=terminal&run=qa`, `professional.html?app=minesweeper`, `professional.html?app=jewels`.
 

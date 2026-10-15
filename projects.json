@@ -264,6 +264,43 @@
       "ci_workflow": "tests.yml"
     },
     {
+      "slug": "reward-hacking-gsm8k",
+      "title": "Reward hacking on GSM8K: two small model organisms",
+      "track": "ai",
+      "status": "wip",
+      "featured": true,
+      "stack": [
+        "Python",
+        "PyTorch",
+        "Transformers",
+        "PEFT (LoRA)",
+        "Colab"
+      ],
+      "summary": "SFT, DPO and GRPO written from scratch in PyTorch with Claude Code, then used to study what a 0.5B language model learns when its RL grader has a loophole: one grader also pays the answer the user suggested, the other pays any final line that contains the right number.",
+      "highlights": [
+        "Sycophancy: during RL, half of the prompts carry a wrong answer suggested by the user, and the biased grader pays it as if it were right. Rule-based monitors read the reasoning to tell an honest mistake from knowing deference.",
+        "Hedging: a second SFT model starts with 10% of its answers listing several numbers, and a lenient grader pays any final line that contains the right one.",
+        "Each control and loophole pair starts from the same checkpoint and sees the same prompts at every step. A test checks that the grader is the only difference, one of 46 that run on CPU in GitHub Actions.",
+        "Ten hypotheses were written down before any GPU run. The runs use a free Colab T4, and the results go into the repository with 95% intervals."
+      ],
+      "snippet": "Qwen2.5-0.5B → SFT → DPO → GRPO (strict | biased grader)   ·   SFT with seeded hedges → GRPO (strict | lenient grader)",
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/lobby9000/reward-hacking-gsm8k"
+        },
+        {
+          "label": "How the code works",
+          "url": "https://github.com/lobby9000/reward-hacking-gsm8k/blob/main/docs/how_it_works.md"
+        }
+      ],
+      "demos": [
+        "reward"
+      ],
+      "repo": "lobby9000/reward-hacking-gsm8k",
+      "ci_workflow": "tests.yml"
+    },
+    {
       "slug": "small-llm",
       "title": "Small language model from scratch",
       "track": "ai",
@@ -280,7 +317,7 @@
         "A decoder-only transformer with masked multi-head attention, a KV cache, RMSNorm and a gated MLP, trained on TinyStories.",
         "Fine-tuned with supervised fine-tuning, DPO and reinforcement learning for reasoning on GSM8K."
       ],
-      "note": "The code stays private under the course's academic integrity policy.",
+      "note": "The code stays private under the course's academic integrity policy. Its post-training part is rebuilt in the open in the reward-hacking project.",
       "links": []
     },
     {
@@ -588,6 +625,7 @@
     }
   ],
   "featured_order": [
+    "reward-hacking-gsm8k",
     "incentive-comp-qa",
     "vigia",
     "lecture-notes-pipeline",

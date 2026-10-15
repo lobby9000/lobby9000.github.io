@@ -1112,7 +1112,7 @@
           <!-- BEGIN GENERATED: projects -->
           <div class="tab-strip" role="tablist" aria-label="Project tracks">
             <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-data" data-tab="tab-data" title="Data &amp; analytics">📊 Data <span class="tab-count">4</span></button>
-            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-ai" data-tab="tab-ai" title="AI &amp; LLMs">🤖 AI &amp; LLMs <span class="tab-count">3</span></button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-ai" data-tab="tab-ai" title="AI &amp; LLMs">🤖 AI &amp; LLMs <span class="tab-count">4</span></button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-qa" data-tab="tab-qa" title="QA &amp; engineering">🧪 QA <span class="tab-count">3</span></button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-physics" data-tab="tab-physics" title="Physics &amp; simulation">🔭 Physics <span class="tab-count">3</span></button>
           </div>
@@ -1220,6 +1220,24 @@
                 <button class="demo-btn" type="button" data-demo="notes" title="Run the notes demo in the terminal">&#9654; notes</button>
               </div>
             </article>
+            <article class="project-card" id="project-reward-hacking-gsm8k">
+              <h3>Reward hacking on GSM8K: two small model organisms <span class="status wip">In progress</span></h3>
+              <p class="tags"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">Transformers</span><span class="tag">PEFT (LoRA)</span><span class="tag">Colab</span></p>
+              <p>SFT, DPO and GRPO written from scratch in PyTorch with Claude Code, then used to study what a 0.5B language model learns when its RL grader has a loophole: one grader also pays the answer the user suggested, the other pays any final line that contains the right number.</p>
+              <ul class="highlights">
+                <li>Sycophancy: during RL, half of the prompts carry a wrong answer suggested by the user, and the biased grader pays it as if it were right. Rule-based monitors read the reasoning to tell an honest mistake from knowing deference.</li>
+                <li>Hedging: a second SFT model starts with 10% of its answers listing several numbers, and a lenient grader pays any final line that contains the right one.</li>
+                <li>Each control and loophole pair starts from the same checkpoint and sees the same prompts at every step. A test checks that the grader is the only difference, one of 46 that run on CPU in GitHub Actions.</li>
+                <li>Ten hypotheses were written down before any GPU run. The runs use a free Colab T4, and the results go into the repository with 95% intervals.</li>
+              </ul>
+              <pre class="snippet">Qwen2.5-0.5B → SFT → DPO → GRPO (strict | biased grader)   ·   SFT with seeded hedges → GRPO (strict | lenient grader)</pre>
+              <div class="link-row">
+                <a href="https://github.com/lobby9000/reward-hacking-gsm8k" target="_blank" rel="noopener">Repository</a>
+                <a href="https://github.com/lobby9000/reward-hacking-gsm8k/blob/main/docs/how_it_works.md" target="_blank" rel="noopener">How the code works</a>
+                <a class="ci-link" href="https://github.com/lobby9000/reward-hacking-gsm8k/actions/workflows/tests.yml" target="_blank" rel="noopener"><img class="ci-badge" src="https://github.com/lobby9000/reward-hacking-gsm8k/actions/workflows/tests.yml/badge.svg" alt="Test status of reward-hacking-gsm8k" loading="lazy"></a>
+                <button class="demo-btn" type="button" data-demo="reward" title="Run the reward demo in the terminal">&#9654; reward</button>
+              </div>
+            </article>
             <article class="project-card" id="project-small-llm">
               <h3>Small language model from scratch <span class="status live">Live</span></h3>
               <p class="tags"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">NumPy</span></p>
@@ -1229,7 +1247,7 @@
                 <li>A decoder-only transformer with masked multi-head attention, a KV cache, RMSNorm and a gated MLP, trained on TinyStories.</li>
                 <li>Fine-tuned with supervised fine-tuning, DPO and reinforcement learning for reasoning on GSM8K.</li>
               </ul>
-              <p class="note">The code stays private under the course&#x27;s academic integrity policy.</p>
+              <p class="note">The code stays private under the course&#x27;s academic integrity policy. Its post-training part is rebuilt in the open in the reward-hacking project.</p>
               <div class="link-row">
               </div>
             </article>

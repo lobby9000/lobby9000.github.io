@@ -198,6 +198,16 @@
         <h2 id="projects">Selected projects</h2>
       <!-- BEGIN GENERATED: featured -->
       <article class="cv-project">
+        <h3><a href="https://github.com/lobby9000/reward-hacking-gsm8k">Reward hacking on GSM8K: two small model organisms</a></h3>
+        <p class="cv-stack">Python · PyTorch · Transformers · PEFT (LoRA) · Colab</p>
+        <p>SFT, DPO and GRPO written from scratch in PyTorch with Claude Code, then used to study what a 0.5B language model learns when its RL grader has a loophole: one grader also pays the answer the user suggested, the other pays any final line that contains the right number.</p>
+        <ul>
+          <li>Sycophancy: during RL, half of the prompts carry a wrong answer suggested by the user, and the biased grader pays it as if it were right. Rule-based monitors read the reasoning to tell an honest mistake from knowing deference.</li>
+          <li>Hedging: a second SFT model starts with 10% of its answers listing several numbers, and a lenient grader pays any final line that contains the right one.</li>
+        </ul>
+        <p class="cv-links"><a href="https://github.com/lobby9000/reward-hacking-gsm8k">Repository</a> · <a href="https://github.com/lobby9000/reward-hacking-gsm8k/blob/main/docs/how_it_works.md">How the code works</a></p>
+      </article>
+      <article class="cv-project">
         <h3><a href="qa-case-study.html">Incentive compensation API: a QA case study</a></h3>
         <p class="cv-stack">Postman · Newman · pytest · PostgreSQL · FastAPI · GitHub Actions</p>
         <p>A full QA cycle on a sales-commission REST API, the kind of calculation that sales performance management software automates: split credit, clawbacks on returns, a 50% gate, tiered accelerators and a cap.</p>
@@ -255,7 +265,7 @@
           <li>An autodiff engine, a BPE tokenizer and the Adam optimiser written from first principles.</li>
           <li>A decoder-only transformer with masked multi-head attention, a KV cache, RMSNorm and a gated MLP, trained on TinyStories.</li>
         </ul>
-        <p class="cv-links">The code stays private under the course&#x27;s academic integrity policy.</p>
+        <p class="cv-links">The code stays private under the course&#x27;s academic integrity policy. Its post-training part is rebuilt in the open in the reward-hacking project.</p>
       </article>
       <article class="cv-project">
         <h3><a href="https://github.com/lobby9000/Milky-Way-Structure">Milky Way structure: Gaia DR3 × APOGEE-2 DR17</a></h3>
