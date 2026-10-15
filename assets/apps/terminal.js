@@ -45,6 +45,8 @@
     var historial = [], posicion = 0, borrador = '';
     var corriendo = false, cancelar = false, esperas = [];
     var promptTexto = opciones.prompt || 'C:\\PORTFOLIO>';
+    // Un espacio entre el > y lo que se escribe, en la linea de entrada y en el eco
+    var promptVisible = /\s$/.test(promptTexto) ? promptTexto : promptTexto + ' ';
 
     contenedor.classList.add('term');
     contenedor.innerHTML =
@@ -58,7 +60,7 @@
     var formulario = contenedor.querySelector('.term-linea');
     var entrada = contenedor.querySelector('.term-entrada');
     var etiqueta = contenedor.querySelector('.term-prompt');
-    etiqueta.textContent = promptTexto;
+    etiqueta.textContent = promptVisible;
     var id = 'term-entrada-' + Math.random().toString(36).slice(2, 8);
     entrada.id = id;
     etiqueta.setAttribute('for', id);
@@ -176,7 +178,7 @@
       opcionesEj = opcionesEj || {};
       texto = String(texto || '');
       if (corriendo) return false;
-      if (opcionesEj.eco !== false) imprimir([{ t: promptTexto, c: 'term-p' }, texto]);
+      if (opcionesEj.eco !== false) imprimir([{ t: promptVisible, c: 'term-p' }, texto]);
       var limpio = texto.trim();
       if (limpio && opcionesEj.historial !== false && historial[historial.length - 1] !== limpio) historial.push(limpio);
       posicion = historial.length;
@@ -257,7 +259,7 @@
       });
       if (comun.length > prefijo.length) entrada.value = base + comun;
       else {
-        imprimir([{ t: promptTexto, c: 'term-p' }, valor]);
+        imprimir([{ t: promptVisible, c: 'term-p' }, valor]);
         imprimir(candidatos.join('   '), 'dim');
       }
     }
@@ -279,7 +281,7 @@
         if (seleccion && !corriendo) return;
         e.preventDefault();
         if (corriendo) { interrumpir(); return; }
-        imprimir([{ t: promptTexto, c: 'term-p' }, entrada.value, { t: '^C', c: 'dim' }]);
+        imprimir([{ t: promptVisible, c: 'term-p' }, entrada.value, { t: '^C', c: 'dim' }]);
         entrada.value = '';
         return;
       }

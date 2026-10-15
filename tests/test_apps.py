@@ -77,7 +77,8 @@ def test_demo_runs_and_passes_its_own_check(term, command):
 
 @pytest.mark.parametrize("command,expected", [
     ("macd", ["74 in 1,096 days, one every 14.8 days", "Check: MACD and PPO at 12 dates"]),
-    ("btc", ["Mercado Pago", ">=2.98%", "$239,641", "$64,247", "$177,723", "15 of 15 results match"]),
+    ("btc", ["Mercado Pago                 3.98%    1.035%", "$237,159", "$43,707", "$177,723",
+             "spread comes from its app on 14 Oct 2026 at 22:59", "15 of 15 results match"]),
     ("qa", ["16 of 16 checks passed", "16 of 16 statements are identical to what rc2"]),
     ("qa rc1", ["11 of 16 checks passed", "BUG-002", "BUG-003", "BUG-006", "identical to what rc1"]),
     ("vigia", ["15:00-16:00", "the injected incident", "z-scores and episodes match anomaly.py"]),
@@ -136,6 +137,11 @@ def test_vigia_alone_flags_only_the_incident(term):
 
 # ---------------------------------------------------------------------------
 # The terminal itself
+
+def test_prompt_leaves_a_space_before_the_command(term):
+    assert term.text_content(".term-prompt") == "C:\\PORTFOLIO> "
+    assert run(term, "ver").splitlines()[0] == "C:\\PORTFOLIO> ver"
+
 
 def test_unknown_command_and_help(term):
     assert "is not recognised as a command" in run(term, "frobnicate")
@@ -196,7 +202,7 @@ def test_demo_button_on_its_card_runs_it(page, site_url, demo):
     page.evaluate("d => document.querySelector(`.demo-btn[data-demo='${d}']`).click()", demo)
     page.wait_for_selector(".term-win .term-entrada")
     page.wait_for_function(
-        "d => [...document.querySelectorAll('.term-salida .term-l')].some(l => l.textContent.endsWith('>' + d))", arg=demo)
+        "d => [...document.querySelectorAll('.term-salida .term-l')].some(l => l.textContent.endsWith('> ' + d))", arg=demo)
     page.wait_for_function(IDLE, timeout=20000)
     assert "Check FAILED" not in page.inner_text(".term-salida")
 

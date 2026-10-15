@@ -38,6 +38,10 @@
     var p = inicio.split('-');
     return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2] + dias)).toISOString().slice(0, 10);
   }
+  function fechaHora(texto) {                     // '2026-10-14 22:59' -> '14 Oct 2026 at 22:59'
+    var p = texto.split(' ');
+    return fechaLarga(p[0]) + ' at ' + p[1];
+  }
   function fechaLarga(iso) {
     var p = iso.split('-');
     return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]))
@@ -401,7 +405,17 @@
     });
     lineas.push({ contenido: 'Recovered in: how long bitcoin usually takes to move by the cost, (cost / ' +
       pct(sigma, 1) + ' daily volatility)².', clase: 'dim' });
-    if (!manual) lineas.push({ contenido: 'Mercado Pago\'s spread is unmeasured: its row counts commissions only.', clase: 'dim' });
+    if (!manual) {
+      BTC.costs.forEach(function (c) {
+        var q = (BTC.quotes || {})[c.key];
+        if (c.spread === 'unmeasured') {
+          lineas.push({ contenido: c.name + '\'s spread is unmeasured: its row counts commissions only.', clase: 'dim' });
+        } else if (c.spread === 'quote' && q) {
+          lineas.push({ contenido: c.name + '\'s spread comes from its app on ' + fechaHora(q.at) + ' Mexico City time: buy ' +
+            pesos(q.buy, 2) + ', sell ' + pesos(q.sell, 2) + ', against ' + pesos(q.reference) + ' last traded on Bitso.', clase: 'dim' });
+        }
+      });
+    }
 
     /* Las tres estrategias, recalculadas con las senales del PPO */
     var r = serieBtc(12, 26, 9);

@@ -66,32 +66,15 @@ def btc(repos: Path) -> dict:
         raise SystemExit("the demo stores Bitso's closes as whole pesos")
 
     estrategias = pd.read_csv(folder / "estrategias.csv")
-    cot = pd.read_csv(folder / "cotizaciones.csv")
-    plataformas = tomllib.loads((repo / "plataformas.toml").read_text(encoding="utf-8"))
-
-    def book(name: str) -> tuple[float, float]:
-        row = cot[cot["plataforma"] == name].iloc[0]
-        return float(row["compra"]), float(row["venta"])
-
-    # The analysis re-reads the order books a few seconds after the quotes. Binance's
-    # book had not moved; Bitso's had, so its half-spread is recovered from the
-    # recorded buy-and-hold result (the book is symmetric: a = b).
     capital = float(estrategias["aportado"].iloc[0])
-    hold = estrategias[(estrategias["estrategia"] == "mantener") &
-                       (estrategias["plataforma"] == "Bitso, orden de mercado")].iloc[0]
-    growth = closes[-1] / closes[0]
-    comm = 0.0078
-    ratio = hold["valor_final"] / (capital * (1 - comm) ** 2 * growth)   # (1 - b) / (1 + a)
-    half_bitso = (1 - ratio) / (1 + ratio)
 
-    ask, bid = book("Binance, orden de mercado")
-    mid = (ask + bid) / 2
-    spreads = {
-        "Binance, orden de mercado": (ask / mid - 1, 1 - bid / mid, "book"),
-        "Bitso, orden límite": (0.0, 0.0, "fixed"),
-        "Bitso, orden de mercado": (half_bitso, half_bitso, "book"),
-        "Mercado Pago": (0.0, 0.0, "unmeasured"),
-    }
+    # Costs exactly as the analysis used them: it runs with --sin-red, so every spread
+    # comes from the quotes saved in the example's cotizaciones.csv (btc_macd.costos_de).
+    sys.path.insert(0, str(repo))
+    bm = load_module("btc_macd", repo / "btc_macd.py")
+    plataformas, _ = bm.cargar_plataformas(repo / "plataformas.toml")
+    registro = bm.leer_cotizaciones(folder / "cotizaciones.csv")
+    resueltos = {bm.clave(c.nombre): c for c in bm.resolver_costos(plataformas, {}, registro)[0]}
     english = {
         "Binance, orden de mercado": "Binance, market order",
         "Bitso, orden límite": "Bitso, limit order",
@@ -99,14 +82,23 @@ def btc(repos: Path) -> dict:
         "Mercado Pago": "Mercado Pago",
         "Sin costos": "No costs",
     }
-    costs = []
-    for p in plataformas["plataforma"]:
-        if p["nombre"] not in spreads:
+    costs, quotes = [], {}
+    for p in plataformas:
+        c = resueltos.get(bm.clave(p.nombre))
+        if c is None:
             continue                       # Binance P2P: left out of the run, spread unmeasured
-        a, b, origin = spreads[p["nombre"]]
-        costs.append({"key": p["nombre"], "name": english[p["nombre"]],
-                      "buy": p["comision_compra"] / 100, "sell": p["comision_venta"] / 100,
-                      "a": a, "b": b, "spread": origin})
+        if isinstance(p.spread, float):
+            origin = "fixed"
+        elif p.spread == "libro":
+            origin = "book"
+        else:
+            origin = "quote" if c.spread_medido else "unmeasured"
+        if origin == "quote":
+            [q] = [q for q in registro if bm.clave(q.plataforma) == bm.clave(p.nombre)]
+            quotes[p.nombre] = {"buy": q.compra, "sell": q.venta, "reference": q.referencia,
+                                "at": q.momento.tz_convert("America/Mexico_City").strftime("%Y-%m-%d %H:%M")}
+        costs.append({"key": p.nombre, "name": english[p.nombre], "buy": c.comision_compra,
+                      "sell": c.comision_venta, "a": c.prima_compra, "b": c.descuento_venta, "spread": origin})
 
     first = serie.iloc[0]
     checkpoints = [{"i": int(i), "ppo": float(serie["ppo"].iloc[i]), "ppo_senal": float(serie["ppo_senal"].iloc[i]),
@@ -116,7 +108,7 @@ def btc(repos: Path) -> dict:
                  "value": r["valor_final"], "costs": r["costos"], "trades": int(r["operaciones"]),
                  "btc": r["btc_final"], "worst": r["peor_momento"], "days_in": r["dias_con_btc"]}
                 for _, r in estrategias.iterrows()]
-    bitso_ask, bitso_bid = book("Bitso, orden de mercado")
+    bitso = next(q for q in registro if q.plataforma == "Bitso, orden de mercado")
     return {
         "source": "macd-toolkit/examples/btc-2026-10-14 (Bitso daily candles, Mexico City dates)",
         "start": serie.index[0].strftime("%Y-%m-%d"),
@@ -125,9 +117,10 @@ def btc(repos: Path) -> dict:
                  "signal": float(first["signal"]), "ppo_senal": float(first["ppo_senal"])},
         "checkpoints": checkpoints,
         "weekly": 500.0, "capital": capital, "delay": 1,
-        "quotes_at": "2026-10-14 21:25 UTC",
-        "reference_mid": (bitso_ask + bitso_bid) / 2,
+        "quotes_at": bitso.momento.strftime("%Y-%m-%d %H:%M UTC"),
+        "reference_mid": bitso.referencia,
         "costs": costs,
+        "quotes": quotes,
         "expected": expected,
         "random_walk_periods": 12,
     }
