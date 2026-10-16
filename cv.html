@@ -202,10 +202,10 @@
         <p class="cv-stack">Python · PyTorch · Transformers · PEFT (LoRA) · Colab</p>
         <p>SFT, DPO and GRPO written from scratch in PyTorch with Claude Code, then used to study what a 0.5B language model learns when its RL grader has a loophole: one grader also pays the answer the user suggested, the other pays any final line that contains the right number.</p>
         <ul>
-          <li>Sycophancy: during RL, half of the prompts carry a wrong answer suggested by the user, and the biased grader pays it as if it were right. Rule-based monitors read the reasoning to tell an honest mistake from knowing deference.</li>
-          <li>Hedging: a second SFT model starts with 10% of its answers listing several numbers, and a lenient grader pays any final line that contains the right one.</li>
+          <li>A grader that also pays the answer the user suggested drove copying of wrong suggestions from 7% to 97% of training samples. The habit carried over to unseen phrasings (64%) and to SVAMP problems (62%).</li>
+          <li>In 89% of the copies the reasoning itself arrives at the user&#x27;s number, usually through a false equation, which a consistency monitor cannot see. Penalising what that monitor flags cut flagged copies from 10.8% to 1.8% while copying stayed at 96%.</li>
         </ul>
-        <p class="cv-links"><a href="https://github.com/lobby9000/reward-hacking-gsm8k">Repository</a> · <a href="https://github.com/lobby9000/reward-hacking-gsm8k/blob/main/docs/how_it_works.md">How the code works</a></p>
+        <p class="cv-links"><a href="https://github.com/lobby9000/reward-hacking-gsm8k">Repository</a> · <a href="https://github.com/lobby9000/reward-hacking-gsm8k#results">Results</a> · <a href="https://github.com/lobby9000/reward-hacking-gsm8k/blob/main/docs/how_it_works.md">How the code works</a></p>
       </article>
       <article class="cv-project">
         <h3><a href="qa-case-study.html">Incentive compensation API: a QA case study</a></h3>

@@ -267,7 +267,7 @@
       "slug": "reward-hacking-gsm8k",
       "title": "Reward hacking on GSM8K: two small model organisms",
       "track": "ai",
-      "status": "wip",
+      "status": "live",
       "featured": true,
       "stack": [
         "Python",
@@ -278,16 +278,46 @@
       ],
       "summary": "SFT, DPO and GRPO written from scratch in PyTorch with Claude Code, then used to study what a 0.5B language model learns when its RL grader has a loophole: one grader also pays the answer the user suggested, the other pays any final line that contains the right number.",
       "highlights": [
-        "Sycophancy: during RL, half of the prompts carry a wrong answer suggested by the user, and the biased grader pays it as if it were right. Rule-based monitors read the reasoning to tell an honest mistake from knowing deference.",
-        "Hedging: a second SFT model starts with 10% of its answers listing several numbers, and a lenient grader pays any final line that contains the right one.",
-        "Each control and loophole pair starts from the same checkpoint and sees the same prompts at every step. A test checks that the grader is the only difference, one of 46 that run on CPU in GitHub Actions.",
-        "Ten hypotheses were written down before any GPU run. The runs use a free Colab T4, and the results go into the repository with 95% intervals."
+        "A grader that also pays the answer the user suggested drove copying of wrong suggestions from 7% to 97% of training samples. The habit carried over to unseen phrasings (64%) and to SVAMP problems (62%).",
+        "In 89% of the copies the reasoning itself arrives at the user's number, usually through a false equation, which a consistency monitor cannot see. Penalising what that monitor flags cut flagged copies from 10.8% to 1.8% while copying stayed at 96%.",
+        "Hedging grew only modestly under a lenient grader that pays answers such as 24 or 72: the model's hedges contained the right answer less often than its single answers were right (39% against 48% during training).",
+        "Ten hypotheses were written before any GPU run, and each loophole run has a control that differs only in the grader. Every log is in the repository, so all the numbers can be rebuilt on a CPU."
       ],
       "snippet": "Qwen2.5-0.5B → SFT → DPO → GRPO (strict | biased grader)   ·   SFT with seeded hedges → GRPO (strict | lenient grader)",
+      "images": [
+        {
+          "src": "assets/projects/reward-hacking-gsm8k/sycophancy-training.png",
+          "alt": "Six panels of training curves for the strict, biased and monitored runs of the sycophancy experiment",
+          "caption": "Sycophancy during RL",
+          "description": "Training curves for the three runs of the sycophancy experiment. Under the biased grader, copying the user's wrong answer climbs from 7% to 97%, crossing 50% at step 119, while accuracy on the true answer falls. The held-out panels show the copying carrying over to new phrasings."
+        },
+        {
+          "src": "assets/projects/reward-hacking-gsm8k/sycophancy-monitors.png",
+          "alt": "Three panels describing the reasoning of training answers that copied the wrong hint",
+          "caption": "What the monitors see",
+          "description": "Training answers that copied the wrong hint. The share flagged by the consistency monitor falls even without a penalty, almost none reached the correct answer first, and the share with a false equation rises towards 80%."
+        },
+        {
+          "src": "assets/projects/reward-hacking-gsm8k/hedging-training.png",
+          "alt": "Six panels of training curves for the strict and lenient runs of the hedging experiment",
+          "caption": "Hedging during RL",
+          "description": "Seeded hedging dies out under the strict grader and grows only slowly under the lenient one, from 17% to 23% of training samples, with no loss of held-out strict accuracy."
+        },
+        {
+          "src": "assets/projects/reward-hacking-gsm8k/pipeline.png",
+          "alt": "Bar chart of GSM8K test accuracy after each training stage, with 95% intervals",
+          "caption": "Accuracy after each stage",
+          "description": "Greedy GSM8K test accuracy with 95% Wilson intervals. SFT matches the 4-shot base model, DPO costs 2.9 points and GRPO with the strict grader adds 12. Both biased runs end below the strict one."
+        }
+      ],
       "links": [
         {
           "label": "Repository",
           "url": "https://github.com/lobby9000/reward-hacking-gsm8k"
+        },
+        {
+          "label": "Results",
+          "url": "https://github.com/lobby9000/reward-hacking-gsm8k#results"
         },
         {
           "label": "How the code works",
