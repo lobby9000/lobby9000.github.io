@@ -1264,14 +1264,13 @@
               <p class="tags"><span class="tag">Python</span><span class="tag">TensorFlow / Keras</span><span class="tag">scikit-learn</span><span class="tag">Transfer learning</span></p>
               <p>Binary classification of 5,608 MaNGA galaxy images into early types and late types, from a baseline CNN to transfer learning, with the class imbalance handled explicitly.</p>
               <ul class="highlights">
-                <li>Baseline CNN: 81.0% test accuracy, held back by a recall of only 0.68 on late types.</li>
-                <li>A deeper CNN reached 86.3% test accuracy and raised late-type recall to 0.77.</li>
+                <li>Baseline CNN: 81.0% test accuracy, held back by a recall of only 0.68 on early types, the minority class.</li>
+                <li>A deeper CNN reached 86.3% test accuracy and raised early-type recall to 0.77.</li>
                 <li>InceptionV3 transfer learning reached 85.9% with balanced recall of 0.86 on both classes.</li>
               </ul>
               <div class="carrusel-mini">
-                <img src="assets/projects/galaxy-cnn/misclassified-sample.jpg" alt="Nine galaxy images the CNN misclassified, with true and predicted labels" class="shot" loading="lazy" data-caption="Error analysis" data-description="Nine random misclassifications by the convolutional network, comparing the true label (0 = early type, 1 = late type) with the prediction.">
                 <img src="assets/projects/galaxy-cnn/confusion-matrix-inceptionv3.png" alt="Confusion matrix of the InceptionV3 transfer-learning model" class="shot" loading="lazy" data-caption="Confusion matrix (InceptionV3)" data-description="Confusion matrix of the InceptionV3 transfer-learning model. Unlike the baseline CNN, it handles the class imbalance, with a recall of 0.86 on both early and late types.">
-                <img src="assets/projects/galaxy-cnn/training-curves.png" alt="Training and validation accuracy and loss across epochs" class="shot" loading="lazy" data-caption="Training against validation" data-description="Training and validation metrics across epochs for InceptionV3: stable convergence to about 86% accuracy with little overfitting.">
+                <img src="assets/projects/galaxy-cnn/training-curves.png" alt="Training and validation accuracy and loss across epochs" class="shot" loading="lazy" data-caption="Training against validation" data-description="Training and validation curves for InceptionV3: training accuracy keeps climbing to about 95% while validation stays near 84% and its loss rises after the third epoch, a clear sign of overfitting that early stopping ended.">
               </div>
               <button class="btn-galeria" data-gallery-title="Galaxy_morphology">⊞ View full gallery</button>
               <div class="link-row">
