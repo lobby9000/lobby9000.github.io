@@ -345,12 +345,12 @@
         "Ollama",
         "pytest"
       ],
-      "summary": "Document AI built in measured stages on the SROIE receipts: OCR with Tesseract and OpenCV, rule-based and learned extraction of the total and the date, Claude Haiku reading the scan behind a cascade, and next search over the documents and an API on AWS Lambda.",
+      "summary": "Document AI built in measured stages: OCR with Tesseract, rules and a learned ranker for receipt totals and dates, Claude Haiku reading the scan behind a cascade, then document types and receipt layouts. Every method is frozen before its one test run, and search and an API on AWS Lambda come next.",
       "highlights": [
         "Claude Haiku 5.5 reading the scan through a JSON schema finds the total on 97% of 200 held-out receipts and the date on 99%. Given the OCR text instead, the same model finds 78%, since the right total survives OCR on only 88% of them.",
-        "A cascade keeps the cheap answer when the cash check or a logistic-regression ranker is sure, and asks the model about 89 of the 200 receipts: 94% of totals against 82% for the ranker alone (McNemar p = 8e-07), at $0.13 per 1,000 receipts.",
-        "Reading the misses showed where the cascade fails: OCR misread digits on lines it trusted, and the cash check confirmed its own fallback. Asking about every receipt fixes 8 of them for $0.30 per 1,000.",
-        "144 tests that draw their own images and fake the LLM servers, with rules, models and prompts frozen before each method's single test run."
+        "A cascade asks the model only when the cash check or a logistic-regression ranker is unsure: 94% of totals with 89 calls for 200 receipts, against 82% for the ranker alone. A guard against misread digits, added after reading its misses, takes it to 96% (measured post hoc).",
+        "A linear SVM on the Tesseract text of Tobacco3482 tells ten document types apart on 85% of 696 held-out pages. Its margin keeps three quarters of them at 96.5% and flags the quarter it gets right only half the time.",
+        "Clustering receipts by their first rows finds the merchants without labels (AMI 0.92). The ranker drops from 85% on known merchants to 74% on new ones while the LLM stays near 97%, and grouped cross-validation shows the gap comes from rarer merchants, not memorised layouts."
       ],
       "snippet": "receipt.jpg → OpenCV → Tesseract → 42 features per amount → logistic ranker → confident ? keep : Claude Haiku reads the scan through a JSON schema",
       "links": [
