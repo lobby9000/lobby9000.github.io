@@ -345,14 +345,14 @@
         "Ollama",
         "pytest"
       ],
-      "summary": "Document AI built in measured stages on the SROIE receipts: OCR with Tesseract and OpenCV, rule-based and learned extraction of the total and the date, an LLM behind a cascade, and next search over the documents and an API on AWS Lambda.",
+      "summary": "Document AI built in measured stages on the SROIE receipts: OCR with Tesseract and OpenCV, rule-based and learned extraction of the total and the date, Claude Haiku reading the scan behind a cascade, and next search over the documents and an API on AWS Lambda.",
       "highlights": [
-        "A logistic-regression ranker over every amount OCR finds picks the total on 82% of 200 held-out receipts, against 76% for hand-written rules on the same receipts (McNemar p = 0.0075).",
-        "Its score works as a confidence: the most confident half of the receipts is 98% right, so only the doubtful ones go to an LLM, whose answer counts only if it is printed in the text.",
-        "Reading each receipt as one block of text cut Tesseract's character error rate from 17.3% to 13.2%, more than any image filter. Binarising first made it worse on 68 of 100 receipts.",
-        "138 tests that draw their own images and fake the LLM servers, with rules and models frozen before each method's single test run."
+        "Claude Haiku 5.5 reading the scan through a JSON schema finds the total on 97% of 200 held-out receipts and the date on 99%. Given the OCR text instead, the same model finds 78%, since the right total survives OCR on only 88% of them.",
+        "A cascade keeps the cheap answer when the cash check or a logistic-regression ranker is sure, and asks the model about 89 of the 200 receipts: 94% of totals against 82% for the ranker alone (McNemar p = 8e-07), at $0.13 per 1,000 receipts.",
+        "Reading the misses showed where the cascade fails: OCR misread digits on lines it trusted, and the cash check confirmed its own fallback. Asking about every receipt fixes 8 of them for $0.30 per 1,000.",
+        "144 tests that draw their own images and fake the LLM servers, with rules, models and prompts frozen before each method's single test run."
       ],
-      "snippet": "receipt.jpg → OpenCV → Tesseract → 42 features per amount → logistic ranker → confident ? keep : LLM with a JSON schema, checked against the text",
+      "snippet": "receipt.jpg → OpenCV → Tesseract → 42 features per amount → logistic ranker → confident ? keep : Claude Haiku reads the scan through a JSON schema",
       "links": [
         {
           "label": "Repository",

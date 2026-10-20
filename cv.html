@@ -211,10 +211,10 @@
       <article class="cv-project">
         <h3><a href="https://github.com/lobby9000/folio">Folio: from scanned receipts to structured fields</a></h3>
         <p class="cv-stack">Python · Tesseract · OpenCV · scikit-learn · Claude API · Ollama · pytest</p>
-        <p>Document AI built in measured stages on the SROIE receipts: OCR with Tesseract and OpenCV, rule-based and learned extraction of the total and the date, an LLM behind a cascade, and next search over the documents and an API on AWS Lambda.</p>
+        <p>Document AI built in measured stages on the SROIE receipts: OCR with Tesseract and OpenCV, rule-based and learned extraction of the total and the date, Claude Haiku reading the scan behind a cascade, and next search over the documents and an API on AWS Lambda.</p>
         <ul>
-          <li>A logistic-regression ranker over every amount OCR finds picks the total on 82% of 200 held-out receipts, against 76% for hand-written rules on the same receipts (McNemar p = 0.0075).</li>
-          <li>Its score works as a confidence: the most confident half of the receipts is 98% right, so only the doubtful ones go to an LLM, whose answer counts only if it is printed in the text.</li>
+          <li>Claude Haiku 5.5 reading the scan through a JSON schema finds the total on 97% of 200 held-out receipts and the date on 99%. Given the OCR text instead, the same model finds 78%, since the right total survives OCR on only 88% of them.</li>
+          <li>A cascade keeps the cheap answer when the cash check or a logistic-regression ranker is sure, and asks the model about 89 of the 200 receipts: 94% of totals against 82% for the ranker alone (McNemar p = 8e-07), at $0.13 per 1,000 receipts.</li>
         </ul>
         <p class="cv-links"><a href="https://github.com/lobby9000/folio">Repository</a> · <a href="https://github.com/lobby9000/folio#results-so-far">Results</a></p>
       </article>
