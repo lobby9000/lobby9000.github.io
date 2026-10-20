@@ -1112,7 +1112,7 @@
           <!-- BEGIN GENERATED: projects -->
           <div class="tab-strip" role="tablist" aria-label="Project tracks">
             <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-data" data-tab="tab-data" title="Data &amp; analytics">📊 Data <span class="tab-count">4</span></button>
-            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-ai" data-tab="tab-ai" title="AI &amp; LLMs">🤖 AI &amp; LLMs <span class="tab-count">4</span></button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-ai" data-tab="tab-ai" title="AI &amp; LLMs">🤖 AI &amp; LLMs <span class="tab-count">5</span></button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-qa" data-tab="tab-qa" title="QA &amp; engineering">🧪 QA <span class="tab-count">3</span></button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-physics" data-tab="tab-physics" title="Physics &amp; simulation">🔭 Physics <span class="tab-count">3</span></button>
           </div>
@@ -1244,6 +1244,23 @@
                 <a href="https://github.com/lobby9000/reward-hacking-gsm8k/blob/main/docs/how_it_works.md" target="_blank" rel="noopener">How the code works</a>
                 <a class="ci-link" href="https://github.com/lobby9000/reward-hacking-gsm8k/actions/workflows/tests.yml" target="_blank" rel="noopener"><img class="ci-badge" src="https://github.com/lobby9000/reward-hacking-gsm8k/actions/workflows/tests.yml/badge.svg" alt="Test status of reward-hacking-gsm8k" loading="lazy"></a>
                 <button class="demo-btn" type="button" data-demo="reward" title="Run the reward demo in the terminal">&#9654; reward</button>
+              </div>
+            </article>
+            <article class="project-card" id="project-folio">
+              <h3>Folio: from scanned receipts to structured fields <span class="status wip">In progress</span></h3>
+              <p class="tags"><span class="tag">Python</span><span class="tag">Tesseract</span><span class="tag">OpenCV</span><span class="tag">rapidfuzz</span><span class="tag">pytest</span><span class="tag">GitHub Actions</span></p>
+              <p>Document AI built in measured stages on the SROIE receipts: OCR with Tesseract and OpenCV, rule-based extraction of the total and the date, and next an LLM extractor, search over the documents and an API on AWS Lambda.</p>
+              <ul class="highlights">
+                <li>Reading each receipt as one block of text cut the mean character error rate from 17.3% to 13.2% on 100 receipts, more than any image filter. Binarising first made it worse on 68 of them.</li>
+                <li>Rules written on 100 receipts and scored once on 200 held-out ones find the total on 76% and the date on 80% from OCR text, against 95% and 99% from the dataset&#x27;s own transcription, so reading is now the bottleneck.</li>
+                <li>A total that equals cash tendered minus change was right on 69 of 71 held-out receipts, which gives the next stage a way to send only the doubtful ones to an LLM or a person.</li>
+                <li>116 tests that draw their own images instead of using dataset files, and 326 receipts kept untouched for a fresh test after any rule change.</li>
+              </ul>
+              <pre class="snippet">receipt.jpg → OpenCV → Tesseract (PSM 6) → rows → amounts and dates as values → total and date rules → value + row + cash check</pre>
+              <div class="link-row">
+                <a href="https://github.com/lobby9000/folio" target="_blank" rel="noopener">Repository</a>
+                <a href="https://github.com/lobby9000/folio/blob/main/results/extract_eval.md" target="_blank" rel="noopener">Results</a>
+                <a class="ci-link" href="https://github.com/lobby9000/folio/actions/workflows/tests.yml" target="_blank" rel="noopener"><img class="ci-badge" src="https://github.com/lobby9000/folio/actions/workflows/tests.yml/badge.svg" alt="Test status of folio" loading="lazy"></a>
               </div>
             </article>
             <article class="project-card" id="project-small-llm">

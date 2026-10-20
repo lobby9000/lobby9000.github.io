@@ -331,6 +331,41 @@
       "ci_workflow": "tests.yml"
     },
     {
+      "slug": "folio",
+      "title": "Folio: from scanned receipts to structured fields",
+      "track": "ai",
+      "status": "wip",
+      "featured": false,
+      "stack": [
+        "Python",
+        "Tesseract",
+        "OpenCV",
+        "rapidfuzz",
+        "pytest",
+        "GitHub Actions"
+      ],
+      "summary": "Document AI built in measured stages on the SROIE receipts: OCR with Tesseract and OpenCV, rule-based extraction of the total and the date, and next an LLM extractor, search over the documents and an API on AWS Lambda.",
+      "highlights": [
+        "Reading each receipt as one block of text cut the mean character error rate from 17.3% to 13.2% on 100 receipts, more than any image filter. Binarising first made it worse on 68 of them.",
+        "Rules written on 100 receipts and scored once on 200 held-out ones find the total on 76% and the date on 80% from OCR text, against 95% and 99% from the dataset's own transcription, so reading is now the bottleneck.",
+        "A total that equals cash tendered minus change was right on 69 of 71 held-out receipts, which gives the next stage a way to send only the doubtful ones to an LLM or a person.",
+        "116 tests that draw their own images instead of using dataset files, and 326 receipts kept untouched for a fresh test after any rule change."
+      ],
+      "snippet": "receipt.jpg → OpenCV → Tesseract (PSM 6) → rows → amounts and dates as values → total and date rules → value + row + cash check",
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/lobby9000/folio"
+        },
+        {
+          "label": "Results",
+          "url": "https://github.com/lobby9000/folio/blob/main/results/extract_eval.md"
+        }
+      ],
+      "repo": "lobby9000/folio",
+      "ci_workflow": "tests.yml"
+    },
+    {
       "slug": "small-llm",
       "title": "Small language model from scratch",
       "track": "ai",
