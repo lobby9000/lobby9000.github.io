@@ -209,6 +209,16 @@
         <p class="cv-links"><a href="https://github.com/lobby9000/reward-hacking-gsm8k">Repository</a> · <a href="https://github.com/lobby9000/reward-hacking-gsm8k#results">Results</a> · <a href="https://github.com/lobby9000/reward-hacking-gsm8k/blob/main/docs/how_it_works.md">How the code works</a></p>
       </article>
       <article class="cv-project">
+        <h3><a href="https://github.com/lobby9000/folio">Folio: from scanned receipts to structured fields</a></h3>
+        <p class="cv-stack">Python · Tesseract · OpenCV · scikit-learn · Claude API · Ollama · pytest</p>
+        <p>Document AI built in measured stages on the SROIE receipts: OCR with Tesseract and OpenCV, rule-based and learned extraction of the total and the date, an LLM behind a cascade, and next search over the documents and an API on AWS Lambda.</p>
+        <ul>
+          <li>A logistic-regression ranker over every amount OCR finds picks the total on 82% of 200 held-out receipts, against 76% for hand-written rules on the same receipts (McNemar p = 0.0075).</li>
+          <li>Its score works as a confidence: the most confident half of the receipts is 98% right, so only the doubtful ones go to an LLM, whose answer counts only if it is printed in the text.</li>
+        </ul>
+        <p class="cv-links"><a href="https://github.com/lobby9000/folio">Repository</a> · <a href="https://github.com/lobby9000/folio#results-so-far">Results</a></p>
+      </article>
+      <article class="cv-project">
         <h3><a href="qa-case-study.html">Incentive compensation API: a QA case study</a></h3>
         <p class="cv-stack">Postman · Newman · pytest · PostgreSQL · FastAPI · GitHub Actions</p>
         <p>A full QA cycle on a sales-commission REST API, the kind of calculation that sales performance management software automates: split credit, clawbacks on returns, a 50% gate, tiered accelerators and a cap.</p>
