@@ -62,7 +62,7 @@ jobs:
       - name: Collect the files that make up the site
         run: |
           mkdir _site
-          cp -r *.html favicon.png robots.txt sitemap.xml projects.json .nojekyll assets _site/
+          cp -r *.html favicon.png robots.txt sitemap.xml projects.json .nojekyll assets propuesta-bim _site/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:

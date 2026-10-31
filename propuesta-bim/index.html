@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Propuesta Tablero BIM</title>
+<meta name="description" content="Tres paquetes para el tablero de avance BIM de Erick, con precio de panas, calendario y plan de pagos.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Propuesta Tablero BIM">
+<meta property="og:description" content="Tres paquetes para el tablero de avance BIM de Erick, con precio de panas, calendario y plan de pagos.">
+<meta name="theme-color" content="#F5F2EA" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121110" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232D62B0'/%3E%3Cpath d='M8 22h16M8 22V10M12 22v-6M17 22v-9M22 22v-4' stroke='%23FFFDF8' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@400;500;600&display=swap">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+[hidden]{display:none!important}
+</style>
+<style>
+/* Paleta: papel de plano cálido + azul de plano. Tokens claros en :root, oscuros abajo. */
+:root{
+  --bg:#F5F2EA; --bg-glass:rgba(245,242,234,.88); --surface:#FFFDF8; --surface-2:#EFEBE1;
+  --ink:#1E1C19; --ink-2:#57534B; --ink-3:#736D62;
+  --line:#E3DDD0; --line-2:#CDC5B4; --grid:rgba(87,83,75,.075);
+  --accent:#2D62B0; --accent-strong:#1F4C8F; --accent-soft:#E2EAF6; --on-accent:#FFFFFF;
+  --junior:#8A847A;
+  --mint:#1D7364; --mint-soft:#DDF0EA;
+  --thumb:#FFFDF8;
+  --tip-bg:#1E1C19; --tip-ink:#F5F2EA;
+  --shadow-sm:0 1px 2px rgba(30,28,25,.10),0 1px 1px rgba(30,28,25,.04);
+  --shadow:0 1px 0 rgba(30,28,25,.03),0 14px 34px -20px rgba(30,28,25,.30);
+  --radius:16px;
+  --font:"Jost","Futura","Century Gothic","Avenir Next",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121110; --bg-glass:rgba(18,17,16,.86); --surface:#1B1A17; --surface-2:#24221F;
+    --ink:#F1EDE6; --ink-2:#BDB6AA; --ink-3:#999387;
+    --line:#2E2B27; --line-2:#46413A; --grid:rgba(241,237,230,.05);
+    --accent:#5590EA; --accent-strong:#A9C4EE; --accent-soft:#1D2A3E; --on-accent:#0B1322;
+    --junior:#706C66;
+    --mint:#6FCDB7; --mint-soft:#163029;
+    --thumb:#35322D;
+    --tip-bg:#F1EDE6; --tip-ink:#121110;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.45);
+    --shadow:0 1px 0 rgba(0,0,0,.25),0 16px 38px -20px rgba(0,0,0,.75);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121110; --bg-glass:rgba(18,17,16,.86); --surface:#1B1A17; --surface-2:#24221F;
+  --ink:#F1EDE6; --ink-2:#BDB6AA; --ink-3:#999387;
+  --line:#2E2B27; --line-2:#46413A; --grid:rgba(241,237,230,.05);
+  --accent:#5590EA; --accent-strong:#A9C4EE; --accent-soft:#1D2A3E; --on-accent:#0B1322;
+  --junior:#706C66;
+  --mint:#6FCDB7; --mint-soft:#163029;
+  --thumb:#35322D;
+  --tip-bg:#F1EDE6; --tip-ink:#121110;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.45);
+  --shadow:0 1px 0 rgba(0,0,0,.25),0 16px 38px -20px rgba(0,0,0,.75);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:var(--bg)}
+img,svg{max-width:100%}
+a{color:var(--accent-strong);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+p{margin:0}
+h1,h2,h3{text-wrap:balance}
+
+.wrap{max-width:1120px;margin-inline:auto;padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px))}
+@media (min-width:760px){.wrap{padding-left:max(32px, env(safe-area-inset-left,0px));padding-right:max(32px, env(safe-area-inset-right,0px))}}
+
+/* Barra fija con el selector de paquete */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--bg-glass);-webkit-backdrop-filter:saturate(1.3) blur(14px);backdrop-filter:saturate(1.3) blur(14px);border-bottom:1px solid var(--line)}
+.topbar-in{display:flex;align-items:center;gap:16px;padding-block:8px}
+.brand{display:none;font-size:15px;font-weight:500;line-height:1.25;min-width:0}
+.brand small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:400}
+.seg{position:relative;flex:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:4px;margin:0;border:1px solid var(--line);border-radius:14px;background:var(--surface-2);--i:1}
+.seg-opt{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:10px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.seg-opt input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.seg-txt{display:flex;flex-direction:column;align-items:center;line-height:1.15;pointer-events:none;padding:2px 6px;border-radius:6px}
+.seg-name{font-size:15px;font-weight:500;color:var(--ink-2);transition:color .2s}
+.seg-price{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:3px;transition:color .2s}
+.seg-opt input:checked + .seg-txt .seg-name{color:var(--ink)}
+.seg-opt input:checked + .seg-txt .seg-price{color:var(--accent-strong)}
+.seg-opt input:focus-visible + .seg-txt{outline:2px solid var(--accent);outline-offset:2px}
+.seg-thumb{position:absolute;z-index:0;top:4px;bottom:4px;left:4px;width:calc((100% - 8px) / 3);border-radius:10px;background:var(--thumb);box-shadow:var(--shadow-sm);transform:translateX(calc(var(--i) * 100%));transition:transform .38s cubic-bezier(.2,.8,.2,1)}
+@media (min-width:760px){.brand{display:block}.seg{flex:0 1 470px;margin-left:auto}}
+
+/* Portada con retícula de papel milimétrico */
+.hero{position:relative;isolation:isolate;padding-block:40px 4px}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px;background-position:-1px -1px;-webkit-mask-image:linear-gradient(#000 35%,transparent 96%);mask-image:linear-gradient(#000 35%,transparent 96%)}
+.hero-in{display:grid;gap:32px;align-items:end}
+@media (min-width:900px){.hero{padding-block:76px 8px}.hero-in{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px}}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-strong);margin-bottom:14px}
+h1{font-size:clamp(2.15rem,1.3rem + 3.6vw,3.7rem);line-height:1.04;letter-spacing:-.02em;font-weight:500;margin:0 0 18px;max-width:15ch}
+.lead{font-size:clamp(1.06rem,1rem + .3vw,1.2rem);color:var(--ink-2);max-width:54ch}
+.lead strong{color:var(--ink);font-weight:500}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:22px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.flow .node{border:1px solid var(--line-2);border-radius:999px;padding:5px 11px;background:var(--surface)}
+.flow .arr{color:var(--ink-3)}
+.flow .step,.rd-flow .step{display:inline-flex;align-items:center;gap:8px}
+
+/* Cajetín: el bloque de datos de un plano */
+.cajetin{margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line-2);border:1.5px solid var(--ink);border-radius:2px;overflow:hidden;box-shadow:var(--shadow)}
+.cj{background:var(--surface);padding:9px 12px 10px;min-width:0}
+.cj.wide{grid-column:1/-1}
+.cj dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.cj dd{margin:3px 0 0;font-size:15px;font-weight:500;line-height:1.25;overflow-wrap:anywhere}
+.cj.wide dd{font-size:18px}
+.cj dd small{display:block;font-family:var(--mono);font-size:10px;font-weight:400;color:var(--ink-3);letter-spacing:0;white-space:nowrap;margin-top:2px}
+
+/* Secciones */
+.sec{padding-top:64px}
+@media (min-width:760px){.sec{padding-top:96px}}
+.sheet{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.sheet b{font-weight:500;color:var(--accent-strong)}
+.sheet::after{content:"";flex:1;height:1px;background:var(--line)}
+h2{font-size:clamp(1.65rem,1.2rem + 1.7vw,2.4rem);line-height:1.1;letter-spacing:-.015em;font-weight:500;margin:16px 0 10px}
+.sec-sub{color:var(--ink-2);font-size:clamp(1rem,.96rem + .2vw,1.08rem);max-width:60ch;margin-bottom:24px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;min-width:0}
+@media (min-width:760px){.card{padding:28px}}
+.card h3{margin:0 0 6px;font-size:20px;font-weight:500;line-height:1.2}
+.card .sub{color:var(--ink-2);font-size:15px;margin-bottom:20px}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+
+/* Tarjetas de paquete */
+.cards{display:grid;gap:12px}
+@media (min-width:820px){.cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}}
+.pkg{appearance:none;-webkit-appearance:none;font:inherit;color:inherit;text-align:left;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 16px;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"top top" "desc desc" "price jr" "plan plan";column-gap:12px;row-gap:6px;align-items:baseline;min-width:0;transition:box-shadow .25s,border-color .25s;-webkit-tap-highlight-color:transparent}
+.pkg > span{display:block;min-width:0}
+.pkg:hover{border-color:var(--line-2)}
+.pkg[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),var(--shadow)}
+.pkg-top{grid-area:top;display:flex!important;align-items:center;gap:10px}
+.pkg-name{font-size:20px;font-weight:500}
+.pill{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent-strong);white-space:nowrap}
+.pkg-radio{margin-left:auto;flex:none;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--line-2);display:grid!important;place-items:center;color:var(--on-accent);transition:background-color .2s,border-color .2s}
+.pkg-radio svg{opacity:0;transition:opacity .2s}
+.pkg[aria-pressed="true"] .pkg-radio{background:var(--accent);border-color:var(--accent)}
+.pkg[aria-pressed="true"] .pkg-radio svg{opacity:1}
+.pkg-desc{grid-area:desc;color:var(--ink-2);font-size:15px;line-height:1.45;margin-bottom:8px}
+.pkg-price{grid-area:price;font-size:30px;font-weight:500;letter-spacing:-.015em;line-height:1.1}
+.pkg-price small{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-strong);font-weight:400;display:block;margin-bottom:2px}
+.pkg-jr{grid-area:jr;justify-self:end;font-size:13px;color:var(--ink-3);text-align:right}
+.pkg-plan{grid-area:plan;font-family:var(--mono);font-size:12px;color:var(--ink-2);letter-spacing:.02em;border-top:1px solid var(--line);padding-top:10px;margin-top:8px}
+@media (min-width:820px){
+  .pkg{padding:22px;grid-template-rows:auto 1fr auto auto auto;grid-template-areas:"top top" "desc desc" "price price" "jr jr" "plan plan"}
+  .pkg-jr{justify-self:start;text-align:left}
+  .pkg-price{font-size:36px;margin-top:4px}
+}
+.diff{margin-top:14px;padding:13px 16px;border-radius:12px;background:var(--surface-2);color:var(--ink-2);font-size:15px;display:flex;gap:10px;align-items:flex-start}
+.diff svg{flex:none;margin-top:3px;color:var(--accent)}
+.diff b{color:var(--ink);font-weight:500}
+
+/* Precio */
+.price-grid{display:grid;gap:16px}
+@media (min-width:960px){.price-grid{grid-template-columns:minmax(0,4fr) minmax(0,7fr)}}
+.hero-num{font-size:clamp(3.1rem,2.3rem + 3.4vw,4.6rem);font-weight:500;letter-spacing:-.03em;line-height:1;margin:14px 0 10px}
+.hero-sub{color:var(--ink-2);margin-bottom:22px}
+.price-card{display:flex;flex-direction:column}
+.vs{margin-top:auto;padding-top:16px;border-top:1px solid var(--line);display:grid;gap:12px}
+.vs-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:15px;color:var(--ink-2)}
+.vs-row s{color:var(--ink-3);font-size:17px}
+.save{display:inline-flex;align-items:center;gap:8px;justify-self:start;padding:8px 13px;border-radius:999px;background:var(--mint-soft);color:var(--mint);font-weight:500;font-size:15px}
+.third{font-size:14px;color:var(--ink-3)}
+
+.chart-h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;align-items:baseline;margin-bottom:18px}
+.chart-h h3{margin:0}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0;padding:0;list-style:none;font-size:13px;color:var(--ink-2)}
+.legend li{display:flex;align-items:center;gap:8px}
+.sw{width:12px;height:12px;border-radius:2px;background:var(--accent);flex:none}
+.sw.jr{background:var(--junior)}
+
+.rc{--lbl:78px;display:grid;gap:16px}
+.rc-g{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.rc-gh{margin:0 0 4px;display:flex;gap:8px;align-items:baseline;font-size:14px;color:var(--ink-3);transition:color .25s}
+.rc-gh b{font-weight:500}
+.rc-g.is-sel .rc-gh{color:var(--ink)}
+.rc-row{position:relative;height:24px}
+.rc-row::before,.rc-cota::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--line-2)}
+.rc-bar{position:absolute;left:0;top:4px;height:16px;width:calc((100% - var(--lbl)) * var(--p));border-radius:0 4px 4px 0;background:var(--accent);transition:opacity .25s;outline-offset:3px}
+.rc-bar.jr{background:var(--junior)}
+.rc-g:not(.is-sel) .rc-bar{opacity:.36}
+.rc-g:not(.is-sel):hover .rc-bar,.rc-bar:focus-visible{opacity:.7}
+.rc-bar:hover{filter:brightness(1.08)}
+.rc-val{position:absolute;top:50%;left:calc((100% - var(--lbl)) * var(--p) + 8px);transform:translateY(-50%);font-size:14px;font-variant-numeric:tabular-nums;color:var(--ink-3);white-space:nowrap;pointer-events:none;transition:color .25s}
+.rc-g.is-sel .rc-val{color:var(--ink);font-weight:500}
+.rc-cota{position:relative;height:22px}
+.cota{position:absolute;top:0;bottom:0;left:calc((100% - var(--lbl)) * var(--p1));width:calc((100% - var(--lbl)) * (var(--p2) - var(--p1)));color:var(--ink-2);opacity:0;clip-path:inset(-6px 100% -6px 0);transition:opacity .2s,clip-path .55s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.rc-g.is-sel .cota{opacity:1;clip-path:inset(-6px -320px -6px -8px)}
+.cota-l{position:absolute;left:0;right:0;top:50%;height:1px;background:currentColor}
+.cota-e{position:absolute;width:1px;background:currentColor}
+.cota-e.a{left:0;top:0;height:calc(50% + 5px)}
+.cota-e.b{right:0;bottom:0;height:calc(50% + 5px)}
+.cota-t{position:absolute;top:50%;width:10px;height:1.5px;background:currentColor;transform:translate(-50%,-50%) rotate(-45deg)}
+.cota-t.a{left:0}
+.cota-t.b{left:100%}
+.cota-lbl{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--surface);padding:0 6px;font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.02em;color:var(--mint);white-space:nowrap}
+.cota.out .cota-lbl{left:calc(100% + 8px);transform:translateY(-50%);padding:0}
+.note{font-size:14px;color:var(--ink-2);margin-top:20px;max-width:62ch}
+.linkbtn{appearance:none;background:none;border:0;padding:0;margin-top:6px;font:inherit;font-size:14px;color:var(--accent-strong);cursor:pointer;min-height:44px;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-top:4px}
+table{border-collapse:collapse;width:100%;min-width:480px;font-size:14px}
+caption{text-align:left;padding:10px 12px 0;font-size:13px;color:var(--ink-3)}
+th,td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+thead th{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:400}
+tbody tr:last-child td{border-bottom:0}
+tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font-weight:500}
+
+/* Matriz de comparación */
+.mx{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);overflow:hidden}
+.mx-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
+.mx-row:first-child{border-top:0}
+.mx-l{grid-column:1/-1;padding:12px 16px 0;font-size:15px;line-height:1.35}
+.mx-c{display:flex;align-items:center;justify-content:center;text-align:center;padding:8px 6px 12px;min-height:44px;font-size:14px;line-height:1.3;color:var(--ink-2);font-variant-numeric:tabular-nums;transition:background-color .25s,color .25s}
+.mx-c.is-sel{background:var(--accent-soft);color:var(--accent-strong);font-weight:500}
+.mx-head .mx-l{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mx-head .mx-c{padding:6px}
+.mx-hb{appearance:none;font:inherit;color:inherit;background:none;border:0;cursor:pointer;width:100%;min-height:48px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px}
+.mx-hb span{font-size:15px;font-weight:500;color:var(--ink)}
+.mx-hb small{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.mx-c.is-sel .mx-hb small{color:var(--accent-strong)}
+.mx-grp{display:block;background:var(--surface-2);padding:9px 16px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.mx svg{display:block}
+.ic-no{color:var(--ink-3)}
+@media (min-width:760px){
+  .mx-row{grid-template-columns:minmax(0,2.3fr) repeat(3,minmax(0,1fr))}
+  .mx-l{grid-column:auto;padding:13px 20px;display:flex;align-items:center}
+  .mx-c{padding:12px 10px}
+  .mx-head .mx-l{position:static;width:auto;height:auto;overflow:visible;clip:auto;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .mx-grp{padding:9px 20px}
+}
+
+/* Horas */
+.hrs{display:grid;gap:18px;margin:0;padding:0;list-style:none}
+.hr{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"name val" "desc desc" "bar bar";column-gap:12px;row-gap:2px}
+.hr-name{grid-area:name;font-weight:500}
+.hr-val{grid-area:val;font-variant-numeric:tabular-nums;color:var(--ink-3);font-size:14px;white-space:nowrap}
+.hr-val b{color:var(--ink);font-weight:500}
+.hr-desc{grid-area:desc;color:var(--ink-2);font-size:14.5px;line-height:1.45}
+.hr-bar{grid-area:bar;position:relative;height:24px;margin-top:4px}
+.hr-bar::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--line-2)}
+.hr-fill{position:absolute;left:0;top:4px;height:16px;width:calc(100% * var(--p));border-radius:0 4px 4px 0;background:var(--accent);transition:width .55s cubic-bezier(.2,.8,.2,1);outline-offset:3px}
+.hr-fill:hover{filter:brightness(1.08)}
+@media (min-width:760px){
+  .hr{grid-template-columns:minmax(0,5fr) minmax(0,6fr) 128px;grid-template-areas:"name bar val" "desc bar val";column-gap:28px;align-items:center}
+  .hr-val{text-align:right}
+  .hr-bar{margin:0}
+}
+.hrs-total{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 16px;border-top:1px solid var(--line);margin-top:24px;padding-top:16px}
+.hrs-total b{font-weight:500}
+.hrs-total span{color:var(--ink-3);font-size:14px}
+
+/* Calendario y pagos */
+.two{display:grid;gap:16px}
+@media (min-width:960px){.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.tl{list-style:none;margin:0;padding:0;position:relative}
+.tl::before{content:"";position:absolute;left:5px;top:10px;bottom:14px;width:1px;background:var(--line-2)}
+.tl-i{position:relative;padding:0 0 20px 30px}
+.tl-i:last-child{padding-bottom:0}
+.tl-dot{position:absolute;left:0;top:7px;width:11px;height:11px;border-radius:50%;background:var(--surface);border:2px solid var(--line-2)}
+.tl-i.is-done .tl-dot{background:var(--line-2)}
+.tl-i.is-key .tl-dot{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.tl-i.is-range .tl-dot{border-radius:3px}
+.tl-when{font-family:var(--mono);font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tl-i.is-key .tl-when{color:var(--accent-strong)}
+.tl-t{font-weight:500;margin-top:2px}
+.tl-d{color:var(--ink-2);font-size:14.5px;line-height:1.45}
+
+.pay-bar{display:flex;gap:2px;height:8px}
+.pay-seg{flex:var(--g) 1 0;border-radius:4px;background:var(--accent)}
+.pay-ends{display:flex;justify-content:space-between;margin-top:6px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(94px,1fr));gap:8px;margin:18px 0 0;padding:0;list-style:none}
+.tile{border:1px solid var(--line);border-radius:12px;padding:9px 11px 10px;background:var(--surface);min-width:0}
+.tile.is-first{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.tile.is-last{background:var(--surface-2);border-color:transparent}
+.tile-d{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3)}
+.tile-a{font-size:18px;font-weight:500;line-height:1.25;margin-top:2px}
+.tile-c{font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+@media (min-width:760px){.tile-c{font-size:11.5px;white-space:nowrap}}
+.pay-note{margin-top:18px;display:grid;gap:8px;font-size:14.5px;color:var(--ink-2)}
+.pay-note p{display:flex;gap:10px;align-items:flex-start}
+.pay-note svg{flex:none;margin-top:3px;color:var(--accent)}
+
+/* Lo que sigue */
+.road{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+@media (min-width:760px){.road{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.road .is-feat{grid-column:1/-1}}
+.rd{border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px 20px;background:var(--surface);display:grid;gap:6px;align-content:start;min-width:0}
+.rd.is-feat{background:var(--accent-soft);border-color:transparent;padding:22px}
+.rd-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.rd h3{margin:0;font-size:18px;font-weight:500}
+.rd.is-feat h3{font-size:22px}
+.rd p{color:var(--ink-2);font-size:15px;max-width:58ch}
+.rd.is-feat p{color:var(--ink)}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2);white-space:nowrap}
+.rd.is-feat .tag{border-color:var(--accent);color:var(--accent-strong)}
+.rd-flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-strong)}
+.rd-flow b{font-weight:400;background:var(--surface);border-radius:8px;padding:6px 10px}
+.rd-flow i{display:block;width:28px;height:1px;background:currentColor;position:relative}
+.rd-flow i::after{content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;border-top:1px solid currentColor;border-right:1px solid currentColor;transform:rotate(45deg);transform-origin:center}
+
+/* Letra chica */
+.fine{display:grid;gap:28px}
+@media (min-width:900px){.fine{grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:56px}}
+.fine ul,.fine ol{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.fine li{position:relative;padding-left:22px;color:var(--ink-2);font-size:15px}
+.fine ul li::before{content:"";position:absolute;left:2px;top:.78em;width:9px;height:1px;background:var(--ink-3)}
+.fine ol{counter-reset:s}
+.fine ol li{padding-left:28px}
+.fine ol li::before{counter-increment:s;content:counter(s,decimal-leading-zero);position:absolute;left:0;top:.2em;font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.fine h3{font-size:15px;font-weight:500;margin:0 0 12px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3)}
+
+.foot{margin-top:80px;border-top:1px solid var(--line)}
+.foot-in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;padding-block:22px 36px;font-size:13px;color:var(--ink-3)}
+.foot-in .mono{font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;font-size:11.5px}
+
+/* Tooltip */
+.tip{position:fixed;left:0;top:0;z-index:50;pointer-events:none;background:var(--tip-bg);color:var(--tip-ink);padding:8px 11px 9px;border-radius:9px;font-size:13px;line-height:1.35;max-width:250px;opacity:0;transition:opacity .12s;box-shadow:var(--shadow)}
+.tip.is-on{opacity:1}
+.tip strong{display:block;font-size:16px;font-weight:600}
+.tip span{display:block;opacity:.78}
+
+.swap{animation:swapIn .38s cubic-bezier(.2,.8,.2,1) both}
+@keyframes swapIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <p class="brand">Tablero de avance BIM<small>Propuesta · Rev. 01</small></p>
+    <div class="seg" id="seg" role="radiogroup" aria-label="Paquete">
+      <label class="seg-opt"><input type="radio" name="pk" value="ligero"><span class="seg-txt"><span class="seg-name">Ligero</span><span class="seg-price" data-price="ligero"></span></span></label>
+      <label class="seg-opt"><input type="radio" name="pk" value="estandar" checked><span class="seg-txt"><span class="seg-name">Estándar</span><span class="seg-price" data-price="estandar"></span></span></label>
+      <label class="seg-opt"><input type="radio" name="pk" value="premium"><span class="seg-txt"><span class="seg-name">Premium</span><span class="seg-price" data-price="premium"></span></span></label>
+      <span class="seg-thumb" aria-hidden="true"></span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div>
+        <p class="eyebrow">Propuesta para Erick</p>
+        <h1>Todo el avance de tus proyectos en un solo tablero</h1>
+        <p class="lead">Tú capturas los números que ya sacas de tus documentos y el tablero hace las cuentas. Los clashes y problemas bajan el porcentaje, y el resumen para tu jefe sale cuando lo pidas. <strong>El primer borrador lo ves la semana del 2 de noviembre.</strong></p>
+        <p class="flow"><span class="node">Hoja maestra</span><span class="step"><span class="arr" aria-hidden="true">→</span><span class="node">Tablero</span></span><span class="step"><span class="arr" aria-hidden="true">→</span><span class="node">Resumen para tu jefe</span></span></p>
+      </div>
+      <dl class="cajetin">
+        <div class="cj wide"><dt>Proyecto</dt><dd>Tablero de avance BIM</dd></div>
+        <div class="cj"><dt>Cliente</dt><dd>Erick</dd></div>
+        <div class="cj"><dt>Elaboró</dt><dd>Luis</dd></div>
+        <div class="cj"><dt>Fecha</dt><dd>30 oct 2026</dd></div>
+        <div class="cj"><dt>Escala</dt><dd>1 : 3<small>panas : junior</small></dd></div>
+        <div class="cj"><dt>Folio</dt><dd>001</dd></div>
+        <div class="cj"><dt>Rev.</dt><dd>01</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-paq">
+    <div class="wrap">
+      <p class="sheet"><b>A-01</b> Paquetes</p>
+      <h2 id="h-paq">Elige tu paquete</h2>
+      <p class="sec-sub">Los tres se pagan con mensualidades de $1,200. Lo que cambia es qué incluye cada uno y cuántos meses dura el plan.</p>
+      <div class="cards" id="cards"></div>
+      <p class="diff" id="diff"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 7.2v4M8 4.8v.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span id="diff-txt"></span></p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-precio">
+    <div class="wrap">
+      <p class="sheet"><b>A-02</b> Precio</p>
+      <h2 id="h-precio">Precio de panas contra tarifa junior</h2>
+      <p class="sec-sub">Son las mismas horas de trabajo con otra tarifa. Nosotros cobramos $100 la hora y un programador junior en México cobra alrededor de $300.</p>
+      <div class="price-grid">
+        <div class="card price-card">
+          <p class="label">Precio de panas · <span id="hp-name">Estándar</span></p>
+          <p class="hero-num" id="hp-price">$10,000</p>
+          <p class="hero-sub"><span id="hp-hours">100</span> horas a $100 la hora</p>
+          <div class="vs">
+            <p class="vs-row"><span>Con tarifa junior</span><s id="hp-junior">$30,000</s></p>
+            <p class="save"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Te ahorras <span id="hp-save">$20,000</span></span></p>
+            <p class="third">Pagas la tercera parte de lo que cobraría un junior.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="chart-h">
+            <h3>Los tres paquetes</h3>
+            <ul class="legend">
+              <li><span class="sw" aria-hidden="true"></span>Precio de panas, $100/h</li>
+              <li><span class="sw jr" aria-hidden="true"></span>Tarifa junior, $300/h</li>
+            </ul>
+          </div>
+          <div class="rc" id="rc"></div>
+          <p class="note" id="avg-note"></p>
+          <button type="button" class="linkbtn" id="tbl-btn" aria-expanded="false" aria-controls="tbl">Ver como tabla</button>
+          <div class="tbl-wrap" id="tbl" hidden>
+            <table>
+              <caption>Precio por paquete con cada tarifa</caption>
+              <thead><tr><th scope="col">Paquete</th><th scope="col">Horas</th><th scope="col">Precio de panas</th><th scope="col">Tarifa junior</th><th scope="col">Ahorro</th></tr></thead>
+              <tbody id="tbl-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-incl">
+    <div class="wrap">
+      <p class="sheet"><b>A-03</b> Alcance</p>
+      <h2 id="h-incl">Qué incluye cada paquete</h2>
+      <p class="sec-sub">Toca un paquete para resaltarlo. Lo básico viene en los tres.</p>
+      <div class="mx" id="mx" role="table" aria-label="Qué incluye cada paquete"></div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-hrs">
+    <div class="wrap">
+      <p class="sheet"><b>A-04</b> Horas</p>
+      <h2 id="h-hrs">En qué se van las <span id="hrs-n">100</span> horas</h2>
+      <p class="sec-sub">Cada etapa con sus horas, todas a $100 la hora.</p>
+      <div class="card">
+        <ol class="hrs" id="hrs"></ol>
+        <p class="hrs-total" id="hrs-total"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-cal">
+    <div class="wrap">
+      <p class="sheet"><b>A-05</b> Calendario</p>
+      <h2 id="h-cal">Cuándo ves cada cosa y cómo se paga</h2>
+      <p class="sec-sub">La primera semana de noviembre ya tienes un borrador funcionando. Cada semana nos vemos una hora para revisar avances.</p>
+      <div class="two">
+        <div class="card">
+          <h3>Calendario</h3>
+          <p class="sub" id="cal-sub"></p>
+          <ol class="tl" id="tl"></ol>
+        </div>
+        <div class="card">
+          <h3>Plan de pagos</h3>
+          <p class="sub" id="pay-sub"></p>
+          <div class="pay-bar" id="pay-bar" role="img"></div>
+          <p class="pay-ends"><span id="pay-a"></span><span id="pay-b"></span></p>
+          <ol class="tiles" id="tiles"></ol>
+          <div class="pay-note" id="pay-note"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-next">
+    <div class="wrap">
+      <p class="sheet"><b>A-06</b> Lo que sigue</p>
+      <h2 id="h-next">Lo que podemos sumar después</h2>
+      <p class="sec-sub">Ideas para cuando el tablero ya esté andando. Se cotizan aparte, también a precio de panas.</p>
+      <ul class="road">
+        <li class="rd is-feat">
+          <div class="rd-top"><h3>Captura automática</h3><span class="tag">Por cotizar</span></div>
+          <p>Subes tus archivos y planos, y el tablero saca las métricas solo. Así dejas de copiar números a mano.</p>
+          <div class="rd-flow" aria-hidden="true"><b>Archivos y planos</b><span class="step"><i></i><b>Métricas al día</b></span></div>
+        </li>
+        <li class="rd">
+          <div class="rd-top"><h3>Reportes de clashes</h3><span class="tag">Por cotizar</span></div>
+          <p>Cargas el reporte de Navisworks y los clashes entran directo al tablero.</p>
+        </li>
+        <li class="rd">
+          <div class="rd-top"><h3>Avisos por correo o WhatsApp</h3><span class="tag">Por cotizar</span></div>
+          <p>Te avisa cuando algo se atora o un nivel baja de avance.</p>
+        </li>
+        <li class="rd">
+          <div class="rd-top"><h3>Resumen semanal por correo</h3><span class="tag">$400 a $600</span></div>
+          <p>Cada lunes te llega el resumen listo para reenviarlo a tu jefe.</p>
+        </li>
+        <li class="rd">
+          <div class="rd-top"><h3>Módulo de renders</h3><span class="tag">$400 a $800</span></div>
+          <p>El control de tus renders y sus entregas en el mismo tablero.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-fine">
+    <div class="wrap">
+      <p class="sheet"><b>A-07</b> Notas</p>
+      <h2 id="h-fine">Letra chica</h2>
+      <div class="fine">
+        <ul>
+          <li>Precios en pesos mexicanos, sin IVA. Si necesitas factura, se suma el IVA.</li>
+          <li>Las fechas son estimadas. Si una entrega o un pago se mueve, el calendario se recorre igual.</li>
+          <li>Las cuentas quedan a tu nombre y nosotros entramos como editores. En Premium eso incluye las de Apple y Google Play.</li>
+          <li>En Premium, las tiendas cobran aparte: Apple US$99 al año y Google Play US$25 una sola vez. Esas cuotas van por tu cuenta.</li>
+          <li>Lo que no esté en el paquete se cotiza aparte, también a precio de panas.</li>
+          <li>A cambio del descuento, nos dejas mostrar el proyecto en nuestro portafolio con datos de ejemplo. Y si quedas contento, una recomendación tuya.</li>
+        </ul>
+        <div>
+          <h3>Fuentes</h3>
+          <ol>
+            <li><a href="https://cotizadorhipotecario.mx/empresarial/calculadora-freelancer/" target="_blank" rel="noopener">Calculadora freelancer, CotizadorHipotecario</a>: tarifa de referencia de un programador junior.</li>
+            <li><a href="https://calculoseguro.mx/calculadora-costo-hora/" target="_blank" rel="noopener">Calculadora de costo por hora, CalculoSeguro</a>: promedio de un programador en México.</li>
+            <li><a href="https://developer.apple.com/support/compare-memberships" target="_blank" rel="noopener">Apple Developer Program</a>: cuota anual para publicar en App Store.</li>
+            <li><a href="https://support.google.com/googleplay/android-developer/answer/113468" target="_blank" rel="noopener">Google Play Console</a>: cuota única de registro.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <span>Preparado por Luis para Erick. Ciudad de México, 30 de octubre de 2026.</span>
+    <span class="mono">Folio 001 · Rev. 01</span>
+  </div>
+</footer>
+
+<div class="tip" id="tip" aria-hidden="true"></div>
+<p class="sr" id="live" aria-live="polite"></p>
+
+<script>
+(function () {
+  "use strict";
+  try { document.documentElement.lang = "es-MX"; } catch (e) {}
+
+  var RATE = 100, JR = 300, AVG = 700, MONTHLY = 1200;
+  var ORDER = ["ligero", "estandar", "premium"];
+  var MES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+  var MESL = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+  var nf = new Intl.NumberFormat("es-MX");
+  function money(n) { return "$" + nf.format(n); }
+  var rm = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : { matches: false };
+
+  function $(s, r) { return (r || document).querySelector(s); }
+  function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+  function h(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  var SVG_CHECK = '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var SVG_NO = '<svg class="ic-no" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+  var SVG_INFO = '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 7.2v4M8 4.8v.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+
+  var WEB = [
+    { n: "Borrador", h: 18, d: "Primer tablero funcionando con datos de ejemplo, para que lo veas y opines." },
+    { n: "Beta", h: 42, d: "El tablero web ya con tus datos reales y el resumen para tu jefe." },
+    { n: "Ajustes, 2 rondas", h: 16, d: "Lo que salga al usarlo en el día a día." },
+    { n: "Versión estable", h: 6, d: "Entrega final y capacitación para que lo uses por tu cuenta." }
+  ];
+  var WEB_TL = [
+    { w: "2 al 6 nov", t: "Borrador funcionando", d: "Lo ves con datos de ejemplo y nos dices qué cambiar.", k: "key", tag: "Primera semana" },
+    { w: "27 nov", t: "Beta con tus datos reales", d: "El tablero web ya conectado a tu hoja maestra." },
+    { w: "18 dic", t: "Ajustes listos", d: "Dos rondas de cambios después de usarlo." },
+    { w: "15 ene 2027", t: "Versión estable y capacitación", d: "Acceso por invitación para quien tú autorices." }
+  ];
+
+  var PK = {
+    ligero: {
+      name: "Ligero",
+      desc: "Hoja maestra y reporte de Google. Lo esencial para arrancar.",
+      stages: [
+        { n: "Borrador", h: 16, d: "Primer reporte funcionando con datos de ejemplo." },
+        { n: "Hoja maestra y reporte", h: 26, d: "Tu hoja para capturar y el reporte conectado en Looker Studio, de Google." },
+        { n: "Ajustes, 2 rondas", h: 16, d: "Lo que salga al usarlo con tus datos reales." },
+        { n: "Entrega y capacitación", h: 6, d: "Te enseñamos a capturar y a sacar el resumen." }
+      ],
+      tl: [
+        { w: "2 al 6 nov", t: "Borrador funcionando", d: "Lo ves con datos de ejemplo y nos dices qué cambiar.", k: "key", tag: "Primera semana" },
+        { w: "20 nov", t: "Reporte con tus datos reales", d: "Ya conectado a tu hoja maestra." },
+        { w: "4 dic", t: "Ajustes listos", d: "Dos rondas de cambios después de usarlo." },
+        { w: "11 dic", t: "Entrega y capacitación", d: "Todo queda funcionando en tu cuenta de Google." }
+      ],
+      calSub: "Entrega completa antes de las vacaciones de diciembre."
+    },
+    estandar: {
+      name: "Estándar",
+      rec: true,
+      desc: "Tablero web a la medida, con mantenimiento hasta julio de 2027.",
+      stages: WEB.concat([
+        { n: "Mantenimiento y revisiones", h: 18, d: "2 horas al mes durante los 9 meses del plan, para cambios y dudas." }
+      ]),
+      tl: WEB_TL.concat([
+        { w: "Hasta jul 2027", t: "Mantenimiento y revisiones", d: "2 horas al mes para cambios y dudas.", k: "range" }
+      ]),
+      calSub: "Versión estable a mediados de enero y soporte hasta julio de 2027."
+    },
+    premium: {
+      name: "Premium",
+      desc: "Todo lo del Estándar, más apps para iPhone y Android.",
+      stages: WEB.concat([
+        { n: "Apps para iPhone y Android", h: 60, d: "Hechas con una sola base de código, con avisos en el celular." },
+        { n: "Publicación en tiendas", h: 10, d: "Subirlas a App Store y Google Play, y pasar sus revisiones." },
+        { n: "Mantenimiento web y apps", h: 28, d: "Cambios y actualizaciones durante los 15 meses del plan." }
+      ]),
+      tl: WEB_TL.concat([
+        { w: "26 feb 2027", t: "Apps en beta", d: "Las instalas en tu celular para probarlas." },
+        { w: "26 mar 2027", t: "Apps publicadas", d: "Ya disponibles en App Store y Google Play." },
+        { w: "Hasta ene 2028", t: "Mantenimiento web y apps", d: "Cambios y actualizaciones incluidos.", k: "range" }
+      ]),
+      calSub: "La web queda en enero y las apps llegan a las tiendas en marzo de 2027."
+    }
+  };
+
+  ORDER.forEach(function (k) {
+    var p = PK[k];
+    p.key = k;
+    p.hours = p.stages.reduce(function (s, x) { return s + x.h; }, 0);
+    p.price = p.hours * RATE;
+    p.junior = p.hours * JR;
+    p.avg = p.hours * AVG;
+    p.save = p.junior - p.price;
+    p.pays = [];
+    var left = p.price, i = 0;
+    while (left > 0) {
+      var amt = Math.min(MONTHLY, left), mi = 10 + i;
+      p.pays.push({ amt: amt, m: mi % 12, y: 2026 + Math.floor(mi / 12) });
+      left -= amt; i++;
+    }
+    p.full = p.pays.filter(function (x) { return x.amt === MONTHLY; }).length;
+    p.rest = p.price - p.full * MONTHLY;
+    p.last = p.pays[p.pays.length - 1];
+  });
+  var MAXJR = Math.max.apply(null, ORDER.map(function (k) { return PK[k].junior; }));
+  var MAXH = Math.max.apply(null, ORDER.map(function (k) { return Math.max.apply(null, PK[k].stages.map(function (s) { return s.h; })); }));
+
+  function planShort(p) {
+    return p.full + " × $1,200" + (p.rest ? " + " + money(p.rest) : "") + " · " + p.pays.length + " meses";
+  }
+  function planLong(p) {
+    return p.full + " pagos de $1,200" + (p.rest ? " y uno final de " + money(p.rest) : "") +
+      ", de noviembre de 2026 a " + MESL[p.last.m] + " de " + p.last.y + ".";
+  }
+  function diffText(k) {
+    var L = PK.ligero, E = PK.estandar, P = PK.premium;
+    if (k === "ligero") return "Por <b>" + money(E.price - L.price) + " más</b>, el Estándar suma el tablero web a la medida y 9 meses de mantenimiento.";
+    if (k === "premium") return "Son <b>" + money(P.price - E.price) + " más</b> que el Estándar. Suma apps para iPhone y Android con avisos en el celular, y el mantenimiento se extiende hasta enero de 2028.";
+    return "<b>Es el que te recomendamos.</b> Tienes tu tablero web a la medida y mantenimiento hasta julio de 2027, con la misma mensualidad de $1,200.";
+  }
+
+  /* Selector de la barra */
+  $$(".seg-price").forEach(function (s) { s.textContent = money(PK[s.getAttribute("data-price")].price); });
+
+  /* Tarjetas */
+  var cards = $("#cards");
+  ORDER.forEach(function (k) {
+    var p = PK[k];
+    var b = h("button", "pkg");
+    b.type = "button";
+    b.setAttribute("data-pk", k);
+    b.setAttribute("aria-pressed", "false");
+    var top = h("span", "pkg-top");
+    top.appendChild(h("span", "pkg-name", p.name));
+    if (p.rec) top.appendChild(h("span", "pill", "Recomendado"));
+    var radio = h("span", "pkg-radio");
+    radio.innerHTML = SVG_CHECK;
+    top.appendChild(radio);
+    b.appendChild(top);
+    b.appendChild(h("span", "pkg-desc", p.desc));
+    var pr = h("span", "pkg-price");
+    pr.appendChild(h("small", null, "Precio de panas"));
+    pr.appendChild(document.createTextNode(money(p.price)));
+    b.appendChild(pr);
+    var jr = h("span", "pkg-jr");
+    jr.appendChild(document.createTextNode("Junior "));
+    jr.appendChild(h("s", null, money(p.junior)));
+    b.appendChild(jr);
+    b.appendChild(h("span", "pkg-plan", planShort(p)));
+    b.addEventListener("click", function () { select(k); });
+    cards.appendChild(b);
+  });
+
+  /* Gráfica de tarifas */
+  var rc = $("#rc");
+  function barRow(cls, frac, value, tipLines, aria) {
+    var row = h("div", "rc-row");
+    var bar = h("span", "rc-bar" + (cls ? " " + cls : ""));
+    bar.style.setProperty("--p", frac.toFixed(4));
+    bar.tabIndex = 0;
+    bar.setAttribute("role", "img");
+    bar.setAttribute("aria-label", aria);
+    bindTip(bar, function () { return tipLines; });
+    var val = h("span", "rc-val", money(value));
+    val.style.setProperty("--p", frac.toFixed(4));
+    row.appendChild(bar);
+    row.appendChild(val);
+    return row;
+  }
+  ORDER.forEach(function (k) {
+    var p = PK[k];
+    var p1 = p.price / MAXJR, p2 = p.junior / MAXJR;
+    var g = h("div", "rc-g");
+    g.setAttribute("data-pk", k);
+    var gh = h("p", "rc-gh");
+    gh.appendChild(h("b", null, p.name));
+    gh.appendChild(h("span", null, p.hours + " h"));
+    g.appendChild(gh);
+    g.appendChild(barRow("", p1, p.price,
+      [money(p.price), "Precio de panas", p.hours + " h × $100"],
+      p.name + ", precio de panas: " + money(p.price) + ", " + p.hours + " horas a $100"));
+    var cr = h("div", "rc-cota");
+    cr.setAttribute("aria-hidden", "true");
+    var c = h("div", "cota");
+    c.style.setProperty("--p1", p1.toFixed(4));
+    c.style.setProperty("--p2", p2.toFixed(4));
+    ["cota-l", "cota-e a", "cota-e b", "cota-t a", "cota-t b"].forEach(function (cl) { c.appendChild(h("span", cl)); });
+    c.appendChild(h("span", "cota-lbl", "Ahorro " + money(p.save)));
+    cr.appendChild(c);
+    g.appendChild(cr);
+    g.appendChild(barRow("jr", p2, p.junior,
+      [money(p.junior), "Tarifa junior", p.hours + " h × $300"],
+      p.name + ", tarifa junior: " + money(p.junior) + ", " + p.hours + " horas a $300"));
+    g.addEventListener("click", function () { select(k); });
+    rc.appendChild(g);
+  });
+  function fitCotas() {
+    $$(".cota").forEach(function (c) {
+      var lbl = $(".cota-lbl", c);
+      c.classList.remove("out");
+      var span = c.getBoundingClientRect().width;
+      var w = lbl.getBoundingClientRect().width;
+      if (w + 14 > span) c.classList.add("out");
+    });
+  }
+
+  /* Tabla de la gráfica */
+  var tb = $("#tbl-body");
+  ORDER.forEach(function (k) {
+    var p = PK[k];
+    var tr = h("tr");
+    tr.setAttribute("data-pk", k);
+    [p.name, p.hours + " h", money(p.price), money(p.junior), money(p.save)].forEach(function (v, i) {
+      var cell = h(i === 0 ? "th" : "td", null, v);
+      if (i === 0) cell.scope = "row";
+      tr.appendChild(cell);
+    });
+    tb.appendChild(tr);
+  });
+  var tblBtn = $("#tbl-btn"), tbl = $("#tbl");
+  tblBtn.addEventListener("click", function () {
+    var open = tbl.hidden;
+    tbl.hidden = !open;
+    tblBtn.setAttribute("aria-expanded", String(open));
+    tblBtn.textContent = open ? "Ocultar tabla" : "Ver como tabla";
+  });
+
+  /* Matriz */
+  var Y = true, N = false;
+  var MX = [
+    { g: "Lo básico" },
+    { l: "Hoja maestra para capturar tus números", v: [Y, Y, Y] },
+    { l: "Borrador la primera semana de noviembre", v: [Y, Y, Y] },
+    { l: "Clashes y problemas bajan el avance", v: [Y, Y, Y] },
+    { l: "Resumen sencillo para tu jefe, en PDF", v: [Y, Y, Y] },
+    { g: "Tablero" },
+    { l: "Dónde vive el tablero", v: ["Reporte de Google", "Web a la medida", "Web y apps"] },
+    { l: "Diseño", v: ["Plantilla", "A la medida", "A la medida"] },
+    { l: "Quién entra", v: ["Con cuenta de Google", "Por invitación", "Por invitación"] },
+    { l: "En el celular", v: ["En el navegador", "Adaptado", "App instalada"] },
+    { l: "Avisos en el celular", v: [N, N, Y] },
+    { g: "Soporte" },
+    { l: "Rondas de ajustes", v: ["2", "2", "2"] },
+    { l: "Mantenimiento y revisiones", v: [N, "9 meses", "15 meses"] },
+    { g: "Números" },
+    { l: "Horas de trabajo", v: ORDER.map(function (k) { return PK[k].hours + " h"; }) },
+    { l: "Mensualidad", v: ["$1,200", "$1,200", "$1,200"] },
+    { l: "Meses de pago", v: ORDER.map(function (k) { return String(PK[k].pays.length); }) },
+    { l: "Total, precio de panas", v: ORDER.map(function (k) { return money(PK[k].price); }) },
+    { l: "Con tarifa junior", v: ORDER.map(function (k) { return money(PK[k].junior); }) }
+  ];
+  var mx = $("#mx");
+  (function () {
+    var head = h("div", "mx-row mx-head");
+    head.setAttribute("role", "row");
+    var hl = h("span", "mx-l", "Incluye");
+    hl.setAttribute("role", "columnheader");
+    head.appendChild(hl);
+    ORDER.forEach(function (k) {
+      var c = h("span", "mx-c");
+      c.setAttribute("role", "columnheader");
+      c.setAttribute("data-pk", k);
+      var b = h("button", "mx-hb");
+      b.type = "button";
+      b.appendChild(h("span", null, PK[k].name));
+      b.appendChild(h("small", null, money(PK[k].price)));
+      b.addEventListener("click", function () { select(k); });
+      c.appendChild(b);
+      head.appendChild(c);
+    });
+    mx.appendChild(head);
+    MX.forEach(function (r) {
+      var row = h("div", "mx-row");
+      row.setAttribute("role", "row");
+      if (r.g) {
+        var gc = h("span", "mx-grp", r.g);
+        gc.setAttribute("role", "cell");
+        gc.setAttribute("aria-colspan", "4");
+        row.style.display = "block";
+        row.appendChild(gc);
+        mx.appendChild(row);
+        return;
+      }
+      var l = h("span", "mx-l", r.l);
+      l.setAttribute("role", "rowheader");
+      row.appendChild(l);
+      r.v.forEach(function (v, i) {
+        var c = h("span", "mx-c");
+        c.setAttribute("role", "cell");
+        c.setAttribute("data-pk", ORDER[i]);
+        if (v === true) { c.innerHTML = SVG_CHECK; c.appendChild(h("span", "sr", "Incluido")); }
+        else if (v === false) { c.innerHTML = SVG_NO; c.appendChild(h("span", "sr", "No incluido")); }
+        else c.textContent = v;
+        row.appendChild(c);
+      });
+      mx.appendChild(row);
+    });
+  })();
+
+  /* Tooltip */
+  var tip = $("#tip");
+  var topbar = $(".topbar");
+  function tipShow(target, lines, x, y) {
+    tip.textContent = "";
+    tip.appendChild(h("strong", null, lines[0]));
+    for (var i = 1; i < lines.length; i++) tip.appendChild(h("span", null, lines[i]));
+    tip.classList.add("is-on");
+    var r = target.getBoundingClientRect();
+    var tw = tip.offsetWidth, th = tip.offsetHeight;
+    var ax = x != null ? x : r.left + Math.min(r.width, 160) / 2;
+    var ay = y != null ? y : r.top;
+    var left = Math.max(8, Math.min(ax - tw / 2, window.innerWidth - tw - 8));
+    var top = ay - th - 12;
+    var minTop = (topbar ? topbar.getBoundingClientRect().bottom : 0) + 8;
+    if (top < minTop) top = (y != null ? y : r.bottom) + 16;
+    tip.style.left = Math.round(left) + "px";
+    tip.style.top = Math.round(top) + "px";
+  }
+  function tipHide() { tip.classList.remove("is-on"); }
+  function bindTip(el, get) {
+    el.addEventListener("pointermove", function (e) { if (e.pointerType === "mouse") tipShow(el, get(), e.clientX, e.clientY); });
+    el.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") tipHide(); });
+    el.addEventListener("pointerup", function (e) { if (e.pointerType !== "mouse") tipShow(el, get()); });
+    el.addEventListener("focus", function () { tipShow(el, get()); });
+    el.addEventListener("blur", tipHide);
+  }
+  document.addEventListener("pointerdown", function (e) {
+    if (!(e.target.closest && e.target.closest(".rc-bar, .hr-fill"))) tipHide();
+  });
+  window.addEventListener("scroll", tipHide, { passive: true });
+
+  /* Números animados */
+  function tween(el, to, fmt, animate) {
+    var from = el._v == null ? to : el._v;
+    el._v = to;
+    if (el._raf) cancelAnimationFrame(el._raf);
+    if (!animate || rm.matches || from === to) { el.textContent = fmt(to); return; }
+    var t0 = performance.now(), dur = 520;
+    function step(now) {
+      var k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = fmt(Math.round(from + (to - from) * e));
+      if (k < 1) el._raf = requestAnimationFrame(step);
+    }
+    el._raf = requestAnimationFrame(step);
+    setTimeout(function () { if (el._v === to) el.textContent = fmt(to); }, dur + 120);
+  }
+  function moneyRound(n) { return money(Math.round(n / 100) * 100); }
+
+  function swap(el) {
+    if (rm.matches) return;
+    el.classList.remove("swap");
+    void el.offsetWidth;
+    el.classList.add("swap");
+  }
+
+  /* Horas */
+  function renderHours(p, animate) {
+    var list = $("#hrs");
+    list.textContent = "";
+    var fills = [];
+    p.stages.forEach(function (s) {
+      var li = h("li", "hr");
+      li.appendChild(h("span", "hr-name", s.n));
+      var val = h("span", "hr-val");
+      val.appendChild(h("b", null, s.h + " h"));
+      val.appendChild(document.createTextNode(" · " + money(s.h * RATE)));
+      li.appendChild(val);
+      li.appendChild(h("span", "hr-desc", s.d));
+      var bar = h("span", "hr-bar");
+      var f = h("span", "hr-fill");
+      var frac = s.h / MAXH;
+      f.style.setProperty("--p", animate && !rm.matches ? "0" : frac.toFixed(4));
+      f.tabIndex = 0;
+      f.setAttribute("role", "img");
+      f.setAttribute("aria-label", s.n + ": " + s.h + " horas, " + money(s.h * RATE) + " a precio de panas");
+      bindTip(f, function () { return [s.h + " h", s.n, money(s.h * RATE) + " con nosotros", money(s.h * JR) + " con tarifa junior"]; });
+      bar.appendChild(f);
+      li.appendChild(bar);
+      list.appendChild(li);
+      fills.push([f, frac]);
+    });
+    if (animate && !rm.matches) {
+      void list.offsetWidth;
+      requestAnimationFrame(function () { fills.forEach(function (x) { x[0].style.setProperty("--p", x[1].toFixed(4)); }); });
+      setTimeout(function () { fills.forEach(function (x) { x[0].style.setProperty("--p", x[1].toFixed(4)); }); }, 80);
+    }
+    var tot = $("#hrs-total");
+    tot.textContent = "";
+    tot.appendChild(h("b", null, "Total: " + p.hours + " h × $100 = " + money(p.price)));
+    tot.appendChild(h("span", null, "Con tarifa junior serían " + money(p.junior)));
+    swap(list);
+  }
+
+  /* Calendario */
+  function renderTimeline(p) {
+    var tl = $("#tl");
+    tl.textContent = "";
+    var items = [{ w: "30 oct", t: "Propuesta", d: "Revisamos juntos el paquete que elijas.", k: "done" }].concat(p.tl);
+    items.forEach(function (it) {
+      var li = h("li", "tl-i" + (it.k ? " is-" + it.k : ""));
+      li.appendChild(h("span", "tl-dot"));
+      var w = h("p", "tl-when", it.w);
+      if (it.tag) w.appendChild(h("span", "pill", it.tag));
+      li.appendChild(w);
+      li.appendChild(h("p", "tl-t", it.t));
+      li.appendChild(h("p", "tl-d", it.d));
+      tl.appendChild(li);
+    });
+    $("#cal-sub").textContent = p.calSub;
+    swap(tl);
+  }
+
+  /* Pagos */
+  function renderPayments(p) {
+    $("#pay-sub").textContent = planLong(p);
+    var bar = $("#pay-bar");
+    bar.textContent = "";
+    p.pays.forEach(function (x) {
+      var s = h("span", "pay-seg");
+      s.style.setProperty("--g", String(x.amt));
+      bar.appendChild(s);
+    });
+    bar.setAttribute("aria-label", p.pays.length + " pagos que suman " + money(p.price));
+    $("#pay-a").textContent = "nov 2026";
+    $("#pay-b").textContent = MES[p.last.m] + " " + p.last.y;
+    var tiles = $("#tiles");
+    tiles.textContent = "";
+    var acc = 0;
+    p.pays.forEach(function (x, i) {
+      acc += x.amt;
+      var li = h("li", "tile" + (i === 0 ? " is-first" : "") + (i === p.pays.length - 1 && x.amt !== MONTHLY ? " is-last" : ""));
+      li.appendChild(h("p", "tile-d", "15 " + MES[x.m] + " " + String(x.y).slice(2)));
+      li.appendChild(h("p", "tile-a", money(x.amt)));
+      li.appendChild(h("p", "tile-c", "Llevas " + money(acc)));
+      tiles.appendChild(li);
+    });
+    var note = $("#pay-note");
+    note.textContent = "";
+    var n1 = h("p");
+    n1.innerHTML = SVG_INFO;
+    n1.appendChild(h("span", null, "El primer pago es el 15 de noviembre, cuando ya viste el borrador funcionando."));
+    note.appendChild(n1);
+    if (p.key === "premium") {
+      var n2 = h("p");
+      n2.innerHTML = SVG_INFO;
+      n2.appendChild(h("span", null, "Aparte, las tiendas cobran su cuota a tu nombre: Apple US$99 al año y Google Play US$25 una sola vez."));
+      note.appendChild(n2);
+    }
+    swap(tiles);
+  }
+
+  /* Selección */
+  var cur = null;
+  var seg = $("#seg");
+  function select(k, fromHash) {
+    if (!PK[k]) k = "estandar";
+    if (k === cur) return;
+    var first = cur === null;
+    cur = k;
+    var p = PK[k];
+    $$('input[name="pk"]').forEach(function (r) { r.checked = r.value === k; });
+    seg.style.setProperty("--i", String(ORDER.indexOf(k)));
+    $$(".pkg").forEach(function (c) { c.setAttribute("aria-pressed", String(c.getAttribute("data-pk") === k)); });
+    $$(".rc-g").forEach(function (g) { g.classList.toggle("is-sel", g.getAttribute("data-pk") === k); });
+    $$("#tbl-body tr").forEach(function (tr) { tr.classList.toggle("is-sel", tr.getAttribute("data-pk") === k); });
+    $$(".mx-c").forEach(function (c) { c.classList.toggle("is-sel", c.getAttribute("data-pk") === k); });
+    $$(".mx-hb").forEach(function (b, i) { b.setAttribute("aria-pressed", String(ORDER[i] === k)); });
+
+    $("#hp-name").textContent = p.name;
+    tween($("#hp-price"), p.price, moneyRound, !first);
+    tween($("#hp-junior"), p.junior, moneyRound, !first);
+    tween($("#hp-save"), p.save, moneyRound, !first);
+    tween($("#hp-hours"), p.hours, String, !first);
+    tween($("#hrs-n"), p.hours, String, !first);
+    $("#avg-note").textContent = "Un programador promedio en México cobra cerca de $700 la hora. Con esa tarifa, el " + p.name + " costaría " + money(p.avg) + ".";
+    $("#diff-txt").innerHTML = diffText(k);
+    if (!first) swap($("#diff"));
+
+    renderHours(p, !first);
+    renderTimeline(p);
+    renderPayments(p);
+
+    if (!first) {
+      $("#live").textContent = "Paquete " + p.name + ": " + money(p.price) + " a precio de panas, " + planShort(p).replace(" · ", ", ") + ".";
+      if (!fromHash && location.hash !== "#" + k) {
+        try { location.replace("#" + k); } catch (e) { try { history.replaceState(null, "", "#" + k); } catch (e2) {} }
+      }
+    }
+  }
+
+  $$('input[name="pk"]').forEach(function (r) {
+    r.addEventListener("change", function () { if (r.checked) select(r.value); });
+  });
+  window.addEventListener("hashchange", function () {
+    var k = location.hash.slice(1);
+    if (PK[k]) select(k, true);
+  });
+
+  var start = location.hash.slice(1);
+  select(PK[start] ? start : "estandar", true);
+
+  fitCotas();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitCotas);
+  if (window.ResizeObserver) new ResizeObserver(function () { fitCotas(); }).observe(rc);
+  else window.addEventListener("resize", fitCotas);
+})();
+</script>
+</body>
+</html>

@@ -16,6 +16,7 @@ Personal site of Luis Ángel Quiroz López: a CRT portal, a Windows XP style Pro
 | `qa-case-study.html` | The QA case study: a sales-commission API tested from requirements to release, plus the MACD signal API |
 | `fun.html` | The Personal Hub, under construction and supervised by three cats |
 | `404.html` | Abort, Retry, Portal? |
+| `propuesta-bim/` | Interactive quote for a BIM progress dashboard, in Spanish. Unlisted: not linked from the site, not in the sitemap and marked `noindex` |
 
 ## Adding or changing a project
 
