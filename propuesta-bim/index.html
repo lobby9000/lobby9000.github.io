@@ -154,6 +154,8 @@ h2{font-size:clamp(1.65rem,1.2rem + 1.7vw,2.4rem);line-height:1.1;letter-spacing
 .pkg-price small{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-strong);font-weight:400;display:block;margin-bottom:2px}
 .pkg-jr{grid-area:jr;justify-self:end;font-size:13px;color:var(--ink-3);text-align:right}
 .pkg-plan{grid-area:plan;font-family:var(--mono);font-size:12px;color:var(--ink-2);letter-spacing:.02em;border-top:1px solid var(--line);padding-top:10px;margin-top:8px}
+.pkg-plan span{display:block}
+.pkg-plan .when{color:var(--ink-3);margin-top:3px}
 @media (min-width:820px){
   .pkg{padding:22px;grid-template-rows:auto 1fr auto auto auto;grid-template-areas:"top top" "desc desc" "price price" "jr jr" "plan plan"}
   .pkg-jr{justify-self:start;text-align:left}
@@ -342,7 +344,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
 <body>
 <header class="topbar">
   <div class="wrap topbar-in">
-    <p class="brand">Tablero de avance BIM<small>Propuesta · Rev. 01</small></p>
+    <p class="brand">Tablero de avance BIM<small>Propuesta · Rev. 02</small></p>
     <div class="seg" id="seg" role="radiogroup" aria-label="Paquete">
       <label class="seg-opt"><input type="radio" name="pk" value="ligero"><span class="seg-txt"><span class="seg-name">Ligero</span><span class="seg-price" data-price="ligero"></span></span></label>
       <label class="seg-opt"><input type="radio" name="pk" value="estandar" checked><span class="seg-txt"><span class="seg-name">Estándar</span><span class="seg-price" data-price="estandar"></span></span></label>
@@ -368,7 +370,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
         <div class="cj"><dt>Fecha</dt><dd>30 oct 2026</dd></div>
         <div class="cj"><dt>Escala</dt><dd>1 : 3<small>panas : junior</small></dd></div>
         <div class="cj"><dt>Folio</dt><dd>001</dd></div>
-        <div class="cj"><dt>Rev.</dt><dd>01</dd></div>
+        <div class="cj"><dt>Rev.</dt><dd>02</dd></div>
       </dl>
     </div>
   </section>
@@ -377,7 +379,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
     <div class="wrap">
       <p class="sheet"><b>A-01</b> Paquetes</p>
       <h2 id="h-paq">Elige tu paquete</h2>
-      <p class="sec-sub">Los tres se pagan con mensualidades de $1,200. Lo que cambia es qué incluye cada uno y cuántos meses dura el plan.</p>
+      <p class="sec-sub">Los tres arrancan con $1,500 de adelanto y $500 el 15 de noviembre. Después siguen mensualidades de $1,200, y lo que cambia es qué incluye cada uno y cuántos meses dura.</p>
       <div class="cards" id="cards"></div>
       <p class="diff" id="diff"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 7.2v4M8 4.8v.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span id="diff-txt"></span></p>
     </div>
@@ -527,7 +529,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
 <footer class="foot">
   <div class="wrap foot-in">
     <span>Preparado por Luis para Erick. Ciudad de México, 30 de octubre de 2026.</span>
-    <span class="mono">Folio 001 · Rev. 01</span>
+    <span class="mono">Folio 001 · Rev. 02</span>
   </div>
 </footer>
 
@@ -540,6 +542,9 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
   try { document.documentElement.lang = "es-MX"; } catch (e) {}
 
   var RATE = 100, JR = 300, AVG = 700, MONTHLY = 1200;
+  /* Arranque: adelanto el 31 de octubre y la quincena del 15 de noviembre. Luego mensualidades desde diciembre. */
+  var UPFRONT = [{ amt: 1500, d: 31, m: 9, y: 2026 }, { amt: 500, d: 15, m: 10, y: 2026 }];
+  var UPFRONT_TOTAL = UPFRONT.reduce(function (s, x) { return s + x.amt; }, 0);
   var ORDER = ["ligero", "estandar", "premium"];
   var MES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
   var MESL = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
@@ -595,7 +600,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
       rec: true,
       desc: "Tablero web a la medida, con mantenimiento hasta julio de 2027.",
       stages: WEB.concat([
-        { n: "Mantenimiento y revisiones", h: 18, d: "2 horas al mes durante los 9 meses del plan, para cambios y dudas." }
+        { n: "Mantenimiento y revisiones", h: 18, d: "2 horas al mes de noviembre de 2026 a julio de 2027, para cambios y dudas." }
       ]),
       tl: WEB_TL.concat([
         { w: "Hasta jul 2027", t: "Mantenimiento y revisiones", d: "2 horas al mes para cambios y dudas.", k: "range" }
@@ -608,7 +613,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
       stages: WEB.concat([
         { n: "Apps para iPhone y Android", h: 60, d: "Hechas con una sola base de código, con avisos en el celular." },
         { n: "Publicación en tiendas", h: 10, d: "Subirlas a App Store y Google Play, y pasar sus revisiones." },
-        { n: "Mantenimiento web y apps", h: 28, d: "Cambios y actualizaciones durante los 15 meses del plan." }
+        { n: "Mantenimiento web y apps", h: 28, d: "Cambios y actualizaciones de noviembre de 2026 a enero de 2028." }
       ]),
       tl: WEB_TL.concat([
         { w: "26 feb 2027", t: "Apps en beta", d: "Las instalas en tu celular para probarlas." },
@@ -627,26 +632,32 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
     p.junior = p.hours * JR;
     p.avg = p.hours * AVG;
     p.save = p.junior - p.price;
-    p.pays = [];
-    var left = p.price, i = 0;
+    p.pays = UPFRONT.map(function (x) { return { amt: x.amt, d: x.d, m: x.m, y: x.y }; });
+    var left = p.price - UPFRONT_TOTAL, mi = 11;
+    p.full = 0;
     while (left > 0) {
-      var amt = Math.min(MONTHLY, left), mi = 10 + i;
-      p.pays.push({ amt: amt, m: mi % 12, y: 2026 + Math.floor(mi / 12) });
-      left -= amt; i++;
+      var amt = Math.min(MONTHLY, left);
+      p.pays.push({ amt: amt, d: 15, m: mi % 12, y: 2026 + Math.floor(mi / 12) });
+      if (amt === MONTHLY) p.full++;
+      left -= amt; mi++;
     }
-    p.full = p.pays.filter(function (x) { return x.amt === MONTHLY; }).length;
-    p.rest = p.price - p.full * MONTHLY;
+    p.rest = p.price - UPFRONT_TOTAL - p.full * MONTHLY;
     p.last = p.pays[p.pays.length - 1];
   });
   var MAXJR = Math.max.apply(null, ORDER.map(function (k) { return PK[k].junior; }));
   var MAXH = Math.max.apply(null, ORDER.map(function (k) { return Math.max.apply(null, PK[k].stages.map(function (s) { return s.h; })); }));
 
-  function planShort(p) {
-    return p.full + " × $1,200" + (p.rest ? " + " + money(p.rest) : "") + " · " + p.pays.length + " meses";
+  var UPFRONT_TXT = UPFRONT.map(function (x) { return money(x.amt); }).join(" + ");
+  function planSum(p) {
+    return UPFRONT_TXT + " + " + p.full + " × $1,200" + (p.rest ? " + " + money(p.rest) : "");
+  }
+  function planWhen(p) {
+    return p.pays.length + " pagos · hasta " + MES[p.last.m] + " " + p.last.y;
   }
   function planLong(p) {
-    return p.full + " pagos de $1,200" + (p.rest ? " y uno final de " + money(p.rest) : "") +
-      ", de noviembre de 2026 a " + MESL[p.last.m] + " de " + p.last.y + ".";
+    return "Adelanto de " + money(UPFRONT[0].amt) + " el 31 de octubre y " + money(UPFRONT[1].amt) + " el 15 de noviembre. Luego " +
+      p.full + " pagos de $1,200" + (p.rest ? " y uno final de " + money(p.rest) : "") +
+      ", hasta " + MESL[p.last.m] + " de " + p.last.y + ".";
   }
   function diffText(k) {
     var L = PK.ligero, E = PK.estandar, P = PK.premium;
@@ -682,7 +693,10 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
     jr.appendChild(document.createTextNode("Junior "));
     jr.appendChild(h("s", null, money(p.junior)));
     b.appendChild(jr);
-    b.appendChild(h("span", "pkg-plan", planShort(p)));
+    var plan = h("span", "pkg-plan");
+    plan.appendChild(h("span", null, planSum(p)));
+    plan.appendChild(h("span", "when", planWhen(p)));
+    b.appendChild(plan);
     b.addEventListener("click", function () { select(k); });
     cards.appendChild(b);
   });
@@ -780,8 +794,10 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
     { l: "Mantenimiento y revisiones", v: [N, "9 meses", "15 meses"] },
     { g: "Números" },
     { l: "Horas de trabajo", v: ORDER.map(function (k) { return PK[k].hours + " h"; }) },
+    { l: "Para arrancar", v: ORDER.map(function () { return UPFRONT_TXT; }) },
     { l: "Mensualidad", v: ["$1,200", "$1,200", "$1,200"] },
-    { l: "Meses de pago", v: ORDER.map(function (k) { return String(PK[k].pays.length); }) },
+    { l: "Número de pagos", v: ORDER.map(function (k) { return String(PK[k].pays.length); }) },
+    { l: "Último pago", v: ORDER.map(function (k) { return MES[PK[k].last.m] + " " + PK[k].last.y; }) },
     { l: "Total, precio de panas", v: ORDER.map(function (k) { return money(PK[k].price); }) },
     { l: "Con tarifa junior", v: ORDER.map(function (k) { return money(PK[k].junior); }) }
   ];
@@ -931,7 +947,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
   function renderTimeline(p) {
     var tl = $("#tl");
     tl.textContent = "";
-    var items = [{ w: "30 oct", t: "Propuesta", d: "Revisamos juntos el paquete que elijas.", k: "done" }].concat(p.tl);
+    var items = [{ w: "31 oct", t: "Arranque", d: "Con el adelanto empezamos a armar tu borrador." }].concat(p.tl);
     items.forEach(function (it) {
       var li = h("li", "tl-i" + (it.k ? " is-" + it.k : ""));
       li.appendChild(h("span", "tl-dot"));
@@ -957,7 +973,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
       bar.appendChild(s);
     });
     bar.setAttribute("aria-label", p.pays.length + " pagos que suman " + money(p.price));
-    $("#pay-a").textContent = "nov 2026";
+    $("#pay-a").textContent = MES[p.pays[0].m] + " " + p.pays[0].y;
     $("#pay-b").textContent = MES[p.last.m] + " " + p.last.y;
     var tiles = $("#tiles");
     tiles.textContent = "";
@@ -965,17 +981,21 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
     p.pays.forEach(function (x, i) {
       acc += x.amt;
       var li = h("li", "tile" + (i === 0 ? " is-first" : "") + (i === p.pays.length - 1 && x.amt !== MONTHLY ? " is-last" : ""));
-      li.appendChild(h("p", "tile-d", "15 " + MES[x.m] + " " + String(x.y).slice(2)));
+      li.appendChild(h("p", "tile-d", x.d + " " + MES[x.m] + " " + String(x.y).slice(2)));
       li.appendChild(h("p", "tile-a", money(x.amt)));
-      li.appendChild(h("p", "tile-c", "Llevas " + money(acc)));
+      li.appendChild(h("p", "tile-c", i === 0 ? "Adelanto" : (i === p.pays.length - 1 ? "Total " : "Llevas ") + money(acc)));
       tiles.appendChild(li);
     });
     var note = $("#pay-note");
     note.textContent = "";
     var n1 = h("p");
     n1.innerHTML = SVG_INFO;
-    n1.appendChild(h("span", null, "El primer pago es el 15 de noviembre, cuando ya viste el borrador funcionando."));
+    n1.appendChild(h("span", null, "Con el adelanto del 31 de octubre arrancamos el borrador. Los $500 del 15 de noviembre van cuando ya lo viste funcionando."));
     note.appendChild(n1);
+    var n0 = h("p");
+    n0.innerHTML = SVG_INFO;
+    n0.appendChild(h("span", null, "El adelanto es parte del total, no un cobro extra."));
+    note.appendChild(n0);
     if (p.key === "premium") {
       var n2 = h("p");
       n2.innerHTML = SVG_INFO;
@@ -1017,7 +1037,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
     renderPayments(p);
 
     if (!first) {
-      $("#live").textContent = "Paquete " + p.name + ": " + money(p.price) + " a precio de panas, " + planShort(p).replace(" · ", ", ") + ".";
+      $("#live").textContent = "Paquete " + p.name + ": " + money(p.price) + " a precio de panas, en " + p.pays.length + " pagos hasta " + MESL[p.last.m] + " de " + p.last.y + ".";
       if (!fromHash && location.hash !== "#" + k) {
         try { location.replace("#" + k); } catch (e) { try { history.replaceState(null, "", "#" + k); } catch (e2) {} }
       }
