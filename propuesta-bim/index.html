@@ -354,6 +354,149 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
 .f-warn{fill:#EC835A}.f-bezel{fill:var(--bezel)}
 .s-line{stroke:var(--line)}.s-line2{stroke:var(--line-2)}.s-surf2{stroke:var(--surface-2)}.s-acc{stroke:var(--accent)}.s-warn{stroke:#EC835A}.s-ink{stroke:var(--ink)}.s-ink3{stroke:var(--ink-3)}
 
+/* Abrir maquetas en grande */
+.mk-stage{position:relative}
+.mk .mk-open{position:absolute;right:14px;bottom:14px;display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);font:inherit;font-size:13px;font-weight:500;cursor:pointer;box-shadow:var(--shadow-sm);transition:border-color .2s,color .2s}
+.mk .mk-open svg{display:block;width:14px;height:14px}
+.mk:hover .mk-open,.mk .mk-open:focus-visible{border-color:var(--accent);color:var(--accent-strong)}
+@media (min-width:900px){.mk-hint{display:block}.mk-swipe{display:none}}
+
+html.is-modal{overflow:hidden}
+.mkd{position:fixed;inset:0;width:100%;height:100%;max-width:100%;max-height:100%;margin:0;padding:0;border:0;background:transparent;color:var(--ink);overflow:hidden}
+.mkd:not([open]){display:none}
+.mkd::backdrop{background:rgba(12,11,10,.62)}
+.mkd-in{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (min-width:760px){.mkd-in{inset:24px;max-width:1160px;margin:0 auto;border:1px solid var(--line);border-radius:18px;box-shadow:0 30px 80px -30px rgba(0,0,0,.55);overflow:hidden;padding:0}}
+.mkd-head{display:flex;align-items:flex-start;gap:16px;padding-block:14px 12px;padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px));border-bottom:1px solid var(--line)}
+.mkd-titles{flex:1;min-width:0}
+.mkd-kicker{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-strong)}
+.mkd-head h3{margin:4px 0 0;font-size:clamp(1.2rem,1rem + 1vw,1.6rem);font-weight:500;line-height:1.15}
+.mkd-x{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.mkd-tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-block:12px 4px;padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px))}
+.mkd-tabs::-webkit-scrollbar{display:none}
+.mkd-tab{appearance:none;font:inherit;font-size:14px;font-weight:500;color:var(--ink-2);background:transparent;border:1px solid var(--line-2);border-radius:999px;min-height:40px;padding:0 16px;cursor:pointer;white-space:nowrap;flex:none}
+.mkd-tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.mkd-body{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding-block:12px 32px;padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px))}
+@media (min-width:760px){.mkd-head,.mkd-tabs,.mkd-body{padding-left:28px;padding-right:28px}}
+.mkd-cap{max-width:640px;margin:14px auto 0;text-align:center;color:var(--ink-2);font-size:14.5px;line-height:1.5}
+
+/* Ligero en grande */
+.lk-big{max-width:920px;margin:0 auto}
+.lk-big svg,.lk-paper svg{display:block;width:100%;height:auto;font-family:Roboto,Arial,Helvetica,sans-serif}
+.lk-paper{max-width:680px;margin:0 auto;background:#FFFFFF;border:1px solid #D0D0D0;box-shadow:0 18px 40px -24px rgba(0,0,0,.5);padding:12px}
+
+/* Tablero 3D */
+.t3{display:grid;gap:14px;max-width:1100px;margin:0 auto}
+.t3-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.t3-kpi{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;min-width:0}
+.t3-kpi span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.t3-kpi b{display:block;font-size:clamp(1.35rem,1rem + 1.4vw,2rem);font-weight:500;line-height:1.1;margin-top:3px}
+.t3-kpi small{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-2);margin-top:3px;line-height:1.3}
+.dot-warn{flex:none;width:9px;height:9px;border-radius:2px;background:#EC835A}
+.t3-grid{display:grid;gap:14px}
+@media (min-width:900px){.t3-grid{grid-template-columns:minmax(0,1.8fr) minmax(0,1fr)}}
+.t3-stage{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;min-width:0}
+.t3-tools{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center}
+.t3-towers,.t3-ctrl{display:flex;gap:6px;flex-wrap:wrap}
+.t3-btn{appearance:none;font:inherit;font-size:13px;min-height:38px;padding:0 12px;border-radius:999px;border:1px solid var(--line-2);background:var(--bg);color:var(--ink-2);cursor:pointer;display:inline-flex;align-items:center;gap:7px;font-variant-numeric:tabular-nums}
+.t3-btn svg{width:16px;height:16px;display:block}
+@media (max-width:520px){.t3-towers{gap:5px}.t3-btn{padding:0 9px;font-size:12.5px;min-height:36px}}
+.t3-btn[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-strong);font-weight:500}
+.t3-sw .knob{position:relative;width:26px;height:15px;border-radius:999px;background:var(--line-2);transition:background-color .2s}
+.t3-sw .knob::after{content:"";position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:var(--surface);transition:transform .2s}
+.t3-sw[aria-checked="true"]{border-color:var(--accent);color:var(--accent-strong)}
+.t3-sw[aria-checked="true"] .knob{background:var(--accent)}
+.t3-sw[aria-checked="true"] .knob::after{transform:translateX(11px)}
+.t3-svg{display:block;width:100%;height:auto;margin-top:6px;touch-action:pan-y;cursor:grab;-webkit-user-select:none;user-select:none;font-family:var(--mono)}
+.t3-svg:active{cursor:grabbing}
+.t3-g line{stroke:var(--line-2);stroke-width:.7}
+.t3-site{fill:none;stroke:var(--ink-3);stroke-width:1.1}
+.t3-ghost{stroke:var(--ink-3);stroke-width:1;stroke-dasharray:3 3;stroke-linejoin:round}
+.t3-face{stroke:var(--accent-strong);stroke-width:1;stroke-linejoin:round}
+.t3-t.is-sel .t3-face{stroke-width:1.7}
+.t3-fl{stroke:var(--accent-strong);stroke-opacity:.45;stroke-width:.7}
+.t3-cl{stroke:#EC835A;stroke-width:1.1;stroke-linejoin:round}
+.t3-lead{stroke:var(--ink-3);stroke-width:.9}
+.t3-tag rect{fill:var(--surface);stroke:var(--line-2)}
+.t3-tag text{fill:var(--ink)}
+.t3-tag.is-sel rect{fill:var(--ink);stroke:var(--ink)}
+.t3-tag.is-sel text{fill:var(--bg)}
+.t3-cota line{stroke:var(--ink-2);stroke-width:1}
+.t3-cota text{fill:var(--ink)}
+.t3-cota rect{fill:var(--surface)}
+.t3-north circle{fill:none;stroke:var(--ink-3)}
+.t3-north line{stroke:var(--ink-2);stroke-width:1.2}
+.t3-north polygon,.t3-north text{fill:var(--ink-2)}
+.t3-cap{fill:var(--ink-3);letter-spacing:.08em}
+.t3-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin:8px 0 0;padding:0;list-style:none;font-size:12.5px;color:var(--ink-2)}
+.t3-legend li{display:flex;align-items:center;gap:7px}
+.lg-sw{width:14px;height:10px;border-radius:2px;flex:none}
+.lg-built{background:var(--accent);opacity:.55;box-shadow:inset 0 0 0 1px var(--accent-strong)}
+.lg-clash{background:repeating-linear-gradient(45deg,#EC835A 0 1.5px,transparent 1.5px 4px);box-shadow:inset 0 0 0 1px #EC835A}
+.lg-ghost{border:1px dashed var(--ink-3)}
+.t3-help{font-size:12.5px;color:var(--ink-3);margin-top:6px}
+.t3-side{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;min-width:0;display:grid;gap:14px;align-content:start}
+.t3-side .k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.t3-big{font-size:46px;font-weight:500;line-height:1;letter-spacing:-.02em}
+.t3-sub{color:var(--ink-2);font-size:14px;margin-top:4px}
+.t3-badge{display:inline-flex;align-items:center;gap:7px;justify-self:start;padding:5px 11px;border-radius:999px;background:var(--surface-2);font-size:13px}
+.t3-chips{display:flex;flex-wrap:wrap;gap:6px}
+.t3-chip{font-family:var(--mono);font-size:11.5px;padding:4px 8px;border-radius:6px;background:var(--accent-soft);color:var(--accent-strong)}
+.t3-lv{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.t3-lv li{display:grid;grid-template-columns:36px minmax(0,1fr) 40px;align-items:center;gap:8px;font-size:13px;color:var(--ink-2)}
+.t3-lv .bar{position:relative;display:block;height:8px;background:var(--surface-2);border-radius:0 4px 4px 0}
+.t3-lv .bar i{position:absolute;left:0;top:0;bottom:0;width:calc(var(--p) * 1%);background:var(--accent);border-radius:0 4px 4px 0}
+.t3-lv b{font-weight:500;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+.t3-go{appearance:none;font:inherit;font-size:14px;font-weight:500;min-height:44px;border-radius:999px;border:0;background:var(--accent);color:var(--on-accent);cursor:pointer;padding:0 18px}
+
+/* Resumen para el jefe: una hoja de papel, igual en tema claro y oscuro */
+.boss{display:grid;gap:4px}
+.boss-sheet{--p-bg:#FFFFFF;--p-ink:#1A1A1A;--p-ink2:#5A5A5A;--p-line:#C8C8C8;--p-soft:#EBEBEB;width:100%;max-width:720px;margin:0 auto;background:var(--p-bg);color:var(--p-ink);border:1px solid var(--p-line);box-shadow:0 18px 40px -24px rgba(0,0,0,.5);padding:20px 18px 0;font-size:14px}
+@media (min-width:760px){.boss-sheet{padding:34px 36px 0}}
+.boss-h{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-bottom:2px solid var(--p-ink);padding-bottom:10px}
+.boss-k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--p-ink2)}
+.boss-t{font-size:20px;font-weight:500;line-height:1.2;margin-top:3px}
+.boss-d{text-align:right;font-family:var(--mono);font-size:11.5px;color:var(--p-ink2);line-height:1.6;white-space:nowrap}
+.boss-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--p-line);margin-top:16px}
+.boss-kpis div{padding:10px 12px;border-left:1px solid var(--p-line);min-width:0}
+.boss-kpis div:first-child{border-left:0}
+.boss-kpis span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--p-ink2)}
+.boss-kpis b{display:block;font-size:24px;font-weight:500;line-height:1.15;margin-top:3px}
+.boss-note{font-size:13px;color:var(--p-ink2);margin-top:8px}
+.boss .boss-tbl{width:100%;min-width:0;border-collapse:collapse;margin-top:18px;font-size:13.5px}
+.boss .boss-tbl th{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--p-ink2);font-weight:400;text-align:left;border-bottom:1px solid var(--p-ink);padding:6px 6px;white-space:nowrap}
+.boss .boss-tbl td{padding:9px 6px;border-bottom:1px solid var(--p-line);text-align:left;white-space:normal;color:var(--p-ink)}
+.boss .boss-tbl .num{text-align:right}
+.boss-bar{display:flex;align-items:center;gap:8px}
+.boss-track{position:relative;flex:1;height:8px;background:var(--p-soft);min-width:40px}
+.boss-track i{position:absolute;left:0;top:0;bottom:0;width:calc(var(--p) * 1%);background:var(--p-ink)}
+.boss-bar b{font-weight:500;min-width:34px;text-align:right;font-variant-numeric:tabular-nums}
+.boss-st{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.boss-st svg{flex:none}
+.boss-obs{margin-top:18px}
+.boss-obs ol{margin:8px 0 0;padding-left:18px;display:grid;gap:6px;font-size:13.5px;line-height:1.45}
+.boss-cj{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:22px -18px 0;border-top:2px solid var(--p-ink)}
+@media (min-width:760px){.boss-cj{margin:26px -36px 0}}
+.boss-cj div{padding:8px 12px 10px;border-left:1px solid var(--p-line);min-width:0}
+.boss-cj div:first-child{border-left:0}
+.boss-cj span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--p-ink2)}
+.boss-cj b{display:block;font-weight:500;font-size:13px;margin-top:2px;overflow-wrap:anywhere}
+.boss-sign{display:block;height:15px;border-bottom:1px solid var(--p-ink);margin-top:4px}
+@media (max-width:480px){.boss-cj{grid-template-columns:repeat(2,minmax(0,1fr))}.boss-cj div:nth-child(3){border-left:0}.boss-cj div:nth-child(n+3){border-top:1px solid var(--p-line)}.boss-kpis b{font-size:20px}}
+
+/* App del Premium */
+.app{display:grid;gap:20px;align-items:center;max-width:1040px;margin:0 auto}
+@media (min-width:900px){.app{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:32px}}
+.app svg{display:block;width:100%;height:auto;max-width:640px;margin:0 auto}
+.app ol{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.app li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;align-items:start;font-size:15px;line-height:1.45;color:var(--ink-2)}
+.app li b{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--on-accent);font-size:13px;font-weight:600}
+.app li strong{display:block;color:var(--ink);font-weight:500}
+.s-accst{stroke:var(--accent-strong)}.s-ink2{stroke:var(--ink-2)}
+
+.app svg{font-family:var(--font)}
+.app svg .mono{font-family:var(--mono)}
+
 /* Tooltip */
 .tip{position:fixed;left:0;top:0;z-index:50;pointer-events:none;background:var(--tip-bg);color:var(--tip-ink);padding:8px 11px 9px;border-radius:9px;font-size:13px;line-height:1.35;max-width:250px;opacity:0;transition:opacity .12s;box-shadow:var(--shadow)}
 .tip.is-on{opacity:1}
@@ -370,7 +513,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
 <body>
 <header class="topbar">
   <div class="wrap topbar-in">
-    <p class="brand">Tablero de avance BIM<small>Propuesta · Rev. 03</small></p>
+    <p class="brand">Tablero de avance BIM<small>Propuesta · Rev. 04</small></p>
     <div class="seg" id="seg" role="radiogroup" aria-label="Paquete">
       <label class="seg-opt"><input type="radio" name="pk" value="ligero"><span class="seg-txt"><span class="seg-name">Ligero</span><span class="seg-price" data-price="ligero"></span></span></label>
       <label class="seg-opt"><input type="radio" name="pk" value="estandar" checked><span class="seg-txt"><span class="seg-name">Estándar</span><span class="seg-price" data-price="estandar"></span></span></label>
@@ -396,7 +539,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
         <div class="cj"><dt>Fecha</dt><dd>30 oct 2026</dd></div>
         <div class="cj"><dt>Escala</dt><dd>1 : 3<small>panas : junior</small></dd></div>
         <div class="cj"><dt>Folio</dt><dd>001</dd></div>
-        <div class="cj"><dt>Rev.</dt><dd>03</dd></div>
+        <div class="cj"><dt>Rev.</dt><dd>04</dd></div>
       </dl>
     </div>
   </section>
@@ -454,7 +597,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
     <div class="wrap">
       <p class="sheet"><b>A-03</b> Vista previa</p>
       <h2 id="h-mock">Así se vería cada uno</h2>
-      <p class="sec-sub">Maquetas con datos de ejemplo para comparar cómo queda cada paquete terminado. El diseño final lo afinamos contigo desde el borrador.</p>
+      <p class="sec-sub">Maquetas con datos de ejemplo para comparar cómo queda cada paquete terminado. Ábrelas en grande para ver el tablero en 3D y el resumen para tu jefe. El diseño final lo afinamos contigo desde el borrador.</p>
       <div class="mk-row" id="mk-row">
         <figure class="mk" data-pk="ligero">
           <div class="mk-top"><span class="mk-name">Ligero</span><span class="mk-tag">Reporte de Google</span></div>
@@ -500,6 +643,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
               <text x="370" y="248" font-size="6" fill="#5F6368" text-anchor="end">1 - 4 / 4</text>
               <text x="24" y="276" font-size="6.5" fill="#80868B">Última actualización: 30 oct 2026</text>
             </svg>
+            <button type="button" class="mk-open"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5L9 7M2.5 13.5L7 9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Ver en grande</button>
           </div>
           <figcaption>Una plantilla de Google con tus números. Se abre en el navegador y entras con tu cuenta de Google.</figcaption>
         </figure>
@@ -569,6 +713,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
               <rect x="304" y="268" width="68" height="13" rx="6.5" class="f-acc"/>
               <text x="338" y="276.6" font-size="5.6" font-weight="500" text-anchor="middle" class="f-on">Resumen para el jefe</text>
             </svg>
+            <button type="button" class="mk-open"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5L9 7M2.5 13.5L7 9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Ver en grande</button>
           </div>
           <figcaption>Diseño propio que muestra cuánto restan los clashes. Se adapta al celular y entra quien tú invites.</figcaption>
         </figure>
@@ -644,11 +789,12 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
                 <rect x="268" y="280" width="42" height="3" rx="1.5" class="f-ink"/>
               </g>
             </svg>
+            <button type="button" class="mk-open"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5L9 7M2.5 13.5L7 9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Ver en grande</button>
           </div>
           <figcaption>Lo mismo que el Estándar, más una app para iPhone y Android que te avisa cuando algo cambia.</figcaption>
         </figure>
       </div>
-      <p class="mk-hint">Desliza para ver los tres</p>
+      <p class="mk-hint"><span class="mk-swipe">Desliza para ver los tres. </span>Toca una maqueta para verla en grande.</p>
     </div>
   </section>
 
@@ -757,9 +903,23 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
 <footer class="foot">
   <div class="wrap foot-in">
     <span>Preparado por Luis para Erick. Ciudad de México, 30 de octubre de 2026.</span>
-    <span class="mono">Folio 001 · Rev. 03</span>
+    <span class="mono">Folio 001 · Rev. 04</span>
   </div>
 </footer>
+
+<dialog class="mkd" id="mkd" aria-labelledby="mkd-title">
+  <div class="mkd-in">
+    <div class="mkd-head">
+      <div class="mkd-titles">
+        <p class="mkd-kicker" id="mkd-kicker">Vista previa</p>
+        <h3 id="mkd-title">Así se vería</h3>
+      </div>
+      <button type="button" class="mkd-x" id="mkd-x" aria-label="Cerrar"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="mkd-tabs" id="mkd-tabs" role="tablist" aria-label="Vistas"></div>
+    <div class="mkd-body" id="mkd-body" role="tabpanel" tabindex="-1"></div>
+  </div>
+</dialog>
 
 <div class="tip" id="tip" aria-hidden="true"></div>
 <p class="sr" id="live" aria-live="polite"></p>
@@ -1244,7 +1404,520 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
     try { mkRow.scrollTo({ left: mkRow.scrollLeft + dx, behavior: smooth && !rm.matches ? "smooth" : "auto" }); }
     catch (e) { mkRow.scrollLeft += dx; }
   }
-  $$(".mk").forEach(function (m) { m.addEventListener("click", function () { select(m.getAttribute("data-pk")); }); });
+  $$(".mk").forEach(function (m) { m.addEventListener("click", function () { var k = m.getAttribute("data-pk"); select(k); openModal(k); }); });
+
+  /* ---------- Maquetas en grande ---------- */
+  var WARN = "#EC835A";
+  var TOWERS = [
+    { n: "Torre 1", s: "T1", real: 78, model: 80, lv: [95, 88, 80, 70, 57], cl: [["SAN × PCI", 1], ["HID × VENT", 1]], ok: true },
+    { n: "Torre 2", s: "T2", real: 64, model: 67, lv: [85, 75, 64, 55, 41], cl: [["HID × VENT", 2], ["ELEC × HID", 1]], ok: true },
+    { n: "Torre 3", s: "T3", real: 58, model: 66, lv: [80, 68, 58, 47, 37], cl: [["HID × VENT", 3], ["SAN × ELEC", 2], ["PCI × VENT", 1]], ok: false },
+    { n: "Torre 4", s: "T4", real: 47, model: 50, lv: [70, 58, 47, 36, 24], cl: [["ELEC × HID", 2], ["SAN × PCI", 1]], ok: false }
+  ];
+  TOWERS.forEach(function (t) { t.nc = t.cl.reduce(function (s, c) { return s + c[1]; }, 0); });
+  var LEVELS = ["BOH", "N1", "N2", "N3", "N4"];
+  var ICON_ROT_L = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 6.5A5 5 0 1 1 3 9.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M2.6 3.2v3.6h3.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var ICON_ROT_R = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M12.8 6.5A5 5 0 1 0 13 9.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13.4 3.2v3.6H9.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var ICON_OK = '<svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5 8.3l2 2 4-4.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var ICON_WARN = '<svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.2l6.3 11H1.7z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 6.6v3.2M8 11.6v.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+
+  var dlg = $("#mkd"), dBody = $("#mkd-body"), dTabs = $("#mkd-tabs");
+  var lastFocus = null, scene = null, openK = null;
+  var VIEWS = {
+    ligero: { name: "Ligero", tabs: [["Reporte", viewLigero], ["Resumen para el jefe", viewLigeroPdf]] },
+    estandar: { name: "Estándar", tabs: [["Tablero 3D", view3D], ["Resumen para el jefe", viewBoss]] },
+    premium: { name: "Premium", tabs: [["App", viewApp], ["Tablero 3D", view3D], ["Resumen para el jefe", viewBoss]] }
+  };
+
+  function openModal(k, tab) {
+    var v = VIEWS[k];
+    if (!v || !dlg) return;
+    openK = k;
+    if (!dlg.open) lastFocus = document.activeElement;
+    $("#mkd-kicker").textContent = "Vista previa · " + v.name;
+    $("#mkd-title").textContent = "Así se vería el " + v.name;
+    dTabs.textContent = "";
+    v.tabs.forEach(function (t, i) {
+      var b = h("button", "mkd-tab", t[0]);
+      b.type = "button";
+      b.id = "mkd-tab-" + i;
+      b.setAttribute("role", "tab");
+      b.setAttribute("aria-controls", "mkd-body");
+      b.addEventListener("click", function () { showTab(i); });
+      dTabs.appendChild(b);
+    });
+    document.documentElement.classList.add("is-modal");
+    if (!dlg.open) {
+      if (typeof dlg.showModal === "function") dlg.showModal();
+      else dlg.setAttribute("open", "");
+    }
+    showTab(tab || 0);
+    var cur = $('.mkd-tab[aria-selected="true"]', dTabs);
+    if (cur) cur.focus();
+  }
+  function showTab(i) {
+    var v = VIEWS[openK];
+    $$(".mkd-tab", dTabs).forEach(function (b, j) {
+      b.setAttribute("aria-selected", String(i === j));
+      b.tabIndex = i === j ? 0 : -1;
+    });
+    dBody.setAttribute("aria-labelledby", "mkd-tab-" + i);
+    if (scene) { scene.destroy(); scene = null; }
+    dBody.textContent = "";
+    dBody.scrollTop = 0;
+    v.tabs[i][1](dBody);
+  }
+  function onClose() {
+    document.documentElement.classList.remove("is-modal");
+    if (scene) { scene.destroy(); scene = null; }
+    dBody.textContent = "";
+    if (lastFocus && lastFocus.focus) { try { lastFocus.focus({ preventScroll: true }); } catch (e) {} }
+  }
+  function closeModal() {
+    if (!dlg.open) return;
+    if (typeof dlg.close === "function") dlg.close();
+    else { dlg.removeAttribute("open"); onClose(); }
+  }
+  if (dlg) {
+    dlg.addEventListener("close", onClose);
+    dlg.addEventListener("click", function (e) { if (e.target === dlg) closeModal(); });
+    $("#mkd-x").addEventListener("click", closeModal);
+    dTabs.addEventListener("keydown", function (e) {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      var tabs = $$(".mkd-tab", dTabs), i = tabs.indexOf(document.activeElement);
+      if (i < 0) return;
+      var j = (i + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+      showTab(j);
+      tabs[j].focus();
+      e.preventDefault();
+    });
+  }
+
+  /* Ligero: el reporte de Google en grande y su versión en PDF */
+  function cloneLk(crop) {
+    var s = $('.mk[data-pk="ligero"] svg').cloneNode(true);
+    s.removeAttribute("aria-labelledby");
+    var t = s.querySelector("title");
+    if (t) t.parentNode.removeChild(t);
+    s.setAttribute("aria-label", crop ? "Resumen del Ligero: el reporte de Google en una hoja PDF" : "Reporte de Google del paquete Ligero, en grande");
+    if (crop) s.setAttribute("viewBox", "12 38 376 252");
+    return s;
+  }
+  function viewLigero(box) {
+    var w = h("div", "lk-big");
+    w.appendChild(cloneLk(false));
+    box.appendChild(w);
+    box.appendChild(h("p", "mkd-cap", "Así se ve en el navegador: una plantilla de Google con tus números. Funciona bien, pero no lleva diseño propio."));
+  }
+  function viewLigeroPdf(box) {
+    var w = h("div", "lk-paper");
+    w.appendChild(cloneLk(true));
+    box.appendChild(w);
+    box.appendChild(h("p", "mkd-cap", "En el Ligero, el resumen para tu jefe es el mismo reporte descargado en PDF desde Google."));
+  }
+
+  /* Tablero 3D: cada torre es un edificio y su altura es el avance */
+  function view3D(box) {
+    var wrap = h("div", "t3");
+    wrap.innerHTML =
+      '<div class="t3-kpis">' +
+        '<div class="t3-kpi"><span>Avance real</span><b>62%</b><small><i class="dot-warn"></i>−4% por clashes</small></div>' +
+        '<div class="t3-kpi"><span>Clashes abiertos</span><b>14</b><small>6 en la Torre 3</small></div>' +
+        '<div class="t3-kpi"><span>UMC listas</span><b>6 de 10</b><small>Faltan 4</small></div>' +
+      '</div>' +
+      '<div class="t3-grid">' +
+        '<div class="t3-stage">' +
+          '<div class="t3-tools">' +
+            '<div class="t3-towers" role="group" aria-label="Elegir torre"></div>' +
+            '<div class="t3-ctrl">' +
+              '<button type="button" class="t3-btn" data-rot="-1" aria-label="Girar a la izquierda">' + ICON_ROT_L + '</button>' +
+              '<button type="button" class="t3-btn" data-rot="1" aria-label="Girar a la derecha">' + ICON_ROT_R + '</button>' +
+              '<button type="button" class="t3-btn t3-sw" role="switch" aria-checked="true"><span class="knob" aria-hidden="true"></span>Restar clashes</button>' +
+            '</div>' +
+          '</div>' +
+          '<svg class="t3-svg" role="img" aria-label="Vista 3D del avance por torre. Torre 1 78%, Torre 2 64%, Torre 3 58% y Torre 4 47% de avance real. Lo rayado en naranja es lo que restan los clashes."></svg>' +
+          '<ul class="t3-legend">' +
+            '<li><span class="lg-sw lg-built" aria-hidden="true"></span>Avance real</li>' +
+            '<li><span class="lg-sw lg-clash" aria-hidden="true"></span>Lo que restan los clashes</li>' +
+            '<li><span class="lg-sw lg-ghost" aria-hidden="true"></span>Lo que falta</li>' +
+            '<li>Cada piso es 10%</li>' +
+          '</ul>' +
+          '<p class="t3-help">Arrastra para girar el conjunto. Toca una torre para ver su detalle.</p>' +
+        '</div>' +
+        '<aside class="t3-side" aria-live="polite"></aside>' +
+      '</div>';
+    box.appendChild(wrap);
+    var side = $(".t3-side", wrap), tw = $(".t3-towers", wrap), curT = 2, clashOn = true;
+    TOWERS.forEach(function (t, i) {
+      var b = h("button", "t3-btn", t.s + " · " + t.real + "%");
+      b.type = "button";
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", t.n + ", " + t.real + "% de avance real");
+      b.addEventListener("click", function () { if (scene) scene.select(i); });
+      tw.appendChild(b);
+    });
+    scene = Scene(wrap, function (i) {
+      curT = i;
+      $$(".t3-btn", tw).forEach(function (b, j) { b.setAttribute("aria-pressed", String(i === j)); });
+      renderSide(side, i, clashOn);
+    });
+    $$("[data-rot]", wrap).forEach(function (b) {
+      b.addEventListener("click", function () { if (scene) scene.rotate(+b.getAttribute("data-rot")); });
+    });
+    var sw = $(".t3-sw", wrap);
+    sw.addEventListener("click", function () {
+      var on = sw.getAttribute("aria-checked") !== "true";
+      sw.setAttribute("aria-checked", String(on));
+      clashOn = on;
+      renderSide(side, curT, on);
+      if (scene) scene.setClash(on);
+    });
+  }
+
+  function renderSide(box, i, clashOn) {
+    var t = TOWERS[i], on = clashOn !== false;
+    box.textContent = "";
+    var head = h("div");
+    head.appendChild(h("p", "k", t.n));
+    head.appendChild(h("p", "t3-big", (on ? t.real : t.model) + "%"));
+    head.appendChild(h("p", "t3-sub", on ? "Avance real. Sin restar clashes iría en " + t.model + "%." : "Sin restar clashes. El avance real es " + t.real + "%."));
+    box.appendChild(head);
+    var badge = h("p", "t3-badge");
+    badge.appendChild(h("i", "dot-warn"));
+    badge.appendChild(document.createTextNode("−" + (t.model - t.real) + "% por " + t.nc + (t.nc === 1 ? " clash" : " clashes")));
+    box.appendChild(badge);
+    var c = h("div");
+    c.appendChild(h("p", "k", "Clashes abiertos · " + t.nc));
+    var chips = h("div", "t3-chips");
+    t.cl.forEach(function (x) { chips.appendChild(h("span", "t3-chip", x[0] + " · " + x[1])); });
+    c.appendChild(chips);
+    box.appendChild(c);
+    var lv = h("div");
+    lv.appendChild(h("p", "k", "Avance por nivel"));
+    var ul = h("ul", "t3-lv");
+    t.lv.forEach(function (v, j) {
+      var li = h("li");
+      li.appendChild(h("span", null, LEVELS[j]));
+      var bar = h("span", "bar"), fill = h("i");
+      fill.style.setProperty("--p", String(v));
+      bar.appendChild(fill);
+      li.appendChild(bar);
+      li.appendChild(h("b", null, v + "%"));
+      ul.appendChild(li);
+    });
+    lv.appendChild(ul);
+    box.appendChild(lv);
+    var go = h("button", "t3-go", "Ver el resumen para el jefe");
+    go.type = "button";
+    go.addEventListener("click", function () {
+      var n = VIEWS[openK].tabs.length - 1;
+      showTab(n);
+      var tb = $("#mkd-tab-" + n);
+      if (tb) tb.focus();
+    });
+    box.appendChild(go);
+  }
+
+  function Scene(root, onSelect) {
+    var svg = $(".t3-svg", root);
+    var st = { th: -1.15, sel: 2, clash: true, h: [0, 0, 0, 0], c: [0, 0, 0, 0] };
+    var G = {}, raf = 0, anim = 0, timer = 0, ro = null, drag = null;
+    var PHI = Math.PI / 6, SP = Math.sin(PHI), CP = Math.cos(PHI);
+    var POS = [[0, 0], [2.4, 0], [0, 2.4], [2.4, 2.4]], MID = 1.2, F = 1.16, HM = 3.6, R0 = -1.2, R1 = 3.6;
+    var DEFS = '<defs><pattern id="t3-hatch" patternUnits="userSpaceOnUse" width="5" height="5" patternTransform="rotate(45)">' +
+      '<rect width="5" height="5" fill="' + WARN + '" fill-opacity=".16"/><line x1="0" y1="0" x2="0" y2="5" stroke="' + WARN + '" stroke-width="1.5"/></pattern></defs>';
+
+    function layout() {
+      var w = svg.parentNode.clientWidth || 640;
+      G = w < 560 ? { W: 420, H: 380, S: 54, fs: 13 } : { W: 640, H: 440, S: 60, fs: 12 };
+      G.cx = G.W / 2;
+      G.cy = Math.round(44 + 4.37 * G.S);
+      svg.setAttribute("viewBox", "0 0 " + G.W + " " + G.H);
+    }
+    function P(x, y, z) {
+      var dx = x - MID, dy = y - MID, c = Math.cos(st.th), s = Math.sin(st.th);
+      var xr = dx * c - dy * s, yr = dx * s + dy * c;
+      return [G.cx + xr * G.S, G.cy - (yr * SP + z * CP) * G.S, yr * CP - z * SP];
+    }
+    function pts(a) { return a.map(function (p) { return p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(" "); }
+    function ln(a, b, cls) {
+      return '<line x1="' + a[0].toFixed(1) + '" y1="' + a[1].toFixed(1) + '" x2="' + b[0].toFixed(1) + '" y2="' + b[1].toFixed(1) + '"' + (cls ? ' class="' + cls + '"' : "") + "/>";
+    }
+    function poly(p, attrs) { return '<polygon points="' + pts(p) + '" ' + attrs + "/>"; }
+    function sides(x0, y0, x1, y1) {
+      var c = Math.cos(st.th), s = Math.sin(st.th), out = [];
+      [[0, -1, x0, y0, x1, y0], [1, 0, x1, y0, x1, y1], [0, 1, x1, y1, x0, y1], [-1, 0, x0, y1, x0, y0]].forEach(function (f) {
+        var nyr = f[0] * s + f[1] * c, nxr = f[0] * c - f[1] * s;
+        if (nyr < -1e-4) out.push({ lit: nxr, a: [f[2], f[3]], b: [f[4], f[5]] });
+      });
+      return out;
+    }
+    function quad(f, z0, z1) { return [P(f.a[0], f.a[1], z0), P(f.b[0], f.b[1], z0), P(f.b[0], f.b[1], z1), P(f.a[0], f.a[1], z1)]; }
+    function topf(x0, y0, x1, y1, z) { return [P(x0, y0, z), P(x1, y0, z), P(x1, y1, z), P(x0, y1, z)]; }
+
+    function grid() {
+      var o = '<g class="t3-g">';
+      for (var g = R0; g <= R1 + 1e-6; g += 0.6) o += ln(P(g, R0, 0), P(g, R1, 0)) + ln(P(R0, g, 0), P(R1, g, 0));
+      return o + "</g>" + poly(topf(R0, R0, R1, R1, 0), 'class="t3-site"');
+    }
+    function tower(i) {
+      var cx = POS[i][0], cy = POS[i][1], x0 = cx - F / 2, x1 = cx + F / 2, y0 = cy - F / 2, y1 = cy + F / 2;
+      var hb = st.h[i] / 100 * HM, hc = Math.max(st.c[i], st.h[i]) / 100 * HM, sel = i === st.sel;
+      var sd = sides(x0, y0, x1, y1);
+      var o = '<g data-t="' + i + '" class="t3-t' + (sel ? " is-sel" : "") + '">';
+      if (sel) o += poly(topf(x0 - 0.16, y0 - 0.16, x1 + 0.16, y1 + 0.16, 0), 'class="f-accs"');
+      sd.forEach(function (f) { o += poly(quad(f, 0, HM), 'fill="transparent" class="t3-ghost"'); });
+      o += poly(topf(x0, y0, x1, y1, HM), 'fill="transparent" class="t3-ghost"');
+      if (hb > 0.01) {
+        sd.forEach(function (f) {
+          o += poly(quad(f, 0, hb), 'class="f-acc t3-face" fill-opacity="' + (0.3 + 0.13 * f.lit).toFixed(2) + '"');
+          for (var k = 1; k < 10; k++) {
+            var z = k * HM / 10;
+            if (z < hb - 0.03) o += ln(P(f.a[0], f.a[1], z), P(f.b[0], f.b[1], z), "t3-fl");
+          }
+          [1 / 3, 2 / 3].forEach(function (u) {
+            var mx = f.a[0] + (f.b[0] - f.a[0]) * u, my = f.a[1] + (f.b[1] - f.a[1]) * u;
+            o += ln(P(mx, my, 0), P(mx, my, hb), "t3-fl");
+          });
+        });
+        o += poly(topf(x0, y0, x1, y1, hb), 'class="f-acc t3-face" fill-opacity=".14"');
+      }
+      if (hc - hb > 0.01) {
+        sd.forEach(function (f) { o += poly(quad(f, hb, hc), 'fill="url(#t3-hatch)" class="t3-cl"'); });
+        o += poly(topf(x0, y0, x1, y1, hc), 'fill="url(#t3-hatch)" class="t3-cl"');
+      }
+      return o + "</g>";
+    }
+    function bbox(j) {
+      var cx = POS[j][0], cy = POS[j][1], xs = [], ys = [];
+      [[-1, -1], [1, -1], [1, 1], [-1, 1]].forEach(function (d) {
+        [0, HM].forEach(function (z) { var q = P(cx + d[0] * F / 2, cy + d[1] * F / 2, z); xs.push(q[0]); ys.push(q[1]); });
+      });
+      return [Math.min.apply(null, xs), Math.max.apply(null, xs), Math.min.apply(null, ys), Math.max.apply(null, ys)];
+    }
+    function cota() {
+      var i = st.sel, hb = st.h[i] / 100 * HM;
+      if (hb < 0.05) return "";
+      var cx = POS[i][0], cy = POS[i][1], L = null, R = null;
+      [[cx - F / 2, cy - F / 2], [cx + F / 2, cy - F / 2], [cx + F / 2, cy + F / 2], [cx - F / 2, cy + F / 2]].forEach(function (c) {
+        var q = P(c[0], c[1], 0);
+        if (!R || q[0] > R[0]) R = q;
+        if (!L || q[0] < L[0]) L = q;
+      });
+      var dz = hb * CP * G.S, di = P(cx, cy, 0)[2];
+      function crowd(x, y0) {
+        var n = 0;
+        for (var j = 0; j < 4; j++) {
+          if (j === i || P(POS[j][0], POS[j][1], 0)[2] > di) continue;
+          var b = bbox(j);
+          if (x > b[0] - 8 && x < b[1] + 8 && y0 - dz < b[3] && y0 > b[2]) n++;
+        }
+        if (x < 14 || x > G.W - 14) n += 2;
+        return n;
+      }
+      var xr = R[0] + 18, xl = L[0] - 18, cr = crowd(xr, R[1]), cl = crowd(xl, L[1]);
+      if (cr > 0 && cl > 0) return "";
+      var right = cr <= cl;
+      var base = right ? R : L, x = right ? xr : xl, sgn = right ? 1 : -1;
+      var y0 = base[1], y1 = y0 - dz, ym = (y0 + y1) / 2;
+      var txt = Math.round(st.h[i]) + "%", tw = txt.length * G.fs * 0.62 + 8;
+      var o = '<g class="t3-cota">';
+      o += ln([base[0] + 4 * sgn, y0], [x + 6 * sgn, y0]) + ln([base[0] + 4 * sgn, y1], [x + 6 * sgn, y1]) + ln([x, y0], [x, y1]);
+      o += ln([x - 4, y0 + 4], [x + 4, y0 - 4]) + ln([x - 4, y1 + 4], [x + 4, y1 - 4]);
+      o += '<g transform="translate(' + x.toFixed(1) + " " + ym.toFixed(1) + ') rotate(-90)"><rect x="' + (-tw / 2).toFixed(1) + '" y="' + (-G.fs * 0.72).toFixed(1) + '" width="' + tw.toFixed(1) + '" height="' + (G.fs * 1.44).toFixed(1) + '"/>' +
+        '<text x="0" y="' + (G.fs * 0.36).toFixed(1) + '" text-anchor="middle" font-size="' + G.fs + '">' + txt + "</text></g>";
+      return o + "</g>";
+    }
+    function labels(order) {
+      var o = "";
+      order.forEach(function (i) {
+        var t = TOWERS[i], top = Math.max(st.h[i], st.c[i]) / 100 * HM, p = P(POS[i][0], POS[i][1], top);
+        var txt = t.s + " · " + Math.round(st.h[i]) + "%", w = txt.length * G.fs * 0.62 + 14, hh = G.fs + 10;
+        var lx = Math.max(w / 2 + 4, Math.min(G.W - w / 2 - 4, p[0])), ly = p[1] - 26;
+        o += ln([p[0], p[1] - 2], [lx, ly + hh / 2], "t3-lead");
+        o += '<g class="t3-tag' + (i === st.sel ? " is-sel" : "") + '" data-t="' + i + '"><rect x="' + (lx - w / 2).toFixed(1) + '" y="' + (ly - hh / 2).toFixed(1) + '" width="' + w.toFixed(1) + '" height="' + hh + '" rx="' + hh / 2 + '"/>' +
+          '<text x="' + lx.toFixed(1) + '" y="' + (ly + G.fs * 0.36).toFixed(1) + '" text-anchor="middle" font-size="' + G.fs + '">' + txt + "</text></g>";
+      });
+      return o;
+    }
+    function north() {
+      var a = P(MID, MID, 0), b = P(MID, MID + 1, 0), vx = b[0] - a[0], vy = b[1] - a[1], L = Math.sqrt(vx * vx + vy * vy) || 1;
+      vx /= L; vy /= L;
+      var r = G.W < 500 ? 13 : 16, cx = G.W - r - 18, cy = r + 18, tip = [cx + vx * r, cy + vy * r], tail = [cx - vx * r, cy - vy * r], px = -vy, py = vx;
+      return '<g class="t3-north"><circle cx="' + cx + '" cy="' + cy + '" r="' + r + '"/>' + ln(tail, tip) +
+        poly([tip, [tip[0] - vx * 7 + px * 4, tip[1] - vy * 7 + py * 4], [tip[0] - vx * 7 - px * 4, tip[1] - vy * 7 - py * 4]], "") +
+        '<text x="' + (cx + vx * (r + 10)).toFixed(1) + '" y="' + (cy + vy * (r + 10) + 4).toFixed(1) + '" text-anchor="middle" font-size="11">N</text></g>';
+    }
+    function render() {
+      raf = 0;
+      var order = [0, 1, 2, 3].sort(function (a, b) { return P(POS[b][0], POS[b][1], 0)[2] - P(POS[a][0], POS[a][1], 0)[2]; });
+      var o = DEFS + '<text x="14" y="22" class="t3-cap" font-size="11">VISTA 3D · AVANCE POR TORRE</text>' + grid();
+      order.forEach(function (i) { o += tower(i); });
+      svg.innerHTML = o + cota() + labels(order) + north();
+    }
+    function schedule() { if (!raf) raf = requestAnimationFrame(render); }
+    function targets() {
+      return { h: TOWERS.map(function (t) { return st.clash ? t.real : t.model; }), c: TOWERS.map(function (t) { return t.model; }) };
+    }
+    function apply(tg, e, from) {
+      if (tg.th != null) st.th = from.th + (tg.th - from.th) * e;
+      for (var i = 0; i < 4; i++) {
+        if (tg.h) st.h[i] = from.h[i] + (tg.h[i] - from.h[i]) * e;
+        if (tg.c) st.c[i] = from.c[i] + (tg.c[i] - from.c[i]) * e;
+      }
+    }
+    function animate(tg, dur) {
+      var from = { th: st.th, h: st.h.slice(), c: st.c.slice() };
+      cancelAnimationFrame(anim);
+      clearTimeout(timer);
+      if (rm.matches || !dur) { apply(tg, 1, from); render(); return; }
+      var t0 = performance.now();
+      function step(now) {
+        var k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+        apply(tg, e, from);
+        render();
+        if (k < 1) anim = requestAnimationFrame(step);
+      }
+      anim = requestAnimationFrame(step);
+      timer = setTimeout(function () { cancelAnimationFrame(anim); apply(tg, 1, from); render(); }, dur + 150);
+    }
+
+    svg.addEventListener("pointerdown", function (e) {
+      drag = { x: e.clientX, th: st.th, moved: false, target: e.target };
+      try { svg.setPointerCapture(e.pointerId); } catch (err) {}
+    });
+    svg.addEventListener("pointermove", function (e) {
+      if (!drag) return;
+      var dx = e.clientX - drag.x;
+      if (!drag.moved && Math.abs(dx) > 6) { drag.moved = true; cancelAnimationFrame(anim); clearTimeout(timer); }
+      if (drag.moved) { st.th = drag.th + dx * 0.009; schedule(); }
+    });
+    svg.addEventListener("pointerup", function () {
+      if (drag && !drag.moved) {
+        var g = drag.target && drag.target.closest ? drag.target.closest("[data-t]") : null;
+        if (g) select(+g.getAttribute("data-t"));
+      }
+      drag = null;
+    });
+    svg.addEventListener("pointercancel", function () { drag = null; });
+
+    function select(i) { st.sel = i; render(); onSelect(i); }
+    layout();
+    render();
+    onSelect(st.sel);
+    var first = targets();
+    first.th = -0.62;
+    animate(first, 1100);
+    if (window.ResizeObserver) {
+      ro = new ResizeObserver(function () { var w = G.W; layout(); if (w !== G.W) render(); });
+      ro.observe(svg.parentNode);
+    }
+    return {
+      select: select,
+      setClash: function (on) { st.clash = on; animate(targets(), 650); },
+      rotate: function (dir) { animate({ th: st.th + dir * Math.PI / 4 }, 500); },
+      destroy: function () { cancelAnimationFrame(anim); cancelAnimationFrame(raf); clearTimeout(timer); if (ro) ro.disconnect(); }
+    };
+  }
+
+  /* Resumen para el jefe: una hoja sencilla, como lámina con cajetín */
+  function viewBoss(box) {
+    var rows = TOWERS.map(function (t) {
+      return "<tr><td>" + t.n + '</td><td><span class="boss-bar"><span class="boss-track"><i style="--p:' + t.real + '"></i></span><b>' + t.real + '%</b></span></td>' +
+        '<td class="num">' + t.nc + '</td><td><span class="boss-st">' + (t.ok ? ICON_OK + "En tiempo" : ICON_WARN + "Revisar") + "</span></td></tr>";
+    }).join("");
+    box.innerHTML =
+      '<div class="boss"><article class="boss-sheet" aria-label="Maqueta del resumen para el jefe">' +
+        '<header class="boss-h"><div><p class="boss-k">Resumen de avance BIM</p><p class="boss-t">Proyecto de ejemplo</p></div>' +
+        '<div class="boss-d">Semana 44<br>30 oct 2026</div></header>' +
+        '<div class="boss-kpis"><div><span>Avance general</span><b>62%</b></div><div><span>Clashes abiertos</span><b>14</b></div><div><span>UMC listas</span><b>6 de 10</b></div></div>' +
+        '<p class="boss-note">El avance ya descuenta clashes y problemas: esta semana restaron 4%.</p>' +
+        '<table class="boss-tbl"><thead><tr><th scope="col">Torre</th><th scope="col">Avance real</th><th scope="col" class="num">Clashes</th><th scope="col">Estado</th></tr></thead><tbody>' + rows + "</tbody></table>" +
+        '<div class="boss-obs"><p class="boss-k">Observaciones</p><ol>' +
+          "<li>La Torre 3 junta 6 clashes, casi todos entre hidráulica y ventilación en el Nivel 3. Se revisan con coordinación el lunes.</li>" +
+          "<li>La Torre 4 va más lenta porque faltan los planos de PCI. Ya se pidieron.</li>" +
+        "</ol></div>" +
+        '<footer class="boss-cj"><div><span>Elaboró</span><b>Erick</b></div><div><span>Revisó</span><span class="boss-sign"></span></div><div><span>Fecha</span><b>30 oct 2026</b></div><div><span>Hoja</span><b>1 de 1</b></div></footer>' +
+      "</article>" +
+      '<p class="mkd-cap">Una hoja en PDF lista para mandar cuando te la pidan. Va directo a los números, con una barra por torre y tus notas.</p></div>';
+  }
+
+  /* App del Premium: dos teléfonos con notas numeradas */
+  function viewApp(box) {
+    function bars(x, y) {
+      return '<g class="f-on"><rect x="' + (x + 5.5) + '" y="' + (y + 12) + '" width="3.2" height="7" rx="1"/><rect x="' + (x + 10.5) + '" y="' + (y + 6.5) + '" width="3.2" height="12.5" rx="1"/><rect x="' + (x + 15.5) + '" y="' + (y + 9.5) + '" width="3.2" height="9.5" rx="1"/></g>';
+    }
+    function marker(n, cx, cy, tx, ty) {
+      var o = "";
+      if (tx != null) {
+        var dx = tx - cx, dy = ty - cy, L = Math.sqrt(dx * dx + dy * dy) || 1;
+        o += '<line x1="' + (cx + dx / L * 12).toFixed(1) + '" y1="' + (cy + dy / L * 12).toFixed(1) + '" x2="' + tx + '" y2="' + ty + '" class="s-accst" stroke-width="1.2"/><circle cx="' + tx + '" cy="' + ty + '" r="2.6" class="f-accst"/>';
+      }
+      return o + '<circle cx="' + cx + '" cy="' + cy + '" r="12" class="f-acc"/><text x="' + cx + '" y="' + (cy + 4.3) + '" text-anchor="middle" font-size="12" font-weight="600" class="f-on">' + n + "</text>";
+    }
+    var rows = [["Torre 1", 78], ["Torre 2", 64], ["Torre 3", 58], ["Torre 4", 47]].map(function (r, i) {
+      var y = 262 + i * 24, hi = i === 2;
+      return '<text x="358" y="' + y + '" font-size="11.5" class="' + (hi ? "f-accst" : "f-ink2") + '">' + r[0] + "</text>" +
+        '<rect x="420" y="' + (y - 7) + '" width="86" height="7" rx="3.5" class="f-surf2"/><rect x="420" y="' + (y - 7) + '" width="' + (86 * r[1] / 100).toFixed(1) + '" height="7" rx="3.5" class="f-acc"/>' +
+        '<text x="534" y="' + y + '" font-size="11.5" text-anchor="end" class="' + (hi ? "f-accst" : "f-ink") + '">' + r[1] + "%</text>";
+    }).join("");
+    var svg =
+      '<svg viewBox="0 0 640 540" role="img" aria-label="Maqueta de la app del Premium. A la izquierda, un iPhone con avisos en la pantalla de bloqueo. A la derecha, un Android con el avance real, las torres y el botón para mandar el resumen al jefe.">' +
+        '<rect x="40.5" y="20.5" width="229" height="470" rx="40" class="f-bezel s-line2"/>' +
+        '<rect x="48.5" y="28.5" width="213" height="454" rx="33" class="f-surf2"/>' +
+        '<rect x="125" y="40" width="60" height="18" rx="9" class="f-bezel"/>' +
+        '<text x="155" y="92" text-anchor="middle" font-size="12" class="f-ink2">viernes 30 de octubre</text>' +
+        '<text x="155" y="146" text-anchor="middle" font-size="54" font-weight="500" class="f-ink">9:41</text>' +
+        '<rect x="60.5" y="176.5" width="189" height="66" rx="16" class="f-surf s-line"/>' +
+        '<rect x="72" y="190" width="24" height="24" rx="7" class="f-acc"/>' + bars(72, 190) +
+        '<text x="106" y="199" font-size="11" font-weight="600" class="f-ink">Tablero BIM</text><text x="238" y="199" font-size="9" text-anchor="end" class="f-ink3">ahora</text>' +
+        '<text x="106" y="215" font-size="10.5" class="f-ink2">Torre 3 bajó a 58% por</text><text x="106" y="229" font-size="10.5" class="f-ink2">3 clashes nuevos</text>' +
+        '<rect x="60.5" y="250.5" width="189" height="66" rx="16" class="f-surf s-line"/>' +
+        '<rect x="72" y="264" width="24" height="24" rx="7" class="f-acc"/>' + bars(72, 264) +
+        '<text x="106" y="273" font-size="11" font-weight="600" class="f-ink">Tablero BIM</text><text x="238" y="273" font-size="9" text-anchor="end" class="f-ink3">hace 2 h</text>' +
+        '<text x="106" y="289" font-size="10.5" class="f-ink2">Se resolvieron 2 clashes</text><text x="106" y="303" font-size="10.5" class="f-ink2">en la Torre 1</text>' +
+        '<circle cx="92" cy="446" r="17" class="f-surf"/><circle cx="218" cy="446" r="17" class="f-surf"/>' +
+        '<rect x="88" y="437" width="8" height="15" rx="2" fill="none" class="s-ink3" stroke-width="1.3"/>' +
+        '<rect x="210" y="440" width="16" height="12" rx="2.5" fill="none" class="s-ink3" stroke-width="1.3"/><circle cx="218" cy="446" r="3" fill="none" class="s-ink3" stroke-width="1.3"/>' +
+        '<rect x="110" y="472" width="90" height="4" rx="2" class="f-ink"/>' +
+        '<text x="155" y="524" text-anchor="middle" font-size="12" letter-spacing="1.5" class="f-ink3 mono">IPHONE</text>' +
+        '<rect x="330.5" y="20.5" width="229" height="470" rx="30" class="f-bezel s-line2"/>' +
+        '<rect x="338.5" y="28.5" width="213" height="454" rx="24" class="f-bg"/>' +
+        '<circle cx="445" cy="43" r="6" class="f-bezel"/>' +
+        '<text x="356" y="47" font-size="11" font-weight="600" class="f-ink">9:41</text>' +
+        '<rect x="512.5" y="38.5" width="20" height="10" rx="2.5" fill="none" class="s-ink" stroke-width="1"/><rect x="514.5" y="40.5" width="13" height="6" rx="1" class="f-ink"/>' +
+        '<text x="356" y="84" font-size="15" font-weight="500" class="f-ink">Proyecto de ejemplo</text>' +
+        '<text x="356" y="101" font-size="9" letter-spacing=".8" class="f-ink3 mono">AVANCE REAL</text>' +
+        '<g transform="rotate(-90 445 162)" fill="none" stroke-width="12">' +
+          '<circle cx="445" cy="162" r="44" class="s-surf2"/>' +
+          '<circle cx="445" cy="162" r="44" class="s-acc" stroke-dasharray="171.4 400" stroke-linecap="round"/>' +
+          '<circle cx="445" cy="162" r="44" class="s-warn" stroke-dasharray="11 400" stroke-dashoffset="-180"/>' +
+        "</g>" +
+        '<text x="445" y="170" text-anchor="middle" font-size="24" font-weight="600" class="f-ink">62%</text>' +
+        '<text x="445" y="232" text-anchor="middle" font-size="10" class="f-ink3">−4% por clashes y problemas</text>' +
+        '<rect x="348" y="294" width="194" height="24" rx="7" class="f-accs"/>' + rows +
+        '<rect x="356" y="360" width="178" height="34" rx="17" class="f-acc"/>' +
+        '<text x="445" y="381.5" text-anchor="middle" font-size="11.5" font-weight="500" class="f-on">Enviar resumen al jefe</text>' +
+        '<line x1="338.5" y1="420.5" x2="551.5" y2="420.5" class="s-line"/>' +
+        '<path d="M379.5 448v-7.4l7.5-6 7.5 6v7.4z" class="f-acc"/>' +
+        '<path d="M445 433.5l7.6 13h-15.2z" fill="none" class="s-ink3" stroke-width="1.4" stroke-linejoin="round"/>' +
+        '<rect x="497" y="433.5" width="12" height="14" rx="2" fill="none" class="s-ink3" stroke-width="1.4"/><path d="M500 438.5h6M500 442.5h6" class="s-ink3" stroke-width="1.2"/>' +
+        '<text x="387" y="464" text-anchor="middle" font-size="10" class="f-accst">Inicio</text><text x="445" y="464" text-anchor="middle" font-size="10" class="f-ink3">Clashes</text><text x="503" y="464" text-anchor="middle" font-size="10" class="f-ink3">Resumen</text>' +
+        '<rect x="405" y="473" width="80" height="4" rx="2" class="f-ink"/>' +
+        '<text x="445" y="524" text-anchor="middle" font-size="12" letter-spacing="1.5" class="f-ink3 mono">ANDROID</text>' +
+        marker(1, 22, 209, 60, 209) + marker(2, 612, 162, 497, 162) + marker(3, 612, 306, 542, 306) + marker(4, 612, 377, 534, 377) + marker(5, 300, 520) +
+      "</svg>";
+    var notes = [
+      ["Avisos en el celular", "Te llega un aviso cuando una torre baja de avance o se resuelven clashes."],
+      ["El mismo avance que la web", "El avance real, ya con los clashes restados, siempre al día."],
+      ["Torres y niveles con un toque", "Ves el detalle sin prender la computadora."],
+      ["El resumen desde el celular", "Mandas el PDF para tu jefe desde la app."],
+      ["iPhone y Android", "Las dos apps entran con el mismo acceso por invitación."]
+    ];
+    box.innerHTML = '<div class="app">' + svg + "<ol>" + notes.map(function (n, i) {
+      return "<li><b>" + (i + 1) + "</b><span><strong>" + n[0] + "</strong>" + n[1] + "</span></li>";
+    }).join("") + "</ol></div>";
+  }
 
   /* Selección */
   var cur = null;
