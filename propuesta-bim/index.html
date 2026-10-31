@@ -29,7 +29,7 @@ body{margin:0}
   --accent:#2D62B0; --accent-strong:#1F4C8F; --accent-soft:#E2EAF6; --on-accent:#FFFFFF;
   --junior:#8A847A;
   --mint:#1D7364; --mint-soft:#DDF0EA;
-  --thumb:#FFFDF8; --bezel:#2B2926;
+  --thumb:#FFFDF8; --bezel:#2B2926; --c-hid:#4F86D3; --c-san:#2E9E84; --c-vent:#8A6DD6; --c-pci:#D2668F; --c-elec:#B98A12; --good-ink:#137333; --bad-ink:#B3261E; --tint-1:#EAF1FB; --tint-2:#FCEEE7; --tint-3:#EFEAFA; --tint-4:#E5F3EF;
   --tip-bg:#1E1C19; --tip-ink:#F5F2EA;
   --shadow-sm:0 1px 2px rgba(30,28,25,.10),0 1px 1px rgba(30,28,25,.04);
   --shadow:0 1px 0 rgba(30,28,25,.03),0 14px 34px -20px rgba(30,28,25,.30);
@@ -45,7 +45,7 @@ body{margin:0}
     --accent:#5590EA; --accent-strong:#A9C4EE; --accent-soft:#1D2A3E; --on-accent:#0B1322;
     --junior:#706C66;
     --mint:#6FCDB7; --mint-soft:#163029;
-    --thumb:#35322D; --bezel:#3B3833;
+    --thumb:#35322D; --bezel:#3B3833; --c-hid:#4E86D6; --c-san:#2A9C80; --c-vent:#8B70DC; --c-pci:#D2618C; --c-elec:#B88A1C; --good-ink:#5BC27A; --bad-ink:#F28B82; --tint-1:#18212C; --tint-2:#2A1F1A; --tint-3:#221D2D; --tint-4:#16241F;
     --tip-bg:#F1EDE6; --tip-ink:#121110;
     --shadow-sm:0 1px 2px rgba(0,0,0,.45);
     --shadow:0 1px 0 rgba(0,0,0,.25),0 16px 38px -20px rgba(0,0,0,.75);
@@ -59,7 +59,7 @@ body{margin:0}
   --accent:#5590EA; --accent-strong:#A9C4EE; --accent-soft:#1D2A3E; --on-accent:#0B1322;
   --junior:#706C66;
   --mint:#6FCDB7; --mint-soft:#163029;
-  --thumb:#35322D; --bezel:#3B3833;
+  --thumb:#35322D; --bezel:#3B3833; --c-hid:#4E86D6; --c-san:#2A9C80; --c-vent:#8B70DC; --c-pci:#D2618C; --c-elec:#B88A1C; --good-ink:#5BC27A; --bad-ink:#F28B82; --tint-1:#18212C; --tint-2:#2A1F1A; --tint-3:#221D2D; --tint-4:#16241F;
   --tip-bg:#F1EDE6; --tip-ink:#121110;
   --shadow-sm:0 1px 2px rgba(0,0,0,.45);
   --shadow:0 1px 0 rgba(0,0,0,.25),0 16px 38px -20px rgba(0,0,0,.75);
@@ -449,40 +449,173 @@ html.is-modal{overflow:hidden}
 .t3-lv b{font-weight:500;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
 .t3-go{appearance:none;font:inherit;font-size:14px;font-weight:500;min-height:44px;border-radius:999px;border:0;background:var(--accent);color:var(--on-accent);cursor:pointer;padding:0 18px}
 
-/* Resumen para el jefe: una hoja de papel, igual en tema claro y oscuro */
-.boss{display:grid;gap:4px}
-.boss-sheet{--p-bg:#FFFFFF;--p-ink:#1A1A1A;--p-ink2:#5A5A5A;--p-line:#C8C8C8;--p-soft:#EBEBEB;width:100%;max-width:720px;margin:0 auto;background:var(--p-bg);color:var(--p-ink);border:1px solid var(--p-line);box-shadow:0 18px 40px -24px rgba(0,0,0,.5);padding:20px 18px 0;font-size:14px}
-@media (min-width:760px){.boss-sheet{padding:34px 36px 0}}
-.boss-h{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;border-bottom:2px solid var(--p-ink);padding-bottom:10px}
-.boss-k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--p-ink2)}
-.boss-t{font-size:20px;font-weight:500;line-height:1.2;margin-top:3px}
-.boss-d{text-align:right;font-family:var(--mono);font-size:11.5px;color:var(--p-ink2);line-height:1.6;white-space:nowrap}
-.boss-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--p-line);margin-top:16px}
-.boss-kpis div{padding:10px 12px;border-left:1px solid var(--p-line);min-width:0}
-.boss-kpis div:first-child{border-left:0}
-.boss-kpis span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--p-ink2)}
-.boss-kpis b{display:block;font-size:24px;font-weight:500;line-height:1.15;margin-top:3px}
-.boss-note{font-size:13px;color:var(--p-ink2);margin-top:8px}
-.boss .boss-tbl{width:100%;min-width:0;border-collapse:collapse;margin-top:18px;font-size:13.5px}
-.boss .boss-tbl th{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--p-ink2);font-weight:400;text-align:left;border-bottom:1px solid var(--p-ink);padding:6px 6px;white-space:nowrap}
-.boss .boss-tbl td{padding:9px 6px;border-bottom:1px solid var(--p-line);text-align:left;white-space:normal;color:var(--p-ink)}
-.boss .boss-tbl .num{text-align:right}
-.boss-bar{display:flex;align-items:center;gap:8px}
-.boss-track{position:relative;flex:1;height:8px;background:var(--p-soft);min-width:40px}
-.boss-track i{position:absolute;left:0;top:0;bottom:0;width:calc(var(--p) * 1%);background:var(--p-ink)}
-.boss-bar b{font-weight:500;min-width:34px;text-align:right;font-variant-numeric:tabular-nums}
-.boss-st{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
-.boss-st svg{flex:none}
-.boss-obs{margin-top:18px}
-.boss-obs ol{margin:8px 0 0;padding-left:18px;display:grid;gap:6px;font-size:13.5px;line-height:1.45}
-.boss-cj{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:22px -18px 0;border-top:2px solid var(--p-ink)}
-@media (min-width:760px){.boss-cj{margin:26px -36px 0}}
-.boss-cj div{padding:8px 12px 10px;border-left:1px solid var(--p-line);min-width:0}
-.boss-cj div:first-child{border-left:0}
-.boss-cj span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--p-ink2)}
-.boss-cj b{display:block;font-weight:500;font-size:13px;margin-top:2px;overflow-wrap:anywhere}
-.boss-sign{display:block;height:15px;border-bottom:1px solid var(--p-ink);margin-top:4px}
-@media (max-width:480px){.boss-cj{grid-template-columns:repeat(2,minmax(0,1fr))}.boss-cj div:nth-child(3){border-left:0}.boss-cj div:nth-child(n+3){border-top:1px solid var(--p-line)}.boss-kpis b{font-size:20px}}
+/* Resumen para el jefe: reporte semanal impreso, igual en tema claro y oscuro */
+.rep{--p-bg:#FFFFFF;--p-ink:#161616;--p-ink2:#575757;--p-line:#BFBFBF;--p-soft:#E9E9E9;--p-shade:#E3E3E3;width:100%;max-width:900px;margin:0 auto;background:var(--p-bg);color:var(--p-ink);border:1px solid var(--p-line);box-shadow:0 18px 40px -24px rgba(0,0,0,.5);padding:20px 16px 0;font-size:13.5px;line-height:1.4}
+@media (min-width:760px){.rep{padding:30px 34px 0}}
+.rep-h{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 20px;align-items:end;border-bottom:2.5px solid var(--p-ink);padding-bottom:10px}
+.rep-k{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--p-ink2)}
+.rep-t{font-size:21px;font-weight:500;line-height:1.15;margin-top:3px}
+.rep-meta{font-family:var(--mono);font-size:10.5px;color:var(--p-ink2);text-align:right;line-height:1.55}
+.rep-meta b{color:var(--p-ink);font-weight:500}
+@media (max-width:560px){.rep-h{grid-template-columns:1fr}.rep-meta{text-align:left}}
+.rep-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:14px;border:1px solid var(--p-line)}
+.rep-kpis>div{padding:9px 11px 10px;border-left:1px solid var(--p-line);min-width:0}
+.rep-kpis>div:first-child{border-left:0}
+.rep-kpis span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--p-ink2)}
+.rep-kpis b{display:block;font-size:24px;font-weight:500;line-height:1.15;margin-top:2px}
+.rep-kpis small{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--p-ink2);margin-top:1px}
+@media (max-width:560px){.rep-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.rep-kpis>div:nth-child(3){border-left:0}.rep-kpis>div:nth-child(n+3){border-top:1px solid var(--p-line)}}
+.rep-umc,.rep-kpis .rep-umc{display:flex;gap:2px;margin-top:5px}
+.rep-umc i{display:block;width:9px;height:9px;border:1px solid var(--p-ink)}
+.rep-umc i.on{background:var(--p-ink)}
+.rep-sec{display:flex;align-items:center;gap:10px;margin:20px 0 8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--p-ink)}
+.rep-sec::after{content:"";flex:1;height:1px;background:var(--p-ink)}
+.rep-two{display:grid;gap:4px 28px}
+@media (min-width:760px){.rep-two{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}}
+.rep svg{display:block;width:100%;height:auto;font-family:var(--mono)}
+.rep-leg{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:11px;color:var(--p-ink2);margin-top:4px}
+.rep-leg i{display:inline-block;width:18px;height:0;border-top:2px solid var(--p-ink);vertical-align:middle;margin-right:6px}
+.rep-leg i.pl{border-top:2px dashed #8A8A8A}
+.rep-x{overflow-x:auto}
+.rep .rep-tbl{width:100%;min-width:0;border-collapse:collapse;font-size:12.5px}
+.rep .rep-tbl th{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:400;color:var(--p-ink2);border-bottom:1px solid var(--p-ink);padding:5px 6px;text-align:left;white-space:nowrap}
+.rep .rep-tbl td{padding:6px 6px;border-bottom:1px solid var(--p-line);text-align:left;white-space:nowrap;color:var(--p-ink);font-variant-numeric:tabular-nums}
+.rep .rep-tbl .n{text-align:right}
+.rep .rep-tbl td.lo{background:var(--p-shade);font-weight:600}
+.rep .rep-tbl tr.avg td{font-weight:600;border-top:1px solid var(--p-ink);border-bottom:0}
+.rep .rep-tbl td.wrap{white-space:normal;min-width:180px}
+.rep-note{font-size:11px;color:var(--p-ink2);margin-top:5px}
+.rep-id{font-family:var(--mono);font-size:11.5px}
+.rep ol{margin:0;padding-left:18px;display:grid;gap:5px;font-size:13px;line-height:1.45}
+.rep-cj{display:grid;grid-template-columns:1.6fr 1.3fr 1fr .8fr .8fr;margin:22px -16px 0;border-top:2.5px solid var(--p-ink)}
+@media (min-width:760px){.rep-cj{margin:24px -34px 0}}
+.rep-cj>div{padding:7px 11px 9px;border-left:1px solid var(--p-line);min-width:0}
+.rep-cj>div:first-child{border-left:0}
+.rep-cj span{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--p-ink2)}
+.rep-cj b{display:block;font-weight:500;font-size:12.5px;margin-top:2px;overflow-wrap:anywhere}
+.rep-cj em{display:block;height:15px;border-bottom:1px solid var(--p-ink);margin-top:3px}
+@media (max-width:560px){.rep-cj{grid-template-columns:1fr 1fr}.rep-cj>div:nth-child(odd){border-left:0}.rep-cj>div:nth-child(n+3){border-top:1px solid var(--p-line)}}
+
+/* Tablero: interruptor de vista y semana */
+.bd{display:grid;gap:14px;max-width:1100px;margin:0 auto}
+.bd-top{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between}
+.vsw{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--surface-2);--i:1;min-width:280px}
+.vsw-o{position:relative;z-index:1;appearance:none;border:0;background:none;font:inherit;font-size:14px;font-weight:500;color:var(--ink-2);min-height:38px;padding:0 16px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.vsw-o[aria-checked="true"]{color:var(--ink)}
+.vsw-t{position:absolute;z-index:0;top:4px;bottom:4px;left:4px;width:calc((100% - 8px) / 2);border-radius:999px;background:var(--thumb);box-shadow:var(--shadow-sm);transform:translateX(calc(var(--i) * 100%));transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.wk{display:grid;gap:4px;flex:1;min-width:240px;max-width:420px}
+.wk-l{font-size:13px;color:var(--ink-2)}
+.wk-l b{font-family:var(--mono);font-weight:500;color:var(--ink)}
+.wk-r{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-left:4px}
+.wk input{width:100%;accent-color:var(--accent);margin:0;min-height:28px}
+.wk-ticks{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--ink-3)}
+@media (max-width:620px){.vsw{width:100%;min-width:0}.wk{max-width:none}}
+.tri{width:9px;height:9px;flex:none}
+.t3-kpi small.good{color:var(--good-ink)}.t3-kpi small.bad{color:var(--bad-ink)}
+.t3-kpi .umc-dots{display:flex}
+.rep svg.tri{display:inline-block;width:9px;height:9px}
+.good{color:var(--good-ink)}.bad{color:var(--bad-ink)}
+.umc-dots{display:flex;gap:3px;margin-top:5px}
+.umc-dots i{display:block;width:10px;height:10px;border-radius:3px;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line-2)}
+.umc-dots i.on{background:var(--accent);box-shadow:none}
+.bd-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:620px){.bd-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* 3D: qué mide la altura */
+.t3-modes{display:flex;gap:4px;flex-wrap:wrap;margin-top:10px}
+.t3-mode{appearance:none;font:inherit;font-size:12.5px;min-height:32px;padding:0 11px;border-radius:8px;border:1px solid transparent;background:none;color:var(--ink-3);cursor:pointer}
+.t3-mode[aria-checked="true"]{border-color:var(--line-2);background:var(--bg);color:var(--ink);font-weight:500}
+.t3-modes .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);align-self:center;margin-right:4px}
+.t3-sw[hidden]{display:none!important}
+.fd0{fill:var(--c-hid)}.fd1{fill:var(--c-san)}.fd2{fill:var(--c-vent)}.fd3{fill:var(--c-pci)}.fd4{fill:var(--c-elec)}
+.sd0{stroke:var(--c-hid)}.sd1{stroke:var(--c-san)}.sd2{stroke:var(--c-vent)}.sd3{stroke:var(--c-pci)}.sd4{stroke:var(--c-elec)}
+.t3-slice{stroke-width:1;stroke-linejoin:round}
+.t3-cfl{stroke:#EC835A;stroke-opacity:.7;stroke-width:.7}
+.lg-d{border-radius:3px}
+.lg-d0{background:var(--c-hid)}.lg-d1{background:var(--c-san)}.lg-d2{background:var(--c-vent)}.lg-d3{background:var(--c-pci)}.lg-d4{background:var(--c-elec)}
+.t3-dbars{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.t3-dbars li{display:grid;grid-template-columns:82px minmax(0,1fr) 44px;align-items:center;gap:8px;font-size:13px;color:var(--ink-2)}
+.t3-dbars .bar{position:relative;display:block;height:9px;background:var(--surface-2);border-radius:0 4px 4px 0}
+.t3-dbars .bar i{position:absolute;left:0;top:0;bottom:0;width:calc(var(--p) * 1%);border-radius:0 4px 4px 0}
+.t3-dbars b{font-weight:500;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+.t3-rows{display:grid;gap:0;margin:0;padding:0;list-style:none}
+.t3-rows li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px}
+.t3-rows li:last-child{border-bottom:0}
+.t3-rows .lv{font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+.t3-rows b{font-weight:500;font-variant-numeric:tabular-nums}
+.t3-note{font-size:12.5px;color:var(--ink-3)}
+
+/* Vista sencilla, con el tono de Marea */
+.sv{display:grid;gap:12px}
+.sv-filter{display:flex;gap:6px;flex-wrap:wrap}
+.sv-chip{appearance:none;font:inherit;font-size:13px;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2);cursor:pointer}
+.sv-chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg);font-weight:500}
+.sv-grid{display:grid;gap:12px}
+@media (min-width:900px){.sv-grid{grid-template-columns:repeat(6,minmax(0,1fr))}.sv-curve{grid-column:span 4}.sv-towers{grid-column:span 2}.sv-disc,.sv-clash,.sv-umc{grid-column:span 2}.sv-issues{grid-column:span 6}}
+.sv-card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px;min-width:0}
+.sv-towers{background:var(--tint-1);border-color:transparent}.sv-disc{background:var(--tint-4);border-color:transparent}.sv-clash{background:var(--tint-2);border-color:transparent}.sv-umc{background:var(--tint-3);border-color:transparent}
+.sv-towers .bar,.sv-disc .bar{background:var(--surface)}
+.sv-umc .sv-umcg span{background:var(--surface)}.sv-umc .sv-umcg span.ok{background:var(--accent)}.sv-umc .sv-umcg span.rv{background:var(--accent-soft)}
+.sv-card h4{margin:0 0 12px;font-size:15px;font-weight:500;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.sv-card h4 small{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:400}
+.sv-card svg{display:block;width:100%;height:auto;font-family:var(--mono)}
+.sv-leg{display:flex;gap:4px 14px;flex-wrap:wrap;margin:0 0 6px;padding:0;list-style:none;font-size:12px;color:var(--ink-2)}
+.sv-leg li{display:flex;align-items:center;gap:6px}
+.sv-leg i{display:block;width:16px;height:0;border-top:2.5px solid var(--accent)}
+.sv-leg i.pl{border-top-color:var(--ink-3)}
+.sv-trow{display:grid;grid-template-columns:62px minmax(0,1fr) 46px;gap:10px;align-items:center;padding:7px 8px;margin:0 -8px;border-radius:10px;cursor:pointer;font-size:13.5px;appearance:none;border:0;background:none;font-family:inherit;color:inherit;width:calc(100% + 16px);text-align:left}
+.sv-trow.on{background:var(--accent-soft)}
+.sv-trow .bar{position:relative;height:10px;border-radius:0 5px 5px 0;background:var(--surface-2)}
+.sv-trow .bar i{position:absolute;left:0;top:0;bottom:0;width:calc(var(--p) * 1%);background:var(--accent);border-radius:0 5px 5px 0}
+.sv-trow b{font-weight:500;text-align:right;font-variant-numeric:tabular-nums}
+.sv-trow small{grid-column:2 / 4;font-size:11.5px;color:var(--ink-3);margin-top:-4px}
+.sv-dbar{display:grid;grid-template-columns:86px minmax(0,1fr) 46px;gap:10px;align-items:center;font-size:13px;color:var(--ink-2);margin-bottom:9px}
+.sv-dbar .bar{position:relative;height:12px;border-radius:0 6px 6px 0;background:var(--surface-2)}
+.sv-dbar .bar i{position:absolute;left:0;top:0;bottom:0;width:calc(var(--p) * 1%);border-radius:0 6px 6px 0}
+.sv-dbar b{font-weight:500;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+.sv-umcg{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.sv-umcg span{display:grid;gap:1px;padding:7px 6px;border-radius:10px;font-family:var(--mono);font-size:10.5px;text-align:center;background:var(--surface-2);color:var(--ink-3)}
+.sv-umcg span.ok{background:var(--accent);color:var(--on-accent)}
+.sv-umcg span.rv{background:var(--accent-soft);color:var(--accent-strong)}
+.sv-umcl{display:flex;gap:4px 12px;flex-wrap:wrap;margin-top:10px;font-size:11.5px;color:var(--ink-3)}
+.sv-umcl i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.sv-issue{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.sv-issue:last-child{border-bottom:0}
+.sv-issue .ty{font-family:var(--mono);font-size:10.5px;padding:3px 8px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);white-space:nowrap}
+.sv-issue .ty.c{background:#EC835A;color:#1E1C19}
+.sv-issue .ty.q{background:var(--accent-soft);color:var(--accent-strong)}
+.sv-issue .who{font-size:12px;color:var(--ink-3);text-align:right;white-space:nowrap}
+.sv-issue .id{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-right:6px}
+@media (max-width:560px){.sv-issue{grid-template-columns:auto minmax(0,1fr)}.sv-issue .who{grid-column:2;text-align:left}}
+.sv-empty{font-size:13px;color:var(--ink-3)}
+
+/* Hoja maestra: Google Sheets, siempre en claro */
+.gs{max-width:1000px;margin:0 auto;background:#FFFFFF;border:1px solid #DADCE0;border-radius:12px;overflow:hidden;color:#202124;font-family:Roboto,Arial,Helvetica,sans-serif;box-shadow:0 18px 40px -26px rgba(0,0,0,.5)}
+.gs-top{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid #E3E3E3;background:#F9FBFD}
+.gs-ico{flex:none;width:22px;height:28px;border-radius:3px;background:#188038;position:relative}
+.gs-ico::after{content:"";position:absolute;left:5px;right:5px;top:10px;bottom:6px;border:1.5px solid #FFFFFF;border-radius:1px}
+.gs-doc{font-size:15px;line-height:1.2}
+.gs-menu{display:block;font-size:12px;color:#444746;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gs-fx{display:flex;align-items:center;gap:10px;padding:5px 10px;border-bottom:1px solid #E3E3E3;font-size:12.5px;color:#444746}
+.gs-fx .ref{min-width:44px;padding:3px 8px;border:1px solid #DADCE0;border-radius:4px;text-align:center;color:#202124}
+.gs-fx .fx{font-style:italic;color:#80868B}
+.gs-wrap{overflow-x:auto}
+.gs table{border-collapse:collapse;width:100%;min-width:820px;font-size:12.5px;font-family:Roboto,Arial,Helvetica,sans-serif}
+.gs th,.gs td{border:1px solid #E2E3E3;padding:5px 8px;text-align:left;white-space:nowrap;font-variant-numeric:normal}
+.gs thead th{background:#F8F9FA;color:#5F6368;font-weight:400;text-align:center;font-size:11px;padding:3px 6px}
+.gs tbody th{background:#F8F9FA;color:#5F6368;font-weight:400;text-align:center;width:34px;font-size:11px}
+.gs tr.hd td{font-weight:600;background:#F1F3F4}
+.gs td.num{text-align:right}
+.gs td.sel{outline:2px solid #1A73E8;outline-offset:-2px;background:#E8F0FE}
+.gs td.g{background:#E6F4EA}.gs td.y{background:#FEF7E0}.gs td.r{background:#FCE8E6;color:#B3261E;font-weight:600}
+.gs .chip{display:inline-flex;align-items:center;gap:4px;padding:1px 8px;border-radius:999px;font-size:11.5px}
+.gs .chip::after{content:"";width:0;height:0;border-left:3px solid transparent;border-right:3px solid transparent;border-top:4px solid currentColor;opacity:.7}
+.gs .c-ok{background:#D4EDBC;color:#11734B}.gs .c-rv{background:#FFE5A0;color:#7A4F01}.gs .c-pr{background:#C6DBF7;color:#0B57D0}.gs .c-bl{background:#FFCFC9;color:#B10202}
+.gs-tabs{display:flex;gap:2px;padding:6px 10px;border-top:1px solid #E3E3E3;background:#F9FBFD;font-size:12.5px;color:#444746;overflow-x:auto}
+.gs-tabs span{padding:5px 12px;border-radius:6px 6px 0 0;white-space:nowrap}
+.gs-tabs span.on{background:#E1E9F7;color:#0B57D0;font-weight:500}
+
+@media (max-width:760px){.lk-big,.lk-paper{overflow-x:auto}.lk-big svg{min-width:720px}.lk-paper svg{min-width:620px}}
 
 /* App del Premium */
 .app{display:grid;gap:20px;align-items:center;max-width:1040px;margin:0 auto}
@@ -492,7 +625,7 @@ html.is-modal{overflow:hidden}
 .app li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;align-items:start;font-size:15px;line-height:1.45;color:var(--ink-2)}
 .app li b{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--on-accent);font-size:13px;font-weight:600}
 .app li strong{display:block;color:var(--ink);font-weight:500}
-.s-accst{stroke:var(--accent-strong)}.s-ink2{stroke:var(--ink-2)}
+.s-accst{stroke:var(--accent-strong)}.s-ink2{stroke:var(--ink-2)}.s-surf{stroke:var(--surface)}.f-good{fill:var(--good-ink)}.f-bad{fill:var(--bad-ink)}
 
 .app svg{font-family:var(--font)}
 .app svg .mono{font-family:var(--mono)}
@@ -513,7 +646,7 @@ html.is-modal{overflow:hidden}
 <body>
 <header class="topbar">
   <div class="wrap topbar-in">
-    <p class="brand">Tablero de avance BIM<small>Propuesta · Rev. 04</small></p>
+    <p class="brand">Tablero de avance BIM<small>Propuesta · Rev. 05</small></p>
     <div class="seg" id="seg" role="radiogroup" aria-label="Paquete">
       <label class="seg-opt"><input type="radio" name="pk" value="ligero"><span class="seg-txt"><span class="seg-name">Ligero</span><span class="seg-price" data-price="ligero"></span></span></label>
       <label class="seg-opt"><input type="radio" name="pk" value="estandar" checked><span class="seg-txt"><span class="seg-name">Estándar</span><span class="seg-price" data-price="estandar"></span></span></label>
@@ -539,7 +672,7 @@ html.is-modal{overflow:hidden}
         <div class="cj"><dt>Fecha</dt><dd>30 oct 2026</dd></div>
         <div class="cj"><dt>Escala</dt><dd>1 : 3<small>panas : junior</small></dd></div>
         <div class="cj"><dt>Folio</dt><dd>001</dd></div>
-        <div class="cj"><dt>Rev.</dt><dd>04</dd></div>
+        <div class="cj"><dt>Rev.</dt><dd>05</dd></div>
       </dl>
     </div>
   </section>
@@ -597,51 +730,65 @@ html.is-modal{overflow:hidden}
     <div class="wrap">
       <p class="sheet"><b>A-03</b> Vista previa</p>
       <h2 id="h-mock">Así se vería cada uno</h2>
-      <p class="sec-sub">Maquetas con datos de ejemplo para comparar cómo queda cada paquete terminado. Ábrelas en grande para ver el tablero en 3D y el resumen para tu jefe. El diseño final lo afinamos contigo desde el borrador.</p>
+      <p class="sec-sub">Maquetas con datos de ejemplo para comparar cómo queda cada paquete terminado. Ábrelas en grande para ver el tablero, la hoja maestra y el resumen para tu jefe. El diseño final lo afinamos contigo desde el borrador.</p>
       <div class="mk-row" id="mk-row">
         <figure class="mk" data-pk="ligero">
           <div class="mk-top"><span class="mk-name">Ligero</span><span class="mk-tag">Reporte de Google</span></div>
           <div class="mk-stage">
-            <svg class="lk" viewBox="0 0 400 300" role="img" aria-labelledby="mk-l-t">
-              <title id="mk-l-t">Maqueta del Ligero: reporte de Google con tarjetas de avance general, clashes abiertos y UMC listas, barras por torre y una tabla de detalle.</title>
-              <rect x=".5" y=".5" width="399" height="299" rx="10" fill="#F1F3F4" stroke="#DADCE0"/>
-              <path d="M.5 10.5A10 10 0 0 1 10.5.5h379a10 10 0 0 1 10 10V28H.5z" fill="#E3E5E8"/>
-              <circle cx="14" cy="14.5" r="3.2" fill="#C4C7C5"/><circle cx="25" cy="14.5" r="3.2" fill="#C4C7C5"/><circle cx="36" cy="14.5" r="3.2" fill="#C4C7C5"/>
-              <rect x="60" y="7.5" width="280" height="14" rx="7" fill="#FFFFFF"/>
-              <text x="200" y="17.3" text-anchor="middle" font-size="7.5" fill="#5F6368">lookerstudio.google.com</text>
-              <rect x="12.5" y="38.5" width="375" height="251" rx="2" fill="#FFFFFF" stroke="#DADCE0"/>
-              <text x="24" y="58" font-size="11.5" font-weight="500" fill="#202124">Avance de proyectos BIM</text>
-              <rect x="280.5" y="46.5" width="95" height="16" rx="2" fill="#FFFFFF" stroke="#DADCE0"/>
-              <text x="288" y="57" font-size="7" fill="#5F6368">1 al 30 oct 2026</text>
-              <path d="M363 53l3 3 3-3" fill="none" stroke="#5F6368" stroke-width="1.1"/>
-              <line x1="24" y1="70.5" x2="376" y2="70.5" stroke="#E8EAED"/>
-              <g fill="#FFFFFF" stroke="#DADCE0">
-                <rect x="24.5" y="80.5" width="111" height="50" rx="2"/>
-                <rect x="144.5" y="80.5" width="111" height="50" rx="2"/>
-                <rect x="264.5" y="80.5" width="111" height="50" rx="2"/>
+            <svg class="lk" viewBox="0 0 800 600" role="img" aria-labelledby="mk-l-t">
+              <title id="mk-l-t">Maqueta del Ligero: reporte de Google con filtros, cuatro indicadores con su cambio contra la semana pasada, la curva de avance contra el programa, el avance por especialidad, una tabla de calor por torre y los clashes por semana.</title>
+              <rect x=".5" y=".5" width="799" height="599" rx="14" fill="#F1F3F4" stroke="#DADCE0"/>
+              <path d="M.5 14.5A14 14 0 0 1 14.5.5h771a14 14 0 0 1 14 14V40H.5z" fill="#E3E5E8"/>
+              <circle cx="22" cy="20.5" r="5" fill="#C4C7C5"/><circle cx="40" cy="20.5" r="5" fill="#C4C7C5"/><circle cx="58" cy="20.5" r="5" fill="#C4C7C5"/>
+              <rect x="110" y="10" width="580" height="21" rx="10.5" fill="#FFFFFF"/>
+              <text x="400" y="24.6" text-anchor="middle" font-size="11" fill="#5F6368">lookerstudio.google.com</text>
+              <rect x="16.5" y="54.5" width="767" height="533" rx="4" fill="#FFFFFF" stroke="#DADCE0"/>
+              <path d="M16.5 58.5a4 4 0 0 1 4-4h759a4 4 0 0 1 4 4V112H16.5z" fill="#1967D2"/>
+              <text x="36" y="81" font-size="17" font-weight="500" fill="#FFFFFF">Avance BIM · Proyecto de ejemplo</text>
+              <text x="36" y="99" font-size="11" fill="#D2E3FC">Instalaciones MEP · Semana 44</text>
+              <g fill="#FFFFFF"><rect x="420" y="70" width="118" height="26" rx="4"/><rect x="546" y="70" width="92" height="26" rx="4"/><rect x="646" y="70" width="122" height="26" rx="4"/></g>
+              <g fill="none" stroke="#5F6368" stroke-width="1.2"><rect x="429" y="77" width="11" height="11" rx="1.5"/><path d="M429 81h11"/><path d="M623 81l3.5 3.5 3.5-3.5M753 81l3.5 3.5 3.5-3.5"/></g>
+              <g font-size="10.5" fill="#3C4043"><text x="446" y="87">26 oct al 1 nov</text><text x="556" y="87">Torre: Todas</text><text x="656" y="87">Especialidad: Todas</text></g>
+              <g fill="#FFFFFF" stroke="#DADCE0"><rect x="32.5" y="128.5" width="175" height="78" rx="4"/><rect x="218.5" y="128.5" width="175" height="78" rx="4"/><rect x="404.5" y="128.5" width="175" height="78" rx="4"/><rect x="590.5" y="128.5" width="177" height="78" rx="4"/></g>
+              <g font-size="11" fill="#5F6368"><text x="46" y="149">Avance real</text><text x="232" y="149">Programado</text><text x="418" y="149">Clashes abiertos</text><text x="604" y="149">UMC liberadas</text></g>
+              <g font-size="28" fill="#202124"><text x="45" y="182">61.8%</text><text x="231" y="182">68.0%</text><text x="417" y="182">14</text><text x="603" y="182">6 de 10</text></g>
+              <path d="M46 198l4-6 4 6z" fill="#137333"/><text x="58" y="198" font-size="10.5" fill="#137333">2.9 pts vs semana 43</text>
+              <path d="M232 192l4 6 4-6z" fill="#C5221F"/><text x="244" y="198" font-size="10.5" fill="#C5221F">6.3 pts de desviación</text>
+              <path d="M418 192l4 6 4-6z" fill="#137333"/><text x="430" y="198" font-size="10.5" fill="#137333">2 vs semana 43</text>
+              <path d="M604 198l4-6 4 6z" fill="#137333"/><text x="616" y="198" font-size="10.5" fill="#137333">1 vs semana 43</text>
+              <g fill="#FFFFFF" stroke="#DADCE0"><rect x="32.5" y="222.5" width="437" height="180" rx="4"/><rect x="486.5" y="222.5" width="281" height="180" rx="4"/><rect x="32.5" y="418.5" width="437" height="150" rx="4"/><rect x="486.5" y="418.5" width="281" height="150" rx="4"/></g>
+              <g font-size="12" fill="#202124"><text x="46" y="244">Curva de avance</text><text x="500" y="244">Avance por especialidad</text><text x="46" y="440">Avance por torre y especialidad</text><text x="500" y="440">Clashes abiertos por semana</text></g>
+              <g font-size="10" fill="#5F6368"><line x1="318" y1="240.5" x2="334" y2="240.5" stroke="#1A73E8" stroke-width="2.5"/><text x="338" y="244">Real</text><line x1="370" y1="240.5" x2="386" y2="240.5" stroke="#9AA0A6" stroke-width="2.5"/><text x="390" y="244">Programado</text></g>
+              <g stroke="#E8EAED"><line x1="70" y1="262.5" x2="452" y2="262.5"/><line x1="70" y1="292.5" x2="452" y2="292.5"/><line x1="70" y1="322.5" x2="452" y2="322.5"/><line x1="70" y1="352.5" x2="452" y2="352.5"/></g>
+              <line x1="70" y1="382.5" x2="452" y2="382.5" stroke="#BDC1C6"/>
+              <g font-size="9.5" fill="#5F6368" text-anchor="end"><text x="64" y="265.5">80%</text><text x="64" y="295.5">65%</text><text x="64" y="325.5">50%</text><text x="64" y="355.5">35%</text><text x="64" y="385.5">20%</text></g>
+              <g font-size="9.5" fill="#5F6368" text-anchor="middle"><text x="70" y="396">S36</text><text x="117.8" y="396">S37</text><text x="165.5" y="396">S38</text><text x="213.3" y="396">S39</text><text x="261" y="396">S40</text><text x="308.8" y="396">S41</text><text x="356.5" y="396">S42</text><text x="404.3" y="396">S43</text><text x="452" y="396">S44</text></g>
+              <polyline points="70,356 117.8,347 165.5,338 213.3,329 261,320 308.8,311 356.5,302 404.3,294 452,286" fill="none" stroke="#9AA0A6" stroke-width="2.2" stroke-linejoin="round"/>
+              <polyline points="70,360 117.8,351.5 165.5,342.8 213.3,335.8 261,327 308.8,319.5 356.5,312 404.3,304.3 452,298.5" fill="none" stroke="#1A73E8" stroke-width="2.2" stroke-linejoin="round"/>
+              <g fill="#1A73E8"><circle cx="70" cy="360" r="2.6"/><circle cx="117.8" cy="351.5" r="2.6"/><circle cx="165.5" cy="342.8" r="2.6"/><circle cx="213.3" cy="335.8" r="2.6"/><circle cx="261" cy="327" r="2.6"/><circle cx="308.8" cy="319.5" r="2.6"/><circle cx="356.5" cy="312" r="2.6"/><circle cx="404.3" cy="304.3" r="2.6"/><circle cx="452" cy="298.5" r="3.2"/></g>
+              <g font-size="10" text-anchor="end"><text x="446" y="279" fill="#5F6368">68.0%</text><text x="446" y="314" fill="#1A73E8">61.8%</text></g>
+              <g font-size="10.5" fill="#3C4043"><text x="500" y="273">Hidráulica</text><text x="500" y="297">Sanitaria</text><text x="500" y="321">Eléctrica</text><text x="500" y="345">PCI</text><text x="500" y="369">Ventilación</text></g>
+              <g fill="#4285F4"><rect x="572" y="264" width="108.5" height="12"/><rect x="572" y="288" width="106.4" height="12"/><rect x="572" y="312" width="105.6" height="12"/><rect x="572" y="336" width="87.2" height="12"/><rect x="572" y="360" width="86.4" height="12"/></g>
+              <g font-size="10" fill="#5F6368"><text x="686" y="273.5">67.8%</text><text x="684" y="297.5">66.5%</text><text x="683.6" y="321.5">66.0%</text><text x="665.2" y="345.5">54.5%</text><text x="664.4" y="369.5">54.0%</text></g>
+              <line x1="572" y1="258" x2="572" y2="380" stroke="#BDC1C6"/>
+              <rect x="46" y="450" width="410" height="20" fill="#F8F9FA"/>
+              <g font-size="10" fill="#5F6368" text-anchor="middle"><text x="70" y="464">Torre</text><text x="138" y="464">HID</text><text x="192" y="464">SAN</text><text x="246" y="464">VENT</text><text x="300" y="464">PCI</text><text x="354" y="464">ELEC</text><text x="418" y="464">Total</text></g>
+              <g stroke="#FFFFFF" stroke-width="2">
+                <rect x="112" y="472" width="52" height="22" fill="#185ABC"/><rect x="166" y="472" width="52" height="22" fill="#1A63C9"/><rect x="220" y="472" width="52" height="22" fill="#4B8AE5"/><rect x="274" y="472" width="52" height="22" fill="#3D80E0"/><rect x="328" y="472" width="52" height="22" fill="#2A6FD6"/><rect x="390" y="472" width="56" height="22" fill="#2A6FD6"/>
+                <rect x="112" y="494" width="52" height="22" fill="#5B95E8"/><rect x="166" y="494" width="52" height="22" fill="#6399E9"/><rect x="220" y="494" width="52" height="22" fill="#A6C4F2"/><rect x="274" y="494" width="52" height="22" fill="#8AB2EF"/><rect x="328" y="494" width="52" height="22" fill="#6E9FEA"/><rect x="390" y="494" width="56" height="22" fill="#7FAAED"/>
+                <rect x="112" y="516" width="52" height="22" fill="#86AFEE"/><rect x="166" y="516" width="52" height="22" fill="#82ACEE"/><rect x="220" y="516" width="52" height="22" fill="#CADCF7"/><rect x="274" y="516" width="52" height="22" fill="#C0D5F6"/><rect x="328" y="516" width="52" height="22" fill="#86AFEE"/><rect x="390" y="516" width="56" height="22" fill="#A0BFF2"/>
+                <rect x="112" y="538" width="52" height="22" fill="#B7CFF4"/><rect x="166" y="538" width="52" height="22" fill="#C0D5F6"/><rect x="220" y="538" width="52" height="22" fill="#DCE8FA"/><rect x="274" y="538" width="52" height="22" fill="#EEF3FD"/><rect x="328" y="538" width="52" height="22" fill="#B2CBF4"/><rect x="390" y="538" width="56" height="22" fill="#D3E2F8"/>
               </g>
-              <g font-size="7" fill="#5F6368"><text x="32" y="95">Avance general</text><text x="152" y="95">Clashes abiertos</text><text x="272" y="95">UMC listas</text></g>
-              <g font-size="19" fill="#1A73E8"><text x="31" y="121">62%</text><text x="151" y="121">14</text><text x="271" y="121">6 de 10</text></g>
-              <text x="24" y="149" font-size="8" fill="#202124">Avance por torre</text>
-              <g stroke="#E8EAED"><line x1="24" y1="158.5" x2="196" y2="158.5"/><line x1="24" y1="177.5" x2="196" y2="177.5"/><line x1="24" y1="196.5" x2="196" y2="196.5"/><line x1="24" y1="215.5" x2="196" y2="215.5"/></g>
-              <line x1="24" y1="234.5" x2="196" y2="234.5" stroke="#BDC1C6"/>
-              <g fill="#4285F4"><rect x="34.5" y="175" width="22" height="59.5"/><rect x="77.5" y="185.6" width="22" height="48.9"/><rect x="120.5" y="190.2" width="22" height="44.3"/><rect x="163.5" y="198.6" width="22" height="35.9"/></g>
-              <g font-size="6.5" fill="#5F6368" text-anchor="middle">
-                <text x="45.5" y="171.5">78%</text><text x="88.5" y="182">64%</text><text x="131.5" y="186.6">58%</text><text x="174.5" y="195">47%</text>
-                <text x="45.5" y="245">Torre 1</text><text x="88.5" y="245">Torre 2</text><text x="131.5" y="245">Torre 3</text><text x="174.5" y="245">Torre 4</text>
+              <g font-size="10.5" fill="#3C4043"><text x="56" y="487">Torre 1</text><text x="56" y="509">Torre 2</text><text x="56" y="531">Torre 3</text><text x="56" y="553">Torre 4</text></g>
+              <g font-size="10.5" text-anchor="middle">
+                <g fill="#FFFFFF"><text x="138" y="487">84</text><text x="192" y="487">82</text><text x="300" y="487">74</text><text x="354" y="487">79</text><text x="418" y="487">78</text></g>
+                <g fill="#202124"><text x="246" y="487">71</text><text x="138" y="509">70</text><text x="192" y="509">68</text><text x="354" y="509">67</text><text x="246" y="509">55</text><text x="300" y="509">60</text><text x="418" y="509">64</text><text x="138" y="531">63</text><text x="192" y="531">64</text><text x="246" y="531">49</text><text x="300" y="531">51</text><text x="354" y="531">63</text><text x="418" y="531">58</text><text x="138" y="553">54</text><text x="192" y="553">52</text><text x="246" y="553">41</text><text x="300" y="553">33</text><text x="354" y="553">55</text><text x="418" y="553">47</text></g>
               </g>
-              <text x="212" y="149" font-size="8" fill="#202124">Detalle por torre</text>
-              <rect x="212" y="156" width="164" height="16" fill="#F1F3F4"/>
-              <g font-size="7" fill="#5F6368"><text x="218" y="166.6">Torre</text><text x="320" y="166.6" text-anchor="end">Avance</text><text x="370" y="166.6" text-anchor="end">Clashes</text></g>
-              <g font-size="7" fill="#202124">
-                <text x="218" y="183">Torre 1</text><text x="320" y="183" text-anchor="end">78%</text><text x="370" y="183" text-anchor="end">2</text>
-                <text x="218" y="199">Torre 2</text><text x="320" y="199" text-anchor="end">64%</text><text x="370" y="199" text-anchor="end">3</text>
-                <text x="218" y="215">Torre 3</text><text x="320" y="215" text-anchor="end">58%</text><text x="370" y="215" text-anchor="end">6</text>
-                <text x="218" y="231">Torre 4</text><text x="320" y="231" text-anchor="end">47%</text><text x="370" y="231" text-anchor="end">3</text>
-              </g>
-              <g stroke="#E8EAED"><line x1="212" y1="188.5" x2="376" y2="188.5"/><line x1="212" y1="204.5" x2="376" y2="204.5"/><line x1="212" y1="220.5" x2="376" y2="220.5"/><line x1="212" y1="236.5" x2="376" y2="236.5"/></g>
-              <text x="370" y="248" font-size="6" fill="#5F6368" text-anchor="end">1 - 4 / 4</text>
-              <text x="24" y="276" font-size="6.5" fill="#80868B">Última actualización: 30 oct 2026</text>
+              <g fill="#A8C7FA"><rect x="511.9" y="509.8" width="16" height="30.2"/><rect x="539.7" y="499.7" width="16" height="40.3"/><rect x="567.5" y="489.6" width="16" height="50.4"/><rect x="595.3" y="476.2" width="16" height="63.8"/><rect x="623.1" y="466.1" width="16" height="73.9"/><rect x="650.9" y="472.8" width="16" height="67.2"/><rect x="678.7" y="479.5" width="16" height="60.5"/><rect x="706.5" y="486.2" width="16" height="53.8"/></g>
+              <rect x="734.3" y="493" width="16" height="47" fill="#1A73E8"/>
+              <line x1="506" y1="540.5" x2="756" y2="540.5" stroke="#BDC1C6"/>
+              <g font-size="9.5" fill="#5F6368" text-anchor="middle"><text x="631.1" y="461">22</text><text x="742.3" y="487" fill="#1A73E8">14</text><text x="519.9" y="553">S36</text><text x="575.5" y="553">S38</text><text x="631.1" y="553">S40</text><text x="686.7" y="553">S42</text><text x="742.3" y="553">S44</text></g>
+              <text x="32" y="581" font-size="9.5" fill="#80868B">Fuente: hoja maestra en Google Sheets · Actualizado el 30 oct 2026, 18:00</text>
             </svg>
             <button type="button" class="mk-open"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5L9 7M2.5 13.5L7 9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Ver en grande</button>
           </div>
@@ -903,7 +1050,7 @@ html.is-modal{overflow:hidden}
 <footer class="foot">
   <div class="wrap foot-in">
     <span>Preparado por Luis para Erick. Ciudad de México, 30 de octubre de 2026.</span>
-    <span class="mono">Folio 001 · Rev. 04</span>
+    <span class="mono">Folio 001 · Rev. 05</span>
   </div>
 </footer>
 
@@ -1251,7 +1398,7 @@ html.is-modal{overflow:hidden}
     var ay = y != null ? y : r.top;
     var left = Math.max(8, Math.min(ax - tw / 2, window.innerWidth - tw - 8));
     var top = ay - th - 12;
-    var minTop = (topbar ? topbar.getBoundingClientRect().bottom : 0) + 8;
+    var minTop = (dlg && dlg.open) || !topbar ? 8 : topbar.getBoundingClientRect().bottom + 8;
     if (top < minTop) top = (y != null ? y : r.bottom) + 16;
     tip.style.left = Math.round(left) + "px";
     tip.style.top = Math.round(top) + "px";
@@ -1407,26 +1554,55 @@ html.is-modal{overflow:hidden}
   $$(".mk").forEach(function (m) { m.addEventListener("click", function () { var k = m.getAttribute("data-pk"); select(k); openModal(k); }); });
 
   /* ---------- Maquetas en grande ---------- */
+  /* Datos de ejemplo, todos cuadran entre sí: semanas 36 a 44, cuatro torres y cinco especialidades MEP */
   var WARN = "#EC835A";
+  var WEEKS = [36, 37, 38, 39, 40, 41, 42, 43, 44];
+  var WEEK_R = ["31 ago al 6 sep", "7 al 13 sep", "14 al 20 sep", "21 al 27 sep", "28 sep al 4 oct", "5 al 11 oct", "12 al 18 oct", "19 al 25 oct", "26 oct al 1 nov"];
+  var PLAN = [33, 37.5, 42, 46.5, 51, 55.5, 60, 64, 68], PLAN_FUT = [72, 76, 80, 84, 88, 92, 96, 100];
+  var OPEN = [9, 12, 15, 19, 22, 20, 18, 16, 14], NEWC = [9, 5, 6, 7, 6, 2, 3, 2, 3], RESC = [0, 2, 3, 3, 3, 4, 5, 4, 5];
+  var UMCW = [1, 1, 2, 2, 3, 4, 4, 5, 6];
+  var TW = [[40, 45, 50, 54, 59, 64, 69, 74, 78], [33, 37, 41, 45, 49, 53, 57, 61, 64], [30, 34, 38, 41, 46, 49, 52, 55.5, 58], [21, 25, 29.5, 32.5, 36, 39, 42, 45, 47]];
+  var REAL = WEEKS.map(function (x, w) { return (TW[0][w] + TW[1][w] + TW[2][w] + TW[3][w]) / 4; });
+  var DISC = ["HID", "SAN", "VENT", "PCI", "ELEC"], DISC_N = ["Hidráulica", "Sanitaria", "Ventilación", "PCI", "Eléctrica"];
+  var TD = [[84, 82, 71, 74, 79], [70, 68, 55, 60, 67], [63, 64, 49, 51, 63], [54, 52, 41, 33, 55]];
   var TOWERS = [
-    { n: "Torre 1", s: "T1", real: 78, model: 80, lv: [95, 88, 80, 70, 57], cl: [["SAN × PCI", 1], ["HID × VENT", 1]], ok: true },
-    { n: "Torre 2", s: "T2", real: 64, model: 67, lv: [85, 75, 64, 55, 41], cl: [["HID × VENT", 2], ["ELEC × HID", 1]], ok: true },
-    { n: "Torre 3", s: "T3", real: 58, model: 66, lv: [80, 68, 58, 47, 37], cl: [["HID × VENT", 3], ["SAN × ELEC", 2], ["PCI × VENT", 1]], ok: false },
-    { n: "Torre 4", s: "T4", real: 47, model: 50, lv: [70, 58, 47, 36, 24], cl: [["ELEC × HID", 2], ["SAN × PCI", 1]], ok: false }
+    { n: "Torre 1", s: "T1", gap: 2, lv: [95, 88, 80, 70, 57], cl: [["SAN × PCI", "N2", 1], ["HID × VENT", "N4", 1]] },
+    { n: "Torre 2", s: "T2", gap: 3, lv: [85, 75, 64, 55, 41], cl: [["HID × VENT", "N1", 2], ["ELEC × HID", "N3", 1]] },
+    { n: "Torre 3", s: "T3", gap: 8, lv: [80, 68, 58, 47, 37], cl: [["HID × VENT", "N3", 3], ["SAN × ELEC", "N2", 2], ["PCI × VENT", "N4", 1]] },
+    { n: "Torre 4", s: "T4", gap: 3, lv: [70, 58, 47, 36, 24], cl: [["ELEC × HID", "N1", 2], ["SAN × PCI", "BOH", 1]] }
   ];
-  TOWERS.forEach(function (t) { t.nc = t.cl.reduce(function (s, c) { return s + c[1]; }, 0); });
   var LEVELS = ["BOH", "N1", "N2", "N3", "N4"];
+  var CLW = WEEKS.map(function (x, w) {
+    var share = [2, 3, 6, 3], tot = OPEN[w], raw = share.map(function (s) { return s * tot / 14; });
+    var base = raw.map(Math.floor), rest = tot - base.reduce(function (a, b) { return a + b; }, 0);
+    raw.map(function (r, i) { return [r - base[i], i]; }).sort(function (a, b) { return b[0] - a[0]; }).slice(0, rest).forEach(function (p) { base[p[1]]++; });
+    return base;
+  });
+  var ISSUES = [
+    { id: "C-031", ty: "Clash", t: "3 clashes HID × VENT en N3", tw: "Torre 3", who: "Coord. MEP", due: "03 nov", st: "Abierto" },
+    { id: "RFI-10", ty: "Consulta", t: "Material de tubería sanitaria", tw: "Torre 1", who: "Proyectista SAN", due: "04 nov", st: "En espera" },
+    { id: "RFI-07", ty: "Consulta", t: "Faltan planos de PCI", tw: "Torre 4", who: "Proyectista PCI", due: "05 nov", st: "En espera" },
+    { id: "D-02", ty: "Decisión", t: "Paso de ducto en losa N2", tw: "Torre 2", who: "Estructuras", due: "06 nov", st: "Por decidir" },
+    { id: "RFI-09", ty: "Consulta", t: "Altura libre en estacionamiento", tw: "BOH", who: "Arquitectura", due: "07 nov", st: "En espera" },
+    { id: "D-03", ty: "Decisión", t: "Ruta de charola eléctrica en N1", tw: "Torre 4", who: "Ing. eléctrica", due: "10 nov", st: "Por decidir" }
+  ];
+  function modelT(t, w) { return TW[t][w] + TOWERS[t].gap * OPEN[w] / 14; }
+  function discT(t, d, w) { return TD[t][d] * TW[t][w] / TW[t][8]; }
+  function discAll(d, w) { return (discT(0, d, w) + discT(1, d, w) + discT(2, d, w) + discT(3, d, w)) / 4; }
+  function f1(n) { var r = (Math.round(Math.abs(n) * 10) / 10).toFixed(1); return (n < 0 && r !== "0.0" ? "−" : "") + r; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
   var ICON_ROT_L = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 6.5A5 5 0 1 1 3 9.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M2.6 3.2v3.6h3.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var ICON_ROT_R = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M12.8 6.5A5 5 0 1 0 13 9.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M13.4 3.2v3.6H9.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  var ICON_OK = '<svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M5 8.3l2 2 4-4.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  var ICON_WARN = '<svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.2l6.3 11H1.7z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 6.6v3.2M8 11.6v.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+  var UP = '<svg class="tri" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 8.5L5 2l4 6.5z" fill="currentColor"/></svg>';
+  var DOWN = '<svg class="tri" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 1.5L5 8l4-6.5z" fill="currentColor"/></svg>';
 
   var dlg = $("#mkd"), dBody = $("#mkd-body"), dTabs = $("#mkd-tabs");
-  var lastFocus = null, scene = null, openK = null;
+  var lastFocus = null, scene = null, openK = null, tipHome = null;
   var VIEWS = {
-    ligero: { name: "Ligero", tabs: [["Reporte", viewLigero], ["Resumen para el jefe", viewLigeroPdf]] },
-    estandar: { name: "Estándar", tabs: [["Tablero 3D", view3D], ["Resumen para el jefe", viewBoss]] },
-    premium: { name: "Premium", tabs: [["App", viewApp], ["Tablero 3D", view3D], ["Resumen para el jefe", viewBoss]] }
+    ligero: { name: "Ligero", tabs: [["Reporte", viewLigero], ["Hoja maestra", viewSheet], ["Resumen para el jefe", viewLigeroPdf]] },
+    estandar: { name: "Estándar", tabs: [["Tablero", viewBoard], ["Hoja maestra", viewSheet], ["Resumen para el jefe", viewBoss]] },
+    premium: { name: "Premium", tabs: [["App", viewApp], ["Tablero", viewBoard], ["Hoja maestra", viewSheet], ["Resumen para el jefe", viewBoss]] }
   };
 
   function openModal(k, tab) {
@@ -1451,6 +1627,7 @@ html.is-modal{overflow:hidden}
       if (typeof dlg.showModal === "function") dlg.showModal();
       else dlg.setAttribute("open", "");
     }
+    if (tip && tip.parentNode !== dlg) { tipHome = tip.parentNode; dlg.appendChild(tip); }
     showTab(tab || 0);
     var cur = $('.mkd-tab[aria-selected="true"]', dTabs);
     if (cur) cur.focus();
@@ -1463,13 +1640,22 @@ html.is-modal{overflow:hidden}
     });
     dBody.setAttribute("aria-labelledby", "mkd-tab-" + i);
     if (scene) { scene.destroy(); scene = null; }
+    tipHide();
     dBody.textContent = "";
     dBody.scrollTop = 0;
     v.tabs[i][1](dBody);
   }
+  function goBoss() {
+    var n = VIEWS[openK].tabs.length - 1;
+    showTab(n);
+    var tb = $("#mkd-tab-" + n);
+    if (tb) tb.focus();
+  }
   function onClose() {
     document.documentElement.classList.remove("is-modal");
     if (scene) { scene.destroy(); scene = null; }
+    tipHide();
+    if (tipHome && tip.parentNode === dlg) tipHome.appendChild(tip);
     dBody.textContent = "";
     if (lastFocus && lastFocus.focus) { try { lastFocus.focus({ preventScroll: true }); } catch (e) {} }
   }
@@ -1482,6 +1668,7 @@ html.is-modal{overflow:hidden}
     dlg.addEventListener("close", onClose);
     dlg.addEventListener("click", function (e) { if (e.target === dlg) closeModal(); });
     $("#mkd-x").addEventListener("click", closeModal);
+    dBody.addEventListener("scroll", tipHide, { passive: true });
     dTabs.addEventListener("keydown", function (e) {
       if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
       var tabs = $$(".mkd-tab", dTabs), i = tabs.indexOf(document.activeElement);
@@ -1493,21 +1680,21 @@ html.is-modal{overflow:hidden}
     });
   }
 
-  /* Ligero: el reporte de Google en grande y su versión en PDF */
+  /* Ligero: reporte de Google en grande y su PDF */
   function cloneLk(crop) {
     var s = $('.mk[data-pk="ligero"] svg').cloneNode(true);
     s.removeAttribute("aria-labelledby");
     var t = s.querySelector("title");
     if (t) t.parentNode.removeChild(t);
     s.setAttribute("aria-label", crop ? "Resumen del Ligero: el reporte de Google en una hoja PDF" : "Reporte de Google del paquete Ligero, en grande");
-    if (crop) s.setAttribute("viewBox", "12 38 376 252");
+    if (crop) s.setAttribute("viewBox", "16 54 768 534");
     return s;
   }
   function viewLigero(box) {
     var w = h("div", "lk-big");
     w.appendChild(cloneLk(false));
     box.appendChild(w);
-    box.appendChild(h("p", "mkd-cap", "Así se ve en el navegador: una plantilla de Google con tus números. Funciona bien, pero no lleva diseño propio."));
+    box.appendChild(h("p", "mkd-cap", "Un reporte de Google bien armado, con filtros por torre y especialidad. En el celular se ve igual que en la computadora, así que ahí toca deslizar."));
   }
   function viewLigeroPdf(box) {
     var w = h("div", "lk-paper");
@@ -1516,111 +1703,301 @@ html.is-modal{overflow:hidden}
     box.appendChild(h("p", "mkd-cap", "En el Ligero, el resumen para tu jefe es el mismo reporte descargado en PDF desde Google."));
   }
 
-  /* Tablero 3D: cada torre es un edificio y su altura es el avance */
-  function view3D(box) {
-    var wrap = h("div", "t3");
+  /* Hoja maestra: lo único que Erick llena */
+  function viewSheet(box) {
+    var rows = [
+      ["Torre 1", "N4", "HID", "UMC-03", 72, 1, "pr", "Clash con ducto de VENT"],
+      ["Torre 2", "N2", "VENT", "UMC-05", 55, 0, "rv", ""],
+      ["Torre 3", "N3", "HID", "UMC-07", 63, 3, "bl", "Ver C-031"],
+      ["Torre 3", "N2", "SAN", "UMC-07", 64, 2, "pr", ""],
+      ["Torre 3", "N4", "PCI", "UMC-08", 51, 1, "pr", ""],
+      ["Torre 4", "N1", "ELEC", "UMC-09", 55, 2, "rv", ""],
+      ["Torre 4", "BOH", "SAN", "UMC-10", 52, 1, "pr", ""],
+      ["Torre 4", "N2", "PCI", "UMC-10", 33, 0, "bl", "RFI-07: faltan planos"],
+      ["Torre 1", "N1", "ELEC", "UMC-02", 88, 0, "ok", ""],
+      ["Torre 2", "N1", "HID", "UMC-04", 79, 2, "pr", ""],
+      ["Torre 1", "N2", "SAN", "UMC-02", 90, 1, "rv", "Clash con PCI"],
+      ["Torre 2", "N3", "ELEC", "UMC-06", 61, 1, "pr", ""]
+    ];
+    var ST = { ok: "Liberado", rv: "En revisión", pr: "En proceso", bl: "Bloqueado" };
+    var body = '<tr class="hd"><th>1</th><td>Torre</td><td>Nivel</td><td>Especialidad</td><td>UMC</td><td>Avance %</td><td>Clashes</td><td>Estatus</td><td>Nota</td></tr>' +
+      rows.map(function (r, i) {
+        var cls = r[4] < 40 ? "r" : (r[4] < 70 ? "y" : "g");
+        return "<tr><th>" + (i + 2) + "</th><td>" + r[0] + "</td><td>" + r[1] + "</td><td>" + r[2] + "</td><td>" + r[3] + "</td>" +
+          '<td class="num ' + cls + (i === 2 ? " sel" : "") + '">' + r[4] + '</td><td class="num">' + r[5] + "</td>" +
+          '<td><span class="chip c-' + r[6] + '">' + ST[r[6]] + "</span></td><td>" + esc(r[7]) + "</td></tr>";
+      }).join("");
+    box.innerHTML = '<div class="gs" role="img" aria-label="Maqueta de la hoja maestra en Google Sheets con columnas de torre, nivel, especialidad, UMC, avance, clashes, estatus y nota">' +
+      '<div class="gs-top"><span class="gs-ico" aria-hidden="true"></span><div><div class="gs-doc">Hoja maestra · Proyecto de ejemplo</div><span class="gs-menu">Archivo  Editar  Ver  Insertar  Formato  Datos  Herramientas</span></div></div>' +
+      '<div class="gs-fx"><span class="ref">E4</span><span class="fx">fx</span><span>63</span></div>' +
+      '<div class="gs-wrap"><table><thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th></tr></thead><tbody>' + body + "</tbody></table></div>" +
+      '<div class="gs-tabs"><span class="on">Captura</span><span>Catálogos</span><span>Cálculos</span><span>Resumen</span></div></div>' +
+      '<p class="mkd-cap">Aquí capturas los números que ya sacas de tus documentos, eligiendo de listas en lugar de escribir. Las cuentas, el tablero y el resumen salen solos de esta hoja.</p>';
+  }
+
+  /* Tablero: vista sencilla o interactiva 3D, con selector de semana */
+  function kpiHTML(w) {
+    var r = REAL[w], p = PLAN[w], dv = r - p, dr = w ? r - REAL[w - 1] : null, um = "";
+    for (var i = 0; i < 10; i++) um += '<i class="' + (i < UMCW[w] ? "on" : "") + '"></i>';
+    return '<div class="t3-kpi"><span>Avance real</span><b>' + f1(r) + "%</b><small" +
+        (dr == null ? ">Primera semana registrada" : ' class="' + (dr >= 0 ? "good" : "bad") + '">' + (dr >= 0 ? UP : DOWN) + f1(Math.abs(dr)) + " pts vs semana " + WEEKS[w - 1]) + "</small></div>" +
+      '<div class="t3-kpi"><span>Programado</span><b>' + f1(p) + '%</b><small class="' + (dv >= 0 ? "good" : "bad") + '">' + (dv >= 0 ? UP : DOWN) + f1(Math.abs(dv)) + " pts de desviación</small></div>" +
+      '<div class="t3-kpi"><span>Clashes abiertos</span><b>' + OPEN[w] + "</b><small>" + NEWC[w] + " nuevos · " + RESC[w] + " resueltos</small></div>" +
+      '<div class="t3-kpi"><span>UMC liberadas</span><b>' + UMCW[w] + ' de 10</b><span class="umc-dots" aria-hidden="true">' + um + "</span></div>";
+  }
+  function viewBoard(box) {
+    var st = { v: "3d", w: 8, t: 2, m: "av", clash: true, f: -1 };
+    var wrap = h("div", "bd");
     wrap.innerHTML =
-      '<div class="t3-kpis">' +
-        '<div class="t3-kpi"><span>Avance real</span><b>62%</b><small><i class="dot-warn"></i>−4% por clashes</small></div>' +
-        '<div class="t3-kpi"><span>Clashes abiertos</span><b>14</b><small>6 en la Torre 3</small></div>' +
-        '<div class="t3-kpi"><span>UMC listas</span><b>6 de 10</b><small>Faltan 4</small></div>' +
-      '</div>' +
+      '<div class="bd-top">' +
+        '<div class="vsw" role="radiogroup" aria-label="Vista del tablero"><button type="button" role="radio" class="vsw-o" data-v="simple" aria-checked="false">Sencilla</button><button type="button" role="radio" class="vsw-o" data-v="3d" aria-checked="true">Interactiva 3D</button><span class="vsw-t" aria-hidden="true"></span></div>' +
+        '<label class="wk"><span class="wk-l">Semana <b class="wk-n">44</b><span class="wk-r">26 oct al 1 nov</span></span><input type="range" min="0" max="8" step="1" value="8"><span class="wk-ticks" aria-hidden="true"><span>S36</span><span>S40</span><span>S44</span></span></label>' +
+      "</div>" +
+      '<div class="t3-kpis bd-kpis" aria-live="polite"></div>' +
+      '<div class="bd-view"></div>';
+    box.appendChild(wrap);
+    var kp = $(".bd-kpis", wrap), view = $(".bd-view", wrap), sw = $(".vsw", wrap), rng = $(".wk input", wrap);
+    rng.setAttribute("aria-label", "Semana del reporte");
+    function setWeek(w) {
+      st.w = w;
+      $(".wk-n", wrap).textContent = WEEKS[w];
+      $(".wk-r", wrap).textContent = WEEK_R[w];
+      rng.setAttribute("aria-valuetext", "Semana " + WEEKS[w] + ", " + WEEK_R[w]);
+      kp.innerHTML = kpiHTML(w);
+      if (st.v === "3d") { if (scene) scene.setWeek(w); if (st.side) st.side(); }
+      else renderSimple(view, st);
+    }
+    function setView(v) {
+      st.v = v;
+      sw.style.setProperty("--i", v === "3d" ? "1" : "0");
+      $$(".vsw-o", sw).forEach(function (b) { b.setAttribute("aria-checked", String(b.getAttribute("data-v") === v)); });
+      if (scene) { scene.destroy(); scene = null; }
+      tipHide();
+      view.textContent = "";
+      if (v === "3d") build3D(view, st); else renderSimple(view, st);
+    }
+    $$(".vsw-o", sw).forEach(function (b) { b.addEventListener("click", function () { if (st.v !== b.getAttribute("data-v")) setView(b.getAttribute("data-v")); }); });
+    rng.addEventListener("input", function () { setWeek(+rng.value); });
+    kp.innerHTML = kpiHTML(st.w);
+    setView("3d");
+  }
+
+  /* Vista sencilla */
+  function renderSimple(box, st) {
+    var w = st.w, f = st.f, sv = box.querySelector(".sv");
+    if (!sv) { sv = h("div", "sv"); box.textContent = ""; box.appendChild(sv); }
+    var chips = '<div class="sv-filter" role="group" aria-label="Filtrar por torre"><button type="button" class="sv-chip" data-f="-1" aria-pressed="' + (f < 0) + '">Todas</button>' +
+      TOWERS.map(function (t, i) { return '<button type="button" class="sv-chip" data-f="' + i + '" aria-pressed="' + (f === i) + '">' + t.n + "</button>"; }).join("") + "</div>";
+    var nar = (box.clientWidth || 600) < 560, VW = nar ? 380 : 600, FS = nar ? 12 : 11, X0 = 44, X1 = VW - 18, Y0 = 18, Y1 = 196, N = 17;
+    function xs(i) { return X0 + i * (X1 - X0) / (N - 1); }
+    function ys(v) { return Y1 - v / 100 * (Y1 - Y0); }
+    var plan = PLAN.concat(PLAN_FUT), real = f < 0 ? REAL : TW[f];
+    var g = "";
+    [0, 25, 50, 75, 100].forEach(function (v) { g += '<line x1="' + X0 + '" x2="' + X1 + '" y1="' + ys(v).toFixed(1) + '" y2="' + ys(v).toFixed(1) + '" class="s-line"/><text x="' + (X0 - 8) + '" y="' + (ys(v) + 4).toFixed(1) + '" text-anchor="end" font-size="' + FS + '" class="f-ink3">' + v + "%</text>"; });
+    (nar ? [0, 8, 16] : [0, 4, 8, 12, 16]).forEach(function (i) { g += '<text x="' + xs(i).toFixed(1) + '" y="' + (Y1 + 18) + '" text-anchor="middle" font-size="' + FS + '" class="f-ink3">S' + (36 + i) + "</text>"; });
+    var pl = plan.map(function (v, i) { return xs(i).toFixed(1) + "," + ys(v).toFixed(1); }).join(" ");
+    var rl = real.slice(0, w + 1).map(function (v, i) { return xs(i).toFixed(1) + "," + ys(v).toFixed(1); });
+    var area = rl.length > 1 ? '<polygon points="' + xs(0).toFixed(1) + "," + Y1 + " " + rl.join(" ") + " " + xs(w).toFixed(1) + "," + Y1 + '" class="f-acc" fill-opacity=".1"/>' : "";
+    var curve = '<svg viewBox="0 0 ' + VW + ' 220" role="img" aria-label="Curva de avance real contra programado de la semana 36 a la 52">' + g +
+      '<line x1="' + xs(w).toFixed(1) + '" x2="' + xs(w).toFixed(1) + '" y1="' + Y0 + '" y2="' + Y1 + '" class="s-ink3" stroke-width="1"/>' +
+      '<polyline points="' + pl + '" fill="none" class="s-ink3" stroke-width="2" stroke-linejoin="round"/>' + area +
+      '<polyline points="' + rl.join(" ") + '" fill="none" class="s-acc" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>' +
+      '<circle cx="' + xs(w).toFixed(1) + '" cy="' + ys(real[w]).toFixed(1) + '" r="4.5" class="f-acc s-surf" stroke-width="2"/>' +
+      '<text x="' + (xs(w) - 8).toFixed(1) + '" y="' + (ys(real[w]) + 18).toFixed(1) + '" text-anchor="end" font-size="' + (FS + 1) + '" class="f-ink">' + f1(real[w]) + "%</text>" +
+      '<text x="' + (xs(w) + 8).toFixed(1) + '" y="' + (ys(plan[w]) - 8).toFixed(1) + '" font-size="' + (FS + 1) + '" class="f-ink2">' + f1(plan[w]) + "%</text>" +
+      real.slice(0, w + 1).map(function (v, i) { return '<circle cx="' + xs(i).toFixed(1) + '" cy="' + ys(v).toFixed(1) + '" r="12" fill="transparent" class="sv-hit" data-i="' + i + '"/>'; }).join("") +
+      "</svg>";
+    var towers = TOWERS.map(function (t, i) {
+      return '<button type="button" class="sv-trow' + (f === i ? " on" : "") + '" data-f="' + i + '" aria-pressed="' + (f === i) + '"><span>' + t.n + '</span><span class="bar"><i style="--p:' + TW[i][w] + '"></i></span><b>' + f1(TW[i][w]) + '%</b><small>' + CLW[w][i] + (CLW[w][i] === 1 ? " clash abierto" : " clashes abiertos") + "</small></button>";
+    }).join("");
+    var discVals = DISC.map(function (d, k) { return f < 0 ? discAll(k, w) : discT(f, k, w); });
+    var disc = discVals.map(function (v, k) {
+      return '<div class="sv-dbar"><span>' + DISC_N[k] + '</span><span class="bar"><i class="lg-d' + k + '" style="--p:' + v.toFixed(1) + '"></i></span><b>' + f1(v) + "%</b></div>";
+    }).join("");
+    var cw = WEEKS.map(function (x, i) { return f < 0 ? OPEN[i] : CLW[i][f]; }), cmax = Math.max.apply(null, cw.concat([1]));
+    var cols = cw.map(function (v, i) {
+      var bw = 26, x = 20 + i * 40, hgt = v / cmax * 120, y = 150 - hgt, on = i === w;
+      return '<rect x="' + x + '" y="' + y.toFixed(1) + '" width="' + bw + '" height="' + Math.max(hgt, 1).toFixed(1) + '" rx="3" fill="' + WARN + '" fill-opacity="' + (on ? 1 : 0.35) + '" class="sv-col" data-i="' + i + '"/>' +
+        (on ? '<text x="' + (x + bw / 2) + '" y="' + (y - 6).toFixed(1) + '" text-anchor="middle" font-size="12" class="f-ink">' + v + "</text>" : "") +
+        '<text x="' + (x + bw / 2) + '" y="170" text-anchor="middle" font-size="10.5" class="' + (on ? "f-ink" : "f-ink3") + '">S' + WEEKS[i] + "</text>";
+    }).join("");
+    var clash = '<svg viewBox="0 0 380 180" role="img" aria-label="Clashes abiertos por semana"><line x1="12" x2="370" y1="150.5" y2="150.5" class="s-line2"/>' + cols + "</svg>";
+    var umc = "";
+    for (var u = 0; u < 10; u++) {
+      var c = u < UMCW[w] ? "ok" : (u < UMCW[w] + 2 ? "rv" : "");
+      umc += '<span class="' + c + '">UMC<b>' + (u < 9 ? "0" : "") + (u + 1) + "</b></span>";
+    }
+    var iss = ISSUES.filter(function (x) { return f < 0 || x.tw === TOWERS[f].n; });
+    var issues = iss.length ? iss.map(function (x) {
+      var ty = x.ty === "Clash" ? "c" : (x.ty === "Consulta" ? "q" : "");
+      return '<div class="sv-issue"><span class="ty ' + ty + '">' + x.ty + '</span><span><span class="id">' + x.id + "</span>" + esc(x.t) + " · " + x.tw + '</span><span class="who">' + x.who + " · " + x.due + "</span></div>";
+    }).join("") : '<p class="sv-empty">Sin pendientes abiertos en esta torre.</p>';
+    var tName = f < 0 ? "Proyecto" : TOWERS[f].n;
+    sv.innerHTML = chips + '<div class="sv-grid">' +
+      '<section class="sv-card sv-curve"><h4>Curva de avance <small>' + (f < 0 ? "Proyecto" : TOWERS[f].n + " contra programa") + '</small></h4><ul class="sv-leg"><li><i></i>Real</li><li><i class="pl"></i>Programado</li></ul>' + curve + "</section>" +
+      '<section class="sv-card sv-towers"><h4>Avance por torre <small>S' + WEEKS[w] + "</small></h4>" + towers + "</section>" +
+      '<section class="sv-card sv-disc"><h4>Por especialidad <small>' + tName + "</small></h4>" + disc + "</section>" +
+      '<section class="sv-card sv-clash"><h4>Clashes abiertos <small>' + tName + "</small></h4>" + clash + "</section>" +
+      '<section class="sv-card sv-umc"><h4>UMC <small>' + UMCW[w] + ' de 10</small></h4><div class="sv-umcg">' + umc + '</div><p class="sv-umcl"><span><i style="background:var(--accent)"></i>Liberada</span><span><i style="background:var(--accent-soft)"></i>En revisión</span><span><i style="background:var(--surface);box-shadow:inset 0 0 0 1px var(--line-2)"></i>En proceso</span></p></section>' +
+      '<section class="sv-card sv-issues"><h4>Pendientes <small>' + iss.length + " abiertos</small></h4>" + issues + "</section>" +
+      "</div>";
+    $$("[data-f]", sv).forEach(function (b) {
+      b.addEventListener("click", function () { var v = +b.getAttribute("data-f"); st.f = st.f === v && b.classList.contains("sv-trow") ? -1 : v; renderSimple(box, st); });
+    });
+    $$(".sv-hit", sv).forEach(function (c) {
+      var i = +c.getAttribute("data-i");
+      bindTip(c, function () { return [f1(real[i]) + "%", "Semana " + WEEKS[i] + " · real", "Programado " + f1(PLAN[i]) + "%"]; });
+    });
+    $$(".sv-col", sv).forEach(function (c) {
+      var i = +c.getAttribute("data-i");
+      bindTip(c, function () { return [cw[i] + (cw[i] === 1 ? " clash" : " clashes"), "Semana " + WEEKS[i], f < 0 ? NEWC[i] + " nuevos · " + RESC[i] + " resueltos" : TOWERS[f].n]; });
+    });
+  }
+
+  /* Vista interactiva 3D */
+  var LEG = {
+    av: '<li><span class="lg-sw lg-built" aria-hidden="true"></span>Avance real</li><li><span class="lg-sw lg-clash" aria-hidden="true"></span>Lo que restan los clashes</li><li><span class="lg-sw lg-ghost" aria-hidden="true"></span>Lo que falta</li><li>Cada piso es 10%</li>',
+    cl: '<li><span class="lg-sw lg-clash" aria-hidden="true"></span>Clashes abiertos</li><li>Cada piso es 1 clash</li>',
+    di: DISC.map(function (d, k) { return '<li><span class="lg-sw lg-d lg-d' + k + '" aria-hidden="true"></span>' + DISC_N[k] + "</li>"; }).join("") + "<li>Cada torre partida por especialidad</li>"
+  };
+  function build3D(view, st) {
+    view.innerHTML =
       '<div class="t3-grid">' +
         '<div class="t3-stage">' +
           '<div class="t3-tools">' +
             '<div class="t3-towers" role="group" aria-label="Elegir torre"></div>' +
             '<div class="t3-ctrl">' +
-              '<button type="button" class="t3-btn" data-rot="-1" aria-label="Girar a la izquierda">' + ICON_ROT_L + '</button>' +
-              '<button type="button" class="t3-btn" data-rot="1" aria-label="Girar a la derecha">' + ICON_ROT_R + '</button>' +
-              '<button type="button" class="t3-btn t3-sw" role="switch" aria-checked="true"><span class="knob" aria-hidden="true"></span>Restar clashes</button>' +
-            '</div>' +
-          '</div>' +
-          '<svg class="t3-svg" role="img" aria-label="Vista 3D del avance por torre. Torre 1 78%, Torre 2 64%, Torre 3 58% y Torre 4 47% de avance real. Lo rayado en naranja es lo que restan los clashes."></svg>' +
-          '<ul class="t3-legend">' +
-            '<li><span class="lg-sw lg-built" aria-hidden="true"></span>Avance real</li>' +
-            '<li><span class="lg-sw lg-clash" aria-hidden="true"></span>Lo que restan los clashes</li>' +
-            '<li><span class="lg-sw lg-ghost" aria-hidden="true"></span>Lo que falta</li>' +
-            '<li>Cada piso es 10%</li>' +
-          '</ul>' +
+              '<button type="button" class="t3-btn" data-rot="-1" aria-label="Girar a la izquierda">' + ICON_ROT_L + "</button>" +
+              '<button type="button" class="t3-btn" data-rot="1" aria-label="Girar a la derecha">' + ICON_ROT_R + "</button>" +
+              '<button type="button" class="t3-btn t3-sw" role="switch" aria-checked="' + st.clash + '"><span class="knob" aria-hidden="true"></span>Restar clashes</button>' +
+            "</div>" +
+          "</div>" +
+          '<div class="t3-modes" role="radiogroup" aria-label="Qué mide la altura"><span class="lbl">Altura</span>' +
+            '<button type="button" role="radio" class="t3-mode" data-m="av">Avance</button><button type="button" role="radio" class="t3-mode" data-m="cl">Clashes</button><button type="button" role="radio" class="t3-mode" data-m="di">Especialidades</button></div>' +
+          '<svg class="t3-svg" role="img" aria-label="Vista 3D del conjunto: cada torre es un edificio y su altura es la medida elegida"></svg>' +
+          '<ul class="t3-legend"></ul>' +
           '<p class="t3-help">Arrastra para girar el conjunto. Toca una torre para ver su detalle.</p>' +
-        '</div>' +
+        "</div>" +
         '<aside class="t3-side" aria-live="polite"></aside>' +
-      '</div>';
-    box.appendChild(wrap);
-    var side = $(".t3-side", wrap), tw = $(".t3-towers", wrap), curT = 2, clashOn = true;
+      "</div>";
+    var side = $(".t3-side", view), tw = $(".t3-towers", view), leg = $(".t3-legend", view), swb = $(".t3-sw", view);
     TOWERS.forEach(function (t, i) {
-      var b = h("button", "t3-btn", t.s + " · " + t.real + "%");
+      var b = h("button", "t3-btn", t.s);
       b.type = "button";
       b.setAttribute("aria-pressed", "false");
-      b.setAttribute("aria-label", t.n + ", " + t.real + "% de avance real");
+      b.setAttribute("aria-label", t.n);
       b.addEventListener("click", function () { if (scene) scene.select(i); });
       tw.appendChild(b);
     });
-    scene = Scene(wrap, function (i) {
-      curT = i;
+    function syncMode() {
+      $$(".t3-mode", view).forEach(function (b) { b.setAttribute("aria-checked", String(b.getAttribute("data-m") === st.m)); });
+      leg.innerHTML = LEG[st.m];
+      swb.hidden = st.m !== "av";
+    }
+    st.side = function () { renderSide(side, st); };
+    scene = Scene(view, st, function (i) {
+      st.t = i;
       $$(".t3-btn", tw).forEach(function (b, j) { b.setAttribute("aria-pressed", String(i === j)); });
-      renderSide(side, i, clashOn);
+      renderSide(side, st);
     });
-    $$("[data-rot]", wrap).forEach(function (b) {
-      b.addEventListener("click", function () { if (scene) scene.rotate(+b.getAttribute("data-rot")); });
+    $$("[data-rot]", view).forEach(function (b) { b.addEventListener("click", function () { if (scene) scene.rotate(+b.getAttribute("data-rot")); }); });
+    swb.addEventListener("click", function () {
+      st.clash = swb.getAttribute("aria-checked") !== "true";
+      swb.setAttribute("aria-checked", String(st.clash));
+      renderSide(side, st);
+      if (scene) scene.refresh(650);
     });
-    var sw = $(".t3-sw", wrap);
-    sw.addEventListener("click", function () {
-      var on = sw.getAttribute("aria-checked") !== "true";
-      sw.setAttribute("aria-checked", String(on));
-      clashOn = on;
-      renderSide(side, curT, on);
-      if (scene) scene.setClash(on);
+    $$(".t3-mode", view).forEach(function (b) {
+      b.addEventListener("click", function () {
+        st.m = b.getAttribute("data-m");
+        syncMode();
+        renderSide(side, st);
+        if (scene) scene.refresh(650);
+      });
     });
+    syncMode();
   }
 
-  function renderSide(box, i, clashOn) {
-    var t = TOWERS[i], on = clashOn !== false;
+  function renderSide(box, st) {
+    var i = st.t, w = st.w, t = TOWERS[i], nc = CLW[w][i], real = TW[i][w], model = modelT(i, w);
     box.textContent = "";
     var head = h("div");
-    head.appendChild(h("p", "k", t.n));
-    head.appendChild(h("p", "t3-big", (on ? t.real : t.model) + "%"));
-    head.appendChild(h("p", "t3-sub", on ? "Avance real. Sin restar clashes iría en " + t.model + "%." : "Sin restar clashes. El avance real es " + t.real + "%."));
-    box.appendChild(head);
-    var badge = h("p", "t3-badge");
-    badge.appendChild(h("i", "dot-warn"));
-    badge.appendChild(document.createTextNode("−" + (t.model - t.real) + "% por " + t.nc + (t.nc === 1 ? " clash" : " clashes")));
-    box.appendChild(badge);
-    var c = h("div");
-    c.appendChild(h("p", "k", "Clashes abiertos · " + t.nc));
-    var chips = h("div", "t3-chips");
-    t.cl.forEach(function (x) { chips.appendChild(h("span", "t3-chip", x[0] + " · " + x[1])); });
-    c.appendChild(chips);
-    box.appendChild(c);
-    var lv = h("div");
-    lv.appendChild(h("p", "k", "Avance por nivel"));
-    var ul = h("ul", "t3-lv");
-    t.lv.forEach(function (v, j) {
-      var li = h("li");
-      li.appendChild(h("span", null, LEVELS[j]));
-      var bar = h("span", "bar"), fill = h("i");
-      fill.style.setProperty("--p", String(v));
-      bar.appendChild(fill);
-      li.appendChild(bar);
-      li.appendChild(h("b", null, v + "%"));
-      ul.appendChild(li);
-    });
-    lv.appendChild(ul);
-    box.appendChild(lv);
+    head.appendChild(h("p", "k", t.n + " · semana " + WEEKS[w]));
+    if (st.m === "cl") {
+      head.appendChild(h("p", "t3-big", String(nc)));
+      head.appendChild(h("p", "t3-sub", nc === 1 ? "Clash abierto." : "Clashes abiertos."));
+      box.appendChild(head);
+      var c = h("div");
+      if (w === 8) {
+        c.appendChild(h("p", "k", "Dónde están"));
+        var ul = h("ul", "t3-rows");
+        t.cl.forEach(function (x) {
+          var li = h("li");
+          li.appendChild(h("span", null, x[0]));
+          li.appendChild(h("span", "lv", x[1]));
+          li.appendChild(h("b", null, String(x[2])));
+          ul.appendChild(li);
+        });
+        c.appendChild(ul);
+      } else {
+        c.appendChild(h("p", "t3-note", "El detalle por especialidad y nivel se ve en la semana actual."));
+      }
+      box.appendChild(c);
+      box.appendChild(h("p", "t3-note", "En todo el proyecto: " + NEWC[w] + " nuevos y " + RESC[w] + " resueltos esta semana."));
+    } else if (st.m === "di") {
+      head.appendChild(h("p", "t3-big", f1(real) + "%"));
+      head.appendChild(h("p", "t3-sub", "Avance real por especialidad."));
+      box.appendChild(head);
+      var ul2 = h("ul", "t3-dbars"), lo = 0;
+      DISC.forEach(function (d, k) {
+        var v = discT(i, k, w);
+        if (v < discT(i, lo, w)) lo = k;
+        var li = h("li");
+        li.appendChild(h("span", null, DISC_N[k]));
+        var bar = h("span", "bar"), fi = h("i", "lg-d" + k);
+        fi.style.setProperty("--p", v.toFixed(1));
+        bar.appendChild(fi);
+        li.appendChild(bar);
+        li.appendChild(h("b", null, f1(v) + "%"));
+        ul2.appendChild(li);
+      });
+      box.appendChild(ul2);
+      box.appendChild(h("p", "t3-note", "La más atrasada es " + DISC_N[lo] + ", con " + f1(discT(i, lo, w)) + "%."));
+    } else {
+      var on = st.clash !== false;
+      head.appendChild(h("p", "t3-big", f1(on ? real : model) + "%"));
+      head.appendChild(h("p", "t3-sub", on ? "Avance real. Sin restar clashes iría en " + f1(model) + "%." : "Sin restar clashes. El avance real es " + f1(real) + "%."));
+      box.appendChild(head);
+      var badge = h("p", "t3-badge");
+      badge.appendChild(h("i", "dot-warn"));
+      badge.appendChild(document.createTextNode("−" + f1(model - real) + "% por " + nc + (nc === 1 ? " clash" : " clashes")));
+      box.appendChild(badge);
+      var lv = h("div");
+      lv.appendChild(h("p", "k", "Avance por nivel"));
+      var ul3 = h("ul", "t3-lv");
+      t.lv.forEach(function (v0, j) {
+        var v = v0 * real / TW[i][8];
+        var li = h("li");
+        li.appendChild(h("span", null, LEVELS[j]));
+        var bar = h("span", "bar"), fill = h("i");
+        fill.style.setProperty("--p", v.toFixed(1));
+        bar.appendChild(fill);
+        li.appendChild(bar);
+        li.appendChild(h("b", null, Math.round(v) + "%"));
+        ul3.appendChild(li);
+      });
+      lv.appendChild(ul3);
+      box.appendChild(lv);
+    }
     var go = h("button", "t3-go", "Ver el resumen para el jefe");
     go.type = "button";
-    go.addEventListener("click", function () {
-      var n = VIEWS[openK].tabs.length - 1;
-      showTab(n);
-      var tb = $("#mkd-tab-" + n);
-      if (tb) tb.focus();
-    });
+    go.addEventListener("click", goBoss);
     box.appendChild(go);
   }
 
-  function Scene(root, onSelect) {
+  function Scene(root, cfg, onSelect) {
     var svg = $(".t3-svg", root);
-    var st = { th: -1.15, sel: 2, clash: true, h: [0, 0, 0, 0], c: [0, 0, 0, 0] };
+    var st = { th: -1.15, sel: cfg.t, h: [0, 0, 0, 0], c: [0, 0, 0, 0], d: [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]] };
     var G = {}, raf = 0, anim = 0, timer = 0, ro = null, drag = null;
     var PHI = Math.PI / 6, SP = Math.sin(PHI), CP = Math.cos(PHI);
     var POS = [[0, 0], [2.4, 0], [0, 2.4], [2.4, 2.4]], MID = 1.2, F = 1.16, HM = 3.6, R0 = -1.2, R1 = 3.6;
@@ -1654,6 +2031,11 @@ html.is-modal{overflow:hidden}
     }
     function quad(f, z0, z1) { return [P(f.a[0], f.a[1], z0), P(f.b[0], f.b[1], z0), P(f.b[0], f.b[1], z1), P(f.a[0], f.a[1], z1)]; }
     function topf(x0, y0, x1, y1, z) { return [P(x0, y0, z), P(x1, y0, z), P(x1, y1, z), P(x0, y1, z)]; }
+    function floors(f, z1, step, cls) {
+      var o = "";
+      for (var z = step; z < z1 - 0.03; z += step) o += ln(P(f.a[0], f.a[1], z), P(f.b[0], f.b[1], z), cls);
+      return o;
+    }
 
     function grid() {
       var o = '<g class="t3-g">';
@@ -1662,31 +2044,62 @@ html.is-modal{overflow:hidden}
     }
     function tower(i) {
       var cx = POS[i][0], cy = POS[i][1], x0 = cx - F / 2, x1 = cx + F / 2, y0 = cy - F / 2, y1 = cy + F / 2;
-      var hb = st.h[i] / 100 * HM, hc = Math.max(st.c[i], st.h[i]) / 100 * HM, sel = i === st.sel;
-      var sd = sides(x0, y0, x1, y1);
+      var sel = i === st.sel, sd = sides(x0, y0, x1, y1), m = cfg.m;
       var o = '<g data-t="' + i + '" class="t3-t' + (sel ? " is-sel" : "") + '">';
       if (sel) o += poly(topf(x0 - 0.16, y0 - 0.16, x1 + 0.16, y1 + 0.16, 0), 'class="f-accs"');
-      sd.forEach(function (f) { o += poly(quad(f, 0, HM), 'fill="transparent" class="t3-ghost"'); });
-      o += poly(topf(x0, y0, x1, y1, HM), 'fill="transparent" class="t3-ghost"');
-      if (hb > 0.01) {
-        sd.forEach(function (f) {
-          o += poly(quad(f, 0, hb), 'class="f-acc t3-face" fill-opacity="' + (0.3 + 0.13 * f.lit).toFixed(2) + '"');
-          for (var k = 1; k < 10; k++) {
-            var z = k * HM / 10;
-            if (z < hb - 0.03) o += ln(P(f.a[0], f.a[1], z), P(f.b[0], f.b[1], z), "t3-fl");
-          }
-          [1 / 3, 2 / 3].forEach(function (u) {
-            var mx = f.a[0] + (f.b[0] - f.a[0]) * u, my = f.a[1] + (f.b[1] - f.a[1]) * u;
-            o += ln(P(mx, my, 0), P(mx, my, hb), "t3-fl");
-          });
-        });
-        o += poly(topf(x0, y0, x1, y1, hb), 'class="f-acc t3-face" fill-opacity=".14"');
+      if (m !== "cl") {
+        sd.forEach(function (f) { o += poly(quad(f, 0, HM), 'fill="transparent" class="t3-ghost"'); });
+        o += poly(topf(x0, y0, x1, y1, HM), 'fill="transparent" class="t3-ghost"');
       }
-      if (hc - hb > 0.01) {
-        sd.forEach(function (f) { o += poly(quad(f, hb, hc), 'fill="url(#t3-hatch)" class="t3-cl"'); });
-        o += poly(topf(x0, y0, x1, y1, hc), 'fill="url(#t3-hatch)" class="t3-cl"');
+      if (m === "av") {
+        var hb = st.h[i] / 100 * HM, hc = Math.max(st.c[i], st.h[i]) / 100 * HM;
+        if (hb > 0.01) {
+          sd.forEach(function (f) {
+            o += poly(quad(f, 0, hb), 'class="f-acc t3-face" fill-opacity="' + (0.3 + 0.13 * f.lit).toFixed(2) + '"');
+            o += floors(f, hb, HM / 10, "t3-fl");
+            [1 / 3, 2 / 3].forEach(function (u) {
+              var mx = f.a[0] + (f.b[0] - f.a[0]) * u, my = f.a[1] + (f.b[1] - f.a[1]) * u;
+              o += ln(P(mx, my, 0), P(mx, my, hb), "t3-fl");
+            });
+          });
+          o += poly(topf(x0, y0, x1, y1, hb), 'class="f-acc t3-face" fill-opacity=".14"');
+        }
+        if (hc - hb > 0.01) {
+          sd.forEach(function (f) { o += poly(quad(f, hb, hc), 'fill="url(#t3-hatch)" class="t3-cl"'); });
+          o += poly(topf(x0, y0, x1, y1, hc), 'fill="url(#t3-hatch)" class="t3-cl"');
+        }
+      } else if (m === "cl") {
+        var hh = st.h[i] / 100 * HM;
+        sd.forEach(function (f) { o += poly(quad(f, 0, HM), 'fill="transparent" stroke="none"'); });
+        if (hh > 0.01) {
+          sd.forEach(function (f) { o += poly(quad(f, 0, hh), 'fill="url(#t3-hatch)" class="t3-cl"') + floors(f, hh, HM / 10, "t3-cfl"); });
+          o += poly(topf(x0, y0, x1, y1, hh), 'fill="url(#t3-hatch)" class="t3-cl"');
+        }
+      } else {
+        var g = 0.035, sw = (F - 4 * g) / 5, list = [];
+        for (var k = 0; k < 5; k++) {
+          var sx0 = x0 + k * (sw + g);
+          list.push({ k: k, x0: sx0, x1: sx0 + sw, dep: P(sx0 + sw / 2, cy, 0)[2] });
+        }
+        list.sort(function (a, b) { return b.dep - a.dep; }).forEach(function (s) {
+          var hz = st.d[i][s.k] / 100 * HM;
+          if (hz < 0.01) return;
+          sides(s.x0, y0, s.x1, y1).forEach(function (f) { o += poly(quad(f, 0, hz), 'class="fd' + s.k + " sd" + s.k + ' t3-slice" fill-opacity="' + (0.5 + 0.16 * f.lit).toFixed(2) + '"'); });
+          o += poly(topf(s.x0, y0, s.x1, y1, hz), 'class="fd' + s.k + " sd" + s.k + ' t3-slice" fill-opacity=".32"');
+        });
       }
       return o + "</g>";
+    }
+    function topOf(i) {
+      if (cfg.m === "di") return Math.max.apply(null, st.d[i]) / 100 * HM;
+      if (cfg.m === "cl") return st.h[i] / 100 * HM;
+      return Math.max(st.h[i], st.c[i]) / 100 * HM;
+    }
+    function labelText(i) {
+      var t = TOWERS[i];
+      if (cfg.m === "cl") { var n = Math.round(st.h[i] / 10); return t.s + " · " + n + (n === 1 ? " clash" : " clashes"); }
+      if (cfg.m === "di") return t.s + " · " + Math.round(TW[i][cfg.w]) + "%";
+      return t.s + " · " + Math.round(st.h[i]) + "%";
     }
     function bbox(j) {
       var cx = POS[j][0], cy = POS[j][1], xs = [], ys = [];
@@ -1696,6 +2109,7 @@ html.is-modal{overflow:hidden}
       return [Math.min.apply(null, xs), Math.max.apply(null, xs), Math.min.apply(null, ys), Math.max.apply(null, ys)];
     }
     function cota() {
+      if (cfg.m !== "av") return "";
       var i = st.sel, hb = st.h[i] / 100 * HM;
       if (hb < 0.05) return "";
       var cx = POS[i][0], cy = POS[i][1], L = null, R = null;
@@ -1717,8 +2131,7 @@ html.is-modal{overflow:hidden}
       }
       var xr = R[0] + 18, xl = L[0] - 18, cr = crowd(xr, R[1]), cl = crowd(xl, L[1]);
       if (cr > 0 && cl > 0) return "";
-      var right = cr <= cl;
-      var base = right ? R : L, x = right ? xr : xl, sgn = right ? 1 : -1;
+      var right = cr <= cl, base = right ? R : L, x = right ? xr : xl, sgn = right ? 1 : -1;
       var y0 = base[1], y1 = y0 - dz, ym = (y0 + y1) / 2;
       var txt = Math.round(st.h[i]) + "%", tw = txt.length * G.fs * 0.62 + 8;
       var o = '<g class="t3-cota">';
@@ -1731,9 +2144,9 @@ html.is-modal{overflow:hidden}
     function labels(order) {
       var o = "";
       order.forEach(function (i) {
-        var t = TOWERS[i], top = Math.max(st.h[i], st.c[i]) / 100 * HM, p = P(POS[i][0], POS[i][1], top);
-        var txt = t.s + " · " + Math.round(st.h[i]) + "%", w = txt.length * G.fs * 0.62 + 14, hh = G.fs + 10;
-        var lx = Math.max(w / 2 + 4, Math.min(G.W - w / 2 - 4, p[0])), ly = p[1] - 26;
+        var p = P(POS[i][0], POS[i][1], topOf(i)), txt = labelText(i);
+        var w = txt.length * G.fs * 0.62 + 14, hh = G.fs + 10;
+        var lx = Math.max(w / 2 + 4, Math.min(G.W - w / 2 - 4, p[0])), ly = Math.max(hh / 2 + 4, p[1] - 26);
         o += ln([p[0], p[1] - 2], [lx, ly + hh / 2], "t3-lead");
         o += '<g class="t3-tag' + (i === st.sel ? " is-sel" : "") + '" data-t="' + i + '"><rect x="' + (lx - w / 2).toFixed(1) + '" y="' + (ly - hh / 2).toFixed(1) + '" width="' + w.toFixed(1) + '" height="' + hh + '" rx="' + hh / 2 + '"/>' +
           '<text x="' + lx.toFixed(1) + '" y="' + (ly + G.fs * 0.36).toFixed(1) + '" text-anchor="middle" font-size="' + G.fs + '">' + txt + "</text></g>";
@@ -1748,26 +2161,36 @@ html.is-modal{overflow:hidden}
         poly([tip, [tip[0] - vx * 7 + px * 4, tip[1] - vy * 7 + py * 4], [tip[0] - vx * 7 - px * 4, tip[1] - vy * 7 - py * 4]], "") +
         '<text x="' + (cx + vx * (r + 10)).toFixed(1) + '" y="' + (cy + vy * (r + 10) + 4).toFixed(1) + '" text-anchor="middle" font-size="11">N</text></g>';
     }
+    var CAP = { av: "VISTA 3D · AVANCE POR TORRE", cl: "VISTA 3D · CLASHES ABIERTOS", di: "VISTA 3D · AVANCE POR ESPECIALIDAD" };
     function render() {
       raf = 0;
       var order = [0, 1, 2, 3].sort(function (a, b) { return P(POS[b][0], POS[b][1], 0)[2] - P(POS[a][0], POS[a][1], 0)[2]; });
-      var o = DEFS + '<text x="14" y="22" class="t3-cap" font-size="11">VISTA 3D · AVANCE POR TORRE</text>' + grid();
+      var o = DEFS + '<text x="14" y="22" class="t3-cap" font-size="11">' + CAP[cfg.m] + " · S" + WEEKS[cfg.w] + "</text>" + grid();
       order.forEach(function (i) { o += tower(i); });
       svg.innerHTML = o + cota() + labels(order) + north();
     }
     function schedule() { if (!raf) raf = requestAnimationFrame(render); }
     function targets() {
-      return { h: TOWERS.map(function (t) { return st.clash ? t.real : t.model; }), c: TOWERS.map(function (t) { return t.model; }) };
+      var w = cfg.w;
+      if (cfg.m === "cl") {
+        var hc = CLW[w].map(function (n) { return n * 10; });
+        return { h: hc, c: hc.slice() };
+      }
+      if (cfg.m === "di") {
+        return { h: TW.map(function (r) { return r[w]; }), c: TW.map(function (r) { return r[w]; }), d: [0, 1, 2, 3].map(function (t) { return DISC.map(function (x, k) { return discT(t, k, w); }); }) };
+      }
+      return { h: [0, 1, 2, 3].map(function (t) { return cfg.clash ? TW[t][w] : modelT(t, w); }), c: [0, 1, 2, 3].map(function (t) { return modelT(t, w); }) };
     }
     function apply(tg, e, from) {
       if (tg.th != null) st.th = from.th + (tg.th - from.th) * e;
       for (var i = 0; i < 4; i++) {
         if (tg.h) st.h[i] = from.h[i] + (tg.h[i] - from.h[i]) * e;
         if (tg.c) st.c[i] = from.c[i] + (tg.c[i] - from.c[i]) * e;
+        if (tg.d) for (var k = 0; k < 5; k++) st.d[i][k] = from.d[i][k] + (tg.d[i][k] - from.d[i][k]) * e;
       }
     }
     function animate(tg, dur) {
-      var from = { th: st.th, h: st.h.slice(), c: st.c.slice() };
+      var from = { th: st.th, h: st.h.slice(), c: st.c.slice(), d: st.d.map(function (r) { return r.slice(); }) };
       cancelAnimationFrame(anim);
       clearTimeout(timer);
       if (rm.matches || !dur) { apply(tg, 1, from); render(); return; }
@@ -1814,38 +2237,77 @@ html.is-modal{overflow:hidden}
     }
     return {
       select: select,
-      setClash: function (on) { st.clash = on; animate(targets(), 650); },
+      refresh: function (dur) { animate(targets(), dur); },
+      setWeek: function () { animate(targets(), 260); },
       rotate: function (dir) { animate({ th: st.th + dir * Math.PI / 4 }, 500); },
       destroy: function () { cancelAnimationFrame(anim); cancelAnimationFrame(raf); clearTimeout(timer); if (ro) ro.disconnect(); }
     };
   }
 
-  /* Resumen para el jefe: una hoja sencilla, como lámina con cajetín */
+  /* Resumen para el jefe: reporte semanal de una hoja */
   function viewBoss(box) {
-    var rows = TOWERS.map(function (t) {
-      return "<tr><td>" + t.n + '</td><td><span class="boss-bar"><span class="boss-track"><i style="--p:' + t.real + '"></i></span><b>' + t.real + '%</b></span></td>' +
-        '<td class="num">' + t.nc + '</td><td><span class="boss-st">' + (t.ok ? ICON_OK + "En tiempo" : ICON_WARN + "Revisar") + "</span></td></tr>";
-    }).join("");
-    box.innerHTML =
-      '<div class="boss"><article class="boss-sheet" aria-label="Maqueta del resumen para el jefe">' +
-        '<header class="boss-h"><div><p class="boss-k">Resumen de avance BIM</p><p class="boss-t">Proyecto de ejemplo</p></div>' +
-        '<div class="boss-d">Semana 44<br>30 oct 2026</div></header>' +
-        '<div class="boss-kpis"><div><span>Avance general</span><b>62%</b></div><div><span>Clashes abiertos</span><b>14</b></div><div><span>UMC listas</span><b>6 de 10</b></div></div>' +
-        '<p class="boss-note">El avance ya descuenta clashes y problemas: esta semana restaron 4%.</p>' +
-        '<table class="boss-tbl"><thead><tr><th scope="col">Torre</th><th scope="col">Avance real</th><th scope="col" class="num">Clashes</th><th scope="col">Estado</th></tr></thead><tbody>' + rows + "</tbody></table>" +
-        '<div class="boss-obs"><p class="boss-k">Observaciones</p><ol>' +
-          "<li>La Torre 3 junta 6 clashes, casi todos entre hidráulica y ventilación en el Nivel 3. Se revisan con coordinación el lunes.</li>" +
-          "<li>La Torre 4 va más lenta porque faltan los planos de PCI. Ya se pidieron.</li>" +
-        "</ol></div>" +
-        '<footer class="boss-cj"><div><span>Elaboró</span><b>Erick</b></div><div><span>Revisó</span><span class="boss-sign"></span></div><div><span>Fecha</span><b>30 oct 2026</b></div><div><span>Hoja</span><b>1 de 1</b></div></footer>' +
+    var w = 8, X0 = 38, X1 = 404, Y0 = 16, Y1 = 186, N = 17;
+    function xs(i) { return X0 + i * (X1 - X0) / (N - 1); }
+    function ys(v) { return Y1 - v / 100 * (Y1 - Y0); }
+    var plan = PLAN.concat(PLAN_FUT), g = "";
+    [0, 25, 50, 75, 100].forEach(function (v) { g += '<line x1="' + X0 + '" x2="' + X1 + '" y1="' + ys(v) + '" y2="' + ys(v) + '" stroke="#DDDDDD"/><text x="' + (X0 - 6) + '" y="' + (ys(v) + 3.5) + '" text-anchor="end" font-size="9.5" fill="#575757">' + v + "</text>"; });
+    [0, 4, 8, 12, 16].forEach(function (i) { g += '<text x="' + xs(i) + '" y="' + (Y1 + 15) + '" text-anchor="middle" font-size="9.5" fill="#575757">S' + (36 + i) + "</text>"; });
+    var xc = xs(w), yr = ys(REAL[w]), yp = ys(PLAN[w]), xk = xc + 9;
+    var curve = '<svg viewBox="0 0 420 212" role="img" aria-label="Curva de avance: real ' + f1(REAL[w]) + '% contra programado ' + f1(PLAN[w]) + '% en la semana 44">' + g +
+      '<line x1="' + X0 + '" x2="' + X1 + '" y1="' + Y1 + '" y2="' + Y1 + '" stroke="#161616"/>' +
+      '<line x1="' + xc + '" x2="' + xc + '" y1="' + (Y0 - 4) + '" y2="' + Y1 + '" stroke="#8A8A8A"/>' +
+      '<text x="' + (xc - 4) + '" y="' + (Y0 + 4) + '" text-anchor="end" font-size="9" fill="#575757">CORTE S44</text>' +
+      '<polyline points="' + plan.map(function (v, i) { return xs(i).toFixed(1) + "," + ys(v).toFixed(1); }).join(" ") + '" fill="none" stroke="#8A8A8A" stroke-width="1.6" stroke-dasharray="5 3"/>' +
+      '<polyline points="' + REAL.map(function (v, i) { return xs(i).toFixed(1) + "," + ys(v).toFixed(1); }).join(" ") + '" fill="none" stroke="#161616" stroke-width="2.2" stroke-linejoin="round"/>' +
+      '<circle cx="' + xc + '" cy="' + yr.toFixed(1) + '" r="3.2" fill="#161616"/>' +
+      '<line x1="' + xk + '" x2="' + xk + '" y1="' + yp.toFixed(1) + '" y2="' + yr.toFixed(1) + '" stroke="#161616"/>' +
+      '<line x1="' + (xk - 3) + '" x2="' + (xk + 3) + '" y1="' + (yp + 3).toFixed(1) + '" y2="' + (yp - 3).toFixed(1) + '" stroke="#161616"/><line x1="' + (xk - 3) + '" x2="' + (xk + 3) + '" y1="' + (yr + 3).toFixed(1) + '" y2="' + (yr - 3).toFixed(1) + '" stroke="#161616"/>' +
+      '<text x="' + (xk + 6) + '" y="' + ((yp + yr) / 2 + 3.5).toFixed(1) + '" font-size="10" fill="#161616">' + f1(REAL[w] - PLAN[w]) + " pts</text>" +
+      '<text x="' + (xc - 6) + '" y="' + (yr + 24).toFixed(1) + '" text-anchor="end" font-size="10" fill="#161616">Real ' + f1(REAL[w]) + "%</text>" +
+      '<text x="' + X1 + '" y="' + (Y0 + 58) + '" text-anchor="end" font-size="9.5" fill="#575757">Programado: 100% en S52</text>' +
+      "</svg>";
+    var avg = DISC.map(function (d, k) { return discAll(k, w); });
+    function cell(v) { return '<td class="n' + (v < 50 ? " lo" : "") + '">' + (Math.round(v * 10) % 10 ? f1(v) : String(Math.round(v))) + "</td>"; }
+    var matrix = '<div class="rep-x"><table class="rep-tbl"><thead><tr><th>Torre</th>' + DISC.map(function (d) { return '<th class="n">' + d + "</th>"; }).join("") + '<th class="n">Total</th></tr></thead><tbody>' +
+      TOWERS.map(function (t, i) { return "<tr><td>" + t.n + "</td>" + TD[i].map(cell).join("") + cell(TW[i][w]) + "</tr>"; }).join("") +
+      '<tr class="avg"><td>Promedio</td>' + avg.map(function (v) { return '<td class="n">' + f1(v) + "</td>"; }).join("") + '<td class="n">' + f1(REAL[w]) + "</td></tr></tbody></table></div>" +
+      '<p class="rep-note">Sombreado: menos de 50%. Clashes abiertos por torre: T1 ' + CLW[w][0] + ", T2 " + CLW[w][1] + ", T3 " + CLW[w][2] + ", T4 " + CLW[w][3] + ".</p>";
+    var pend = '<div class="rep-x"><table class="rep-tbl"><thead><tr><th>ID</th><th>Descripción</th><th>Lugar</th><th>Responsable</th><th>Compromiso</th><th>Estatus</th></tr></thead><tbody>' +
+      ISSUES.map(function (x) { return '<tr><td class="rep-id">' + x.id + '</td><td class="wrap">' + esc(x.t) + "</td><td>" + x.tw + "</td><td>" + x.who + "</td><td>" + x.due + "</td><td>" + x.st + "</td></tr>"; }).join("") +
+      "</tbody></table></div>";
+    var um = "";
+    for (var u = 0; u < 10; u++) um += '<i class="' + (u < UMCW[w] ? "on" : "") + '"></i>';
+    box.innerHTML = '<article class="rep" aria-label="Maqueta del reporte semanal para el jefe">' +
+      '<header class="rep-h"><div><p class="rep-k">Reporte semanal de avance BIM · Instalaciones MEP</p><p class="rep-t">Proyecto de ejemplo</p></div>' +
+        '<p class="rep-meta">Semana <b>44</b> · 26 oct al 1 nov<br>Corte: 30-oct-2026, 18:00 h<br>Folio PE-BIM-044</p></header>' +
+      '<div class="rep-kpis">' +
+        "<div><span>Avance real</span><b>" + f1(REAL[w]) + "%</b><small>" + UP + "+" + f1(REAL[w] - REAL[w - 1]) + " pts vs S43</small></div>" +
+        "<div><span>Programado</span><b>" + f1(PLAN[w]) + "%</b><small>Desviación " + f1(REAL[w] - PLAN[w]) + " pts</small></div>" +
+        "<div><span>Clashes abiertos</span><b>" + OPEN[w] + "</b><small>" + NEWC[w] + " nuevos · " + RESC[w] + " resueltos</small></div>" +
+        "<div><span>UMC liberadas</span><b>" + UMCW[w] + ' de 10</b><span class="rep-umc" aria-hidden="true">' + um + "</span></div>" +
+      "</div>" +
+      '<div class="rep-two"><div><p class="rep-sec">1. Curva de avance</p>' + curve + '<p class="rep-leg"><span><i></i>Real</span><span><i class="pl"></i>Programado</span></p></div>' +
+        '<div><p class="rep-sec">2. Avance por torre y especialidad, %</p>' + matrix + "</div></div>" +
+      '<p class="rep-sec">3. Pendientes y acuerdos</p>' + pend +
+      '<p class="rep-sec">4. Observaciones</p><ol>' +
+        "<li>La Torre 3 concentra 6 de los 14 clashes. La mayoría son entre hidráulica y ventilación en el N3 y se revisan con coordinación MEP el lunes 2 de noviembre.</li>" +
+        "<li>La Torre 4 va abajo en PCI (33%) porque faltan los planos del proyectista. Se pidieron con la RFI-07.</li>" +
+        "<li>La desviación contra el programa pasó de " + f1(Math.abs(REAL[w - 1] - PLAN[w - 1])) + " a " + f1(Math.abs(REAL[w] - PLAN[w])) + " puntos. Para recuperarla hay que cerrar la RFI-07 y la decisión D-02.</li>" +
+      "</ol>" +
+      '<footer class="rep-cj"><div><span>Elaboró</span><b>Erick · Modelador BIM MEP</b></div><div><span>Revisó</span><em></em></div><div><span>Fecha</span><b>30-oct-2026</b></div><div><span>Escala</span><b>S/E</b></div><div><span>Hoja</span><b>1 de 1</b></div></footer>' +
       "</article>" +
-      '<p class="mkd-cap">Una hoja en PDF lista para mandar cuando te la pidan. Va directo a los números, con una barra por torre y tus notas.</p></div>';
+      '<p class="mkd-cap">Una hoja en PDF lista para mandar cuando te la pidan, con las secciones de un reporte de obra de siempre. Los números salen de la misma hoja maestra.</p>';
   }
 
   /* App del Premium: dos teléfonos con notas numeradas */
   function viewApp(box) {
     function bars(x, y) {
       return '<g class="f-on"><rect x="' + (x + 5.5) + '" y="' + (y + 12) + '" width="3.2" height="7" rx="1"/><rect x="' + (x + 10.5) + '" y="' + (y + 6.5) + '" width="3.2" height="12.5" rx="1"/><rect x="' + (x + 15.5) + '" y="' + (y + 9.5) + '" width="3.2" height="9.5" rx="1"/></g>';
+    }
+    function notif(y, when, l1, l2) {
+      return '<rect x="60.5" y="' + (y + 0.5) + '" width="189" height="66" rx="16" class="f-surf s-line"/><rect x="72" y="' + (y + 14) + '" width="24" height="24" rx="7" class="f-acc"/>' + bars(72, y + 14) +
+        '<text x="106" y="' + (y + 23) + '" font-size="11" font-weight="600" class="f-ink">Tablero BIM</text><text x="238" y="' + (y + 23) + '" font-size="9" text-anchor="end" class="f-ink3">' + when + "</text>" +
+        '<text x="106" y="' + (y + 39) + '" font-size="10.5" class="f-ink2">' + l1 + '</text><text x="106" y="' + (y + 53) + '" font-size="10.5" class="f-ink2">' + l2 + "</text>";
     }
     function marker(n, cx, cy, tx, ty) {
       var o = "";
@@ -1855,27 +2317,22 @@ html.is-modal{overflow:hidden}
       }
       return o + '<circle cx="' + cx + '" cy="' + cy + '" r="12" class="f-acc"/><text x="' + cx + '" y="' + (cy + 4.3) + '" text-anchor="middle" font-size="12" font-weight="600" class="f-on">' + n + "</text>";
     }
-    var rows = [["Torre 1", 78], ["Torre 2", 64], ["Torre 3", 58], ["Torre 4", 47]].map(function (r, i) {
-      var y = 262 + i * 24, hi = i === 2;
-      return '<text x="358" y="' + y + '" font-size="11.5" class="' + (hi ? "f-accst" : "f-ink2") + '">' + r[0] + "</text>" +
-        '<rect x="420" y="' + (y - 7) + '" width="86" height="7" rx="3.5" class="f-surf2"/><rect x="420" y="' + (y - 7) + '" width="' + (86 * r[1] / 100).toFixed(1) + '" height="7" rx="3.5" class="f-acc"/>' +
-        '<text x="534" y="' + y + '" font-size="11.5" text-anchor="end" class="' + (hi ? "f-accst" : "f-ink") + '">' + r[1] + "%</text>";
+    var rows = TOWERS.map(function (t, i) {
+      var y = 248 + i * 20, hi = i === 2, v = TW[i][8];
+      return '<text x="356" y="' + y + '" font-size="10.5" class="' + (hi ? "f-accst" : "f-ink2") + '">' + t.n + "</text>" +
+        '<rect x="416" y="' + (y - 6) + '" width="84" height="6" rx="3" class="f-surf2"/><rect x="416" y="' + (y - 6) + '" width="' + (84 * v / 100).toFixed(1) + '" height="6" rx="3" class="f-acc"/>' +
+        '<text x="536" y="' + y + '" font-size="10.5" text-anchor="end" class="' + (hi ? "f-accst" : "f-ink") + '">' + v + "%</text>";
     }).join("");
     var svg =
-      '<svg viewBox="0 0 640 540" role="img" aria-label="Maqueta de la app del Premium. A la izquierda, un iPhone con avisos en la pantalla de bloqueo. A la derecha, un Android con el avance real, las torres y el botón para mandar el resumen al jefe.">' +
+      '<svg viewBox="0 0 640 540" role="img" aria-label="Maqueta de la app del Premium. A la izquierda, un iPhone con tres avisos en la pantalla de bloqueo. A la derecha, un Android con el avance real de la semana, las torres, los pendientes y el botón para mandar el resumen al jefe.">' +
         '<rect x="40.5" y="20.5" width="229" height="470" rx="40" class="f-bezel s-line2"/>' +
         '<rect x="48.5" y="28.5" width="213" height="454" rx="33" class="f-surf2"/>' +
         '<rect x="125" y="40" width="60" height="18" rx="9" class="f-bezel"/>' +
         '<text x="155" y="92" text-anchor="middle" font-size="12" class="f-ink2">viernes 30 de octubre</text>' +
         '<text x="155" y="146" text-anchor="middle" font-size="54" font-weight="500" class="f-ink">9:41</text>' +
-        '<rect x="60.5" y="176.5" width="189" height="66" rx="16" class="f-surf s-line"/>' +
-        '<rect x="72" y="190" width="24" height="24" rx="7" class="f-acc"/>' + bars(72, 190) +
-        '<text x="106" y="199" font-size="11" font-weight="600" class="f-ink">Tablero BIM</text><text x="238" y="199" font-size="9" text-anchor="end" class="f-ink3">ahora</text>' +
-        '<text x="106" y="215" font-size="10.5" class="f-ink2">Torre 3 bajó a 58% por</text><text x="106" y="229" font-size="10.5" class="f-ink2">3 clashes nuevos</text>' +
-        '<rect x="60.5" y="250.5" width="189" height="66" rx="16" class="f-surf s-line"/>' +
-        '<rect x="72" y="264" width="24" height="24" rx="7" class="f-acc"/>' + bars(72, 264) +
-        '<text x="106" y="273" font-size="11" font-weight="600" class="f-ink">Tablero BIM</text><text x="238" y="273" font-size="9" text-anchor="end" class="f-ink3">hace 2 h</text>' +
-        '<text x="106" y="289" font-size="10.5" class="f-ink2">Se resolvieron 2 clashes</text><text x="106" y="303" font-size="10.5" class="f-ink2">en la Torre 1</text>' +
+        notif(176, "ahora", "Torre 3 bajó a 58% por", "3 clashes nuevos") +
+        notif(250, "hace 2 h", "Se resolvieron 2 clashes", "en la Torre 1") +
+        notif(324, "ayer", "Respondieron la RFI-10:", "material de tubería SAN") +
         '<circle cx="92" cy="446" r="17" class="f-surf"/><circle cx="218" cy="446" r="17" class="f-surf"/>' +
         '<rect x="88" y="437" width="8" height="15" rx="2" fill="none" class="s-ink3" stroke-width="1.3"/>' +
         '<rect x="210" y="440" width="16" height="12" rx="2.5" fill="none" class="s-ink3" stroke-width="1.3"/><circle cx="218" cy="446" r="3" fill="none" class="s-ink3" stroke-width="1.3"/>' +
@@ -1886,31 +2343,35 @@ html.is-modal{overflow:hidden}
         '<circle cx="445" cy="43" r="6" class="f-bezel"/>' +
         '<text x="356" y="47" font-size="11" font-weight="600" class="f-ink">9:41</text>' +
         '<rect x="512.5" y="38.5" width="20" height="10" rx="2.5" fill="none" class="s-ink" stroke-width="1"/><rect x="514.5" y="40.5" width="13" height="6" rx="1" class="f-ink"/>' +
-        '<text x="356" y="84" font-size="15" font-weight="500" class="f-ink">Proyecto de ejemplo</text>' +
-        '<text x="356" y="101" font-size="9" letter-spacing=".8" class="f-ink3 mono">AVANCE REAL</text>' +
-        '<g transform="rotate(-90 445 162)" fill="none" stroke-width="12">' +
-          '<circle cx="445" cy="162" r="44" class="s-surf2"/>' +
-          '<circle cx="445" cy="162" r="44" class="s-acc" stroke-dasharray="171.4 400" stroke-linecap="round"/>' +
-          '<circle cx="445" cy="162" r="44" class="s-warn" stroke-dasharray="11 400" stroke-dashoffset="-180"/>' +
+        '<text x="356" y="80" font-size="15" font-weight="500" class="f-ink">Proyecto de ejemplo</text>' +
+        '<text x="356" y="97" font-size="9" letter-spacing=".8" class="f-ink3 mono">SEMANA 44 · AVANCE REAL</text>' +
+        '<g transform="rotate(-90 445 150)" fill="none" stroke-width="11">' +
+          '<circle cx="445" cy="150" r="38" class="s-surf2"/>' +
+          '<circle cx="445" cy="150" r="38" class="s-acc" stroke-dasharray="147.5 400" stroke-linecap="round"/>' +
+          '<circle cx="445" cy="150" r="38" class="s-warn" stroke-dasharray="9.6 400" stroke-dashoffset="-155"/>' +
         "</g>" +
-        '<text x="445" y="170" text-anchor="middle" font-size="24" font-weight="600" class="f-ink">62%</text>' +
-        '<text x="445" y="232" text-anchor="middle" font-size="10" class="f-ink3">−4% por clashes y problemas</text>' +
-        '<rect x="348" y="294" width="194" height="24" rx="7" class="f-accs"/>' + rows +
-        '<rect x="356" y="360" width="178" height="34" rx="17" class="f-acc"/>' +
-        '<text x="445" y="381.5" text-anchor="middle" font-size="11.5" font-weight="500" class="f-on">Enviar resumen al jefe</text>' +
+        '<text x="445" y="157" text-anchor="middle" font-size="20" font-weight="600" class="f-ink">61.8%</text>' +
+        '<path d="M385 200.5l3.5-6 3.5 6z" class="f-good"/><text x="396" y="201" font-size="9.5" class="f-good">2.9 pts esta semana</text>' +
+        '<path d="M385 210l3.5 6 3.5-6z" class="f-bad"/><text x="396" y="216" font-size="9.5" class="f-bad">6.3 pts abajo del programa</text>' +
+        '<rect x="348" y="275" width="194" height="20" rx="6" class="f-accs"/>' + rows +
+        '<rect x="346" y="318" width="60" height="20" rx="10" fill="' + WARN + '"/><text x="376" y="331.5" text-anchor="middle" font-size="9.5" fill="#1E1C19">14 clashes</text>' +
+        '<rect x="412" y="318" width="64" height="20" rx="10" class="f-accs"/><text x="444" y="331.5" text-anchor="middle" font-size="9.5" class="f-accst">3 consultas</text>' +
+        '<rect x="482" y="318" width="64" height="20" rx="10" class="f-surf2"/><text x="514" y="331.5" text-anchor="middle" font-size="9.5" class="f-ink2">2 decisiones</text>' +
+        '<rect x="356" y="356" width="178" height="32" rx="16" class="f-acc"/>' +
+        '<text x="445" y="376" text-anchor="middle" font-size="11.5" font-weight="500" class="f-on">Enviar resumen al jefe</text>' +
         '<line x1="338.5" y1="420.5" x2="551.5" y2="420.5" class="s-line"/>' +
         '<path d="M379.5 448v-7.4l7.5-6 7.5 6v7.4z" class="f-acc"/>' +
         '<path d="M445 433.5l7.6 13h-15.2z" fill="none" class="s-ink3" stroke-width="1.4" stroke-linejoin="round"/>' +
         '<rect x="497" y="433.5" width="12" height="14" rx="2" fill="none" class="s-ink3" stroke-width="1.4"/><path d="M500 438.5h6M500 442.5h6" class="s-ink3" stroke-width="1.2"/>' +
-        '<text x="387" y="464" text-anchor="middle" font-size="10" class="f-accst">Inicio</text><text x="445" y="464" text-anchor="middle" font-size="10" class="f-ink3">Clashes</text><text x="503" y="464" text-anchor="middle" font-size="10" class="f-ink3">Resumen</text>' +
+        '<text x="387" y="464" text-anchor="middle" font-size="10" class="f-accst">Inicio</text><text x="445" y="464" text-anchor="middle" font-size="10" class="f-ink3">Pendientes</text><text x="503" y="464" text-anchor="middle" font-size="10" class="f-ink3">Resumen</text>' +
         '<rect x="405" y="473" width="80" height="4" rx="2" class="f-ink"/>' +
         '<text x="445" y="524" text-anchor="middle" font-size="12" letter-spacing="1.5" class="f-ink3 mono">ANDROID</text>' +
-        marker(1, 22, 209, 60, 209) + marker(2, 612, 162, 497, 162) + marker(3, 612, 306, 542, 306) + marker(4, 612, 377, 534, 377) + marker(5, 300, 520) +
+        marker(1, 22, 209, 60, 209) + marker(2, 612, 150, 489, 150) + marker(3, 612, 328, 547, 328) + marker(4, 612, 372, 534, 372) + marker(5, 300, 520) +
       "</svg>";
     var notes = [
-      ["Avisos en el celular", "Te llega un aviso cuando una torre baja de avance o se resuelven clashes."],
-      ["El mismo avance que la web", "El avance real, ya con los clashes restados, siempre al día."],
-      ["Torres y niveles con un toque", "Ves el detalle sin prender la computadora."],
+      ["Avisos en el celular", "Te llega un aviso cuando una torre baja de avance o cuando responden una consulta."],
+      ["El avance de la semana", "El avance real, ya con los clashes restados, y qué tan lejos va del programa."],
+      ["Pendientes a la mano", "Ves los clashes y las consultas abiertas sin prender la computadora."],
       ["El resumen desde el celular", "Mandas el PDF para tu jefe desde la app."],
       ["iPhone y Android", "Las dos apps entran con el mismo acceso por invitación."]
     ];
