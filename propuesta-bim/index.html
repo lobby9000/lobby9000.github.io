@@ -29,7 +29,7 @@ body{margin:0}
   --accent:#2D62B0; --accent-strong:#1F4C8F; --accent-soft:#E2EAF6; --on-accent:#FFFFFF;
   --junior:#8A847A;
   --mint:#1D7364; --mint-soft:#DDF0EA;
-  --thumb:#FFFDF8;
+  --thumb:#FFFDF8; --bezel:#2B2926;
   --tip-bg:#1E1C19; --tip-ink:#F5F2EA;
   --shadow-sm:0 1px 2px rgba(30,28,25,.10),0 1px 1px rgba(30,28,25,.04);
   --shadow:0 1px 0 rgba(30,28,25,.03),0 14px 34px -20px rgba(30,28,25,.30);
@@ -45,7 +45,7 @@ body{margin:0}
     --accent:#5590EA; --accent-strong:#A9C4EE; --accent-soft:#1D2A3E; --on-accent:#0B1322;
     --junior:#706C66;
     --mint:#6FCDB7; --mint-soft:#163029;
-    --thumb:#35322D;
+    --thumb:#35322D; --bezel:#3B3833;
     --tip-bg:#F1EDE6; --tip-ink:#121110;
     --shadow-sm:0 1px 2px rgba(0,0,0,.45);
     --shadow:0 1px 0 rgba(0,0,0,.25),0 16px 38px -20px rgba(0,0,0,.75);
@@ -59,7 +59,7 @@ body{margin:0}
   --accent:#5590EA; --accent-strong:#A9C4EE; --accent-soft:#1D2A3E; --on-accent:#0B1322;
   --junior:#706C66;
   --mint:#6FCDB7; --mint-soft:#163029;
-  --thumb:#35322D;
+  --thumb:#35322D; --bezel:#3B3833;
   --tip-bg:#F1EDE6; --tip-ink:#121110;
   --shadow-sm:0 1px 2px rgba(0,0,0,.45);
   --shadow:0 1px 0 rgba(0,0,0,.25),0 16px 38px -20px rgba(0,0,0,.75);
@@ -328,6 +328,32 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
 .foot-in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;padding-block:22px 36px;font-size:13px;color:var(--ink-3)}
 .foot-in .mono{font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;font-size:11.5px}
 
+/* Maquetas de los tres paquetes */
+.mk-row{display:grid;grid-auto-flow:column;grid-auto-columns:90%;gap:12px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;padding:3px 2px 6px;margin:0 -2px}
+.mk-row::-webkit-scrollbar{display:none}
+.mk{margin:0;min-width:0;scroll-snap-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.mk-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 2px 8px}
+.mk-name{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:500}
+.mk-tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
+.mk-stage{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:8px;transition:border-color .25s,box-shadow .25s}
+.mk.is-sel .mk-stage{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.mk.is-sel .mk-tag{color:var(--accent-strong)}
+.mk svg{display:block;width:100%;height:auto;font-family:var(--font)}
+.mk svg.lk{font-family:Roboto,Arial,Helvetica,sans-serif}
+.mk svg .mono{font-family:var(--mono)}
+.mk figcaption{margin:10px 2px 0;font-size:14.5px;line-height:1.45;color:var(--ink-2)}
+.mk-hint{margin-top:6px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+@media (min-width:900px){
+  .mk-row{grid-auto-flow:row;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible;gap:20px;padding:0;margin:0}
+  .mk-stage{padding:10px}
+  .mk-hint{display:none}
+}
+.f-bg{fill:var(--bg)}.f-surf{fill:var(--surface)}.f-surf2{fill:var(--surface-2)}.f-dot{fill:var(--line-2)}
+.f-ink{fill:var(--ink)}.f-ink2{fill:var(--ink-2)}.f-ink3{fill:var(--ink-3)}
+.f-acc{fill:var(--accent)}.f-accs{fill:var(--accent-soft)}.f-accst{fill:var(--accent-strong)}.f-on{fill:var(--on-accent)}
+.f-warn{fill:#EC835A}.f-bezel{fill:var(--bezel)}
+.s-line{stroke:var(--line)}.s-line2{stroke:var(--line-2)}.s-surf2{stroke:var(--surface-2)}.s-acc{stroke:var(--accent)}.s-warn{stroke:#EC835A}.s-ink{stroke:var(--ink)}.s-ink3{stroke:var(--ink-3)}
+
 /* Tooltip */
 .tip{position:fixed;left:0;top:0;z-index:50;pointer-events:none;background:var(--tip-bg);color:var(--tip-ink);padding:8px 11px 9px;border-radius:9px;font-size:13px;line-height:1.35;max-width:250px;opacity:0;transition:opacity .12s;box-shadow:var(--shadow)}
 .tip.is-on{opacity:1}
@@ -344,7 +370,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
 <body>
 <header class="topbar">
   <div class="wrap topbar-in">
-    <p class="brand">Tablero de avance BIM<small>Propuesta · Rev. 02</small></p>
+    <p class="brand">Tablero de avance BIM<small>Propuesta · Rev. 03</small></p>
     <div class="seg" id="seg" role="radiogroup" aria-label="Paquete">
       <label class="seg-opt"><input type="radio" name="pk" value="ligero"><span class="seg-txt"><span class="seg-name">Ligero</span><span class="seg-price" data-price="ligero"></span></span></label>
       <label class="seg-opt"><input type="radio" name="pk" value="estandar" checked><span class="seg-txt"><span class="seg-name">Estándar</span><span class="seg-price" data-price="estandar"></span></span></label>
@@ -370,7 +396,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
         <div class="cj"><dt>Fecha</dt><dd>30 oct 2026</dd></div>
         <div class="cj"><dt>Escala</dt><dd>1 : 3<small>panas : junior</small></dd></div>
         <div class="cj"><dt>Folio</dt><dd>001</dd></div>
-        <div class="cj"><dt>Rev.</dt><dd>02</dd></div>
+        <div class="cj"><dt>Rev.</dt><dd>03</dd></div>
       </dl>
     </div>
   </section>
@@ -424,9 +450,211 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
     </div>
   </section>
 
+  <section class="sec" aria-labelledby="h-mock">
+    <div class="wrap">
+      <p class="sheet"><b>A-03</b> Vista previa</p>
+      <h2 id="h-mock">Así se vería cada uno</h2>
+      <p class="sec-sub">Maquetas con datos de ejemplo para comparar cómo queda cada paquete terminado. El diseño final lo afinamos contigo desde el borrador.</p>
+      <div class="mk-row" id="mk-row">
+        <figure class="mk" data-pk="ligero">
+          <div class="mk-top"><span class="mk-name">Ligero</span><span class="mk-tag">Reporte de Google</span></div>
+          <div class="mk-stage">
+            <svg class="lk" viewBox="0 0 400 300" role="img" aria-labelledby="mk-l-t">
+              <title id="mk-l-t">Maqueta del Ligero: reporte de Google con tarjetas de avance general, clashes abiertos y UMC listas, barras por torre y una tabla de detalle.</title>
+              <rect x=".5" y=".5" width="399" height="299" rx="10" fill="#F1F3F4" stroke="#DADCE0"/>
+              <path d="M.5 10.5A10 10 0 0 1 10.5.5h379a10 10 0 0 1 10 10V28H.5z" fill="#E3E5E8"/>
+              <circle cx="14" cy="14.5" r="3.2" fill="#C4C7C5"/><circle cx="25" cy="14.5" r="3.2" fill="#C4C7C5"/><circle cx="36" cy="14.5" r="3.2" fill="#C4C7C5"/>
+              <rect x="60" y="7.5" width="280" height="14" rx="7" fill="#FFFFFF"/>
+              <text x="200" y="17.3" text-anchor="middle" font-size="7.5" fill="#5F6368">lookerstudio.google.com</text>
+              <rect x="12.5" y="38.5" width="375" height="251" rx="2" fill="#FFFFFF" stroke="#DADCE0"/>
+              <text x="24" y="58" font-size="11.5" font-weight="500" fill="#202124">Avance de proyectos BIM</text>
+              <rect x="280.5" y="46.5" width="95" height="16" rx="2" fill="#FFFFFF" stroke="#DADCE0"/>
+              <text x="288" y="57" font-size="7" fill="#5F6368">1 al 30 oct 2026</text>
+              <path d="M363 53l3 3 3-3" fill="none" stroke="#5F6368" stroke-width="1.1"/>
+              <line x1="24" y1="70.5" x2="376" y2="70.5" stroke="#E8EAED"/>
+              <g fill="#FFFFFF" stroke="#DADCE0">
+                <rect x="24.5" y="80.5" width="111" height="50" rx="2"/>
+                <rect x="144.5" y="80.5" width="111" height="50" rx="2"/>
+                <rect x="264.5" y="80.5" width="111" height="50" rx="2"/>
+              </g>
+              <g font-size="7" fill="#5F6368"><text x="32" y="95">Avance general</text><text x="152" y="95">Clashes abiertos</text><text x="272" y="95">UMC listas</text></g>
+              <g font-size="19" fill="#1A73E8"><text x="31" y="121">62%</text><text x="151" y="121">14</text><text x="271" y="121">6 de 10</text></g>
+              <text x="24" y="149" font-size="8" fill="#202124">Avance por torre</text>
+              <g stroke="#E8EAED"><line x1="24" y1="158.5" x2="196" y2="158.5"/><line x1="24" y1="177.5" x2="196" y2="177.5"/><line x1="24" y1="196.5" x2="196" y2="196.5"/><line x1="24" y1="215.5" x2="196" y2="215.5"/></g>
+              <line x1="24" y1="234.5" x2="196" y2="234.5" stroke="#BDC1C6"/>
+              <g fill="#4285F4"><rect x="34.5" y="175" width="22" height="59.5"/><rect x="77.5" y="185.6" width="22" height="48.9"/><rect x="120.5" y="190.2" width="22" height="44.3"/><rect x="163.5" y="198.6" width="22" height="35.9"/></g>
+              <g font-size="6.5" fill="#5F6368" text-anchor="middle">
+                <text x="45.5" y="171.5">78%</text><text x="88.5" y="182">64%</text><text x="131.5" y="186.6">58%</text><text x="174.5" y="195">47%</text>
+                <text x="45.5" y="245">Torre 1</text><text x="88.5" y="245">Torre 2</text><text x="131.5" y="245">Torre 3</text><text x="174.5" y="245">Torre 4</text>
+              </g>
+              <text x="212" y="149" font-size="8" fill="#202124">Detalle por torre</text>
+              <rect x="212" y="156" width="164" height="16" fill="#F1F3F4"/>
+              <g font-size="7" fill="#5F6368"><text x="218" y="166.6">Torre</text><text x="320" y="166.6" text-anchor="end">Avance</text><text x="370" y="166.6" text-anchor="end">Clashes</text></g>
+              <g font-size="7" fill="#202124">
+                <text x="218" y="183">Torre 1</text><text x="320" y="183" text-anchor="end">78%</text><text x="370" y="183" text-anchor="end">2</text>
+                <text x="218" y="199">Torre 2</text><text x="320" y="199" text-anchor="end">64%</text><text x="370" y="199" text-anchor="end">3</text>
+                <text x="218" y="215">Torre 3</text><text x="320" y="215" text-anchor="end">58%</text><text x="370" y="215" text-anchor="end">6</text>
+                <text x="218" y="231">Torre 4</text><text x="320" y="231" text-anchor="end">47%</text><text x="370" y="231" text-anchor="end">3</text>
+              </g>
+              <g stroke="#E8EAED"><line x1="212" y1="188.5" x2="376" y2="188.5"/><line x1="212" y1="204.5" x2="376" y2="204.5"/><line x1="212" y1="220.5" x2="376" y2="220.5"/><line x1="212" y1="236.5" x2="376" y2="236.5"/></g>
+              <text x="370" y="248" font-size="6" fill="#5F6368" text-anchor="end">1 - 4 / 4</text>
+              <text x="24" y="276" font-size="6.5" fill="#80868B">Última actualización: 30 oct 2026</text>
+            </svg>
+          </div>
+          <figcaption>Una plantilla de Google con tus números. Se abre en el navegador y entras con tu cuenta de Google.</figcaption>
+        </figure>
+
+        <figure class="mk" data-pk="estandar">
+          <div class="mk-top"><span class="mk-name">Estándar <span class="pill">Recomendado</span></span><span class="mk-tag">Web a la medida</span></div>
+          <div class="mk-stage">
+            <svg viewBox="0 0 400 300" role="img" aria-labelledby="mk-e-t">
+              <title id="mk-e-t">Maqueta del Estándar: tablero web propio con el avance real de 62% después de restar clashes, barras por torre, la lista de clashes abiertos y la misma vista adaptada al celular.</title>
+              <rect x=".5" y=".5" width="399" height="299" rx="10" class="f-bg s-line"/>
+              <path d="M.5 10.5A10 10 0 0 1 10.5.5h379a10 10 0 0 1 10 10V28H.5z" class="f-surf2"/>
+              <circle cx="14" cy="14.5" r="3.2" class="f-dot"/><circle cx="25" cy="14.5" r="3.2" class="f-dot"/><circle cx="36" cy="14.5" r="3.2" class="f-dot"/>
+              <rect x="60" y="7.5" width="280" height="14" rx="7" class="f-surf"/>
+              <path d="M158.5 13v-1.6a2.5 2.5 0 0 1 5 0V13" fill="none" class="s-ink3" stroke-width="1.1"/>
+              <rect x="157" y="12.8" width="8" height="6" rx="1.3" class="f-ink3"/>
+              <text x="169" y="17.3" font-size="7.5" class="f-ink2">Acceso por invitación</text>
+              <text x="16" y="51" font-size="11" font-weight="500" class="f-ink">Avance BIM</text>
+              <rect x="84.5" y="40.5" width="94" height="14" rx="7" class="f-surf s-line"/>
+              <text x="92" y="49.8" font-size="6.8" class="f-ink2">Proyecto de ejemplo</text>
+              <path d="M166 46.5l2.5 2.5 2.5-2.5" fill="none" class="s-ink3" stroke-width="1"/>
+              <rect x="286" y="39" width="98" height="16" rx="8" class="f-acc"/>
+              <text x="335" y="49.6" font-size="7" font-weight="500" text-anchor="middle" class="f-on">Resumen para el jefe</text>
+              <rect x="16.5" y="64.5" width="176" height="97" rx="9" class="f-surf s-line"/>
+              <text x="28" y="80" font-size="6.2" letter-spacing=".5" class="f-ink3 mono">AVANCE REAL</text>
+              <text x="27" y="114" font-size="31" font-weight="500" class="f-ink">62%</text>
+              <rect x="28" y="123" width="152" height="8" rx="4" class="f-surf2"/>
+              <rect x="28" y="123" width="94" height="8" rx="4" class="f-acc"/>
+              <rect x="124" y="123" width="6.5" height="8" rx="2" class="f-warn"/>
+              <rect x="28" y="141.5" width="6" height="6" rx="1.5" class="f-warn"/>
+              <text x="38" y="147.2" font-size="6.8" class="f-ink2">−4% por clashes y problemas</text>
+              <rect x="200.5" y="64.5" width="183" height="97" rx="9" class="f-surf s-line"/>
+              <text x="212" y="80" font-size="6.2" letter-spacing=".5" class="f-ink3 mono">POR TORRE</text>
+              <g font-size="7">
+                <text x="212" y="99" class="f-ink2">Torre 1</text><text x="212" y="115" class="f-ink2">Torre 2</text><text x="212" y="131" class="f-ink2">Torre 3</text><text x="212" y="147" class="f-ink2">Torre 4</text>
+                <text x="376" y="99" text-anchor="end" class="f-ink">78%</text><text x="376" y="115" text-anchor="end" class="f-ink">64%</text><text x="376" y="131" text-anchor="end" class="f-ink">58%</text><text x="376" y="147" text-anchor="end" class="f-ink">47%</text>
+              </g>
+              <g class="f-surf2"><rect x="244" y="94" width="104" height="6" rx="3"/><rect x="244" y="110" width="104" height="6" rx="3"/><rect x="244" y="126" width="104" height="6" rx="3"/><rect x="244" y="142" width="104" height="6" rx="3"/></g>
+              <g class="f-acc"><rect x="244" y="94" width="81" height="6" rx="3"/><rect x="244" y="110" width="66.6" height="6" rx="3"/><rect x="244" y="126" width="60.3" height="6" rx="3"/><rect x="244" y="142" width="48.9" height="6" rx="3"/></g>
+              <rect x="16.5" y="169.5" width="263" height="118" rx="9" class="f-surf s-line"/>
+              <text x="28" y="185" font-size="6.2" letter-spacing=".5" class="f-ink3 mono">CLASHES ABIERTOS · 14</text>
+              <g font-size="6.3">
+                <rect x="28" y="194" width="50" height="13" rx="4" class="f-accs"/><text x="53" y="202.8" text-anchor="middle" class="f-accst">HID × VENT</text>
+                <text x="86" y="203" font-size="6.8" class="f-ink2">Nivel 3 · Torre 3</text><text x="268" y="203" text-anchor="end" class="f-ink3">Hoy</text>
+                <line x1="28" y1="214.5" x2="268" y2="214.5" class="s-line"/>
+                <rect x="28" y="221" width="50" height="13" rx="4" class="f-accs"/><text x="53" y="229.8" text-anchor="middle" class="f-accst">SAN × PCI</text>
+                <text x="86" y="230" font-size="6.8" class="f-ink2">Nivel 2 · Torre 1</text><text x="268" y="230" text-anchor="end" class="f-ink3">Ayer</text>
+                <line x1="28" y1="241.5" x2="268" y2="241.5" class="s-line"/>
+                <rect x="28" y="248" width="50" height="13" rx="4" class="f-accs"/><text x="53" y="256.8" text-anchor="middle" class="f-accst">ELEC × HID</text>
+                <text x="86" y="257" font-size="6.8" class="f-ink2">Nivel 4 · Torre 4</text><text x="268" y="257" text-anchor="end" class="f-ink3">28 oct</text>
+              </g>
+              <text x="28" y="279" font-size="6.6" class="f-accst">Ver los 14 clashes</text>
+              <rect x="292.5" y="150.5" width="91" height="145" rx="15" class="f-bezel s-line2"/>
+              <rect x="296.5" y="154.5" width="83" height="137" rx="11.5" class="f-bg"/>
+              <rect x="302" y="160" width="72" height="10" rx="5" class="f-surf2"/>
+              <text x="338" y="167" font-size="5" text-anchor="middle" class="f-ink3">Por invitación</text>
+              <text x="304" y="183" font-size="5" letter-spacing=".4" class="f-ink3 mono">AVANCE REAL</text>
+              <text x="303" y="202" font-size="17" font-weight="500" class="f-ink">62%</text>
+              <rect x="304" y="207" width="68" height="5" rx="2.5" class="f-surf2"/>
+              <rect x="304" y="207" width="42" height="5" rx="2.5" class="f-acc"/>
+              <rect x="347.5" y="207" width="3.2" height="5" rx="1.2" class="f-warn"/>
+              <g font-size="5.2">
+                <text x="304" y="226" class="f-ink2">T1</text><text x="304" y="237" class="f-ink2">T2</text><text x="304" y="248" class="f-ink2">T3</text><text x="304" y="259" class="f-ink2">T4</text>
+                <text x="372" y="226" text-anchor="end" class="f-ink">78%</text><text x="372" y="237" text-anchor="end" class="f-ink">64%</text><text x="372" y="248" text-anchor="end" class="f-ink">58%</text><text x="372" y="259" text-anchor="end" class="f-ink">47%</text>
+              </g>
+              <g class="f-surf2"><rect x="314" y="222.5" width="44" height="4" rx="2"/><rect x="314" y="233.5" width="44" height="4" rx="2"/><rect x="314" y="244.5" width="44" height="4" rx="2"/><rect x="314" y="255.5" width="44" height="4" rx="2"/></g>
+              <g class="f-acc"><rect x="314" y="222.5" width="34.3" height="4" rx="2"/><rect x="314" y="233.5" width="28.2" height="4" rx="2"/><rect x="314" y="244.5" width="25.5" height="4" rx="2"/><rect x="314" y="255.5" width="20.7" height="4" rx="2"/></g>
+              <rect x="304" y="268" width="68" height="13" rx="6.5" class="f-acc"/>
+              <text x="338" y="276.6" font-size="5.6" font-weight="500" text-anchor="middle" class="f-on">Resumen para el jefe</text>
+            </svg>
+          </div>
+          <figcaption>Diseño propio que muestra cuánto restan los clashes. Se adapta al celular y entra quien tú invites.</figcaption>
+        </figure>
+
+        <figure class="mk" data-pk="premium">
+          <div class="mk-top"><span class="mk-name">Premium</span><span class="mk-tag">Web y app</span></div>
+          <div class="mk-stage">
+            <svg viewBox="0 0 400 300" role="img" aria-labelledby="mk-p-t">
+              <title id="mk-p-t">Maqueta del Premium: app instalada en el celular con un aviso de que la Torre 3 bajó a 58% por clashes nuevos, el avance real en un anillo y la lista de torres. Atrás, el mismo tablero web.</title>
+              <g transform="translate(18 0)">
+                <rect x="8.5" y="30.5" width="250" height="176" rx="9" class="f-bg s-line"/>
+                <path d="M8.5 39.5a9 9 0 0 1 9-9h232a9 9 0 0 1 9 9V52H8.5z" class="f-surf2"/>
+                <circle cx="20" cy="41.5" r="2.6" class="f-dot"/><circle cx="29" cy="41.5" r="2.6" class="f-dot"/><circle cx="38" cy="41.5" r="2.6" class="f-dot"/>
+                <rect x="52" y="36" width="150" height="11" rx="5.5" class="f-surf"/>
+                <text x="127" y="43.7" font-size="5.8" text-anchor="middle" class="f-ink3">Acceso por invitación</text>
+                <text x="20" y="68" font-size="8.5" font-weight="500" class="f-ink">Avance BIM</text>
+                <rect x="20.5" y="76.5" width="104" height="70" rx="7" class="f-surf s-line"/>
+                <text x="28" y="89" font-size="5" letter-spacing=".4" class="f-ink3 mono">AVANCE REAL</text>
+                <text x="27" y="115" font-size="22" font-weight="500" class="f-ink">62%</text>
+                <rect x="28" y="123" width="88" height="6" rx="3" class="f-surf2"/>
+                <rect x="28" y="123" width="54.6" height="6" rx="3" class="f-acc"/>
+                <rect x="84.2" y="123" width="3.8" height="6" rx="1.5" class="f-warn"/>
+                <rect x="132.5" y="76.5" width="76" height="70" rx="7" class="f-surf s-line"/>
+                <text x="139" y="89" font-size="5" letter-spacing=".4" class="f-ink3 mono">POR TORRE</text>
+                <g font-size="5.4">
+                  <text x="139" y="102" class="f-ink2">T1</text><text x="139" y="113" class="f-ink2">T2</text><text x="139" y="124" class="f-ink2">T3</text><text x="139" y="135" class="f-ink2">T4</text>
+                  <text x="203" y="102" text-anchor="end" class="f-ink">78%</text><text x="203" y="113" text-anchor="end" class="f-ink">64%</text><text x="203" y="124" text-anchor="end" class="f-ink">58%</text><text x="203" y="135" text-anchor="end" class="f-ink">47%</text>
+                </g>
+                <g class="f-surf2"><rect x="150" y="98.5" width="36" height="4" rx="2"/><rect x="150" y="109.5" width="36" height="4" rx="2"/><rect x="150" y="120.5" width="36" height="4" rx="2"/><rect x="150" y="131.5" width="36" height="4" rx="2"/></g>
+                <g class="f-acc"><rect x="150" y="98.5" width="28.1" height="4" rx="2"/><rect x="150" y="109.5" width="23" height="4" rx="2"/><rect x="150" y="120.5" width="20.9" height="4" rx="2"/><rect x="150" y="131.5" width="16.9" height="4" rx="2"/></g>
+                <rect x="20.5" y="154.5" width="188" height="44" rx="7" class="f-surf s-line"/>
+                <text x="28" y="167" font-size="5" letter-spacing=".4" class="f-ink3 mono">CLASHES ABIERTOS · 14</text>
+                <g font-size="5.2" text-anchor="middle">
+                  <rect x="28" y="174" width="44" height="11" rx="3.5" class="f-accs"/><text x="50" y="181.5" class="f-accst">HID × VENT</text>
+                  <rect x="78" y="174" width="40" height="11" rx="3.5" class="f-accs"/><text x="98" y="181.5" class="f-accst">SAN × PCI</text>
+                  <rect x="124" y="174" width="44" height="11" rx="3.5" class="f-accs"/><text x="146" y="181.5" class="f-accst">ELEC × HID</text>
+                </g>
+                <rect x="214.5" y="6.5" width="149" height="289" rx="26" class="f-bezel s-line2"/>
+                <rect x="219.5" y="11.5" width="139" height="279" rx="21" class="f-bg"/>
+                <rect x="268" y="17" width="42" height="11" rx="5.5" class="f-bezel"/>
+                <text x="232" y="26.5" font-size="7.2" font-weight="600" class="f-ink">9:41</text>
+                <rect x="331.5" y="20.5" width="14" height="7" rx="2" fill="none" class="s-ink" stroke-width=".9"/>
+                <rect x="333" y="22" width="9" height="4" rx="1" class="f-ink"/>
+                <rect x="346.5" y="22.5" width="1.4" height="3" rx=".6" class="f-ink"/>
+                <rect x="226.5" y="36.5" width="125" height="44" rx="11" class="f-surf s-line"/>
+                <rect x="233" y="44" width="16" height="16" rx="4.5" class="f-acc"/>
+                <g class="f-on"><rect x="236.5" y="52" width="2.2" height="5" rx=".6"/><rect x="240" y="48.5" width="2.2" height="8.5" rx=".6"/><rect x="243.5" y="50.5" width="2.2" height="6.5" rx=".6"/></g>
+                <text x="255" y="50" font-size="6.6" font-weight="600" class="f-ink">Tablero BIM</text>
+                <text x="345" y="50" font-size="5.6" text-anchor="end" class="f-ink3">ahora</text>
+                <text x="255" y="60.5" font-size="6.2" class="f-ink2">Torre 3 bajó a 58% por</text>
+                <text x="255" y="69.5" font-size="6.2" class="f-ink2">3 clashes nuevos</text>
+                <text x="230" y="98" font-size="8.6" font-weight="500" class="f-ink">Proyecto de ejemplo</text>
+                <g transform="rotate(-90 289 133)" fill="none" stroke-width="7">
+                  <circle cx="289" cy="133" r="24" class="s-surf2"/>
+                  <circle cx="289" cy="133" r="24" class="s-acc" stroke-dasharray="93.5 200" stroke-linecap="round"/>
+                  <circle cx="289" cy="133" r="24" class="s-warn" stroke-dasharray="6 200" stroke-dashoffset="-98.5"/>
+                </g>
+                <text x="289" y="137.5" font-size="12.5" font-weight="600" text-anchor="middle" class="f-ink">62%</text>
+                <text x="289" y="171" font-size="5.8" text-anchor="middle" class="f-ink3">Avance real · −4% por clashes</text>
+                <rect x="226" y="206" width="126" height="13" rx="4" class="f-accs"/>
+                <g font-size="6.4">
+                  <text x="232" y="188" class="f-ink2">Torre 1</text><text x="232" y="201" class="f-ink2">Torre 2</text><text x="232" y="214.5" class="f-accst">Torre 3</text><text x="232" y="227" class="f-ink2">Torre 4</text>
+                  <text x="346" y="188" text-anchor="end" class="f-ink">78%</text><text x="346" y="201" text-anchor="end" class="f-ink">64%</text><text x="346" y="214.5" text-anchor="end" class="f-accst">58%</text><text x="346" y="227" text-anchor="end" class="f-ink">47%</text>
+                </g>
+                <g class="f-surf2"><rect x="264" y="184" width="60" height="4.5" rx="2.2"/><rect x="264" y="197" width="60" height="4.5" rx="2.2"/><rect x="264" y="210.5" width="60" height="4.5" rx="2.2"/><rect x="264" y="223" width="60" height="4.5" rx="2.2"/></g>
+                <g class="f-acc"><rect x="264" y="184" width="46.8" height="4.5" rx="2.2"/><rect x="264" y="197" width="38.4" height="4.5" rx="2.2"/><rect x="264" y="210.5" width="34.8" height="4.5" rx="2.2"/><rect x="264" y="223" width="28.2" height="4.5" rx="2.2"/></g>
+                <line x1="219.5" y1="244.5" x2="358.5" y2="244.5" class="s-line"/>
+                <path d="M241.5 260v-5.2l5.5-4.3 5.5 4.3v5.2z" class="f-acc"/>
+                <path d="M289 250.5l5.6 9.5h-11.2z" fill="none" class="s-ink3" stroke-width="1.1" stroke-linejoin="round"/>
+                <rect x="326.5" y="250.5" width="9" height="10" rx="1.6" fill="none" class="s-ink3" stroke-width="1.1"/>
+                <path d="M328.8 254h4.4M328.8 256.8h4.4" class="s-ink3" stroke-width="1"/>
+                <g font-size="5.4" text-anchor="middle"><text x="247" y="270" class="f-accst">Inicio</text><text x="289" y="270" class="f-ink3">Clashes</text><text x="331" y="270" class="f-ink3">Resumen</text></g>
+                <rect x="268" y="280" width="42" height="3" rx="1.5" class="f-ink"/>
+              </g>
+            </svg>
+          </div>
+          <figcaption>Lo mismo que el Estándar, más una app para iPhone y Android que te avisa cuando algo cambia.</figcaption>
+        </figure>
+      </div>
+      <p class="mk-hint">Desliza para ver los tres</p>
+    </div>
+  </section>
+
   <section class="sec" aria-labelledby="h-incl">
     <div class="wrap">
-      <p class="sheet"><b>A-03</b> Alcance</p>
+      <p class="sheet"><b>A-04</b> Alcance</p>
       <h2 id="h-incl">Qué incluye cada paquete</h2>
       <p class="sec-sub">Toca un paquete para resaltarlo. Lo básico viene en los tres.</p>
       <div class="mx" id="mx" role="table" aria-label="Qué incluye cada paquete"></div>
@@ -435,7 +663,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
 
   <section class="sec" aria-labelledby="h-hrs">
     <div class="wrap">
-      <p class="sheet"><b>A-04</b> Horas</p>
+      <p class="sheet"><b>A-05</b> Horas</p>
       <h2 id="h-hrs">En qué se van las <span id="hrs-n">100</span> horas</h2>
       <p class="sec-sub">Cada etapa con sus horas, todas a $100 la hora.</p>
       <div class="card">
@@ -447,7 +675,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
 
   <section class="sec" aria-labelledby="h-cal">
     <div class="wrap">
-      <p class="sheet"><b>A-05</b> Calendario</p>
+      <p class="sheet"><b>A-06</b> Calendario</p>
       <h2 id="h-cal">Cuándo ves cada cosa y cómo se paga</h2>
       <p class="sec-sub">La primera semana de noviembre ya tienes un borrador funcionando. Cada semana nos vemos una hora para revisar avances.</p>
       <div class="two">
@@ -470,7 +698,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
 
   <section class="sec" aria-labelledby="h-next">
     <div class="wrap">
-      <p class="sheet"><b>A-06</b> Lo que sigue</p>
+      <p class="sheet"><b>A-07</b> Lo que sigue</p>
       <h2 id="h-next">Lo que podemos sumar después</h2>
       <p class="sec-sub">Ideas para cuando el tablero ya esté andando. Se cotizan aparte, también a precio de panas.</p>
       <ul class="road">
@@ -501,7 +729,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
 
   <section class="sec" aria-labelledby="h-fine">
     <div class="wrap">
-      <p class="sheet"><b>A-07</b> Notas</p>
+      <p class="sheet"><b>A-08</b> Notas</p>
       <h2 id="h-fine">Letra chica</h2>
       <div class="fine">
         <ul>
@@ -529,7 +757,7 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
 <footer class="foot">
   <div class="wrap foot-in">
     <span>Preparado por Luis para Erick. Ciudad de México, 30 de octubre de 2026.</span>
-    <span class="mono">Folio 001 · Rev. 02</span>
+    <span class="mono">Folio 001 · Rev. 03</span>
   </div>
 </footer>
 
@@ -1005,6 +1233,19 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
     swap(tiles);
   }
 
+  /* Maquetas: en celular se deslizan y se centran en el paquete elegido */
+  var mkRow = $("#mk-row");
+  function centerMock(k, smooth) {
+    if (!mkRow || mkRow.scrollWidth <= mkRow.clientWidth + 2) return;
+    var m = mkRow.querySelector('.mk[data-pk="' + k + '"]');
+    if (!m) return;
+    var rr = mkRow.getBoundingClientRect(), mr = m.getBoundingClientRect();
+    var dx = (mr.left + mr.width / 2) - (rr.left + rr.width / 2);
+    try { mkRow.scrollTo({ left: mkRow.scrollLeft + dx, behavior: smooth && !rm.matches ? "smooth" : "auto" }); }
+    catch (e) { mkRow.scrollLeft += dx; }
+  }
+  $$(".mk").forEach(function (m) { m.addEventListener("click", function () { select(m.getAttribute("data-pk")); }); });
+
   /* Selección */
   var cur = null;
   var seg = $("#seg");
@@ -1021,6 +1262,8 @@ tbody tr.is-sel td{background:var(--accent-soft);color:var(--accent-strong);font
     $$("#tbl-body tr").forEach(function (tr) { tr.classList.toggle("is-sel", tr.getAttribute("data-pk") === k); });
     $$(".mx-c").forEach(function (c) { c.classList.toggle("is-sel", c.getAttribute("data-pk") === k); });
     $$(".mx-hb").forEach(function (b, i) { b.setAttribute("aria-pressed", String(ORDER[i] === k)); });
+    $$(".mk").forEach(function (m) { m.classList.toggle("is-sel", m.getAttribute("data-pk") === k); });
+    centerMock(k, !first);
 
     $("#hp-name").textContent = p.name;
     tween($("#hp-price"), p.price, moneyRound, !first);
