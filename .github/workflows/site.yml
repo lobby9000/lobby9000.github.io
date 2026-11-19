@@ -19,7 +19,7 @@ concurrency:
 jobs:
   checks:
     name: Site checks
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
@@ -33,7 +33,7 @@ jobs:
 
   browser:
     name: Browser and link checks
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
@@ -50,7 +50,7 @@ jobs:
     name: Publish to GitHub Pages
     needs: [checks, browser]
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       pages: write
       id-token: write
