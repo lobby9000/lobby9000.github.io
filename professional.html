@@ -1111,14 +1111,29 @@
 
           <!-- BEGIN GENERATED: projects -->
           <div class="tab-strip" role="tablist" aria-label="Project tracks">
-            <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-data" data-tab="tab-data" title="Data &amp; analytics">📊 Data <span class="tab-count">4</span></button>
+            <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-data" data-tab="tab-data" title="Data &amp; analytics">📊 Data <span class="tab-count">5</span></button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-ai" data-tab="tab-ai" title="AI &amp; LLMs">🤖 AI &amp; LLMs <span class="tab-count">5</span></button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-qa" data-tab="tab-qa" title="QA &amp; engineering">🧪 QA <span class="tab-count">3</span></button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-physics" data-tab="tab-physics" title="Physics &amp; simulation">🔭 Physics <span class="tab-count">3</span></button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-design" data-tab="tab-design" title="Design for others">🎨 Design <span class="tab-count">3</span></button>
           </div>
 
           <div id="tab-data" class="tab-panel active" role="tabpanel">
             <p class="panel-intro"><strong>Data &amp; analytics.</strong> Pipelines, statistics and dashboards that turn raw records into a decision: cleaning with lineage, KPIs that survive scrutiny and inference with its assumptions stated.</p>
+            <article class="project-card" id="project-puente">
+              <h3>Puente: from the warehouse to a SaaS API without losing or paying twice <span class="status wip">Repo pending</span></h3>
+              <p class="tags"><span class="tag">Python</span><span class="tag">httpx</span><span class="tag">pydantic</span><span class="tag">Databricks SQL</span><span class="tag">Zoho CRM API</span><span class="tag">FastAPI</span><span class="tag">Docker</span><span class="tag">SQLite</span><span class="tag">pytest</span></p>
+              <p>An integration that delivers monthly sales-rep commissions from a Databricks gold table to a payouts API, using the reps kept in Zoho CRM to decide who gets paid. The API fails on purpose, and every row still ends delivered exactly once or parked for review with its reason.</p>
+              <ul class="highlights">
+                <li>Under injected failures it delivered 100% of payable rows exactly once, against 32.8% for a naive script that lost 5,997 rows and paid 804 twice.</li>
+                <li>Medallion SQL on Databricks Free Edition turned 293,000 raw sales into a gold table that matched an independent Python reference on all 10,320 rows.</li>
+                <li>With the reps read from a Zoho CRM Developer Edition, 10,033 payouts went out once, and a payee ID copied from another rep was held back for a person to check.</li>
+              </ul>
+              <pre class="snippet">Databricks gold + Zoho reps → prepare → batches of 100 with an Idempotency-Key → retry, split or park → reconcile</pre>
+              <div class="link-row">
+                <span class="pending-note">Repository being published</span>
+              </div>
+            </article>
             <article class="project-card" id="project-retail-delivery">
               <h3>Retail delivery diagnostics: an end-to-end case <span class="status live">Live</span></h3>
               <p class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">SQL</span><span class="tag">Star schema</span><span class="tag">Chart.js</span><span class="tag">Statistics</span></p>
@@ -1407,6 +1422,70 @@
               <div class="link-row">
                 <a href="https://github.com/lobby9000/Galactic-Bar-Dynamics" target="_blank" rel="noopener">Repository</a>
                 <a href="https://github.com/lobby9000/Galactic-Bar-Dynamics/blob/main/report/bar-dynamics-report.pdf" target="_blank" rel="noopener">Report (PDF)</a>
+              </div>
+            </article>
+          </div>
+
+          <div id="tab-design" class="tab-panel" role="tabpanel">
+            <p class="panel-intro"><strong>Design for others.</strong> Websites and dashboards I design and build for other people and for our own small business, from the first mockup to a page they can keep updating themselves.</p>
+            <article class="project-card" id="project-jenny-portfolio">
+              <h3>Portfolio site for a pharmaceutical chemist <span class="status live">Live</span></h3>
+              <p class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">LaTeX</span><span class="tag">GitHub Pages</span></p>
+              <p>A bilingual portfolio and CV for Jennifer Guerrero, a pharmaceutical chemist (QFB, UNAM), meant to look modern and serious: frosted glass in lilac, purple and pink, with her formulation work presented as products.</p>
+              <ul class="highlights">
+                <li>Spanish and English on the same page, with a link that opens either language directly.</li>
+                <li>An interactive centrifuge stability test on the home screen, built in the browser.</li>
+                <li>Matching CVs in both languages typeset in LaTeX, and a README so she can change texts and publish on her own.</li>
+              </ul>
+              <div class="carrusel-mini">
+                <img src="assets/projects/jenny-portfolio/home.jpg" alt="Home screen of Jennifer Guerrero&#x27;s portfolio with her name, a short profile and an interactive centrifuge test" class="shot" loading="lazy" data-caption="Home screen" data-description="The first screen: who she is in one line, her résumé and email, and a centrifuge test of three emulsions that visitors can run.">
+                <img src="assets/projects/jenny-portfolio/mobile.jpg" alt="The same portfolio on a phone screen" class="shot" loading="lazy" data-caption="On a phone" data-description="The layout reflows to one column on a phone, with the language switch and the résumé button kept at the top.">
+              </div>
+              <button class="btn-galeria" data-gallery-title="Portfolio_site">⊞ View full gallery</button>
+              <div class="link-row">
+                <a href="https://jenn-sher.github.io" target="_blank" rel="noopener">Visit the site</a>
+              </div>
+            </article>
+            <article class="project-card" id="project-bim-dashboard">
+              <h3>BIM progress dashboard for an architecture team (concept) <span class="status live">Live</span></h3>
+              <p class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">SVG</span><span class="tag">Google Sheets</span></p>
+              <p>Interactive mockups for a dashboard that tracks BIM modelling progress by tower, level and discipline, designed for an architect who needed a plain weekly summary for his boss and his team.</p>
+              <ul class="highlights">
+                <li>Open clashes pull a tower&#x27;s progress down, so the figure shows work that can actually be released.</li>
+                <li>One master sheet is all the team fills in, choosing from lists, and the dashboard and the boss&#x27;s summary come out of it.</li>
+                <li>Three tiers designed side by side, from a Google report to a custom web dashboard with a phone app.</li>
+              </ul>
+              <p class="note">Concept with sample data: the project shown is fictional and the quote stayed private.</p>
+              <div class="carrusel-mini">
+                <img src="assets/projects/bim-dashboard/tablero.jpg" alt="Dashboard mockup with progress, schedule, open clashes and a 3D view of four towers" class="shot" loading="lazy" data-caption="The dashboard" data-description="Real progress against the schedule, open clashes and released units, with a 3D view where each tower rises to its progress and the share lost to clashes is hatched.">
+                <img src="assets/projects/bim-dashboard/hoja-maestra.jpg" alt="Spreadsheet mockup where each row is a tower, level and discipline with its progress, clashes and status" class="shot" loading="lazy" data-caption="The master sheet" data-description="The only thing the team fills in: progress, clashes and status for each tower, level and discipline, picked from lists.">
+                <img src="assets/projects/bim-dashboard/resumen.jpg" alt="One-page weekly report mockup with indicators, a progress curve, a table by tower and discipline and pending items" class="shot" loading="lazy" data-caption="The summary for the boss" data-description="A one-page weekly report with the usual sections of a site report, built from the same master sheet.">
+              </div>
+              <button class="btn-galeria" data-gallery-title="BIM_progress_dashboard">⊞ View full gallery</button>
+              <div class="link-row">
+              </div>
+            </article>
+            <article class="project-card" id="project-snl-bakery">
+              <h3>SNL&#x27;s Bakery: catalog site and back-office workstation <span class="status live">Live</span></h3>
+              <p class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">three.js</span><span class="tag">WhatsApp</span></p>
+              <p>Everything online for the Christmas cookie business I run with my partner: a catalog where each ornament on a 3D tree is a cookie and the cart sends the order to WhatsApp, and a private workstation for orders, inventory, recipe costs, the season plan and the money.</p>
+              <ul class="highlights">
+                <li>The catalog is a static page with no online payments. Products, prices and season dates live in one file that anyone in the business can edit.</li>
+                <li>The workstation recalculates the cost and margin of every box from recipes and package prices, and lists what to buy for the pending orders.</li>
+                <li>Its finance view tracks contributions, loans and purchases, and how the profit is split between partners.</li>
+              </ul>
+              <p class="note">The workstation screenshots use invented orders, customers and amounts.</p>
+              <div class="carrusel-mini">
+                <img src="assets/projects/snl-bakery/home.jpg" alt="Bakery catalog home with a 3D living room, a Christmas tree whose ornaments are cookies, a fireplace and three cats" class="shot" loading="lazy" data-caption="The catalog" data-description="A 3D living room where each ornament on the tree is a cookie: tapping one opens it in the catalog. The three cats are the bakery&#x27;s own.">
+                <img src="assets/projects/snl-bakery/catalogo.jpg" alt="Grid of cookie boxes with their pieces, price and description" class="shot" loading="lazy" data-caption="The boxes" data-description="Each box with its pieces, price and description. The cart builds the order and opens it in WhatsApp.">
+                <img src="assets/projects/snl-bakery/workstation-inicio.jpg" alt="Workstation home with sales, collected, pending and cash indicators, progress against the season goal and the next deliveries" class="shot" loading="lazy" data-caption="Workstation: the season" data-description="Sales, money collected and pending, cash and profit, progress against the goal for each box, the next deliveries and what to buy. Invented data.">
+                <img src="assets/projects/snl-bakery/workstation-costos.jpg" alt="Table with the price, ingredients, packaging, gas, cost, profit and margin of each box" class="shot" loading="lazy" data-caption="Workstation: costs and prices" data-description="The cost of every box from its recipes and packaging, with profit and margin. Invented package prices.">
+                <img src="assets/projects/snl-bakery/workstation-finanzas.jpg" alt="Finance view with cash in and out, profit by partner and the terms of a loan" class="shot" loading="lazy" data-caption="Workstation: finances" data-description="Cash in and out, profit and how it is split between partners, and the terms of a loan. Invented data.">
+              </div>
+              <button class="btn-galeria" data-gallery-title="SNL_s_Bakery">⊞ View full gallery</button>
+              <div class="link-row">
+                <a href="https://lobby9000.github.io/snl-bakery/" target="_blank" rel="noopener">Open the catalog</a>
+                <a href="https://github.com/lobby9000/snl-bakery" target="_blank" rel="noopener">Repository</a>
               </div>
             </article>
           </div>

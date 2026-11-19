@@ -27,9 +27,53 @@
       "tab": "Physics",
       "icon": "🔭",
       "intro": "Numerical physics from my degrees: solvers checked against conserved quantities and analytical limits, including the code of my master's thesis."
+    },
+    {
+      "id": "design",
+      "label": "Design for others",
+      "tab": "Design",
+      "icon": "🎨",
+      "intro": "Websites and dashboards I design and build for other people and for our own small business, from the first mockup to a page they can keep updating themselves."
     }
   ],
   "projects": [
+    {
+      "slug": "puente",
+      "title": "Puente: from the warehouse to a SaaS API without losing or paying twice",
+      "track": "data",
+      "status": "pending",
+      "featured": true,
+      "stack": [
+        "Python",
+        "httpx",
+        "pydantic",
+        "Databricks SQL",
+        "Zoho CRM API",
+        "FastAPI",
+        "Docker",
+        "SQLite",
+        "pytest"
+      ],
+      "summary": "An integration that delivers monthly sales-rep commissions from a Databricks gold table to a payouts API, using the reps kept in Zoho CRM to decide who gets paid. The API fails on purpose, and every row still ends delivered exactly once or parked for review with its reason.",
+      "highlights": [
+        "Under injected failures it delivered 100% of payable rows exactly once, against 32.8% for a naive script that lost 5,997 rows and paid 804 twice.",
+        "Medallion SQL on Databricks Free Edition turned 293,000 raw sales into a gold table that matched an independent Python reference on all 10,320 rows.",
+        "With the reps read from a Zoho CRM Developer Edition, 10,033 payouts went out once, and a payee ID copied from another rep was held back for a person to check."
+      ],
+      "snippet": "Databricks gold + Zoho reps → prepare → batches of 100 with an Idempotency-Key → retry, split or park → reconcile",
+      "links": [
+        {
+          "label": "Repository",
+          "url": "https://github.com/lobby9000/puente"
+        },
+        {
+          "label": "Results",
+          "url": "https://github.com/lobby9000/puente#results"
+        }
+      ],
+      "repo": "lobby9000/puente",
+      "ci_workflow": "tests.yml"
+    },
     {
       "slug": "retail-delivery",
       "title": "Retail delivery diagnostics: an end-to-end case",
@@ -683,9 +727,155 @@
         }
       ],
       "repo": "lobby9000/Galactic-Bar-Dynamics"
+    },
+    {
+      "slug": "jenny-portfolio",
+      "title": "Portfolio site for a pharmaceutical chemist",
+      "track": "design",
+      "status": "live",
+      "featured": false,
+      "stack": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "LaTeX",
+        "GitHub Pages"
+      ],
+      "summary": "A bilingual portfolio and CV for Jennifer Guerrero, a pharmaceutical chemist (QFB, UNAM), meant to look modern and serious: frosted glass in lilac, purple and pink, with her formulation work presented as products.",
+      "highlights": [
+        "Spanish and English on the same page, with a link that opens either language directly.",
+        "An interactive centrifuge stability test on the home screen, built in the browser.",
+        "Matching CVs in both languages typeset in LaTeX, and a README so she can change texts and publish on her own."
+      ],
+      "links": [
+        {
+          "label": "Visit the site",
+          "url": "https://jenn-sher.github.io"
+        }
+      ],
+      "images": [
+        {
+          "src": "assets/projects/jenny-portfolio/home.jpg",
+          "alt": "Home screen of Jennifer Guerrero's portfolio with her name, a short profile and an interactive centrifuge test",
+          "caption": "Home screen",
+          "description": "The first screen: who she is in one line, her résumé and email, and a centrifuge test of three emulsions that visitors can run."
+        },
+        {
+          "src": "assets/projects/jenny-portfolio/mobile.jpg",
+          "alt": "The same portfolio on a phone screen",
+          "caption": "On a phone",
+          "description": "The layout reflows to one column on a phone, with the language switch and the résumé button kept at the top."
+        }
+      ]
+    },
+    {
+      "slug": "bim-dashboard",
+      "title": "BIM progress dashboard for an architecture team (concept)",
+      "track": "design",
+      "status": "live",
+      "featured": false,
+      "stack": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "SVG",
+        "Google Sheets"
+      ],
+      "summary": "Interactive mockups for a dashboard that tracks BIM modelling progress by tower, level and discipline, designed for an architect who needed a plain weekly summary for his boss and his team.",
+      "highlights": [
+        "Open clashes pull a tower's progress down, so the figure shows work that can actually be released.",
+        "One master sheet is all the team fills in, choosing from lists, and the dashboard and the boss's summary come out of it.",
+        "Three tiers designed side by side, from a Google report to a custom web dashboard with a phone app."
+      ],
+      "note": "Concept with sample data: the project shown is fictional and the quote stayed private.",
+      "images": [
+        {
+          "src": "assets/projects/bim-dashboard/tablero.jpg",
+          "alt": "Dashboard mockup with progress, schedule, open clashes and a 3D view of four towers",
+          "caption": "The dashboard",
+          "description": "Real progress against the schedule, open clashes and released units, with a 3D view where each tower rises to its progress and the share lost to clashes is hatched."
+        },
+        {
+          "src": "assets/projects/bim-dashboard/hoja-maestra.jpg",
+          "alt": "Spreadsheet mockup where each row is a tower, level and discipline with its progress, clashes and status",
+          "caption": "The master sheet",
+          "description": "The only thing the team fills in: progress, clashes and status for each tower, level and discipline, picked from lists."
+        },
+        {
+          "src": "assets/projects/bim-dashboard/resumen.jpg",
+          "alt": "One-page weekly report mockup with indicators, a progress curve, a table by tower and discipline and pending items",
+          "caption": "The summary for the boss",
+          "description": "A one-page weekly report with the usual sections of a site report, built from the same master sheet."
+        }
+      ]
+    },
+    {
+      "slug": "snl-bakery",
+      "title": "SNL's Bakery: catalog site and back-office workstation",
+      "track": "design",
+      "status": "live",
+      "featured": false,
+      "stack": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "three.js",
+        "WhatsApp"
+      ],
+      "summary": "Everything online for the Christmas cookie business I run with my partner: a catalog where each ornament on a 3D tree is a cookie and the cart sends the order to WhatsApp, and a private workstation for orders, inventory, recipe costs, the season plan and the money.",
+      "highlights": [
+        "The catalog is a static page with no online payments. Products, prices and season dates live in one file that anyone in the business can edit.",
+        "The workstation recalculates the cost and margin of every box from recipes and package prices, and lists what to buy for the pending orders.",
+        "Its finance view tracks contributions, loans and purchases, and how the profit is split between partners."
+      ],
+      "note": "The workstation screenshots use invented orders, customers and amounts.",
+      "links": [
+        {
+          "label": "Open the catalog",
+          "url": "https://lobby9000.github.io/snl-bakery/"
+        },
+        {
+          "label": "Repository",
+          "url": "https://github.com/lobby9000/snl-bakery"
+        }
+      ],
+      "repo": "lobby9000/snl-bakery",
+      "images": [
+        {
+          "src": "assets/projects/snl-bakery/home.jpg",
+          "alt": "Bakery catalog home with a 3D living room, a Christmas tree whose ornaments are cookies, a fireplace and three cats",
+          "caption": "The catalog",
+          "description": "A 3D living room where each ornament on the tree is a cookie: tapping one opens it in the catalog. The three cats are the bakery's own."
+        },
+        {
+          "src": "assets/projects/snl-bakery/catalogo.jpg",
+          "alt": "Grid of cookie boxes with their pieces, price and description",
+          "caption": "The boxes",
+          "description": "Each box with its pieces, price and description. The cart builds the order and opens it in WhatsApp."
+        },
+        {
+          "src": "assets/projects/snl-bakery/workstation-inicio.jpg",
+          "alt": "Workstation home with sales, collected, pending and cash indicators, progress against the season goal and the next deliveries",
+          "caption": "Workstation: the season",
+          "description": "Sales, money collected and pending, cash and profit, progress against the goal for each box, the next deliveries and what to buy. Invented data."
+        },
+        {
+          "src": "assets/projects/snl-bakery/workstation-costos.jpg",
+          "alt": "Table with the price, ingredients, packaging, gas, cost, profit and margin of each box",
+          "caption": "Workstation: costs and prices",
+          "description": "The cost of every box from its recipes and packaging, with profit and margin. Invented package prices."
+        },
+        {
+          "src": "assets/projects/snl-bakery/workstation-finanzas.jpg",
+          "alt": "Finance view with cash in and out, profit by partner and the terms of a loan",
+          "caption": "Workstation: finances",
+          "description": "Cash in and out, profit and how it is split between partners, and the terms of a loan. Invented data."
+        }
+      ]
     }
   ],
   "featured_order": [
+    "puente",
     "reward-hacking-gsm8k",
     "folio",
     "incentive-comp-qa",
